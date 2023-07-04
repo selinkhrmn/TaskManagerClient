@@ -1,0 +1,100 @@
+.tabs_container {
+    width: 80%;
+    height: 100px;
+    background-color: #A3C4D9;
+    color: white;
+}
+
+.tabs_container_project-name-part {
+    height: 50%;
+    display: flex;
+    align-items: center;
+
+
+    h5 {
+        font-size: 20px;
+        font-family: 'Roboto Mono', monospace;
+    }
+    img:first-child {
+        width: 30px;
+        height: 30px;
+        padding: 15px;
+    }
+
+    .bucket_button {
+        width: 20px;
+        height: 20px;
+
+        margin-left: 10px;
+        padding: 5px;
+
+        border-radius: 50%;
+
+        background-image: url('../../../assets/color.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+
+        transition: 0.1s;
+
+        &:hover {
+            background-color: #D9D9D9;
+        }
+
+        &:visited {
+            background-color: #D9D9D9;
+        }
+    }
+}
+
+.customize {
+    width: 250px;
+    height: 20px;
+    padding: 12px;
+    margin-bottom: 60px;
+    p {
+        font-size: 10px;
+        margin-left: 8px;
+        margin-bottom: 30px;
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 500;
+    }
+}
+
+.color_holder {
+    display: flex;
+    gap: 15px;
+}
+
+.color_holder_items {
+    margin-left: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.green {
+    background-color: #216E4E;
+
+}
+
+.darkBlue {
+    background-color: #172b4d;
+
+}
+
+
+.purple {
+    background-color: #3f3b8c;
+}
+
+
+.brown {
+    background-color: #946F00;
+}
+
+
+.blue {
+    background-color: #A3C4D9;
+}

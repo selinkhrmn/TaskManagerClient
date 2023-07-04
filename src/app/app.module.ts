@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import { TabsNamePartComponent } from './components/tabs/tabs-name-part/tabs-name-part.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SidenavComponent,
     NavbarComponent,
     TabsComponent,
+    TabsNamePartComponent,
+
+
   ],
   imports: [
     AllFormsModule,
@@ -24,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule,
   ],
 
   providers: [],
