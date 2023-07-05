@@ -1,1 +1,67 @@
-<p>navbar works!</p> 
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div>
+            <img src="../../assets/ikon.jpg" alt="" style="width: 50px;">..
+            <a href="" class="navbar-brand">
+              <span class="sedna">sedna</span>
+              <span class="cloud">cloud</span>
+            </a>
+          </div>
+          
+
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">You Work</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Projects</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
+            <button class="btn btn-secondary " type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Create
+                    </button>
+        </ul>
+       
+        <style>
+            .user-section {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+             
+            }
+        </style>
+
+        <form class="d-flex">
+            <div class="user-section">
+                <img src="../../assets/kullanıcı.png" alt="" style="width: 30px;">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        User Name
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item active" href="#">Çıkış</a></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</nav>
