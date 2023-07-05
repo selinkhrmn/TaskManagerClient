@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabsComponent } from '../tabs.component';
 
 @Component({
   selector: 'app-tabs-name-part',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./tabs-name-part.component.scss']
 })
 export class TabsNamePartComponent {
+  constructor(private tabs : TabsComponent) { 
+  
+  }
 
 }

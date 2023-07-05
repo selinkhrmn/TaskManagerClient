@@ -11,6 +11,7 @@ export class TabsComponent {
   colorBucketImageUrl = '../../../assets/color-bucket.png';
   projectName = 'ProjectName';
 
+
   isGreen = false;
   isDarkBlue = false;
   isPurple = false;
@@ -23,6 +24,7 @@ export class TabsComponent {
     this.isPurple = false;
     this.isBrown = false;
     this.isBlue = false;
+
   }
 
   colorDarkBlue() {
@@ -56,5 +58,6 @@ export class TabsComponent {
     this.isPurple = false;
     this.isBrown = false;
   }
+
 
 }

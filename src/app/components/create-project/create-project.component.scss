@@ -1,0 +1,54 @@
+.body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Kanit", sans-serif;
+  padding: 20px;
+  gap: 80px;
+}
+
+.container {
+  width: 400px;
+  height: 300px;
+  margin: 0 0 0 0;
+  padding: 20px;
+  background-color: #f6f8fa;
+  border: 1px solid hsla(210, 18%, 87%, 1);
+  border-radius: 8px;
+
+  h4 {
+    font-size: 32px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .input_field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .button_field {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+}
+
+.image_container {
+  width: fit-content;
+  height: fit-content;
+  margin-right: 40px;
+
+
+  img:first-child {
+    width: 600px;
+    height: 600px;
+  }
+}

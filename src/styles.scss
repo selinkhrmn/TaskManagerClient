@@ -37,3 +37,8 @@ $TaskManagerClient-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-bottom-sheet-container {
+  min-height: 100vh;
+  min-width: 100vw !important;
+}

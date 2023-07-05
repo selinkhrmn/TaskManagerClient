@@ -11,6 +11,13 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { TabsNamePartComponent } from './components/tabs/tabs-name-part/tabs-name-part.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { HeaderComponent } from './components/login-page/header/header.component';
+import { ForgotPasswordComponent } from './components/login-page/forgot-password/forgot-password.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import {MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { CreateProjectPageComponent } from './components/create-project/create-project-page/create-project-page.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,11 @@ import { TabsNamePartComponent } from './components/tabs/tabs-name-part/tabs-nam
     NavbarComponent,
     TabsComponent,
     TabsNamePartComponent,
-
+    LoginPageComponent,
+    HeaderComponent,
+    ForgotPasswordComponent,
+    CreateProjectComponent,
+    CreateProjectPageComponent,
 
   ],
   imports: [
@@ -31,6 +42,8 @@ import { TabsNamePartComponent } from './components/tabs/tabs-name-part/tabs-nam
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatButtonModule,
+    MatBottomSheetModule,
+    MatSidenavModule
   ],
 
   providers: [],

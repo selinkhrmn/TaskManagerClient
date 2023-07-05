@@ -1,19 +1,19 @@
 .tabs_container {
     width: 80%;
     height: 100px;
-    background-color: #A3C4D9;
-    color: white;
+    background-color: #172b4d;
 }
 
 .tabs_container_project-name-part {
     height: 50%;
     display: flex;
     align-items: center;
-
+    color: white;
 
     h5 {
         font-size: 20px;
-        font-family: 'Roboto Mono', monospace;
+        font-family: 'Kanit', sans-serif;
+
     }
     img:first-child {
         width: 30px;
@@ -56,7 +56,8 @@
         font-size: 10px;
         margin-left: 8px;
         margin-bottom: 30px;
-        font-family: 'Roboto Mono', monospace;
+        font-family: 'Kanit', sans-serif;
+
         font-weight: 500;
     }
 }
@@ -97,4 +98,13 @@
 
 .blue {
     background-color: #A3C4D9;
+}
+
+
+.textColorWhite {
+    color: white;
+}
+
+.textColorBlack {
+    color: black;
 }

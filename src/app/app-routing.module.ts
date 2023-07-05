@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent, SidenavComponent, TabsComponent } from './components';
+import { ForgotPasswordComponent } from './components/login-page/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
 
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: "tabs",
     component: TabsComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
   }
 ];
 
