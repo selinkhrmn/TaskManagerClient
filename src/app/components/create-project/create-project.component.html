@@ -7,7 +7,7 @@
     </p>
     <div class="input_field">
       <label>Name</label>
-      <input />
+      <input matInput (keyup.enter)="createProject()" [(ngModel)]="projectName"/>
     </div>
     <div class="button_field">
        <button mat-raised-button>Cancel</button>

@@ -21,6 +21,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { ChartComponent } from './components/summary/chart/chart.component';
+import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -37,8 +38,8 @@ import { NgChartsModule } from 'ng2-charts';
     CreateProjectPageComponent,
     HomepageComponent,
     SummaryComponent,
-    ChartComponent
-
+    ChartComponent,
+    HttpClientModule
   ],
   imports: [
     AllFormsModule,
