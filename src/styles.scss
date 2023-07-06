@@ -35,6 +35,8 @@ $TaskManagerClient-theme: mat.define-light-theme((
 @include mat.all-component-themes($TaskManagerClient-theme);
 
 $TaskManagerClient-typography: mat-typography-config($font-family: "'Kanit', sans-serif");
+@include angular-material-typography($TaskManagerClient-typography);
+@include angular-material-typography($TaskManagerClient-typography);
 
 /* You can add global styles to this file, and also import other style files */
 
