@@ -18,6 +18,7 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import {MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { CreateProjectPageComponent } from './components/create-project/create-project-page/create-project-page.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ForgotPasswordComponent,
     CreateProjectComponent,
     CreateProjectPageComponent,
+    HomepageComponent,
 
   ],
   imports: [
