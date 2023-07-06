@@ -1,0 +1,32 @@
+.btn-primary {
+    background-color: #ffffff;
+    border-color: #644747;
+    color: #110e0e;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  
+    .progress-label {
+      text-align: center;
+  
+      span {
+        display: block;
+        white-space: pre;
+      }
+    }
+  }
+  .center-content {
+    width: 55%; // Genişliği ayarlayabilirsiniz
+    margin: auto; 
+    margin-top: -45px// Otomatik marjın merkezlemeyi sağlar.
+    
+}
+.center-content {
+  margin-bottom: -55px; /* İstediğiniz değeri kullanın */
+}
+
+
+
+  

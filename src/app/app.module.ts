@@ -19,6 +19,9 @@ import {MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { CreateProjectPageComponent } from './components/create-project/create-project-page/create-project-page.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { ChartComponent } from './components/summary/chart/chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     CreateProjectComponent,
     CreateProjectPageComponent,
     HomepageComponent,
+    SummaryComponent,
+    ChartComponent
 
   ],
   imports: [
@@ -45,7 +50,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgChartsModule
   ],
 
   providers: [],

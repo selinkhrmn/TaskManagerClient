@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-12">
+        <br>
+        <div class="center-align">
+            <div class="d-flex align-items-center justify-content-center">
+                <h3 class="text-center me-2">Hoş geldiniz {{ UserName }}</h3>
+                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 40px;">
+            </div>
+        </div>
+
+
+        <br>
+        <div class="container overflow-hidden text-center">
+            <div class="row gx-5">
+                <div class="col">
+                    <button type="button" class="btn btn-primary">
+                        <div class="p-4 d-flex align-items-center">
+                            <img src="../../assets/okey.png" alt="" style="width: 50px;" class="me-2">
+                            <div>
+                                <h4>Son 7 günde</h4>
+                                <h5>{{ Ogesayisitam }} öğe tamamlandı.</h5>
+                            </div>
+                        </div>
+                    </button>
+
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary">
+                        <div class="p-4 d-flex align-items-center">
+                            <img src="../../assets/güncellenme.png" alt="" style="width: 50px;" class="me-2">
+                            <div>
+                                <h4>Son 7 günde</h4>
+                                <h5>{{ Ogesayisiguncelleme }} öğe güncellendi.</h5>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary">
+                        <div class="p-4 d-flex align-items-center">
+                            <img src="../../assets/olustur.png" alt="" style="width: 50px;" class="me-2">
+                            <div>
+                                <h4>Son 7 günde</h4>
+                                <h5>{{ Ogesayisiolus }} öğe oluşturuldu.</h5>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary">
+                        <div class="p-4 d-flex align-items-center">
+                            <img src="../../assets/takvim.png" alt="" style="width: 50px;" class="me-2">
+                            <div>
+                                <h4>Son 7 günde</h4>
+                                <h5>{{ Ogesayisitam }} öğenin tamamlandı.</h5>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container-fluid pt-100 mb-5">
+            <div class="container overflow-hidden text-center">
+                <div class="row gx-4">
+                    <div class="col-6">
+                        <div class="p-4 rounded" style="border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0;">Durum genel bakışı</h5>
+                            <br>
+                            <h6 style="text-align: left; margin-top: 0;">
+                                Takımınızın ilerleme durumunun özetini görmek için takımınızda birkaç öğe
+                                oluşturmalısınız.
+                                <button
+                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                    öğe oluşturun</button>
+                            </h6>
+                            
+                            <div class="center-content">
+                                <app-chart></app-chart>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 rounded" style="border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0;">En son etkinlikleriniz</h5>
+                            <br>
+                            <h6 style="text-align: left; margin-top: 0;">
+                                Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım arkadaşlarınızı projenize davet edin.
+                                <button
+                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                    öğe oluşturun</button>
+                            </h6>
+                            <img src="../../assets/sonetkinlik.png" alt="" style="width: 250px;" class="me-2">
+                     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid pt-100 mb-5">
+            <div class="container overflow-hidden text-center">
+                <div class="row gx-4">
+                    <div class="col-6">
+                        <div class="p-4 rounded" style="border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0;">Öncelik dökümü</h5>
+                            <br>
+                            <h6 style="text-align: left; margin-top: 0;">
+                                İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız. 
+                                <button
+                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                    öğe oluşturun</button>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 rounded" style="border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0;">İlgili Projeler</h5>
+                            <br>
+                            <h6 style="text-align: left; margin-top: 0;">
+                                Tüm çalışmalarınızı aynı yerde yönetmek ve paydaşlarla uyum içinde olmak için projeleri kullanın.
+                            </h6>
+                            <img src="../../assets/ilgiliprojeler.png" alt="" style="width: 280px;" class="me-2">
+                            <br><br>
+                            <button type="button" class="btn" style="background-color: blue; color: white;">Bir proje oluştur</button>
+                              &nbsp;
+                            <button type="button" class="btn btn-secondary">Tüm projeleri görüntüle</button>
+
+                            
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
