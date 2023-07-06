@@ -8,7 +8,8 @@ import { SummaryComponent } from './components/summary/summary.component';
 
 
 export const routes: Routes = [
-
+  
+  { path: 'summary', component: SummaryComponent },
   {
     path: "",
     component:HomepageComponent 
