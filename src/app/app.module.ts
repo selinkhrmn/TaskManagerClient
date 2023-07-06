@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AllFormsModule, MaterialModule, CdkModule } from './modules';
 import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +23,13 @@ import { ChartComponent } from './components/summary/chart/chart.component';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
+import { BoardComponent } from './components/board/board.component';
+import { LittleMainComponentsComponent } from './components/little-main-components/little-main-components.component';
+import { AddPeopleComponent } from './components/little-main-components/add-people/add-people.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddPeoplePageComponent } from './components/add-people-page/add-people-page.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +44,12 @@ import { HttpClientModule } from '@angular/common/http';
     CreateProjectPageComponent,
     HomepageComponent,
     SummaryComponent,
-    ChartComponent
+    ChartComponent,
+    BoardComponent,
+    LittleMainComponentsComponent,
+    AddPeopleComponent,
+    AddPeoplePageComponent,
+    ProjectDetailsComponent
     
   ],
   imports: [
@@ -54,7 +64,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatBottomSheetModule,
     MatSidenavModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatDialogModule,
   ],
 
   providers: [],

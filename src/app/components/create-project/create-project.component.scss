@@ -7,6 +7,9 @@
   font-family: "Kanit", sans-serif;
   padding: 20px;
   gap: 80px;
+
+  // animation: slide-right;
+  // animation-duration: 1s;
 }
 
 .container {
@@ -17,6 +20,7 @@
   background-color: #f6f8fa;
   border: 1px solid hsla(210, 18%, 87%, 1);
   border-radius: 8px;
+
 
   h4 {
     font-size: 32px;
@@ -38,6 +42,7 @@
     align-items: center;
     gap: 12px;
     margin-top: 20px;
+
   }
 }
 
@@ -52,3 +57,15 @@
     height: 600px;
   }
 }
+
+
+
+// @keyframes slide-right {
+//   0% {
+//     transform: translateX(-100%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
+

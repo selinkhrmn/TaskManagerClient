@@ -10,8 +10,8 @@
       <input matInput (keyup.enter)="createProject()" [(ngModel)]="projectName"/>
     </div>
     <div class="button_field">
-       <button mat-raised-button>Cancel</button>
-       <button mat-raised-button>Create project</button>
+       <button mat-raised-button routerLink="">Cancel</button>
+       <button mat-raised-button (click)="createProject()">Create project</button>
     </div>
   </div>
   <div class="image_container">

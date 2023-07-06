@@ -12,6 +12,7 @@ import { Project } from 'src/app/interfaces';
 export class CreateProjectComponent implements OnInit {
   projectName : string;
   projects : Project[] = [];
+  
 
   constructor(
     private bottomSheet: MatBottomSheet,
@@ -32,8 +33,7 @@ export class CreateProjectComponent implements OnInit {
     this.projectService.createProject({name: this.projectName}).subscribe(() => {
       this.ngOnInit();
     });
-    console.log(this.projectName);
-    
+    // console.log(this.projectName);
   }
 
 

@@ -22,4 +22,7 @@ export class ProjectService {
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project);
   }
 
+  deleteProject(project: Partial<Project>) {
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project);
+  }
 }

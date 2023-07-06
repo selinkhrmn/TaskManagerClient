@@ -1,0 +1,65 @@
+.wrapper {
+    width: max-content;
+    height: max-content;
+    display: flex;
+    gap: 5px;
+}
+
+.container {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 3px solid orange;
+
+    label {
+        font-size: 18px;
+        position: absolute;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.little_box {
+    top: 10px;
+    left: 15px;
+    width: 14px;
+    height: 14px;
+    padding: 2px;
+    position: relative;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+
+    label {
+        font-size: 12px;
+        position: absolute;
+    }
+}
+
+.add_people {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 3px solid orange;
+    cursor: pointer;
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}
