@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="top_bar">
+        <label>Projects</label>
+        <div class="icon_holder">
+            <img src="../../../assets/add.png">
+        </div>
+    </div>
+
+    <div class="project_names" *ngFor="let item of projectNames">
+        <div class="card">
+            {{item.name}}
+        </div>
+      </div>
+</div>

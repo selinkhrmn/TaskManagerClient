@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectService } from 'src/app/services';
 
 @Component({
   selector: 'app-project-details',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class ProjectDetailsComponent {
 
+  projectId: number;
+  constructor(public projectService: ProjectService) {
+  }
+
+  ngOnInit(){
+
+  }
+
+  deleteProject() {
+    this.projectService.deleteProject({id: this.projectId}).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
 }

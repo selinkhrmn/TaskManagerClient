@@ -7,7 +7,7 @@
     </div>
     <div class="details">
       <label>Details</label>
-      <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+      <!-- <button mat-icon-button><mat-icon>more_vert</mat-icon></button> -->
     </div>
   </div>
   <div class="container">
@@ -18,10 +18,11 @@
 
     <div class="input_field">
       <label>Name</label>
-      <input />
+      <input [(ngModel)]="projectId" />
     </div>
     <div class="save_button">
       <button mat-raised-button>Save</button>
+      <button mat-raised-button (click)="deleteProject()">Delete</button>
     </div>
   </div>
 </div>

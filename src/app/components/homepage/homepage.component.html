@@ -1,10 +1,16 @@
-<app-navbar></app-navbar>
-<div class="wrapper">
-  <div>
-    <app-sidenav></app-sidenav>
-  </div>
+<div class="body">
+  
+  <app-navbar></app-navbar>
+  <div class="container">
+    <app-sidenav2></app-sidenav2>
 
-  <div class="tab_container">
-    <app-tabs></app-tabs>
+    <div class="container2">
+      <app-tabs></app-tabs> 
+      <div class="summary_container">
+        <router-outlet></router-outlet>
+      </div>
+      
+    </div>
+    
   </div>
 </div>

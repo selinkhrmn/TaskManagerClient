@@ -30,6 +30,9 @@ import { AddPeopleComponent } from './components/little-main-components/add-peop
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddPeoplePageComponent } from './components/add-people-page/add-people-page.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { Sidenav2Component } from './components/sidenav2/sidenav2.component';
+import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,10 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
     LittleMainComponentsComponent,
     AddPeopleComponent,
     AddPeoplePageComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    Sidenav2Component,
+    PasswordChangePageComponent,
+
     
   ],
   imports: [

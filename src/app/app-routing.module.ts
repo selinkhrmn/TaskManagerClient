@@ -5,15 +5,15 @@ import { ForgotPasswordComponent } from './components/login-page/forgot-password
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 
 
 export const routes: Routes = [
   
-  { path: 'summary', component: SummaryComponent },
   {
     path: "",
-    component:HomepageComponent 
+    component:HomepageComponent,
   },
   {
     path: 'forgot-password',
@@ -21,11 +21,19 @@ export const routes: Routes = [
   },
   {
     path: 'summary',
-    component: SummaryComponent
+    component: SummaryComponent,
   },
   {
     path: 'create-project',
     component: CreateProjectComponent
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
   },
 
 ];

@@ -59,7 +59,8 @@
 
 .input_field {
     width: 350px;
-    height: 300px;
+    height: 100px;
+
 
     display: flex;
     flex-direction: column;
@@ -85,9 +86,18 @@
 .save_button {
     width: 350px;
     display: flex;
-
+    justify-content: end;
+    gap: 12px;
     button {
-        background-color: #0052CC;
         color: white;
     }
+    button:first-child {
+        background-color: #0052CC;
+    }
+
+    button:last-child {
+        background-color: #f44336;
+    }
+
+    
 }
