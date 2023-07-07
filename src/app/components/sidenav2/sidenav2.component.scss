@@ -1,51 +1,58 @@
-
 .container {
-    width: 15vw;
+  width: 15vw;
+  height: 98%;
 }
 
 .top_bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 30px;
+
+  label {
+    font-size: 22px;
+  }
+
+  .icon_holder {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin-top: 30px;
-
-
-    .icon_holder {
-        width: 30px;
-        height: 30px;
-        margin-right:10px;
-        cursor: pointer;
-        border-radius: 50%;
-        img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-
-            &:hover {
-            background-color: #f6f8fa;
-        }
-        }
-
-        
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s;
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
     }
+    &:hover {
+      background-color: #f6f8fa;
+    }
+  }
 }
 
 .project_names {
-    width: 90%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  width: 90%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    .card {
-        width: 100%;
-        padding: 10px;
-        background-color: transparent;
+  .card {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    margin-top: 10px;
+    border: none;
 
-        &:hover {
-            background-color: beige;
-        }
+    font-size: 16px;
+    &:hover {
+      // border: 1px solid gray;
+      background-color: #f6f8fa;
     }
+  }
 }

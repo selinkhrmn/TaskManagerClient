@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
+import { CreateProjectComponent } from '../create-project/create-project.component';
 
 @Component({
   selector: 'app-sidenav2',
@@ -9,7 +12,7 @@ import { ProjectService } from 'src/app/services';
 })
 export class Sidenav2Component {
   projectNames : Project[] = [];
-  constructor(  public projectService: ProjectService) {
+  constructor(  public projectService: ProjectService, private router: Router, public dialog: MatDialog) {
 this.getAllProjects()
   }
 
@@ -21,4 +24,10 @@ this.getAllProjects()
     });
   }
 
+  toAddProject() {
+    this.router.navigate(['create-project'])
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateProjectComponent,{height: '95.5%',width: '80%', panelClass: 'dialog'});
+  }
 }

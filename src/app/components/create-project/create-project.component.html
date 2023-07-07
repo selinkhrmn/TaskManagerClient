@@ -1,3 +1,7 @@
+<div class="back_arrow_img" (click)="closeDialog()">
+  <img src="../../../assets/back.png" />
+  Back to project templates
+</div>
 <div class="body">
   <div class="container">
     <h4>Create Project</h4>
@@ -7,11 +11,19 @@
     </p>
     <div class="input_field">
       <label>Name</label>
-      <input matInput (keyup.enter)="createProject()" [(ngModel)]="projectName"/>
+      <input
+        matInput
+        (keyup.enter)="createProject()"
+        [(ngModel)]="projectName"
+      />
     </div>
     <div class="button_field">
-       <button mat-raised-button routerLink="">Cancel</button>
-       <button mat-raised-button (click)="createProject()">Create project</button>
+      <button mat-raised-button routerLink="" (click)="closeDialog()">
+        Cancel
+      </button>
+      <button mat-raised-button (click)="createProject()">
+        Create project
+      </button>
     </div>
   </div>
   <div class="image_container">

@@ -32,6 +32,7 @@ import { AddPeoplePageComponent } from './components/add-people-page/add-people-
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { Sidenav2Component } from './components/sidenav2/sidenav2.component';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
+import { Navbar2Component } from './components/navbar2/navbar2.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PasswordChangePageComponent } from './components/password-change-page/p
     ProjectDetailsComponent,
     Sidenav2Component,
     PasswordChangePageComponent,
+    Navbar2Component,
 
     
   ],

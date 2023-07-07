@@ -8,43 +8,42 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 
-
-
 export const routes: Routes = [
-  
   {
-    path: "",
-    component:HomepageComponent,
+    path: '',
+    component: HomepageComponent,
+    children: [
+      {
+        path: 'summary',
+        component: SummaryComponent,
+      },
+      {
+        path: 'project-settings',
+        component: ProjectDetailsComponent,
+      },
+    ],
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
   },
-  {
-    path: 'summary',
-    component: SummaryComponent,
-  },
+
   {
     path: 'create-project',
-    component: CreateProjectComponent
+    component: CreateProjectComponent,
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
   },
-  {
-    path: 'project-settings',
-    component: ProjectDetailsComponent
-  },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

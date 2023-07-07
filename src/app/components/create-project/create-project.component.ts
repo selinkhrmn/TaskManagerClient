@@ -3,6 +3,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/interfaces';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-project',
@@ -16,7 +17,8 @@ export class CreateProjectComponent implements OnInit {
 
   constructor(
     private bottomSheet: MatBottomSheet,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class CreateProjectComponent implements OnInit {
       this.ngOnInit();
     });
     // console.log(this.projectName);
+  }
+
+  closeDialog() {
+    const dialogRef = this.dialog.closeAll()
   }
 
 
