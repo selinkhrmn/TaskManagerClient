@@ -104,15 +104,78 @@
             <div class="container overflow-hidden text-center">
                 <div class="row gx-4">
                     <div class="col-6">
-                        <div class="p-4 rounded" style="border: 1px solid black;">
-                            <h5 style="text-align: left; margin-bottom: 0;">Öncelik dökümü</h5>
+                        <div class="p-4 rounded" style="display: block; height: 437px; width: 580px;border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0;">Takım iş yükü</h5>
                             <br>
                             <h6 style="text-align: left; margin-top: 0;">
-                                İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız. 
+                                İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir. 
                                 <button
                                     style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
                                     öğe oluşturun</button>
                             </h6>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Atanan Kişi</th>
+                                    <th scope="col">İş Dağılımı</th>
+                                    <th scope="col">Sayı</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" style="text-align: left;">Atanmamış</th>
+                                        <td>
+                                          <div class="progress">
+                                            <div class="progress-bar" style="width: 0%">0%</div>
+                                          </div>
+                                        </td>
+                                        <td id="progress-value">0</td>
+                                      </tr>
+                                      
+                                      <script>
+                                        // Değeri güncelleyen fonksiyon
+                                        function updateProgress(value) {
+                                          var progressValue = document.getElementById("progress-value");
+                                          var progressBar = document.querySelector(".progress-bar");
+                                          
+                                          if (value >= 1 && value <= 100) {
+                                            progressValue.textContent = value + "%";
+                                            progressBar.style.width = value + "%";
+                                            progressValue.parentElement.parentElement.classList.add("atanmis");
+                                          } else {
+                                            progressValue.textContent = "0%";
+                                            progressBar.style.width = "0%";
+                                            progressValue.parentElement.parentElement.classList.remove("atanmis");
+                                          }
+                                        }
+                                      
+                                        // Örnek değerler
+                                        var value1 = 0; // Atanmamış durumu
+                                        var value2 = 50; // Atanmış durumu
+                                        
+                                        // Değerleri güncelle
+                                        updateProgress(value1);
+                                        setTimeout(function() {
+                                          updateProgress(value2);
+                                        }, 2000); // 2 saniye sonra değeri güncelle (örnek amaçlı)
+                                      </script>
+                                      
+                                     
+                                      
+                                  <tr>
+                                    ...
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td>
+                                      <button><img src="../../assets/takım.ekle.png" alt="" style="width: 25px;"></button>
+                                      <button style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;">Takım arkadaşı davet edin.</button>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              
                         </div>
                     </div>
                     <div class="col-6">
