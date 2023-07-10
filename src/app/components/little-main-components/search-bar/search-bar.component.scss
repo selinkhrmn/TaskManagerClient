@@ -1,0 +1,28 @@
+.input_holder { 
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    padding: 4px;
+
+
+
+    input {
+        background-color: rgba(255,255,255,0.8);
+        border-color: rgba(255,255,255,0.8);
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .image_holder {
+        cursor: pointer;
+        position: relative;
+        img {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top:8px;
+            right: 12px;
+        }
+    }
+}

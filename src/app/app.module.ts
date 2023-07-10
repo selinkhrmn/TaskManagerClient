@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AllFormsModule, MaterialModule, CdkModule } from './modules';
 import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { RouterModule } from '@angular/router';
@@ -32,12 +31,15 @@ import { AddPeoplePageComponent } from './components/add-people-page/add-people-
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { Sidenav2Component } from './components/sidenav2/sidenav2.component';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
-import { Navbar2Component } from './components/navbar2/navbar2.component';
+import { SearchBarComponent } from './components/little-main-components/search-bar/search-bar.component';
+import { ColumnsComponent } from './components/board/columns/columns.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
     NavbarComponent,
     TabsComponent,
     TabsNamePartComponent,
@@ -56,7 +58,9 @@ import { Navbar2Component } from './components/navbar2/navbar2.component';
     ProjectDetailsComponent,
     Sidenav2Component,
     PasswordChangePageComponent,
-    Navbar2Component,
+    SearchBarComponent,
+    ColumnsComponent
+
 
     
   ],
@@ -75,6 +79,7 @@ import { Navbar2Component } from './components/navbar2/navbar2.component';
     HttpClientModule,
     FormsModule,
     MatDialogModule,
+    DragDropModule
   ],
 
   providers: [],

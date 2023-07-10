@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="top_bar">
+      <div class="left_side">
+        <div class="title">
+        <label>{{column_name}}</label>
+      </div>
+  
+      <label>{{ number_of_tasks }}</label>
+      </div>
+      
+  
+      <mat-icon class="icon">more_horiz</mat-icon>
+    </div>
+  
+    <div #p cdkDrag></div>
+  
+    <div class="create_task" *ngIf="visibility == true">
+      <button id="create_button" type="submit" mat-button (click)="createTask()">
+        <mat-icon>add</mat-icon>Create
+      </button>
+      <input
+        (click)="onInputClick()"
+        (keyup.enter)="createTask()"
+        id="input"
+        [(ngModel)]="inputText"
+      />
+    </div>
+  </div>
+  
