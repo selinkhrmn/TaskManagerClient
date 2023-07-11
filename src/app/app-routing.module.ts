@@ -7,6 +7,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { CreateIssueDialogComponent } from './components/create-issue-dialog/create-issue-dialog.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
         path: 'project-settings',
         component: ProjectDetailsComponent,
       },
+      {
+        path: 'create-issue-dialog',
+        component: CreateIssueDialogComponent,
+      }
     ],
   },
   {

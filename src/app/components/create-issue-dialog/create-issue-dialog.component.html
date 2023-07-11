@@ -1,0 +1,82 @@
+<h1 mat-dialog-title> Create Issue</h1>
+
+<div mat-dialog-content>
+    <div class="row">
+        <mat-form-field>
+            <mat-label>Project Name</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item for project">{{item.projectName}}</mat-option>  
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="row">
+        <mat-form-field>
+            <mat-label>Summary</mat-label>
+            <input matInput type="text">
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput maxlength="300"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="col-6">
+            <mat-label>Assignee</mat-label>
+            <mat-select>
+              <mat-option *ngFor=""></mat-option>  
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Reporter</mat-label>
+            <mat-select>
+              <mat-option *ngFor=""></mat-option>  
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="col-6">
+            <mat-label>Priority</mat-label>
+            <mat-select>
+              <mat-option *ngFor=""></mat-option>  
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Select Labels</mat-label>
+            <mat-select>
+              <mat-option *ngFor=""></mat-option>  
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="col-6">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div mat-dialog-actions class="button">
+    
+<button mat-flat-button mat-dialog-close>Cancel</button>
+<button mat-flat-button color="primary" (click)="createIssue()">Create</button>
+</div>

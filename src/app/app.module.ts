@@ -33,6 +33,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { Sidenav2Component } from './components/sidenav2/sidenav2.component';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
 import { Navbar2Component } from './components/navbar2/navbar2.component';
+import { CreateIssueDialogComponent } from './components/create-issue-dialog/create-issue-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { Navbar2Component } from './components/navbar2/navbar2.component';
     Sidenav2Component,
     PasswordChangePageComponent,
     Navbar2Component,
+    CreateIssueDialogComponent,
 
     
   ],

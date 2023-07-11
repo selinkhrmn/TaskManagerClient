@@ -12,7 +12,8 @@ import { CreateProjectComponent } from '../create-project/create-project.compone
 })
 export class Sidenav2Component {
   projectNames : Project[] = [];
-  constructor(  public projectService: ProjectService, private router: Router, public dialog: MatDialog) {
+  constructor(  
+    public projectService: ProjectService, private router: Router, public dialog: MatDialog) {
 this.getAllProjects()
   }
 
