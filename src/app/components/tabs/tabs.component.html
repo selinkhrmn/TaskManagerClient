@@ -1,7 +1,7 @@
 <div class="tabs_container" [ngClass]="isGreen ? 'green' : isDarkBlue ? 'darkBlue' : isPurple ? 'purple' : isBrown ? 'brown' : isBlue ? 'blue' : ''">
   <div class="tabs_container_project-name-part">
     <img [src]="projectImageUrl" />
-    <h5>{{ projectName }}</h5>
+    <h5>{{ currentProjectName }}</h5>
     <!-- <div class="bucket_button" [matMenuTriggerFor]="menu">
       <mat-menu #menu="matMenu" yPosition="below">
         <div class="customize">

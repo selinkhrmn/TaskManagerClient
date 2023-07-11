@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Project } from 'src/app/interfaces';
+import { ProjectService } from 'src/app/services';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })
-export class TabsComponent {
+export class TabsComponent implements OnInit {
+
+  currentProject: Project;
+  currentProjectName : string;
+
+  constructor(public projectService: ProjectService){}
+
+  ngOnInit(): void {
+    this.projectService.selectedProject$.subscribe((value) => {
+      this.currentProjectName = value.name;
+    });
+    this.currentProjectName = this.projectService.getCurrentProject().name;
+  }
 
   projectImageUrl = '../../../assets/app-development.png';
   colorBucketImageUrl = '../../../assets/color-bucket.png';
-  projectName = 'ProjectName';
 
 
   isGreen = false;

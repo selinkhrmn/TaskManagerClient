@@ -26,20 +26,23 @@ export class CreateProjectComponent implements OnInit {
       if(response.data != null){
         this.projects = response.data;
       }
-      debugger;
     });
        
   }
   
   createProject(){
-    this.projectService.createProject({name: this.projectName}).subscribe(() => {
+    this.projectService.createProject({name: this.projectName}).subscribe((res) => {
+      this.selectedProject(res.data);
       this.ngOnInit();
     });
-    // console.log(this.projectName);
   }
 
   closeDialog() {
     const dialogRef = this.dialog.closeAll()
+  }
+
+  selectedProject(project: any) {
+    this.projectService.setCurrentProject(project);
   }
 
 

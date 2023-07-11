@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { Task } from 'src/app/interfaces/task';
 import { TaskService } from 'src/app/services/task.service';
 import { Column } from 'src/app/interfaces/column';
+import { ColumnService } from 'src/app/services/column.service';
+import { ColumnTask } from 'src/app/interfaces/columnTasks';
+import { taskDto } from 'src/app/interfaces/taskDto';
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
@@ -11,9 +14,17 @@ import { Column } from 'src/app/interfaces/column';
 export class ColumnComponent {
 
   tasks : Task[] = [];
-  
+  columns: ColumnTask[] = [];
 
-  constructor(private taskService : TaskService) {
+  
+  todo : taskDto[] = [];
+
+  done  : taskDto[] = [];
+
+  InProgress  : taskDto[] = [];
+
+  constructor(private taskService : TaskService,
+    private columnService: ColumnService) {
 
   }
 
@@ -25,25 +36,18 @@ export class ColumnComponent {
     //   }
     //   debugger;
     // });
+
+    this.columnService.GetProjectColumnsTasks({"projectId": 1}).subscribe((response) => {
+      if(response.data != null){
+        this.columns = response.data;
+      }
+      this.todo = this.columns[0].tasks;
+      this.InProgress = this.columns[1].tasks;
+    });
        
   }
 
-
-  
-
-  todo : Column[] = [
-    
-  ];
-
-  done  : Column[] = [
-   
-  ];
-
-  InProgress  : Column[] = [
-    
-  ];
-
-  drop(event: CdkDragDrop<Column[]>) {
+  drop(event: CdkDragDrop<taskDto[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

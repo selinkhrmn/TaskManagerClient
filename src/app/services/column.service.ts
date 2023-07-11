@@ -14,7 +14,8 @@ export class ColumnService {
 
   constructor(private http: HttpClient) { }
 
-  GetProjectColumnsTasks(projectId: number): Observable<ResponseModel<ColumnTask>> {
+  GetProjectColumnsTasks(projectId: Partial<Column>): Observable<ResponseModel<ColumnTask>> {
     return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, projectId);
   }
 }
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/interfaces';
@@ -10,17 +10,45 @@ import { CreateProjectComponent } from '../create-project/create-project.compone
   templateUrl: './sidenav2.component.html',
   styleUrls: ['./sidenav2.component.scss']
 })
-export class Sidenav2Component {
-  projectNames : Project[] = [];
-  constructor(  
-    public projectService: ProjectService, private router: Router, public dialog: MatDialog) {
-this.getAllProjects()
-  }
 
-  getAllProjects() {
+export class Sidenav2Component implements OnInit{
+  projects : Project[] = [];
+  selectedProject: Project;
+  currentProject: Project;
+
+  constructor(  
+    public projectService: ProjectService, 
+    private router: Router, 
+    public dialog: MatDialog) { }
+
+  ngOnInit(): void {
     this.projectService.getAllProjects().subscribe((response) => {
       if(response.data != null){
-        this.projectNames = response.data;
+        this.projects = response.data;
+      }
+    });
+  }
+
+  selectProject(selectProject: Project){
+    this.selectedProject = selectProject;
+    this.projectService.setCurrentProject(selectProject);
+  }
+
+  public updateProject(currentProjectName: string){
+    let data = localStorage.getItem('current-project');
+    this.currentProject = data ? JSON.parse(data) : null;
+    this.projectService.updateProject({"id": this.currentProject.id, "name": currentProjectName}).subscribe((res) => {
+      this.projectService.setCurrentProject(res.data);
+      this.ngOnInit();
+    })
+  }
+
+  public getAllProjectsFrom(){
+    this.projectService.getAllProjects().subscribe((response) => {
+      if(response.data != null){
+        this.projects = response.data;
+        this.ngOnInit();
+        alert("done");
       }
     });
   }

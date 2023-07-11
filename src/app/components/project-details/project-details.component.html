@@ -18,10 +18,10 @@
 
     <div class="input_field">
       <label>Name</label>
-      <input [(ngModel)]="projectId" />
+      <input [(ngModel)]="currentProjectName" />
     </div>
     <div class="save_button">
-      <button mat-raised-button>Save</button>
+      <button mat-raised-button (click)="updateProject()">Save</button>
       <button mat-raised-button (click)="deleteProject()">Delete</button>
     </div>
   </div>

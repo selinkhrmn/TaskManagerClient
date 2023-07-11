@@ -10,15 +10,15 @@ import { ColumnService } from 'src/app/services/column.service';
 export class BoardComponent {
   
   columns: ColumnTask[];
+  projectId: number = 1;
 
   constructor(private columnService : ColumnService) {}
   
   ngOnInit(): void {
-    this.columnService.GetProjectColumnsTasks(1).subscribe((response) => {
+    this.columnService.GetProjectColumnsTasks({"projectId": this.projectId}).subscribe((response) => {
       if(response.data != null){
         this.columns = response.data;
       }
-      debugger;
     });
        console.log(this.columns);
        
