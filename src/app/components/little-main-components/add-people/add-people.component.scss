@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 3px solid rgba(255,255,255,0.8);
+    border: 3px solid gray;
 
     label {
         font-size: 18px;
@@ -34,7 +34,7 @@
     height: 14px;
     padding: 2px;
     position: relative;
-    background-color: rgba(255,255,255,0.8);
+    background-color: gray;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +55,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 3px solid rgba(255,255,255,0.8);
+    border: 3px solid gray;
     cursor: pointer;
 
     img {

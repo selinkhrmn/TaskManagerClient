@@ -14,6 +14,8 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+
+import { Task } from 'src/app/interfaces/task';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -21,9 +23,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ColumnsComponent {
+
   @ViewChild('p') p: ElementRef;
   @Input() public column_name: string;
   @Input() public visibility: boolean;
+
+  taskTodoArray : Array<Task> = [];
   number_of_tasks = 0;
   inputText: string;
   priority = 'high';
@@ -46,7 +51,7 @@ export class ColumnsComponent {
       element.disabled = true;
     } else {
       
-      p.innerHTML = `<div class='task_structure' cdkDrag>
+      p.innerHTML = `<div class='task_structure'>
       <p>${this.inputText}</p>
       <div class='delete_side'>
       <label>${this.priority}</label>
@@ -55,6 +60,7 @@ export class ColumnsComponent {
       </div>`;
 
       this.renderer.appendChild(this.p.nativeElement, p);
+      // this.taskTodoArray.push({name: inputValue})
       element.disabled = false;
     }
   }

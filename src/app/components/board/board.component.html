@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <app-columns column_name="TO-DO" [visibility]="true"></app-columns>
-  <app-columns column_name="In Progress" [visibility]="false"></app-columns>
-  <app-columns column_name="Done" [visibility]="false"></app-columns>
+  <div class="left_side">
+    <app-search-bar></app-search-bar>
+    <app-add-people></app-add-people>
+  </div>
 </div>
+<app-column></app-column>

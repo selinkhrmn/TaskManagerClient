@@ -35,6 +35,7 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { SearchBarComponent } from './components/little-main-components/search-bar/search-bar.component';
 import { ColumnsComponent } from './components/board/columns/columns.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ColumnComponent } from './components/board/column/column.component';
 
 
 
@@ -61,7 +62,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     PasswordChangePageComponent,
     SearchBarComponent,
     ColumnsComponent,
-    CreateIssueDialogComponent
+    CreateIssueDialogComponent,
+    ColumnsComponent,
+    ColumnComponent
   ],
   imports: [
     AllFormsModule,
