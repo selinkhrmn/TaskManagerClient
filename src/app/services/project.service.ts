@@ -45,9 +45,10 @@ export class ProjectService {
     return this.project;
   }
 
-  private getProjectLocal() {
+  public getProjectLocal() {
     const data = localStorage.getItem('current-project');
     this.project = data ? JSON.parse(data) : null;
+    return this.project;
   }
 
 }
