@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { Column } from 'src/app/interfaces/column';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { ColumnService } from 'src/app/services/column.service';
@@ -22,5 +22,6 @@ export class BoardComponent {
     });
        
   }
+
   
 }

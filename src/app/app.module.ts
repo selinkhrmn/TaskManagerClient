@@ -36,6 +36,7 @@ import { SearchBarComponent } from './components/little-main-components/search-b
 import { ColumnsComponent } from './components/board/columns/columns.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ColumnComponent } from './components/board/column/column.component';
+import { TaskComponent } from './components/task/task.component';
 
 
 
@@ -64,7 +65,8 @@ import { ColumnComponent } from './components/board/column/column.component';
     ColumnsComponent,
     CreateIssueDialogComponent,
     ColumnsComponent,
-    ColumnComponent
+    ColumnComponent,
+    TaskComponent
   ],
   imports: [
     AllFormsModule,

@@ -7,8 +7,9 @@
     </div>
 
     <div class="project_names" *ngFor="let project of projects" (click)="selectProject(project)">
-        <div class="card">
+        <div class="card" >
             {{project.name}}
+            {{project.id}}
         </div>
       </div>
       <!-- <mat-selection-list [multiple]="false">

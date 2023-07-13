@@ -9,6 +9,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { CreateIssueDialogComponent } from './components/create-issue-dialog/create-issue-dialog.component';
 import { BoardComponent } from './components/board/board.component';
+import { TaskComponent } from './components/task/task.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'board',
         component: BoardComponent,
+      },
+      {
+        path: 'task',
+        component: TaskComponent,
       }
     ],
   },

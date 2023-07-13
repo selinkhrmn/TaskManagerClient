@@ -11,7 +11,6 @@ import { Project } from '../interfaces';
 export class TaskService {
   task : Task;
   baseUrl = `${environment.baseUrl}/Task`;
-
   private task$ = new BehaviorSubject<any>({});
   
 

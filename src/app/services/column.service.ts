@@ -14,6 +14,10 @@ export class ColumnService {
 
   constructor(private http: HttpClient) { }
 
+  GetAllProjectColumns(projectId: Partial<Column>) {
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/GetAllProjectColumns`, projectId);
+  }
+
   GetProjectColumnsTasks(projectId: Partial<Column>): Observable<ResponseModel<ColumnTask>> {
     return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, projectId);
   }

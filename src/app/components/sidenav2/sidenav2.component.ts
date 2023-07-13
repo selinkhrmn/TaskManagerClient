@@ -59,4 +59,5 @@ export class Sidenav2Component implements OnInit{
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateProjectComponent,{height: '95.5%',width: '80%', panelClass: 'dialog'});
   }
+  
 }

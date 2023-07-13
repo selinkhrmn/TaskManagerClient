@@ -6,6 +6,11 @@ import { Column } from 'src/app/interfaces/column';
 import { ColumnService } from 'src/app/services/column.service';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { taskDto } from 'src/app/interfaces/taskDto';
+import { ProjectService } from 'src/app/services';
+import { Router } from '@angular/router';
+import { CreateProjectComponent } from '../../create-project/create-project.component';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskComponent } from '../../task/task.component';
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
@@ -24,11 +29,12 @@ export class ColumnComponent {
   InProgress  : taskDto[] = [];
 
   constructor(private taskService : TaskService,
-    private columnService: ColumnService) {
+    private columnService: ColumnService, private projectService : ProjectService, private router : Router,public dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
+    const project = this.projectService.getProjectLocal();
     //Get all task metodu backend de yazılacak ordan buraya entegre edilecek
     // this.taskService.getAllTasks().subscribe((response) => {
     //   if(response.data != null){
@@ -37,12 +43,16 @@ export class ColumnComponent {
     //   debugger;
     // });
 
-    this.columnService.GetProjectColumnsTasks({"projectId": 1}).subscribe((response) => {
+    
+    this.columnService.GetProjectColumnsTasks({"projectId": project.id}).subscribe((response) => {
       if(response.data != null){
         this.columns = response.data;
       }
+      console.log(this.columns);
+      
       this.todo = this.columns[0].tasks;
       this.InProgress = this.columns[1].tasks;
+      this.done = this.columns[2].tasks
     });
        
   }
@@ -69,5 +79,10 @@ export class ColumnComponent {
     // console.log(this.projectName);
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TaskComponent,{height: '90%',width: '100%', panelClass: 'dialog'});
+  
+    
+  }
 
 }
