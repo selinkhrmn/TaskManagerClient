@@ -31,7 +31,7 @@
           [cdkDropListData]="done"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of done" cdkDrag (click)="openDialog()">
+          <div class="example-box" *ngFor="let item of done" cdkDrag (click)="openDialog(item.id)">
            {{item.name}} {{item.id}}
           </div>
         </div>

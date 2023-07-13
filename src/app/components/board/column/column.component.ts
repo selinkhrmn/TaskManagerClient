@@ -79,10 +79,15 @@ export class ColumnComponent {
     // console.log(this.projectName);
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(TaskComponent,{height: '90%',width: '100%', panelClass: 'dialog'});
-  
+  openDialog(tId: number) { 
+    this.taskService.getTask({"id" : tId}).subscribe((res)=> {
+      this.tasks = res.data;
+      const dialogRef = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
+     })
     
-  }
+    
+
+    
+  } 
 
 }

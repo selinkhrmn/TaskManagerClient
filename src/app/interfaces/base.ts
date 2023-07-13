@@ -1,5 +1,5 @@
 export interface Base {
-    id?: number;
+    id: number;
     createdDate?: Date;
     createdUser?: string; 
     updatedDate?: Date;

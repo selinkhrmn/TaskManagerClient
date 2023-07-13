@@ -38,8 +38,8 @@ export class TaskService {
 
   // }
 
-  getTask(taskId : Partial<Project>)  {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, taskId);
+  getTask(Id : Partial<Task>)  {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, Id);
   }
 
 

@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="left_side">
     <div class="navbar">
-      <label></label>
+      <label taskName>{{taskName}} {{taskId}} {{taskProjectId}}</label>
       <button mat-button><mat-icon> attach_file</mat-icon>Attach</button>
     </div>
 
@@ -35,42 +35,44 @@
         <div class="top_side">
             <label>Details</label>
         </div>
-        <div class="assignee">
+        <div class="body">
+          <div class="assignee card">
             <label>Assignee</label>
             <div class="assigned_person">
                 <!--dropdown button ile atanan kişiyi göreceğiz-->
                 <!--Ayrıca class isimlerini de düzenle-->
             </div>
         </div>
-        <div class="reporter">
+        <div class="reporter card">
             <label>Reporter</label>
             <div class="reported_person">
                 <!--dropdown button ile reporter kişiyi göreceğiz-->
             </div>
         </div>
-        <div class="priority">
+        <div class="priority card">
             <label>Priority</label>
             <div class="priority">
                 <!--dropdown button ile priority yi göreceğiz-->
             </div>
         </div>
-        <div class="due_date">
+        <div class="due_date card">
             <label>Due Date</label>
             <div class="due_date">
                 <!--dropdown button ile due date i göreceğiz-->
             </div>
         </div>
-        <div class="time_tracking">
+        <div class="time_tracking card">
             <label>Time Tracking</label>
             <div class="time_tracking">
                 <!--dropdown button ile atanan kişiyi göreceğiz-->
             </div>
         </div>
-        <div class="start_date">
+        <div class="start_date card">
             <label>Start Date</label>
             <div class="start_date">
                 <!--dropdown button ile start date i göreceğiz-->
             </div>
+        </div>
         </div>
     </div>
   </div>
