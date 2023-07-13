@@ -36,7 +36,8 @@ export class CreateIssueDialogComponent {
     const project= this.projectService.getProjectLocal();
     this.taskService.getTask({"id": project.id}).subscribe(res => {
       this.task = res.data;
-      // debugger;
+   console.log(this.task);
+   
     });
   }
 
@@ -45,7 +46,7 @@ export class CreateIssueDialogComponent {
     this.taskService.createTask({name: this.taskName}).subscribe((res) => {
       this.setTask(res.data);
       this.ngOnInit();
-      // console.log(this.taskName)
+      
     });
   }
 

@@ -39,8 +39,8 @@ export class TaskService {
 
   // }
 
-  getTask(projectId : Partial<Project>)  {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTask`, projectId);
+  getTask(taskId : Partial<Project>)  {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, taskId);
   }
 
 

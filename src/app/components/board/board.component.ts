@@ -20,7 +20,6 @@ export class BoardComponent {
         this.columns = response.data;
       }
     });
-       console.log(this.columns);
        
   }
   
