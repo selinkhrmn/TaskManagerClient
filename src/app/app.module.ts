@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AllFormsModule, MaterialModule, CdkModule } from './modules';
 import { AppRoutingModule, routes } from './app-routing.module';
@@ -37,7 +37,8 @@ import { ColumnsComponent } from './components/board/columns/columns.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ColumnComponent } from './components/board/column/column.component';
 import { TaskComponent } from './components/task/task.component';
-
+import { DescriptionComponent } from './components/create-issue-dialog/description/description.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TaskComponent } from './components/task/task.component';
     CreateIssueDialogComponent,
     ColumnsComponent,
     ColumnComponent,
-    TaskComponent
+    TaskComponent,
+    DescriptionComponent
   ],
   imports: [
     AllFormsModule,
@@ -83,7 +85,9 @@ import { TaskComponent } from './components/task/task.component';
     HttpClientModule,
     FormsModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    AngularEditorModule,
+    FormsModule
   ],
 
   providers: [],
