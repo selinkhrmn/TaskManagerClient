@@ -4,7 +4,7 @@ import { Project } from 'src/app/interfaces';
 import { Task } from 'src/app/interfaces/task';
 import { ProjectService } from 'src/app/services';
 import { TaskService } from 'src/app/services/task.service';
-
+import { AngularEditorConfig } from '@kolkov/angular-editor/public-api';
 
 
 @Component({
@@ -17,6 +17,18 @@ export class CreateIssueDialogComponent {
   taskName : string;
   projects : Project[] = [];
   currentDate = new FormControl(new Date());
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '12rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial'
+  };
+
 
   constructor(
     private taskService: TaskService,
