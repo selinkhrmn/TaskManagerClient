@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/interfaces';
@@ -27,6 +27,11 @@ export class Sidenav2Component implements OnInit{
         this.projects = response.data;
       }
     });
+  }
+
+  ngOnChanges(changes : SimpleChanges) {
+    console.log(changes);
+    
   }
 
   selectProject(selectProject: Project){

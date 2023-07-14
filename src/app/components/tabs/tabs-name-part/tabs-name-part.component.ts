@@ -23,7 +23,6 @@ export class TabsNamePartComponent {
   GetProjectColumns() {
     this.columnService.GetAllProjectColumns({"projectId": this.project.id})
     .subscribe(response => {
-     console.log(response.data[0].name);
     })
     
         

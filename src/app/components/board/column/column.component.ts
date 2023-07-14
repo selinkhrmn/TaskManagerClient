@@ -21,6 +21,7 @@ export class ColumnComponent {
   tasks : Task[] = [];
   columns: ColumnTask[] = [];
 
+  allTasks: taskDto[] = []
   
   todo : taskDto[] = [];
 
@@ -53,6 +54,8 @@ export class ColumnComponent {
       this.todo = this.columns[0].tasks;
       this.InProgress = this.columns[1].tasks;
       this.done = this.columns[2].tasks
+
+      this.allTasks.push(...this.todo,...this.InProgress,...this.done)
     });
        
   }

@@ -16,6 +16,13 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { Task } from 'src/app/interfaces/task';
+import { taskDto } from 'src/app/interfaces/taskDto';
+import { ColumnService } from 'src/app/services/column.service';
+import { ColumnTask } from 'src/app/interfaces/columnTasks';
+import { TaskService } from 'src/app/services/task.service';
+import { TaskComponent } from '../../task/task.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Column } from 'src/app/interfaces/column';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -24,61 +31,63 @@ import { Task } from 'src/app/interfaces/task';
 })
 export class ColumnsComponent {
 
-  @ViewChild('p') p: ElementRef;
-  @Input() public column_name: string;
-  @Input() public visibility: boolean;
+  tasks : Task[] = [];
+  
+  columns: ColumnTask[] = [];
 
-  taskTodoArray : Array<Task> = [];
-  number_of_tasks = 0;
-  inputText: string;
-  priority = 'high';
-  constructor(private renderer: Renderer2) {}
+  allTasks: taskDto[] = [];
 
-  onInputClick() {
-    var element = <HTMLInputElement>document.getElementById('create_button');
-    element.disabled = false;
+  todo : taskDto[] = [];
+
+  done  : taskDto[] = [];
+
+  InProgress  : taskDto[] = [];
+
+  projectService: any;
+
+  constructor(private columnService : ColumnService, private taskService: TaskService,public dialog: MatDialog) {
+     
   }
+  ngOnInit(): void {
+    // const project = this.projectService.getProjectLocal(); 
+    console.log(this.columns);
+        
+    this.columnService.GetProjectColumnsTasks({"projectId": 1}).subscribe((response) => {
+      if(response.data != null){
+        this.columns = response.data;
+      }
+      console.log(this.columns[1].id);
+    });
 
-  createTask() {
-    this.number_of_tasks++; //ileride dinamik olması için değiştirilecek
-    const p: HTMLDivElement = this.renderer.createElement('p');
-    var inputValue = (<HTMLInputElement>document.getElementById('input')).value;
-    var element = <HTMLInputElement>document.getElementById('create_button');
-
-    element.disabled = true;
-
-    if (inputValue == '') {
-      element.disabled = true;
-    } else {
-      
-      p.innerHTML = `<div class='task_structure'>
-      <p>${this.inputText}</p>
-      <div class='delete_side'>
-      <label>${this.priority}</label>
-      <span class="material-icons">delete</span>
-      </div>
-      </div>`;
-
-      this.renderer.appendChild(this.p.nativeElement, p);
-      // this.taskTodoArray.push({name: inputValue})
-      element.disabled = false;
-    }
   }
+  drop(event: CdkDragDrop<taskDto[]>) {
+    console.log(event);
+    console.log(this.columns);
+    console.log(event);
 
-  drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     }
+        localStorage.setItem('columns', JSON.stringify(this.columns));
+
+    
   }
+
+  openDialog(tId: number) { 
+    this.taskService.getTask({"id" : tId}).subscribe((res)=> {
+      this.tasks = res.data;
+      const dialogRef = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
+     })
+    
+    
+
+    
+  } 
 }

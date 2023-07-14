@@ -1,29 +1,17 @@
-<div class="container">
-    <div class="top_bar">
-      <div class="left_side">
-        <div class="title">
-        <label>{{column_name}}</label>
+
+<div class="example-container" cdkDropListGroup>
+  <div class="example-column" *ngFor="let column of columns">
+    <h2>{{ column.name }}</h2>
+    <div
+      cdkDropList
+      [cdkDropListData]="column.tasks"
+      [cdkDropListConnectedTo]="['example-list']"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let task of column.tasks" cdkDrag>
+        {{ task.name }}
       </div>
-  
-      <label>{{ number_of_tasks }}</label>
-      </div>
-      
-  
-      <mat-icon class="icon">more_horiz</mat-icon>
-    </div>
-  
-    <div #p cdkDrag></div>
-  
-    <div class="create_task" *ngIf="visibility == true">
-      <button id="create_button" type="submit" mat-button (click)="createTask()">
-        <mat-icon>add</mat-icon>Create
-      </button>
-      <input
-        (click)="onInputClick()"
-        (keyup.enter)="createTask()"
-        id="input"
-        [(ngModel)]="inputText"
-      />
     </div>
   </div>
-  
+</div>
