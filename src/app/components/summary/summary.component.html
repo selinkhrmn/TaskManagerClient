@@ -4,7 +4,7 @@
         <div class="center-align">
             <div class="d-flex align-items-center justify-content-center">
                 <h3 class="text-center me-2">Hoş geldiniz {{ UserName }}</h3>
-                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 40px;">
+                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 30px;">
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                 <div class="row gx-4">
                     <div class="col-6">
                         <div class="p-4 rounded" style="border: 1px solid black;">
-                            <h5 style="text-align: left; margin-bottom: 0;">Durum genel bakışı</h5>
+                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Durum Genel Bakışı</h5>
                             <br>
                             <h6 style="text-align: left; margin-top: 0;">
                                 Takımınızın ilerleme durumunun özetini görmek için takımınızda birkaç öğe
@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-6">
                         <div class="p-4 rounded" style="border: 1px solid black;">
-                            <h5 style="text-align: left; margin-bottom: 0;">En son etkinlikleriniz</h5>
+                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">En Son Etkinlikleriniz</h5>>
                             <br>
                             <h6 style="text-align: left; margin-top: 0;">
                                 Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım
@@ -106,7 +106,7 @@
                     <div class="col-6">
                         <div class="p-4 rounded"
                             style="display: block; height: 437px; width: 580px; border: 1px solid black;">
-                            <h5 style="text-align: left; margin-bottom: 0;">Takım iş yükü</h5>
+                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım İş Yükü</h5>
                             <br>
                             <h6 style="text-align: left; margin-top: 0;">
                                 İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
@@ -182,8 +182,74 @@
                         </div>
                     </div>
                     <div class="col-6">
+                        <div class="p-4 rounded"
+                            style="display: block; height: 437px; width: 580px; border: 1px solid black;">
+                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İş türleri</h5>
+                            <br>
+                            <h6 style="text-align: left; margin-top: 0;">
+                                Başlamak için projenizde birkaç öğe oluşturmalısınız. 
+                                <button
+                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                    öğe oluşturun</button>
+                            </h6>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tür</th>
+                                        <th scope="col">Dağılım</th>
+                                        <th scope="col">Sayı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" style="text-align: left;"> <img src="../../assets/tik.png" alt=""
+                                            style="width: 30px;">     Task</th>
+                                        
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%">0%</div>
+                                            </div>
+                                        </td>
+                                        <td id="progress-value">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="text-align: left;"><img src="../../assets/subtask.png" alt=""
+                                            style="width: 30px;">       Sub-Task</th>
+                                        
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%">0%</div>
+                                            </div>
+                                        </td>
+                                        <td id="progress-value">0</td>
+                                    </tr>
+
+                                    <tr id="atanan-kisiler">
+                                        <td colspan="3"></td>
+                                    </tr>
+
+
+
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button><img src="../../assets/ayarlar.png" alt=""
+                                                    style="width: 30px;"></button>
+                                            <button
+                                                style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;">Türleri yönetin.</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <br><br>
+                    </div>
+                    
+                    <div class="col-6">
                         <div class="p-4 rounded" style="border: 1px solid black;">
-                            <h5 style="text-align: left; margin-bottom: 0;">İlgili Projeler</h5>
+                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İlgili Projeler</h5>
                             <br>
                             <h6 style="text-align: left; margin-top: 0;">
                                 Tüm çalışmalarınızı aynı yerde yönetmek ve paydaşlarla uyum içinde olmak için projeleri
