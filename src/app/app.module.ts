@@ -35,7 +35,6 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { SearchBarComponent } from './components/little-main-components/search-bar/search-bar.component';
 import { ColumnsComponent } from './components/board/columns/columns.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { ColumnComponent } from './components/board/column/column.component';
 import { TaskComponent } from './components/task/task.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -65,7 +64,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ColumnsComponent,
     CreateIssueDialogComponent,
     ColumnsComponent,
-    ColumnComponent,
     TaskComponent
   ],
   imports: [

@@ -48,22 +48,18 @@ export class ColumnsComponent {
   constructor(private columnService : ColumnService, private taskService: TaskService,public dialog: MatDialog) {
      
   }
-  ngOnInit(): void {
-    // const project = this.projectService.getProjectLocal(); 
-    console.log(this.columns);
-        
+  ngOnInit(): void {        
     this.columnService.GetProjectColumnsTasks({"projectId": 1}).subscribe((response) => {
       if(response.data != null){
         this.columns = response.data;
       }
       console.log(this.columns[1].id);
+      console.log(this.columns);
     });
 
   }
   drop(event: CdkDragDrop<taskDto[]>) {
-    console.log(event);
     console.log(this.columns);
-    console.log(event);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -75,11 +71,9 @@ export class ColumnsComponent {
         event.currentIndex,
       );
     }
-        localStorage.setItem('columns', JSON.stringify(this.columns));
-
-    
   }
 
+  
   openDialog(tId: number) { 
     this.taskService.getTask({"id" : tId}).subscribe((res)=> {
       this.tasks = res.data;

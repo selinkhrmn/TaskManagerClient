@@ -1,13 +1,17 @@
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 10px;
     width: 100%;
-    height: 15%;
 
+    overflow: auto;
     .left_side {
         display: flex;
         gap: 10px;
     }
+
+    
 }
+.columns_container {
+        width: 83.5vw;
+        height: 89%;
+        overflow: auto;
+    }
