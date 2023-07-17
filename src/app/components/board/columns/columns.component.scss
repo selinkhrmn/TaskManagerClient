@@ -1,16 +1,56 @@
+.create_column_container {
+  display: flex;
 
+  width: 200px;
+  height: 155px;
+  // background-color: aqua;
 
+  .button_container {
+    // background: red;
+    background: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    label {
+      margin-bottom: 10px;
+    }
+  }
+
+  .just {
+    // background-color: aqua;
+    padding: 10px;
+    width: 100%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:5px;
+
+    input {
+      border: 1px solid gray;
+    }
+  }
+}
 .example-container {
-  padding: 40px;
+  padding: 20px;
   width: 100%;
   height: 100%;
   max-width: 100%;
   display: flex;
   align-items: start;
   gap: 30px;
-  overflow:auto;
+  overflow: auto;
   white-space: nowrap;
-  
+
+  button {
+    position: sticky;
+    left: 0;
+  }
 }
 
 .add_button {
@@ -24,31 +64,31 @@
   left: 0;
   cursor: pointer;
 
- img {
-  width: 30px;
-  height: 30px;
- }
+  img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .example-list {
   border: solid 1px #ccc;
-  min-height:40px;
+  width: 100%;
+  min-height: 40px;
   border-radius: 4px;
   overflow-y: auto;
   white-space: nowrap;
   display: inline-block;
 }
 
-.example-column{
-
+.example-column {
   padding: 20px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  background: #D9D9D9;
+  background: #d9d9d9;
   min-width: 270px;
   h2 {
     border-radius: 5px;
-    background-color: #BF49F2;
+    background-color: #bf49f2;
     text-align: center;
     font-size: 22px;
     font-weight: 700;
@@ -59,7 +99,7 @@
 .example-box {
   padding: 20px 10px;
   border-bottom: 1px solid #ccc;
-  color: #0D0D0D;
+  color: #0d0d0d;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -75,8 +115,7 @@
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {

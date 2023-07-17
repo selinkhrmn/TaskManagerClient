@@ -18,6 +18,8 @@ export class BoardComponent {
     this.columnService.GetProjectColumnsTasks({"projectId": this.projectId}).subscribe((response) => {
       if(response.data != null){
         this.columns = response.data;
+        console.log(this.columns);
+        
       }
     });
        

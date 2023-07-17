@@ -1,21 +1,43 @@
-
 <div class="example-container" cdkDropListGroup>
-  <div class="add_button">
-    <img src="../../../../assets/plus.png">
-  </div>
   <div class="example-column" *ngFor="let column of columns">
     <h2>{{ column.name }}</h2>
     <div
+      
       cdkDropList
       [cdkDropListData]="column.tasks"
       [cdkDropListConnectedTo]="['example-list']"
       class="example-list"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="drop($event, column)"
+      #droppedContainer
     >
       <div class="example-box" *ngFor="let task of column.tasks" cdkDrag>
         {{ task.name }}
       </div>
     </div>
   </div>
+  <div class="just_container">
+    <mat-drawer-container class="create_column_container">
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <div class="just">
+          <h3>Name:</h3>
+          <input [(ngModel)]="columnName"/>
+          <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+
+          <button mat-button (click)="drawer.toggle()">
+            Back
+          </button>
+          <button mat-raised-button (click)="drawer.toggle();createColumn()" color="primary">
+            Create
+          </button>
+        </div>
+      </mat-drawer>
+      <div class="button_container">
+        <label>Add column</label>
+        <button mat-mini-fab color="warn" (click)="drawer.toggle()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-drawer-container>
+  </div>
+
 </div>
- 

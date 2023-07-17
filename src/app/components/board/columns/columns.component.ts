@@ -11,6 +11,7 @@ import {
   CdkDrag,
   CdkDropList,
   CdkDropListGroup,
+  copyArrayItem,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -23,6 +24,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { TaskComponent } from '../../task/task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/interfaces/column';
+import { ProjectService } from 'src/app/services';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -34,6 +36,7 @@ export class ColumnsComponent {
   tasks : Task[] = [];
   
   columns: ColumnTask[] = [];
+  columnGet: ColumnTask;
 
   allTasks: taskDto[] = [];
 
@@ -43,24 +46,31 @@ export class ColumnsComponent {
 
   InProgress  : taskDto[] = [];
 
-  projectService: any;
+  currentProjectId : number;
+  columnName : string;
+  showFiller = false;
+  panelOpenState = false;
 
-  constructor(private columnService : ColumnService, private taskService: TaskService,public dialog: MatDialog) {
+  constructor(private columnService : ColumnService, private taskService: TaskService,public dialog: MatDialog, private projectService : ProjectService) {
      
   }
   ngOnInit(): void {        
-    this.columnService.GetProjectColumnsTasks({"projectId": 1}).subscribe((response) => {
+    const currentProject = this.projectService.getCurrentProject();
+
+    this.columnService.GetProjectColumnsTasks({"projectId": currentProject.id}).subscribe((response) => {
       if(response.data != null){
         this.columns = response.data;
       }
-      console.log(this.columns[1].id);
       console.log(this.columns);
     });
 
   }
-  drop(event: CdkDragDrop<taskDto[]>) {
-    console.log(this.columns);
 
+  drop(event: CdkDragDrop<taskDto[]>, column: ColumnTask) {
+    console.log(this.columns);
+    
+    console.log(column.id);
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -70,7 +80,16 @@ export class ColumnsComponent {
         event.previousIndex,
         event.currentIndex,
       );
+     
+      this.taskService.updateTaskColumnId({"id": event.container.data[0].id, "columnId": column.id}).subscribe((res) => {
+        console.log(res.data);
+        console.log(res.message);
+        
+        
+      });
     }
+
+    
   }
 
   
@@ -79,9 +98,16 @@ export class ColumnsComponent {
       this.tasks = res.data;
       const dialogRef = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
      })
-    
-    
-
-    
   } 
+
+  getProjectLocal() {
+    const currentProjectId =  this.projectService.getProjectLocal();
+    return this.currentProjectId = currentProjectId.id;
+  }
+
+  createColumn() {
+    this.getProjectLocal();
+    this.columnService.CreateColumn({'projectId' : this.currentProjectId, 'name': this.columnName}).subscribe((res)=> {
+      
+  })}
 }

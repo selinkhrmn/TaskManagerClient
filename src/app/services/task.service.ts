@@ -24,12 +24,17 @@ export class TaskService {
   }
 
   updateTask(task : Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaks`, task);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task);
   }
 
   deleteTask(task: Partial<Task>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, {body: task });
   }
+
+  updateTaskColumnId(task: Partial<Task>) {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task);
+  }
+
 
 
   // setTask(task: any) {

@@ -64,7 +64,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ColumnsComponent,
     CreateIssueDialogComponent,
     ColumnsComponent,
-    TaskComponent
+    TaskComponent,
   ],
   imports: [
     AllFormsModule,
