@@ -1,45 +1,129 @@
 .row {
   height: 100%;
   width: 100%;
-  
+
 }
+h3.text-center {
+  font-weight: bold;
+  font-size: 24px;
+}
+
 
 .btn-primary {
-    background-color: #ffffff;
-    border-color: #644747;
-    color: #110e0e;
-  }
-  .progress-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  
-    .progress-label {
-      text-align: center;
-  
-      span {
-        display: block;
-        white-space: pre;
-      }
+  background-color: #ffffff;
+  border-color: #644747;
+  color: #110e0e;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .progress-label {
+    text-align: center;
+
+    span {
+      display: block;
+      white-space: pre;
     }
   }
-  .center-content {
-    width: 55%; // Genişliği ayarlayabilirsiniz
-    margin: auto; 
-    margin-top: -45px// Otomatik marjın merkezlemeyi sağlar.
-    
 }
+
 .center-content {
-  margin-bottom: -55px; /* İstediğiniz değeri kullanın */
+  width: 55%; // Genişliği ayarlayabilirsiniz
+  margin: auto;
+  margin-top: -45px // Otomatik marjın merkezlemeyi sağlar.
+
 }
 
-  $atanmisRenk: green; // Atanmış durumu için renk
+.center-content {
+  margin-bottom: -55px;
+  /* İstediğiniz değeri kullanın */
+}
 
-  .atanmis {
-    background-color: $atanmisRenk;
-    // Diğer stil tanımları
-  }
+$atanmisRenk: green; // Atanmış durumu için renk
+
+.atanmis {
+  background-color: $atanmisRenk;
+  // Diğer stil tanımları
+}
 
 
 
-  
+.col {
+  width: 100%;
+  height: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button-container button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button-container img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.button-container div {
+  text-align: left;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+
+
+
+.button-container div {
+  text-align: right;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button-container button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+
+
+
+.button-container h4 {
+  font-size: 18px;
+}
+
+.button-container h5 {
+  font-size: 16px;
+}
+

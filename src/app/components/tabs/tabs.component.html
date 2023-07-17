@@ -1,4 +1,4 @@
-<div class="tabs_container" [ngClass]="isGreen ? 'green' : isDarkBlue ? 'darkBlue' : isPurple ? 'purple' : isBrown ? 'brown' : isBlue ? 'blue' : ''">
+<div class="tabs_container col" [ngClass]="isGreen ? 'green' : isDarkBlue ? 'darkBlue' : isPurple ? 'purple' : isBrown ? 'brown' : isBlue ? 'blue' : ''">
   <div class="tabs_container_project-name-part">
     <img [src]="projectImageUrl" />
     <h5>{{ currentProjectName }}</h5>
@@ -19,3 +19,5 @@
   </div>
   <app-tabs-name-part></app-tabs-name-part>
 </div>
+
+
