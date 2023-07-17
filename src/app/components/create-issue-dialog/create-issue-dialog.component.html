@@ -2,20 +2,29 @@
 
 <div mat-dialog-content>
     <div class="row">
-        <mat-form-field>
+        <mat-form-field class="col-6">
             <mat-label>Project Name</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let project of projects" [value]="project">{{project.name}}</mat-option>  
+            <mat-select [(ngModel)] = "project">
+              <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field class="col-6">
+            <mat-label>Column Name</mat-label>
+            <mat-select [(ngModel)]="column">
+              <mat-option *ngFor="let column of columnForTask" [value]="column" >{{column.name}}</mat-option>  
+            </mat-select>
+        </mat-form-field>
+
     </div>
+    
 
     <mat-divider></mat-divider>
 
     <div class="row">
         <mat-form-field>
-            <mat-label>Summary</mat-label>
-            <input matInput type="text">
+            <mat-label>Task Name</mat-label>
+            <input matInput type="text" [(ngModel)]="taskName">
         </mat-form-field>
     </div>
 
@@ -68,16 +77,16 @@
     </div>
 
     <div class="row">
-        <mat-form-field class="col-6">
+        <!-- <mat-form-field class="col-6">
             <mat-label>Start Date</mat-label>
             <input matInput [matDatepicker]="pickerStart" [value]="currentDate.value">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
             <mat-datepicker #pickerStart></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="col-6">
+        </mat-form-field> -->
+        <mat-form-field class="col-12">
             <mat-label>Due Date</mat-label>
-            <input matInput [matDatepicker]="pickerEnd" [value]="currentDate.value">
+            <input [(ngModel)]="dueTime" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
             <mat-datepicker #pickerEnd></mat-datepicker>
@@ -89,5 +98,5 @@
 <div mat-dialog-actions class="button">
     
 <button mat-flat-button mat-dialog-close>Cancel</button>
-<button mat-flat-button color="primary" (click)="getAllTasks()">Create</button>
+<button mat-flat-button color="primary" (click)="createTask()">Create</button>
 </div>

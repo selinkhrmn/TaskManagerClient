@@ -11,11 +11,12 @@ import { Project } from '../interfaces';
 export class TaskService {
   task : Task;
   baseUrl = `${environment.baseUrl}/Task`;
+  
   private task$ = new BehaviorSubject<any>({});
+  selectedTask$ = this.task$.asObservable();
   
 
   constructor(private http : HttpClient) {
-    this.getTaskLocal();
    }
 
   createTask(task: Partial<Task>) {
@@ -42,10 +43,4 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, Id);
   }
 
-
-   getTaskLocal() {
-    // debugger;
-    const data = localStorage.getItem('current-project');
-    this.task = data ? JSON.parse(data) : null ;
-  }
 }

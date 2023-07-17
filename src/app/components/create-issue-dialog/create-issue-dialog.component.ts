@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ErrorHandler, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Project } from 'src/app/interfaces';
 import { Task } from 'src/app/interfaces/task';
 import { ProjectService } from 'src/app/services';
 import { TaskService } from 'src/app/services/task.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor/public-api';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { ColumnService } from 'src/app/services/column.service';
+import { ColumnTask } from 'src/app/interfaces/columnTasks';
+import { Column } from 'src/app/interfaces/column';
 
+interface DialogData {
+  table: MatTable<Task>;
+}
 
 @Component({
   selector: 'app-create-issue-dialog',
@@ -13,10 +21,23 @@ import { AngularEditorConfig } from '@kolkov/angular-editor/public-api';
   styleUrls: ['./create-issue-dialog.component.scss']
 })
 export class CreateIssueDialogComponent {
-  task : Task[] = [];
-  taskName : string;
-  projects : Project[] = [];
+  
+
+  task: Task[] = [];
+  projects: Project[] = [];
   currentDate = new FormControl(new Date());
+
+  project : Project;
+  column : Column;
+  taskName: string;
+  dueTime : Date;
+
+  projectForTask: Project[] = [];
+  columnForTask: Column[] = [];
+
+  currentProject: Partial<Project>;
+
+  
 
   config: AngularEditorConfig = {
     editable: true,
@@ -31,50 +52,76 @@ export class CreateIssueDialogComponent {
 
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
+    private dialog: MatDialog,
     private taskService: TaskService,
-    private projectService: ProjectService
+    private columnService: ColumnService,
+    private projectService: ProjectService,
+
   ) {
     this.getAllProjects();
+    this.getCurrentProject();
   }
 
 
   ngOnInit() {
-    // this.createTask();
-    this.getAllTasks();
-   
-  }
+      //get current project id 
+       this.projectService.selectedProject$?.subscribe((value) => {
+        this.currentProject = value;
+      });
+      this.currentProject = this.projectService.getCurrentProject();
+  
+      //get current colums of projects
+      this.columnService.GetAllProjectColumns({"projectId": this.currentProject.id}).subscribe((response) => {
+        if(response.data != null){
+          this.columnForTask = response.data;
+          
+        }
+        
+      });
 
-  getAllTasks() {
-    const project= this.projectService.getProjectLocal();
-    this.taskService.getTask({"id": project.id}).subscribe(res => {
-      this.task = res.data;
-   console.log(this.task);
-   
-    });
-  }
-
-  //yeni issue
-  createTask(){
-    this.taskService.createTask({name: this.taskName}).subscribe((res) => {
-      this.setTask(res.data);
-      this.ngOnInit();
+      //error message
       
-    });
   }
 
-  setTask(task: any) {
-    this.taskService.updateTask(task);
+
+  createTask() {
+    this.taskService.createTask({ "name": this.taskName, "columnId": this.column.id , "projectId": this.project.id }).subscribe(
+      response => {
+        if (response.data != null) {
+          this.task = response.data;
+          
+        }
+      });
+   
   }
 
-  //bütün projeleri servis üstünden çekip proje arrayına atanıyor.
-  public getAllProjects(){
+  // setTask(task: any) {
+  //   this.taskService.updateTask(task);
+  // }
+
+
+  // //bütün projeleri servis üstünden çekip proje arrayına atanıyor.
+  public getAllProjects() {
     this.projectService.getAllProjects().subscribe((response) => {
-      if(response.data != null){
+      if (response.data != null ) {
         this.projects = response.data;
         this.ngOnInit();
+        
       }
     });
+    
   }
+
+  // returned current project from local storage.
+  public getCurrentProject() {
+    this.projectService.selectedProject$?.subscribe((value) => {
+      this.currentProject = value;
+    });
+    this.currentProject = this.projectService.getCurrentProject();
+  }
+
 
 
 }

@@ -1,6 +1,6 @@
 import { Base } from "./base";
 
-export class Column {
+export interface Column extends Base{
     name: string;
     projectId: number;
 }
