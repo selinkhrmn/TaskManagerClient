@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
 import { Sidenav2Component } from '../sidenav2/sidenav2.component';
+import { HomepageComponent } from '../homepage/homepage.component';
 
 @Component({
   selector: 'app-project-details',
@@ -17,7 +18,8 @@ export class ProjectDetailsComponent {
   currentProjectName : string;
   constructor(
     public projectService: ProjectService,
-    private sideNav: Sidenav2Component) {
+    private sideNav: Sidenav2Component,
+    private homePageComponent: HomepageComponent) {
   }
 
   ngOnInit() {
@@ -38,6 +40,18 @@ export class ProjectDetailsComponent {
     });
   }
 
+  saveProjectDetails(){
+    let storage = JSON.parse(localStorage.getItem("current-project") ?? "");
+    const model = {
+      Id: storage.id,
+      Name: this.currentProjectName
+    }
+    this.projectService.updateProject(model).subscribe((res) => {
+      this.projectService.setCurrentProject(res.data);
+      this.updateProject();
+    })
+  }
+
   updateProject(){
     // let data = localStorage.getItem('current-project');
     // this.currentProject = data ? JSON.parse(data) : null;
@@ -46,6 +60,7 @@ export class ProjectDetailsComponent {
     //   this.getAllProjectsFrom();
     //   this.ngOnInit();
     // })
-    this.sideNav.updateProject(this.currentProjectName);
+    //this.sideNav.updateProject();
+    //this.homePageComponent.updateProject();
   }
 }

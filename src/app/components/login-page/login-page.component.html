@@ -4,13 +4,15 @@
     <div class="container">
       <div class="username_and_password_part">
         <label>Username or E-mail</label>
-        <input />
+        <input [(ngModel)]="user.usernameOrEmail" />
         <div class="password">
           <label>Password</label>
           <label routerLink="forgot-password" >Forgot password?</label>
         </div>
-        <input />
-        <button>Sign in</button>
+        <input [(ngModel)]="user.password"  />
+        <button mat-raised-button routerLink="" (click)="signIn()">
+          Sign In
+        </button>
 
       </div>
     </div>

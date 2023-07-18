@@ -27,7 +27,7 @@ export class ProjectService {
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project);
   }
 
-  updateProject(project: Partial<Project>) {
+  updateProject(project: Partial<any>) {
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project);
   }
 
