@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent{
 
   usernameOrEmail: string;
   password: string;
@@ -22,11 +22,6 @@ export class LoginPageComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private activatedRoute: ActivatedRoute) {
-
-  }
-
-  ngOnInit(): void {
-
   }
 
   signIn() {
@@ -34,16 +29,13 @@ export class LoginPageComponent implements OnInit {
       this.authService.login(this.user).subscribe(() => {
         const tokenT = localStorage.getItem("token");
         if (tokenT != null) {
-          this.router.navigate(['summary'], { relativeTo: this.activatedRoute });
+          this.router.navigate([''], { relativeTo: this.activatedRoute });
         }
       },error => {
           console.log(error);
-          alert("Hatalı giriş");
+          alert("Incorrect Enterence");
         })
     }
-
-    
-
-
   }
 }
+
