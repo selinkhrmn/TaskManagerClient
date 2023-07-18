@@ -3,7 +3,7 @@ import { Column } from "./column";
 
 
 export interface ColumnTask {
-    name: String;
+    name: string;
     id: number;
     tasks: taskDto[];
 

@@ -1,23 +1,30 @@
 <div class="container">
-    <div class="top_bar">
-        <label>Projects</label>
-        <div class="icon_holder" (click)="openDialog()">
-            <img src="../../../assets/plus.png">
-        </div>
+  <div class="top_bar">
+    <label>Projects</label>
+    <div class="icon_holder">
+      <button mat-mini-fab color="basic">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
-    <div class="project_names" *ngFor="let project of projects" (click)="selectProject(project)">
-        <div class="card" >
-            {{project.name}}
-            {{project.id}}
-        </div>
-      </div>
-      <!-- <mat-selection-list [multiple]="false">
+    <!-- <div class="icon_holder" (click)="openDialog()" >
+            <img src="../../../assets/plus.png">
+        </div> -->
+  </div>
+
+  <div
+    class="project_names"
+    *ngFor="let project of projects"
+    (click)="selectProject(project)"
+  >
+    <div class="card">
+      {{ project.name }}
+      {{ project.id }}
+    </div>
+  </div>
+  <!-- <mat-selection-list [multiple]="false">
         <mat-list-option *ngFor="let project of projects" [value]="project">
           {{project.name}}
         </mat-list-option>
       </mat-selection-list> -->
-      
-      
-   
 </div>

@@ -25,6 +25,14 @@ export class ColumnService implements OnInit{
 
   }
 
+  DeleteColumn(id : Partial<Column>) {
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/DeleteColumn`,id );
+  }
+
+  UpdateColumn(column: Partial<Column>) {
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/UpdateColumn`,column );
+  }
+
   GetAllProjectColumns(projectId: Partial<Column>) {
     return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/GetAllProjectColumns`, projectId);
   }
@@ -32,5 +40,7 @@ export class ColumnService implements OnInit{
   GetProjectColumnsTasks(projectId: Partial<Column>): Observable<ResponseModel<ColumnTask>> {
     return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, projectId);
   }
+
+  
 }
 

@@ -1,6 +1,25 @@
 <div class="example-container" cdkDropListGroup>
   <div class="example-column" *ngFor="let column of columns">
-    <h2>{{ column.name }}</h2>
+    <div class="update_column">
+      <div class="column_name">
+     <h2>{{ column.name }}</h2>
+      </div>
+ 
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item  (click)="getColumnId(column.id);openEditDialog(column.name)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="getColumnId(column.id);DeleteColumn()">
+          <mat-icon>delete_outline</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+    
     <div
       
       cdkDropList

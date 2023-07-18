@@ -37,6 +37,7 @@ import { ColumnsComponent } from './components/board/columns/columns.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { TaskComponent } from './components/task/task.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { EditColumnComponent } from './components/board/edit-column/edit-column.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     CreateIssueDialogComponent,
     ColumnsComponent,
     TaskComponent,
+    EditColumnComponent,
   ],
   imports: [
     AllFormsModule,
@@ -83,7 +85,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatDialogModule,
     DragDropModule,
     AngularEditorModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule 
   ],
 
   providers: [],

@@ -1,0 +1,14 @@
+.container {
+    width: 300px;
+    height: 140px;
+    display: flex;  
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    padding: 12px;
+    
+    .button_container {
+        display: flex;
+        width: 100%;
+justify-content: space-evenly;    }
+}
