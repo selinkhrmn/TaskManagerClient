@@ -1,7 +1,11 @@
+
 .row {
+
   height: 100%;
   width: 100%;
   
+
+
 }
 h3.text-center {
   font-weight: bold;
@@ -79,8 +83,8 @@ $atanmisRenk: green; // Atanmış durumu için renk
 }
 
 .button-container img {
-  width: 50px;
-  margin-right: 10px;
+  width: 40px;
+  margin-right: 5px;
 }
 
 .button-container div {
@@ -127,3 +131,29 @@ $atanmisRenk: green; // Atanmış durumu için renk
   font-size: 16px;
 }
 
+.custom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+.button-container {
+  margin-top: 20px;
+}
+
+.custom-button {
+  background-color: rgb(76, 65, 174);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.custom-button.btn-secondary {
+  background-color: gray;
+}
