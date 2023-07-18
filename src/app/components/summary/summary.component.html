@@ -1,309 +1,263 @@
 <div class="row">
     <div class="col-12">
         <br>
-        <div class="center-align">
+        <div class="center-align custom-container">
             <div class="d-flex align-items-center justify-content-center">
                 <h3 class="text-center me-2">Hoş geldiniz {{ UserName }}</h3>
                 <img src="../../assets/hosgeldiniz.png" alt="" style="width: 30px;">
             </div>
         </div>
 
+        <div class="center-align custom-container">
+            <div class="d-flex align-items-center justify-content-center">
+                Burada proje1 adlı projenin durumunun, önceliklerinin, iş yükünün ve daha fazlasının bir özetini görebilirsiniz.
+            </div>
+        </div>
 
-        <br>
         <div class="container overflow-hidden text-center">
             <div class="row gx-5">
-              <div class="col">
-                <div class="button-container">
-                  <button type="button" class="btn btn-primary">
-                    <div class="p-4 d-flex align-items-center">
-                      <img src="../../assets/okey.png" alt="" class="me-3">
-                      <div>
-                        <h4>Son 7 günde</h4>
-                        <h5>{{ Ogesayisitam }} öğe tamamlandı.</h5>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-          
-              <div class="col">
-                <div class="button-container">
-                  <button type="button" class="btn btn-primary">
-                    <div class="p-4 d-flex align-items-center">
-                      <img src="../../assets/güncellenme.png" alt="" class="me-2">
-                      <div>
-                        <h4>Son 7 günde</h4>
-                        <h5>{{ Ogesayisiguncelleme }} öğe güncellendi.</h5>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-          
-              <div class="col">
-                <div class="button-container">
-                  <button type="button" class="btn btn-primary">
-                    <div class="p-4 d-flex align-items-center">
-                      <img src="../../assets/olustur.png" alt="" class="me-2">
-                      <div>
-                        <h4>Son 7 günde</h4>
-                        <h5>{{ Ogesayisiolus }} öğe oluşturuldu.</h5>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-          
-              <div class="col">
-                <div class="button-container">
-                  <button type="button" class="btn btn-primary">
-                    <div class="p-4 d-flex align-items-center">
-                      <img src="../../assets/takvim.png" alt="" class="me-2">
-                      <div>
-                        <h4>Son 7 günde</h4>
-                        <h5>{{ Ogesayisitam }} öğe tamamlandı.</h5>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          >
-          
-            <br>      
-        <br>
-
-        <div class="container-fluid pt-100 mb-5">
-            <div class="container overflow-hidden text-center">
-                <div class="row gx-4">
-                    <div class="col-6">
-                        <div class="p-4 rounded" style="display: block; height: 400px; width: 620px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Durum
-                                Genel Bakışı</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Takımınızın ilerleme durumunun özetini görmek için takımınızda birkaç öğe
-                                oluşturmalısınız.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-
-                            <div class="center-content">
-                                <app-chart></app-chart>
+                <div class="col">
+                    <div class="button-container">
+                        <button type="button" class="btn btn-primary">
+                            <div class="p-4 d-flex align-items-center">
+                                <img src="../../assets/okey.png" alt="" class="me-3">
+                                <div>
+                                    <h4>Son 7 günde</h4>
+                                    <h5>{{ Ogesayisitam }} öğe tamamlandı.</h5>
+                                </div>
                             </div>
-
-
-                        </div>
+                        </button>
                     </div>
-                    <div class="col-6">
-                        <div class="p-4 rounded" style="display: block; height: 400px; width: 640px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">En Son
-                                Etkinlikleriniz</h5>>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım
-                                arkadaşlarınızı projenize davet edin.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-                            <img src="../../assets/sonetkinlik.png" alt="" style="width: 250px;" class="me-2">
-                        </div>
+                </div>
+                <div class="col">
+                    <div class="button-container">
+                        <button type="button" class="btn btn-primary">
+                            <div class="p-4 d-flex align-items-center">
+                                <img src="../../assets/güncellenme.png" alt="" class="me-2">
+                                <div>
+                                    <h4>Son 7 günde</h4>
+                                    <h5>{{ Ogesayisiguncelleme }} öğe güncellendi.</h5>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="button-container">
+                        <button type="button" class="btn btn-primary">
+                            <div class="p-4 d-flex align-items-center">
+                                <img src="../../assets/olustur.png" alt="" class="me-2">
+                                <div>
+                                    <h4>Son 7 günde</h4>
+                                    <h5>{{ Ogesayisiolus }} öğe oluşturuldu.</h5>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="button-container">
+                        <button type="button" class="btn btn-primary">
+                            <div class="p-4 d-flex align-items-center">
+                                <img src="../../assets/takvim.png" alt="" class="me-2">
+                                <div>
+                                    <h4>Son 7 günde</h4>
+                                    <h5>{{ Ogesayisitam }} öğe tamamlandı.</h5>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid pt-100 mb-5">
-            <div class="container overflow-hidden text-center">
-                <div class="row gx-4">
-                    <div class="col-6">
-                        <div class="p-4 rounded"
-                            style="display: block; height: 437px; width: 620px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım
-                                İş Yükü</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Atanan Kişi</th>
-                                        <th scope="col">İş Dağılımı</th>
-                                        <th scope="col">Sayı</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" style="text-align: left;">Atanmamış</th>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 0%">0%</div>
-                                            </div>
-                                        </td>
-                                        <td id="progress-value">0</td>
-                                    </tr>
 
-                                    <tr id="atanan-kisiler">
-                                        <td colspan="3"></td>
-                                    </tr>
+        <br>
+        <br>
 
-
-
-                                    <script>
-                                        // Örnek atanmış kişiler dizisi
-                                        var atanmisKisiler = ["Kişi 1", "Kişi 2", "Kişi 3"];
-
-                                        // Atanan kişilerin listesini oluşturan fonksiyon
-                                        function createAtananKisilerList() {
-                                            var atanmisKisilerRow = document.getElementById("atanan-kisiler");
-                                            atanmisKisilerRow.innerHTML = ""; // Önceki içeriği temizle
-
-                                            if (atanmisKisiler.length > 0) {
-                                                var td = document.createElement("td");
-                                                td.colSpan = "3";
-                                                for (var i = 0; i < atanmisKisiler.length; i++) {
-                                                    var p = document.createElement("p");
-                                                    p.textContent = atanmisKisiler[i];
-                                                    td.appendChild(p);
-                                                }
-                                                atanmisKisilerRow.appendChild(td);
-                                            }
-                                        }
-
-                                        // Atanan kişiler listesini oluştur.
-                                        // Örneğin atanmisKisiler dizisini gerçek verilere veya veritabanından gelen değerlere göre güncelleyebilirsiniz.
-                                        // Ardından, createAtananKisilerList fonksiyonunu çağırarak atanan kişilerin listesini oluşturabilirsiniz.
-                                        createAtananKisilerList();
-                                    </script>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <button><img src="../../assets/takım.ekle.png" alt=""
-                                                    style="width: 25px;"></button>
-                                            <button
-                                                style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Takım
-                                                arkadaşı davet edin.</button>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+        <div class="container overflow-hidden text-center">
+            <div class="row">
+                <div class="col-6">
+                    <div class="p-4 rounded custom-content" style="display: block; max-height: 400px; max-width: 550px; border: 1px solid black; background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Durum Genel Bakışı</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            Takımınızın ilerleme durumunun özetini görmek için takımınızda birkaç öğe oluşturmalısınız.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        </h6>
+                        <div class="center-content">
+                            <app-chart></app-chart>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="p-4 rounded"
-                            style="display: block; height: 437px; width: 650px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İş
-                                türleri</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Başlamak için projenizde birkaç öğe oluşturmalısınız.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Tür</th>
-                                        <th scope="col">Dağılım</th>
-                                        <th scope="col">Sayı</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" style="text-align: left;"> <img src="../../assets/tik.png"
-                                                alt="" style="width: 30px;"> Task</th>
-
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 0%">0%</div>
-                                            </div>
-                                        </td>
-                                        <td id="progress-value">0</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="text-align: left;"><img src="../../assets/subtask.png"
-                                                alt="" style="width: 30px;"> Sub-Task</th>
-
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 0%">0%</div>
-                                            </div>
-                                        </td>
-                                        <td id="progress-value">0</td>
-                                    </tr>
-
-                                    <tr id="atanan-kisiler">
-                                        <td colspan="3"></td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <button><img src="../../assets/ayarlar.png" alt=""
-                                                    style="width: 30px;"></button>
-                                            <button
-                                                style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Türleri
-                                                yönetin.</button>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                        <br><br>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İlgili
-                                Projeler</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Tüm çalışmalarınızı aynı yerde yönetmek ve paydaşlarla uyum içinde olmak için projeleri
-                                kullanın.
-                            </h6>
-                            <img src="../../assets/ilgiliprojeler.png" alt="" style="width: 280px;" class="me-2">
-                            <br><br>
-                            <button type="button" class="btn" style="background-color: blue; color: white;">Bir proje
-                                oluştur</button>
-                            &nbsp;
-                            <button type="button" class="btn btn-secondary">Tüm projeleri görüntüle</button>
-
-
-                        </div>
-
-                    </div>
-                    <div class="col-6">
-                        <div class="p-4 rounded" style="display: block; height: 437px; width: 650px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                          <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik dökümü</h5>
-                          <br>
-                          <h6 style="text-align: left; margin-top: 0;">
-                            İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
-                          </h6>
-                          
-                          <svg id="myChart" width="400" height="312"></svg>
-                          
-                        </div>
-                      </div>
-                      
-
-
                 </div>
 
+                <div class="col-6">
+                    <div class="p-4 rounded" style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">En Son Etkinlikleriniz</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım arkadaşlarınızı projenize davet edin.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        </h6>
+                        <img src="../../assets/sonetkinlik.png" alt="" style="width: 250px;" class="me-2">
+                    </div>
+                </div>
             </div>
+        </div>
 
+        <br><br>
+
+        <div class="container overflow-hidden text-center">
+            <div class="row">
+                <div class="col-6">
+                    <div class="p-4 rounded" style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım İş Yükü</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Atanan Kişi</th>
+                                    <th scope="col">İş Dağılımı</th>
+                                    <th scope="col">Sayı</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" style="text-align: left;">Atanmamış</th>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 0%">0%</div>
+                                        </div>
+                                    </td>
+                                    <td id="progress-value">0</td>
+                                </tr>
+                                <tr id="atanan-kisiler">
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <button><img src="../../assets/takım.ekle.png" alt="" style="width: 25px;"></button>
+                                        <button style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Takım arkadaşı davet edin.</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script>
+                            // Örnek atanmış kişiler dizisi
+                            var atanmisKisiler = ["Kişi 1", "Kişi 2", "Kişi 3"];
+
+                            // Atanan kişilerin listesini oluşturan fonksiyon
+                            function createAtananKisilerList() {
+                                var atanmisKisilerRow = document.getElementById("atanan-kisiler");
+                                atanmisKisilerRow.innerHTML = ""; // Önceki içeriği temizle
+
+                                if (atanmisKisiler.length > 0) {
+                                    var td = document.createElement("td");
+                                    td.colSpan = "3";
+                                    for (var i = 0; i < atanmisKisiler.length; i++) {
+                                        var p = document.createElement("p");
+                                        p.textContent = atanmisKisiler[i];
+                                        td.appendChild(p);
+                                    }
+                                    atanmisKisilerRow.appendChild(td);
+                                }
+                            }
+
+                            // Atanan kişiler listesini oluştur.
+                            // Örneğin atanmisKisiler dizisini gerçek verilere veya veritabanından gelen değerlere göre güncelleyebilirsiniz.
+                            // Ardından, createAtananKisilerList fonksiyonunu çağırarak atanan kişilerin listesini oluşturabilirsiniz.
+                            createAtananKisilerList();
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-4 rounded" style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İş Türleri</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            Başlamak için projenizde birkaç öğe oluşturmalısınız.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Bir öğe oluşturun</button>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tür</th>
+                                    <th scope="col">Dağılım</th>
+                                    <th scope="col">Sayı</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" style="text-align: left;"> <img src="../../assets/tik.png" alt="" style="width: 30px;"> Task</th>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 0%">0%</div>
+                                        </div>
+                                    </td>
+                                    <td id="progress-value">0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: left;"><img src="../../assets/subtask.png" alt="" style="width: 30px;"> Sub-Task</th>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 0%">0%</div>
+                                        </div>
+                                    </td>
+                                    <td id="progress-value">0</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <button><img src="../../assets/ayarlar.png" alt="" style="width: 30px;"></button>
+                                        <button style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Türleri yönetin.</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="container overflow-hidden text-center">
+            <div class="row">
+                <div class="col-6">
+                    <div class="p-4 rounded custom-container" style="display: block; height: 440px; max-width: 550px; border: 1px solid black; background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İlgili Projeler</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            Tüm çalışmalarınızı aynı yerde yönetmek ve paydaşlarla uyum içinde olmak için projeleri kullanın.
+                        </h6>
+                        <img src="../../assets/ilgiliprojeler.png" alt="" style="width: 280px;" class="me-2">
+                        <br><br>
+                        <div class="button-container">
+                            <button type="button" class="btn custom-button">Bir proje oluştur</button>
+                            <button type="button" class="btn btn-secondary custom-button">Tüm projeleri görüntüle</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik Dökümü</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        </h6>
+                        <svg id="myChart" width="400" height="312"></svg>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
