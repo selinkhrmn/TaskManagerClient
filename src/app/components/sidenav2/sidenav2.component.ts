@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
 import { CreateProjectComponent } from '../create-project/create-project.component';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-sidenav2',
@@ -19,7 +20,8 @@ export class Sidenav2Component implements OnInit{
   constructor(  
     public projectService: ProjectService, 
     private router: Router, 
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    public tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe((response) => {

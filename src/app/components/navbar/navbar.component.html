@@ -50,6 +50,7 @@
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
+        [disabled]="!tokenService.hasRole('Admin')"
         (click)="openCreateIssueDialog()">
         Create
       </button>

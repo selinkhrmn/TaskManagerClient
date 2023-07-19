@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateIssueDialogComponent } from '../create-issue-dialog/create-issue-dialog.component';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,8 @@ import { CreateIssueDialogComponent } from '../create-issue-dialog/create-issue-
 })
 export class NavbarComponent {
     constructor(
-      public dialog : MatDialog
+      public dialog : MatDialog,
+      public tokenService: TokenService
     ) {}
 
     openCreateIssueDialog() {

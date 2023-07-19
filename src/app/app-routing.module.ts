@@ -13,6 +13,10 @@ import { TaskComponent } from './components/task/task.component';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    component: LoginPageComponent,
+  },
+  {
     path: '',
     component: HomepageComponent,
     children: [
@@ -46,10 +50,6 @@ export const routes: Routes = [
   {
     path: 'create-project',
     component: CreateProjectComponent,
-  },
-  {
-    path: 'login',
-    component: LoginPageComponent,
   },
   {
     path: 'forgot-password',

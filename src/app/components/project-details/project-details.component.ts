@@ -4,6 +4,7 @@ import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
 import { Sidenav2Component } from '../sidenav2/sidenav2.component';
 import { HomepageComponent } from '../homepage/homepage.component';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-project-details',
@@ -19,7 +20,8 @@ export class ProjectDetailsComponent {
   constructor(
     public projectService: ProjectService,
     private sideNav: Sidenav2Component,
-    private homePageComponent: HomepageComponent) {
+    private homePageComponent: HomepageComponent,
+    public tokenService: TokenService) {
   }
 
   ngOnInit() {

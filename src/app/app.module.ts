@@ -38,6 +38,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { TaskComponent } from './components/task/task.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditColumnComponent } from './components/board/edit-column/edit-column.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+
 
 
 @NgModule({
@@ -86,10 +88,14 @@ import { EditColumnComponent } from './components/board/edit-column/edit-column.
     DragDropModule,
     AngularEditorModule,
     FormsModule,
-    HttpClientModule 
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token')
+      }
+    })
   ],
 
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
