@@ -19,9 +19,13 @@ export class TabsNamePartComponent {
     private projectService: ProjectService
   ) {}
 
+
   toSummary() {
     this.router.navigate(['summary']);
   }
+
+  //project = this.projectService.getProjectLocal();
+
 
   toCalendar() {
     this.router.navigate(['calendar']);

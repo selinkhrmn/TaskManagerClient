@@ -11,6 +11,7 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { BoardComponent } from './components/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { canActivateGuard } from './guards/guards.guard';
 
 export const routes: Routes = [
   {
@@ -18,8 +19,9 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
-    path: '',
+    path: 'home',
     component: HomepageComponent,
+    canActivate: [canActivateGuard],
     children: [
       {
         path: 'summary',
@@ -48,13 +50,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent,
-  },
-
-  {
     path: 'create-project',
     component: CreateProjectComponent,
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
   },
   {
     path: 'forgot-password',

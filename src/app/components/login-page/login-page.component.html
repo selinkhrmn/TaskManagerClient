@@ -7,10 +7,10 @@
         <input [(ngModel)]="user.usernameOrEmail" />
         <div class="password">
           <label>Password</label>
-          <label routerLink="forgot-password" >Forgot password?</label>
+          <label routerLink="forgot-password">Forgot password?</label>
         </div>
         <input [(ngModel)]="user.password"  />
-        <button mat-raised-button routerLink="" (click)="signIn()">
+        <button routerLink="home" mat-raised-button (click)="signIn()">
           Sign In
         </button>
 
