@@ -31,11 +31,9 @@ export class TabsNamePartComponent {
     this.router.navigate(['calendar']);
   }
 
-  GetProjectColumns() {
-    this.columnService
-      .GetAllProjectColumns({ projectId: this.project.id })
-      .subscribe(response => {
-        // Handle the response as needed
-      });
-  }
+  //  GetProjectColumns() {
+  //   this.columnService.GetAllProjectColumns({ "id": this.project.id }).subscribe(response => {
+  //       // Handle the response as needed
+  //     });
+  //  }
 }

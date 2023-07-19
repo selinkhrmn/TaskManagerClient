@@ -18,7 +18,7 @@ export class TabsComponent implements OnInit {
     this.projectService.selectedProject$.subscribe((value) => {
       this.currentProjectName = value.name;
     });
-    this.currentProjectName = this.projectService.getCurrentProject().name;
+    this.currentProjectName = this.projectService.getCurrentProject()?.name;
   }
 
   projectImageUrl = '../../../assets/app-development.png';

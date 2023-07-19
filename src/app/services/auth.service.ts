@@ -22,10 +22,7 @@ export class AuthService {
             map((response: any )=> {
                 const result = response;
                 if (result.isSuccessful) {
-                    localStorage.setItem("token", result.data.accessToken),
-                        this.decodedToken = this.jwtHelper.decodeToken(result.data.accessToken);
-                    localStorage.setItem("username", this.decodedToken.UserName);
-                    localStorage.setItem("userId", this.decodedToken.UserId);
+                    localStorage.setItem("token", result.data.accessToken)
                 }
                 else if(!result.isSuccessful){
                     alert(result.message);

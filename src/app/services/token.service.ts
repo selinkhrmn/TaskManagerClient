@@ -11,7 +11,10 @@ export class TokenService {
   constructor(
     public jwtHelper: JwtHelperService) 
     {
-    this.role = this.decodeToken().Role;
+      //todo
+    //this.role = const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+     this.role = this.tokenRole();
+     
   }
 
   decodeToken() {
@@ -23,8 +26,22 @@ export class TokenService {
     return decodedToken;
   }
 
+  tokenRole(){
+    const rol = this.decodeToken();
+    const role = rol['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role;
+  }
+
+  tokenUsername(){
+    return this.decodeToken().Username;
+  }
+  
+  tokenNameSurname(){
+    let token = this.decodeToken();
+    return token.UserName[0]+token.UserSurname[0];
+  }
+
   hasRole(role: string): boolean {
-    console.log(this.role === role); //true
     return this.role === role;
   }
 }

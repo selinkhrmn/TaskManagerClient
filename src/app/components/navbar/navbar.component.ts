@@ -5,6 +5,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,20 +21,30 @@ export class NavbarComponent {
       public tokenService: TokenService,
       private dialog : MatDialog,
       private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
-      public taskService : TaskService
+      public taskService : TaskService,
+      private router: Router
 
 
     ) {}
 
     ngOnInit() {}
 
+    hasToken(): boolean {
+      return localStorage.getItem('token') !== null;
+    }
+  
+    logOut(){
+      localStorage.removeItem("token");
+      localStorage.clear();
+      this.router.navigate([""]);
+     }
+
     openCreateIssueDialog() {
       const dialog = this.dialog.open(CreateIssueDialogComponent, {data : {table : this.table},width:'60%'});
-      
       dialog.afterClosed().subscribe((response) => {
         if(response.isAdded) {
           this.taskService.createTask({
-            name : response.name,
+            name : response.task.name,
             columnId : response.columnId,
             projectId : response.projectId,
             priority : response.priority,

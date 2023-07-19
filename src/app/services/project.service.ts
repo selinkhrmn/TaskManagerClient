@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { ResponseModel } from '../interfaces/responseModel';
 import { Project } from '../interfaces';
+import { ProjectDto } from '../interfaces/project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  project :Project;
+  project : ProjectDto;
   baseUrl = `${environment.baseUrl}/Project`;
 
   private project$ = new BehaviorSubject<any>({});

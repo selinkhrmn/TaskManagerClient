@@ -11,6 +11,7 @@ import { ColumnService } from 'src/app/services/column.service';
 import { Column } from 'src/app/interfaces/column';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
+import { ProjectDto } from 'src/app/interfaces/project';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -52,15 +53,20 @@ export class CreateIssueDialogComponent {
    
   }
 
-  // project : Project;
+   
   // column : Column;
   // taskName: string;
   // dueTime : Date;
 
   projectForTask: Project[] = [];
-  columnForTask: ColumnTask[] = [];
+  columns: Column[] = [];
+  currentProject: ProjectDto;
+  project : ProjectDto = {
+    name: '',
+    id: 0
+  }
 
-  currentProject: Partial<Project>;
+  
 
   config: AngularEditorConfig = {
     editable: true,
@@ -93,45 +99,28 @@ export class CreateIssueDialogComponent {
 
 
   ngOnInit() {
-
-    //get current project id 
     this.projectService.selectedProject$?.subscribe((value) => {
       this.currentProject = value;
     });
-    this.currentProject = this.projectService.getCurrentProject();
+    
+    this.project = this.projectService?.getProjectLocal();
 
-    //get current colums of projects
-    this.columnService.GetProjectColumnsTasks({ "projectId": this.currentProject.id }).subscribe((response) => {
+  }
+
+  onChangeProject(event: any){
+    this.columns = [];
+    this.project.id = event.id;
+    this.project.name = event.name;
+    this.columnService.GetAllProjectColumns({ "id": this.project.id }).subscribe((response) => {
       if (response.data != null) {
-        this.columnForTask = response.data;
-
+        this.columns = response.data;
       }
-
     });
-
   }
 
 
   createTask() {
-   debugger
-    
-    this.taskService.createTask({ "name": this.task.name, "columnId": this.task.columnId, "projectId": this.task.projectId, "priority" : this.task.priority, "endDate" : this.task.endDate }).subscribe(
-      response => {
-        if (response.data != null) {
-          // this.tasks = response.data;
-          console.log(response.data);
-        }
-        console.log(response.data);
-      });
-
-    
-    
-    
-
     this.closeDialog();
-    this.data.table.renderRows();
-
-console.log(this.data.table);
 
   }
 

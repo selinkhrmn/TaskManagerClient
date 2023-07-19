@@ -16,21 +16,21 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.projectService.getAllProjects().subscribe((response) => {
-      if(response.data != null){
-        this.projects = response.data;
-        this.ngOnInit();
-      }
-    });
-  }
+   ngOnInit(): void {
+  //   this.projectService.getAllProjects().subscribe((response) => {
+  //     if(response.data != null){
+  //       this.projects = response.data;
+  //       this.ngOnInit();
+  //     }
+  //   });
+   }
 
-  public updateProject(){
-    this.projectService.getAllProjects().subscribe((response) => {
-      if(response.data != null){
-        this.projects = response.data;
-        this.ngOnInit();
-      }
-    });
-  }
+  // public updateProject(){
+  //   this.projectService.getAllProjects().subscribe((response) => {
+  //     if(response.data != null){
+  //       this.projects = response.data;
+  //       this.ngOnInit();
+  //     }
+  //   });
+  // }
 }

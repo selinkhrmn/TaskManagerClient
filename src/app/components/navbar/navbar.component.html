@@ -10,15 +10,8 @@
 
     <ul class="navbar-nav me-auto">
       <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle text-light"
-          data-bs-toggle="dropdown"
-          href="#"
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-          >Your Work</a
-        >
+        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
+          aria-haspopup="true" aria-expanded="false">Your Work</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
@@ -28,15 +21,8 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle text-light"
-          data-bs-toggle="dropdown"
-          href="#"
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-          >Projects</a
-        >
+        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
+          aria-haspopup="true" aria-expanded="false">Projects</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
@@ -45,13 +31,8 @@
           <a class="dropdown-item" href="#">Separated link</a>
         </div>
       </li>
-      <button
-        class="btn btn-light"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        [disabled]="!tokenService.hasRole('Admin')"
-        (click)="openCreateIssueDialog()">
+      <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+        [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
         Create
       </button>
     </ul>
@@ -66,28 +47,25 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <div
-          style="
+        <div style="
             width: fit-content;
             height: fit-content;
             border-radius: 50%;
             background-color: #f6f8fa;
-          "
-        >
+          ">
           <img src="../../assets/kullanıcı.png" alt="" style="width: 30px" />
         </div>
         <div class="dropdown">
-          <button
-            class="btn btn-light dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            User Name
-          </button>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item active" href="#">Çıkış</a></li>
-          </ul>
+          <!-- <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{tokenService.tokenUsername()}}
+          </button> -->
+          <div *ngIf="hasToken()" class="menu">
+            <button mat-button [matMenuTriggerFor]="menu"> {{ tokenService.tokenUsername() }}</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logOut()">Logout <mat-icon>exit_to_app</mat-icon> </button>
+              <!-- <button mat-menu-item [routerLink]="'/profile'">Profile <mat-icon>how_to_reg</mat-icon></button> -->
+            </mat-menu>
+          </div>
         </div>
       </div>
     </form>

@@ -29,7 +29,7 @@ export class LoginPageComponent{
       this.authService.login(this.user).subscribe(() => {
         const tokenT = localStorage.getItem("token");
         if (tokenT != null) {
-          this.router.navigate([''], { relativeTo: this.activatedRoute });
+          this.router.navigate(['home'], { relativeTo: this.activatedRoute });
         }
       },error => {
           console.log(error);

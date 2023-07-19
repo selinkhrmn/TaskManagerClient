@@ -57,26 +57,27 @@ export class ColumnsComponent {
   showFiller = false;
   panelOpenState = false;
 
-  constructor(private columnService : ColumnService, private taskService: TaskService,public dialog: MatDialog, private projectService : ProjectService) {
+  constructor(
+    private columnService : ColumnService, 
+    private taskService: TaskService,
+    public dialog: MatDialog, 
+    private projectService : ProjectService) {
      
   }
-  ngOnInit(): void {        
-    const currentProject = this.projectService.getCurrentProject();
 
-    this.columnService.GetProjectColumnsTasks({"projectId": currentProject.id}).subscribe((response) => {
-      if(response.data != null){
-        this.columns = response.data;
-      }
-      console.log(this.columns);
-    });
-    this.getProjectLocal()
+  ngOnInit(): void {        
+    const currentProject = this.projectService.getProjectLocal();
+    if(currentProject != null){
+      this.columnService.GetProjectColumnsTasks({"id": currentProject.id}).subscribe((response) => {
+        if(response.data != null){
+          this.columns = response.data;
+        }
+      });
+    }
+    
   }
 
   drop(event: CdkDragDrop<taskDto[]>, column: ColumnTask) {
-    console.log(this.columns);
-    
-    console.log(column.id);
-    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -88,16 +89,9 @@ export class ColumnsComponent {
       );
      
       this.taskService.updateTaskColumnId({"id": event.container.data[0].id, "columnId": column.id}).subscribe((res) => {
-        console.log(res.data);
-        console.log(res.message);
-      console.log(event);
-      
-        
-        
+    
       });
     }
-
-    
   }
 
   getColumnId(columnId: number) {
@@ -106,10 +100,7 @@ export class ColumnsComponent {
   }
 
   openEditDialog(columnName : string) {
-    console.log(columnName);
-    
     const dialogRef = this.dialog.open(EditColumnComponent,{data: columnName});
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
@@ -154,3 +145,5 @@ export class ColumnsComponent {
     })
   }
 }
+
+//?

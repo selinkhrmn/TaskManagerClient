@@ -6,23 +6,19 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { OnInit } from '@angular/core';
+import { Project } from '../interfaces';
+import { ProjectDto } from '../interfaces/project';
 @Injectable({
   providedIn: 'root'
 })
-export class ColumnService implements OnInit{
+export class ColumnService {
 
   baseUrl = `${environment.baseUrl}/Column`;
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
-    
-  }
-
   CreateColumn(column: Partial<Column>) {
     return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/CreateColumn`,column );
-      
-
   }
 
   DeleteColumn(id : Partial<Column>) {
@@ -33,12 +29,12 @@ export class ColumnService implements OnInit{
     return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/UpdateColumn`,column );
   }
 
-  GetAllProjectColumns(projectId: Partial<Column>) {
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/GetAllProjectColumns`, projectId);
+  GetAllProjectColumns(id: Partial<ProjectDto>) {
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/GetAllProjectColumns`, id);
   }
 
-  GetProjectColumnsTasks(projectId: Partial<Column>): Observable<ResponseModel<ColumnTask>> {
-    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, projectId);
+  GetProjectColumnsTasks(id: Partial<ProjectDto>): Observable<ResponseModel<ColumnTask>> {
+    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, id);
   }
 
   

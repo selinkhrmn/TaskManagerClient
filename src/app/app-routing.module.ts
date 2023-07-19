@@ -15,7 +15,7 @@ import { canActivateGuard } from './guards/guards.guard';
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     component: LoginPageComponent,
   },
   {
