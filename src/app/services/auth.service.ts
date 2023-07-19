@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/user';
+import { User, User1 } from '../interfaces/user';
 import { ResponseModel } from '../interfaces/responseModel';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,7 @@ export class AuthService {
     constructor(private http: HttpClient) { }
 
     login(user: User){
+        
         return this.http.post(this.baseUrl + '/LoginUser', user).pipe(
             map((response: any )=> {
                 const result = response;
@@ -31,7 +32,8 @@ export class AuthService {
         )
     }
 
-    register(user: Partial<User>) {
+    register(user: Partial<User1>) {
+        debugger
         localStorage.setItem("isSuccessful", "false");
         return this.http.post(this.baseUrl + '/RegisterUser', user).pipe(
             map((response: any) => {

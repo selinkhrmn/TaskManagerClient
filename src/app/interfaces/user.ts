@@ -9,3 +9,12 @@ export interface User {
     role?: string;
 }
 
+
+export interface User1 {
+      userName: string
+      name : string
+      surname: string
+      email:string
+      password :string
+      role: string;
+}

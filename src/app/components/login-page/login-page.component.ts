@@ -10,8 +10,8 @@ import { AuthService } from 'src/app/services';
 })
 export class LoginPageComponent{
 
-  usernameOrEmail: string;
-  password: string;
+  // usernameOrEmail: string;
+  // password: string;
 
   user: User = {
     usernameOrEmail: '',
