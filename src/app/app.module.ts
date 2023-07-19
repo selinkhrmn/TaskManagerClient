@@ -40,6 +40,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditColumnComponent } from './components/board/edit-column/edit-column.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -71,6 +73,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     TaskComponent,
     EditColumnComponent,
     CalendarComponent,
+    RegisterPageComponent,
   ],
   imports: [
     AllFormsModule,
@@ -94,7 +97,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
       config: {
         tokenGetter: () => localStorage.getItem('token')
       }
-    })
+    }),
+    MatRadioModule
   ],
 
   providers: [JwtHelperService,

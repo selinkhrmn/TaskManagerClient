@@ -1,0 +1,65 @@
+.body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Kanit", sans-serif;
+    background-color: rgba(255,255,255,0);
+  }
+
+.wrapper {
+    width: 350px;
+    height: 500px;
+    text-align: center;
+
+    p {
+        margin-top: 20px;
+    }
+}
+  
+.container {
+    width: 100%;
+    height: 340px;
+    padding: 10px;
+    background-color: #f6f8fa;
+    border: 1px solid hsla(210, 18%, 87%, 1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 5px;
+        align-self: baseline;
+    }
+
+    input {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid hsla(210, 18%, 87%, 1);
+        margin-bottom: 20px;
+
+        &:focus {
+          border: 1px solid #54aeff;
+          outline: none;
+        }
+      }
+
+      button {
+        font-size: 16px;  
+        width: 100%;
+        height: 30px;
+        border: 1px solid hsla(210, 18%, 87%, 1);
+        border-radius: 4px;
+        background: #8332a6;
+        color: white;
+        transition: 0.1s;
+        &:hover {
+            background-color: #6F1CA6;
+        }
+      }
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }
