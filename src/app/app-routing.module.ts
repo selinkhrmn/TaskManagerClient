@@ -10,6 +10,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { CreateIssueDialogComponent } from './components/create-issue-dialog/create-issue-dialog.component';
 import { BoardComponent } from './components/board/board.component';
 import { TaskComponent } from './components/task/task.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
       {
         path: 'summary',
         component: SummaryComponent,
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
       },
       {
         path: 'project-settings',

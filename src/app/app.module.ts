@@ -39,6 +39,7 @@ import { TaskComponent } from './components/task/task.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditColumnComponent } from './components/board/edit-column/edit-column.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 
@@ -69,6 +70,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
     ColumnsComponent,
     TaskComponent,
     EditColumnComponent,
+    CalendarComponent,
   ],
   imports: [
     AllFormsModule,

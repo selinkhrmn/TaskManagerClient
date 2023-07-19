@@ -10,21 +10,28 @@ import { ProjectService } from 'src/app/services';
   styleUrls: ['./tabs-name-part.component.scss']
 })
 export class TabsNamePartComponent {
-  constructor(private tabs : TabsComponent,private router: Router, private columnService : ColumnService
-    ,private projectService : ProjectService) { 
-  
-  }
+  project = this.projectService.getProjectLocal(); // Declare project here
 
-  project = this.projectService.getProjectLocal()
+  constructor(
+    private tabs: TabsComponent,
+    private router: Router,
+    private columnService: ColumnService,
+    private projectService: ProjectService
+  ) {}
+
   toSummary() {
     this.router.navigate(['summary']);
   }
 
+  toCalendar() {
+    this.router.navigate(['calendar']);
+  }
+
   GetProjectColumns() {
-    this.columnService.GetAllProjectColumns({"projectId": this.project.id})
-    .subscribe(response => {
-    })
-    
-        
+    this.columnService
+      .GetAllProjectColumns({ projectId: this.project.id })
+      .subscribe(response => {
+        // Handle the response as needed
+      });
   }
 }
