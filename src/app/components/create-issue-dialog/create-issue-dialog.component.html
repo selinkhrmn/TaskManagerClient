@@ -4,14 +4,14 @@
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>Project Name</mat-label>
-            <mat-select [(ngModel)] = "project">
+            <mat-select [(ngModel)] = "task.projectId" ngDefaultControl>
               <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>Column Name</mat-label>
-            <mat-select [(ngModel)]="column">
+            <mat-select [(ngModel)]="task.columnId" ngDefaultControl>
               <mat-option *ngFor="let column of columnForTask" [value]="column" >{{column.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
@@ -24,7 +24,7 @@
     <div class="row">
         <mat-form-field>
             <mat-label>Task Name</mat-label>
-            <input matInput type="text" [(ngModel)]="taskName">
+            <input matInput type="text" [(ngModel)]="task.name">
         </mat-form-field>
     </div>
 
@@ -64,8 +64,8 @@
     <div class="row">
         <mat-form-field class="col-12">
             <mat-label>Priority</mat-label>
-            <mat-select>
-              <!-- <mat-option *ngFor=""></mat-option>   -->
+            <mat-select >
+              <mat-option [(ngModel)]="task.priority" *ngFor="let priority of priorities" value="priority.value">{{priority.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
         <!-- <mat-form-field class="col-6">
@@ -86,7 +86,7 @@
         </mat-form-field> -->
         <mat-form-field class="col-12">
             <mat-label>Due Date</mat-label>
-            <input [(ngModel)]="dueTime" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value">
+            <input [(ngModel)]="task.endDate" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value" ngDefaultControl>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
             <mat-datepicker #pickerEnd></mat-datepicker>

@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { BoardComponent } from './components/board/board.component';
 import { LittleMainComponentsComponent } from './components/little-main-components/little-main-components.component';
 import { AddPeopleComponent } from './components/little-main-components/add-people/add-people.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { AddPeoplePageComponent } from './components/add-people-page/add-people-page.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { Sidenav2Component } from './components/sidenav2/sidenav2.component';
@@ -95,7 +95,11 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
     })
   ],
 
-  providers: [JwtHelperService],
+  providers: [JwtHelperService,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
