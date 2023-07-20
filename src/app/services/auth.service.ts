@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User, User1 } from '../interfaces/user';
 import { ResponseModel } from '../interfaces/responseModel';
 import { Observable } from 'rxjs';
+import { TokenService } from './token.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,36 +16,53 @@ export class AuthService {
     jwtHelper = new JwtHelperService();
     decodedToken: any;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+        public tokenService: TokenService) { }
 
-    login(user: User){
-        
+    login(user: User) {
+
         return this.http.post(this.baseUrl + '/LoginUser', user).pipe(
-            map((response: any )=> {
+            map((response: any) => {
                 const result = response;
                 if (result.isSuccessful) {
                     localStorage.setItem("token", result.data.accessToken)
                 }
-                else if(!result.isSuccessful){
+                else if (!result.isSuccessful) {
                     alert(result.message);
                 }
             })
         )
     }
 
-    register(user: Partial<User1>) {
-        debugger
-        localStorage.setItem("isSuccessful", "false");
-        return this.http.post(this.baseUrl + '/RegisterUser', user).pipe(
+    register(user: Partial<User1>){
+        // debugge
+        // localStorage.setItem("isSuccessful", "false");
+        // return this.http.post(this.baseUrl + '/RegisterUser', user).pipe(
+        //     map((response: any) => {
+        //         const result = response;
+        //         if (result) {
+        //             localStorage.setItem("isSuccessful", result.isSuccessful);
+        //         }
+        //     }))
+
+
+        const headers = this.tokenService.getHeaders();
+
+        const httpOptions = {
+            headers: headers
+        };
+
+        return this.http.post(this.baseUrl + '/RegisterUser', user, httpOptions).pipe(
             map((response: any) => {
                 const result = response;
                 if (result) {
                     localStorage.setItem("isSuccessful", result.isSuccessful);
                 }
-            }))
+            })
+        );
     }
 
-     loggedIn() {
+    loggedIn() {
         const token: any = localStorage.getItem("token");
         return !this.jwtHelper.isTokenExpired(token);
     }

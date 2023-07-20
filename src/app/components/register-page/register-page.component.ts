@@ -25,8 +25,8 @@ export class RegisterPageComponent {
   register() {
     
     if (
-      this.user.name ||
-      this.user.surname ||
+      this.user.name &&
+      this.user.surname &&
       this.user.userName != ''
     ) {
       this.authService.register(this.user).subscribe((res) => {

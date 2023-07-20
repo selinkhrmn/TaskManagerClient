@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -9,13 +10,10 @@ export class TokenService {
   role: string;
 
   constructor(
-    public jwtHelper: JwtHelperService) 
-    {
-      //todo
-    //this.role = const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    public jwtHelper: JwtHelperService) {
      this.role = this.tokenRole();
-     
   }
+
 
   decodeToken() {
     const token = localStorage.getItem('token');
@@ -43,5 +41,13 @@ export class TokenService {
 
   hasRole(role: string): boolean {
     return this.role === role;
+  }
+
+  public getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); 
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 }
