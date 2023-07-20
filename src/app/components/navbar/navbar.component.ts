@@ -44,13 +44,15 @@ export class NavbarComponent {
       dialog.afterClosed().subscribe((response) => {
         if(response.isAdded) {
           this.taskService.createTask({
-            name : response.task.name,
+            name : response.name,
             columnId : response.columnId,
             projectId : response.projectId,
-            priority : response.priority,
             userUpdatedDate : response.userUpdatedDate,
-            endDate : response.endDate
+            endDate : response.endDate,
+            priority : response.priority
           })
+          console.log(response);
+          
         }
 
       });

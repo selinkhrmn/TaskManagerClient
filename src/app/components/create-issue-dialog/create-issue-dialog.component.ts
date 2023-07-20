@@ -12,14 +12,10 @@ import { Column } from 'src/app/interfaces/column';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { ProjectDto } from 'src/app/interfaces/project';
+import { IPriority } from 'src/app/interfaces/IPriority';
 
 interface DialogData {
   table: MatTable<Task>;
-}
-
-interface IPriority {
-  name: string;
-  value: number;
 }
 
 
@@ -30,43 +26,31 @@ interface IPriority {
 })
 export class CreateIssueDialogComponent {
   errors: any = {};
+
   
   priorities: IPriority[] = [
     { name: "highest", value: 5 },
-      { name: "high", value: 4 },
-      { name: "medium", value: 3 },
-      { name: "low", value: 2 },
-      { name: "lowest", value: 1 }
+    { name: "high", value: 4 },
+    { name: "medium", value: 3 },
+    { name: "low", value: 2 },
+    { name: "lowest", value: 1 }
   ];
 
   projects: Project[] = [];
-  currentDate = new FormControl(new Date());
-  
-
-  task: Partial<Task> = {
-    name: "",
-    projectId: 0,
-    columnId: 0,
-    priority: 0,
-    userUpdatedDate: new Date,
-    endDate: new Date,
-   
-  }
-
-   
-  // column : Column;
-  // taskName: string;
-  // dueTime : Date;
-
-  projectForTask: Project[] = [];
   columns: Column[] = [];
+  currentDate = new FormControl(new Date());
   currentProject: ProjectDto;
-  project : ProjectDto = {
+  project: ProjectDto = {
     name: '',
     id: 0
   }
 
-  
+  taskName: string = "";
+  taskProjectId: number = 0;
+  taskColumnId: number = 0;
+  taskPriority : number;
+  taskUpdatedDate: Date = new Date();
+  taskEndDate: Date = new Date();
 
   config: AngularEditorConfig = {
     editable: true,
@@ -102,12 +86,14 @@ export class CreateIssueDialogComponent {
     this.projectService.selectedProject$?.subscribe((value) => {
       this.currentProject = value;
     });
-    
+
     this.project = this.projectService?.getProjectLocal();
+
 
   }
 
-  onChangeProject(event: any){
+
+  onChangeProject(event: any) {
     this.columns = [];
     this.project.id = event.id;
     this.project.name = event.name;
@@ -118,11 +104,6 @@ export class CreateIssueDialogComponent {
     });
   }
 
-
-  createTask() {
-    this.closeDialog();
-
-  }
 
   // //bütün projeleri servis üstünden çekip proje arrayına atanıyor.
   public getAllProjects() {
@@ -144,11 +125,18 @@ export class CreateIssueDialogComponent {
     this.currentProject = this.projectService.getCurrentProject();
   }
 
+
   closeDialog() {
     this.dialogRef.close({
-      isAdded : true,
-      task : this.task
+      isAdded: true,
+      name: this.taskName,
+      projectId: this.taskProjectId,
+      columnId: this.taskColumnId,
+      priority: this.taskPriority,
+      endDate: this.taskEndDate
     });
+    
+    
   }
 
 }
