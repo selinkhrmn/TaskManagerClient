@@ -9,6 +9,18 @@ export const canActivateGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
     if(localStorage.getItem('token')) {      
       return true
     }
-    return false
+    //this.route.navigate(['home']);
+    return false;
+
+    /*
+    tokenService: TokenService
+    if(this.tokenService.loggedIn()){
+        console.log(this.tokenService.loggedIn);
+        
+        return true;
+      }
+      this.router.navigate(['home']);
+      return false;
+    */
 
   }

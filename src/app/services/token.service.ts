@@ -26,8 +26,13 @@ export class TokenService {
 
   tokenRole(){
     const rol = this.decodeToken();
-    const role = rol['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    return role;
+    if(rol != null){
+      const role = rol['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      return role;
+    }
+    else{
+      return null;
+    }
   }
 
   tokenUsername(){
@@ -41,6 +46,13 @@ export class TokenService {
 
   hasRole(role: string): boolean {
     return this.role === role;
+  }
+
+  loggedIn(){
+    const token = localStorage.getItem("token");
+    console.log(token);
+    
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
   public getHeaders(): HttpHeaders {

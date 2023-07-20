@@ -64,6 +64,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
+  //providers:[canActivateGuard],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
