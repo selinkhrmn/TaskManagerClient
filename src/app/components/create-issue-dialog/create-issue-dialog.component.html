@@ -4,15 +4,15 @@
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>Project Name</mat-label>
-            <mat-select [(ngModel)] = "taskProjectId" (ngModelChange)="onChangeProject($event)" ngDefaultControl>
+            <mat-select [(ngModel)] = "task.projectId" (ngModelChange)="onChangeProject($event)" ngDefaultControl>
               <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>Column Name</mat-label>
-            <mat-select [(ngModel)]="taskColumnId" ngDefaultControl>
-              <mat-option *ngFor="let column of columns" [value]="column" >{{column.name}}</mat-option>  
+            <mat-select [(ngModel)]="task.columnId" ngDefaultControl>
+              <mat-option *ngFor="let column of columns" [value]="column.id" >{{column.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
 
@@ -24,7 +24,7 @@
     <div class="row">
         <mat-form-field>
             <mat-label>Task Name</mat-label>
-            <input matInput type="text" [(ngModel)]="taskName" ngDefaultControl>
+            <input matInput type="text" [(ngModel)]="task.name" ngDefaultControl>
         </mat-form-field>
     </div>
 
@@ -64,7 +64,7 @@
     <div class="row">
         <mat-form-field class="col-12">
             <mat-label>Priority</mat-label>
-            <mat-select [(ngModel)]="taskPriority">
+            <mat-select [(ngModel)]="task.priority">
               <mat-option *ngFor="let priority of priorities" [value]="priority.value" ngDefaultControl
             >{{priority.name}}</mat-option>  
             </mat-select>
@@ -87,7 +87,7 @@
         </mat-form-field> -->
         <mat-form-field class="col-12">
             <mat-label>Due Date</mat-label>
-            <input [(ngModel)]="taskEndDate" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value" ngDefaultControl>
+            <input [(ngModel)]="task.endDate" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value" ngDefaultControl>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
             <mat-datepicker #pickerEnd></mat-datepicker>

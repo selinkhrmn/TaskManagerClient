@@ -43,15 +43,17 @@ export class NavbarComponent {
       const dialog = this.dialog.open(CreateIssueDialogComponent, {data : {table : this.table},width:'60%'});
       dialog.afterClosed().subscribe((response) => {
         if(response.isAdded) {
-          this.taskService.createTask({
+          let task : Partial<Task> = {
             name : response.name,
             columnId : response.columnId,
-            projectId : response.projectId,
-            userUpdatedDate : response.userUpdatedDate,
-            endDate : response.endDate,
-            priority : response.priority
+            projectId : response.projectId.id,
+            priority : response.priority,
+            endDate : response.endDate
+          }
+          this.taskService.createTask(task).subscribe((res)=>{
+            console.log(res);
+            
           })
-          console.log(response);
           
         }
 
