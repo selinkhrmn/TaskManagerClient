@@ -42,8 +42,9 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { MatRadioModule } from '@angular/material/radio';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,12 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     DragDropModule,
     AngularEditorModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatButtonModule,
     FormsModule,
     JwtModule.forRoot({
       config: {
