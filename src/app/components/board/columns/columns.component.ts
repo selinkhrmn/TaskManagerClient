@@ -27,6 +27,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/interfaces/column';
 import { ProjectService } from 'src/app/services';
 import { EditColumnComponent } from '../edit-column/edit-column.component';
+import { columnDto } from 'src/app/interfaces/columnDto';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -94,13 +95,31 @@ export class ColumnsComponent {
     }
   }
 
+  dropColumn(event: CdkDragDrop<any[]>) {
+    console.log(event);
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+        
+      };
+    }
+  
+  
+
   getColumnId(columnId: number) {
     this.currentColumnId = columnId;
     console.log('Column ID:', this.currentColumnId);
   }
 
   openEditDialog(columnName : string) {
-    const dialogRef = this.dialog.open(EditColumnComponent,{data: columnName});
+    const dialogRef = this.dialog.open(EditColumnComponent,{data: columnName });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
@@ -136,14 +155,7 @@ export class ColumnsComponent {
     return this.columnService.DeleteColumn({'id': this.currentColumnId}).subscribe((res) => {
 
     })
-  }
-
-  UpdateColumn() {
-    this.getProjectLocal();
-    this.columnService.UpdateColumn({'projectId' : this.currentProjectId, 'name': this.updatedColumnName}).subscribe((res) => {
-
-    })
-  }
+}
 }
 
 //?

@@ -10,7 +10,7 @@
         <label>Surname</label>
         <input placeholder="Doe"  [(ngModel)] = 'user.surname' />
         <label>Username</label>
-        <input [value]="user.name + '.' +user.surname"  [(ngModel)] = 'user.userName'>
+        <input disabled="" [value]="user.name + '.' +user.surname"  [(ngModel)] = 'user.userName'>
         <label>E-mail</label> 
         <input placeholder="john.doe@email.com" [(ngModel)] = 'user.email'/>
         <mat-radio-group aria-label="Select an option " [(ngModel)] = 'user.role'>
