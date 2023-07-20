@@ -20,6 +20,7 @@ export class BoardComponent {
     public projectService: ProjectService ) {}
   
   ngOnInit(): void {
+
     this.project = this.projectService?.getProjectLocal();
     if(this.project != null){
       this.columnService.GetProjectColumnsTasks({"id": this.project.id}).subscribe((response) => {

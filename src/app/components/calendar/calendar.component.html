@@ -1,1 +1,20 @@
-<p>calendar works!</p>
+<div class="calendar">
+    <div class="calendar-header">
+      <button (click)="prevMonth()">Önceki Ay</button>
+      {{ months[currentMonth] }} {{ currentYear }}
+      <button (click)="nextMonth()">Sonraki Ay</button>
+    </div>
+    <div class="weekdays">
+      <div>Pzr</div>
+      <div>Pzt</div>
+      <div>Sal</div>
+      <div>Çar</div>
+      <div>Per</div>
+      <div>Cum</div>
+      <div>Cmt</div>
+    </div>
+    <div class="calendar-days">
+      <div *ngFor="let day of days">{{ day }}</div>
+    </div>
+  </div>
+  

@@ -66,7 +66,8 @@ export class ColumnsComponent {
      
   }
 
-  ngOnInit(): void {        
+  ngOnInit(): void {  
+   
     const currentProject = this.projectService.getProjectLocal();
     if(currentProject != null){
       this.columnService.GetProjectColumnsTasks({"id": currentProject.id}).subscribe((response) => {
@@ -74,6 +75,7 @@ export class ColumnsComponent {
           this.columns = response.data;
         }
       });
+      
     }
     
   }

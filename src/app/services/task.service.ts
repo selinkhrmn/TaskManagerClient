@@ -19,8 +19,9 @@ export class TaskService {
   constructor(private http : HttpClient) {
    }
 
-  createTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task);
+  createTask(tasks: Partial<Task>) {
+    debugger;
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, tasks);
   }
 
   updateTask(task : Partial<Task>) {

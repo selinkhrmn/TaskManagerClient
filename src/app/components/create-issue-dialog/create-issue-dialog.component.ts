@@ -1,5 +1,5 @@
-import { Component, ErrorHandler, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Project } from 'src/app/interfaces';
 import { Task } from 'src/app/interfaces/task';
 import { ProjectService } from 'src/app/services';
@@ -9,10 +9,9 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MatTable } from '@angular/material/table';
 import { ColumnService } from 'src/app/services/column.service';
 import { Column } from 'src/app/interfaces/column';
-import { taskDto } from 'src/app/interfaces/taskDto';
-import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { IPriority } from 'src/app/interfaces/IPriority';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -25,7 +24,6 @@ interface DialogData {
   styleUrls: ['./create-issue-dialog.component.scss']
 })
 export class CreateIssueDialogComponent {
-  errors: any = {};
 
   
   priorities: IPriority[] = [
@@ -45,12 +43,13 @@ export class CreateIssueDialogComponent {
     id: 0
   }
 
-  taskName: string = "";
-  taskProjectId: number = 0;
-  taskColumnId: number = 0;
-  taskPriority : number;
-  taskUpdatedDate: Date = new Date();
-  taskEndDate: Date = new Date();
+  task : Partial<Task> = {
+    name: "",
+    projectId: 0,
+    columnId: 0,
+    priority : 0,
+    endDate: new Date()
+  }
 
   config: AngularEditorConfig = {
     editable: true,
@@ -72,8 +71,7 @@ export class CreateIssueDialogComponent {
     private taskService: TaskService,
     private columnService: ColumnService,
     private projectService: ProjectService,
-    private fb: FormBuilder,
-    private errorHandler: ErrorHandler
+    private snackBar: MatSnackBar
 
   ) {
     this.getAllProjects();
@@ -127,16 +125,20 @@ export class CreateIssueDialogComponent {
 
 
   closeDialog() {
-    this.dialogRef.close({
-      isAdded: true,
-      name: this.taskName,
-      projectId: this.taskProjectId,
-      columnId: this.taskColumnId,
-      priority: this.taskPriority,
-      endDate: this.taskEndDate
-    });
+    if(this.task.name != null || this.task.projectId != null || this.task.columnId != null || this.task.priority != null) {
+      this.dialogRef.close({
+        isAdded: true,
+        name: this.task.name,
+        projectId: this.task.projectId,
+        columnId: this.task.columnId,
+        priority: this.task.priority,
+        endDate : this.task.endDate
+      });
+      
+    }
     
     
   }
+
 
 }
