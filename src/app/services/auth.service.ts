@@ -12,7 +12,7 @@ import { TokenService } from './token.service';
     providedIn: 'root'
 })
 export class AuthService {
-    baseUrl = `${environment.baseUrl}/Users`;
+    baseUrl = `${environment.baseUrl}/identity/Users`;
     jwtHelper = new JwtHelperService();
     decodedToken: any;
 

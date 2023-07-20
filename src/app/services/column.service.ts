@@ -13,7 +13,7 @@ import { ProjectDto } from '../interfaces/project';
 })
 export class ColumnService {
 
-  baseUrl = `${environment.baseUrl}/Column`;
+  baseUrl = `${environment.baseUrl}/business/Column`;
 
   constructor(private http: HttpClient) { }
 

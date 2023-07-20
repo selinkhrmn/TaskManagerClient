@@ -11,7 +11,7 @@ import { ProjectDto } from '../interfaces/project';
 })
 export class ProjectService {
   project : ProjectDto;
-  baseUrl = `${environment.baseUrl}/Project`;
+  baseUrl = `${environment.baseUrl}/business/Project`;
 
   private project$ = new BehaviorSubject<any>({});
   selectedProject$ = this.project$.asObservable();
@@ -19,7 +19,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { 
     this.getProjectLocal();
   }
-
+  
   getAllProjects(): Observable<ResponseModel<Project>> {
     return this.http.get<ResponseModel<Project>>(`${this.baseUrl}/GetAllProjects`);
   }
