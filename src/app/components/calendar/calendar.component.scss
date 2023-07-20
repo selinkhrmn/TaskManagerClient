@@ -1,0 +1,82 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    width: 1200px;
+    padding: 10px;
+    margin-top: 20px; 
+}
+
+.calendar-header {
+    display: flex;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-days div {
+    text-align: center;
+    padding: 5px;
+}
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f5f5f5;
+}
+
+.weekdays div {
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+}
+button {
+    padding: 5px 10px;
+    font-size: 0.8em; /* Düğme yazı boyutunu azalt */
+}
+.calendar-days div, .weekdays div {
+    height: 100px; /* Bu değeri istediğiniz yüksekliğe ayarlayabilirsiniz */
+    line-height: 60px; /* İçerik yatayda ortalanmış olacaktır */
+}
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Bu satırı değiştirdik. */
+    height: 100vh; /* Ekranın tam yüksekliği */
+    padding-top: 5px; /* İstediğiniz bir değere göre ayarlayın. */
+}
+
+.weekdays div {
+    height: 30px; /* Örnek olarak bu değeri daha küçük bir değere ayarladım. */
+    line-height: 30px; /* İçerik yatayda ortalanmış olacaktır */
+   
+}
+/* Haftanın günlerini (Pzr, Pzt, vs.) ve günleri (1, 2, 3, vs.) çevreleyen çizgiler */
+.weekdays div, .calendar-days div {
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+
+/* Her satırın sonundaki gün için sağdaki çizgiyi kaldıralım, böylece çift çizgi oluşmasın */
+.calendar-days div:nth-child(7n) {
+    border-right: none;
+}
+
+/* Haftanın günlerinin altında çift çizgi oluşmasın diye bir düzenleme */
+.weekdays div {
+    border-bottom: none;
+}
+
+/* Takvimin dış sınırlarını belirleyelim */
+.calendar {
+    border-left: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+}
+.calendar-header button {
+    margin: 0 10px;  /* İki düğme arasında biraz boşluk bırakmak için. */
+}
