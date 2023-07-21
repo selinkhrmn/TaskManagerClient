@@ -5,7 +5,8 @@ import { ColumnService, ProjectService } from 'src/app/services';
 import { Column } from 'src/app/interfaces/column';
 
 interface DialogData {
-  data: string
+  data: string,
+  currentColumnId: number
 }
 
 @Component({
@@ -27,27 +28,23 @@ export class EditColumnComponent implements OnInit {
     private columnService: ColumnService
   ) {}
   ngOnInit(): void {
-  console.log(this.columnName);
-  this.columnName = JSON.stringify(this.data).toString();
-  this.columnName = JSON.parse(this.columnName);
+
+      this.columnName = this.data.data;
+      console.log(this.columnName);
+      this.currentColumnId = this.data.currentColumnId
+  
   }
 
   closeDialog() {
     this.dialogRef.close();
   }
-
-  getColumnId(columnId: number) {
-    this.currentColumnId = columnId;
-    console.log('Column ID:', this.currentColumnId);
-  }
   
   getProjectLocal() {
-    const currentProjectId = this.projectService.getProjectLocal();
-    return (this.currentProjectId = currentProjectId.id);
+    this.currentProjectId = this.projectService.getProjectLocal().id;
+
   }
 
   UpdateColumn() {
-    console.log(this.data);
     
     this.getProjectLocal();
     console.log(this.data);
@@ -55,7 +52,7 @@ export class EditColumnComponent implements OnInit {
     
     this.columnService
       .UpdateColumn({
-        'id': this.currentProjectId,
+        'id': this.currentColumnId,
         'name': this.columnName
       })
       .subscribe((res) => {});

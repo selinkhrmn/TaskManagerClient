@@ -120,8 +120,8 @@ export class ColumnsComponent {
     console.log('Column ID:', this.currentColumnId);
   }
 
-  openEditDialog(columnName : string) {
-    const dialogRef = this.dialog.open(EditColumnComponent,{data: columnName });
+  openEditDialog(columnName : string, currentColumnId: number) {
+    const dialogRef = this.dialog.open(EditColumnComponent,{data: {data: columnName, currentColumnId: currentColumnId} });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
