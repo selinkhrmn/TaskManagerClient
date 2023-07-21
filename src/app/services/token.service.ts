@@ -43,6 +43,10 @@ export class TokenService {
     let token = this.decodeToken();
     return token.UserName[0]+token.UserSurname[0];
   }
+  tokenFullName(){
+    let token = this.decodeToken();
+    return token.UserName+" "+token.UserSurname;
+  }
 
   hasRole(role: string): boolean {
     return this.role === role;
