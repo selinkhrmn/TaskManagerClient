@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from 'src/app/services/token.service';
 
 interface DayObject {
   day: number;
@@ -16,7 +17,7 @@ interface DayObject {
 export class CalendarComponent {
   currentMonth: number;
   currentYear: number;
-  UserName: string = '';
+  UserName: string = 'ACD VDD';
   searchedDay: number = -1; // Add this property to store the searched day
   searchDate: string = ''; // Add this property to store the search input
 
@@ -27,6 +28,10 @@ export class CalendarComponent {
   // Update the weekdays array to start from Monday
   weekdays: string[] = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Pzr"];
   months: string[] = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+  constructor(public tokenService: TokenService){
+
+  }
 
   ngOnInit(): void {
     const today = new Date();
@@ -136,8 +141,21 @@ export class CalendarComponent {
     // Burada "Kişi Ekle" butonuna tıklandığında yapılması gereken işlemleri ekleyebilirsiniz.
     console.log("Kişi Ekle butonuna tıklandı!");
   }
-
-
+  getInitials(name: string): string {
+    const initials = name
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('');
+    return initials.toUpperCase();
+  }
+  isToday(date: number): boolean {
+    const today = new Date();
+    return (
+      date === today.getDate() &&
+      this.currentMonth === today.getMonth() &&
+      this.currentYear === today.getFullYear()
+    );
+  }
 }
 
 

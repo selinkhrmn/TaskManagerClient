@@ -135,7 +135,7 @@ button {
 .center-content {
     display: flex;
     align-items: center;
-    margin-left: 33px; 
+    margin-left: 30px; 
     flex-grow: 1;
     /* Mümkün olduğunda maksimum genişliği kullan */
 
@@ -225,13 +225,13 @@ button {
     width: 95%;
     height: 50%;
     transform: translateX(-50%);
-    background-color: rgb(116, 103, 190);
+    background-color: rgb(31, 102, 73);
     display: flex;
     justify-content: center;
     align-items: center;
 
     // Use box-shadow and outline to create a thinner border effect
-    box-shadow: 0 0 0 1px rgb(49, 35, 127), 0 0 0 10px transparent; // Adjust the 2px value for thickness
+    box-shadow: 0 0 0 1px rgb(18, 104, 51), 0 0 0 10px transparent; // Adjust the 2px value for thickness
     outline: 1px solid transparent; // Adjust the 1px value for thickness
     border-radius: 5px; // You can adjust the radius if needed
 
@@ -298,4 +298,25 @@ button {
     cursor: default; /* Kullanıcı adının üzerine tıklanamaz hale gelmesini sağlar */
     margin-right: 15px;
   }
+  /* ... (Existing styles) ... */
+
+.calendar-days div.is-today {
+    background-color: #71ad83; /* Bugünün arka plan rengi */
+    color: #ffffff; /* Bugünün yazı rengi (beyaz) */
+  }
+  
+  .calendar-days div.is-today::after {
+    content: "Bugün"; /* Bugünün altında "Bugün" yazısı */
+    position: absolute;
+    bottom: 0px; /* "Bugün" yazısının altındaki mesafe */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:  #71ad83; /* "Bugün" yazısı arka plan rengi */
+    padding: -25px 1px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ffffff; /* "Bugün" yazısı rengi (beyaz) */
+  }
+  
+  /* ... (Existing styles) ... */
   

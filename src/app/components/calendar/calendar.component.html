@@ -1,6 +1,10 @@
 <div class="calendar">
     <div class="calendar-header">
-        <span class="user-name">{{ UserName }}</span>
+        <div class="user-info">
+            
+            <span class="user-name"> {{tokenService.tokenNameSurname()}}</span>
+            
+          </div>
         <div class="search-bar">
             <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara">
             <button (click)="searchDay()" class="search-button">
@@ -58,9 +62,11 @@
         <div>Pzr</div>
     </div>
     <div class="calendar-days">
-        <div *ngFor="let dayObj of days" [class.is-today]="dayObj.isToday" (click)="toggleDescription(dayObj)">
-            {{ dayObj.day }}
-            <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
+        <div *ngFor="let dayObj of days" 
+        [class.is-today]="isToday(dayObj.day)" 
+        (click)="toggleDescription(dayObj)">
+     {{ dayObj.day }}
+     <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
                 <!-- Eğer dayObj.description boşsa varsayılan metni göster, değilse dayObj.description'ı göster -->
                 <ng-template #userDescription>
                     <p>{{ dayObj.description }}</p>
