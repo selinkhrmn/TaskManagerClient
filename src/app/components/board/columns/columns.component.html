@@ -34,7 +34,8 @@
       </div>
     </div>
   </div>
-  <div class="just_container">
+  
+  <div class="just_container" *ngIf="currentProject.name != ''">
     <mat-drawer-container class="create_column_container">
       <mat-drawer #drawer class="example-sidenav" mode="side">
         <div class="just">

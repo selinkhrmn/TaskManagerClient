@@ -36,6 +36,9 @@ export const routes: Routes = [
         path: 'project-settings',
         component: ProjectDetailsComponent,
         // canActivate: [AuthGuard],
+        // data: {
+        //   role: 'admin'
+        // }
       },
       {
         path: 'create-issue-dialog',

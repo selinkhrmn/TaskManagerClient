@@ -28,6 +28,7 @@ import { Column } from 'src/app/interfaces/column';
 import { ProjectService } from 'src/app/services';
 import { EditColumnComponent } from '../edit-column/edit-column.component';
 import { columnDto } from 'src/app/interfaces/columnDto';
+import { ProjectDto } from 'src/app/interfaces/project';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -52,6 +53,7 @@ export class ColumnsComponent {
   currentProjectId : number;
   columnName : string;
   updatedColumnName : string;
+  currentProject:  ProjectDto;
 
   @Output() currentColumnId: number;
 
@@ -68,9 +70,9 @@ export class ColumnsComponent {
 
   ngOnInit(): void {  
    
-    const currentProject = this.projectService.getProjectLocal();
-    if(currentProject != null){
-      this.columnService.GetProjectColumnsTasks({"id": currentProject.id}).subscribe((response) => {
+    this.currentProject = this.projectService.getProjectLocal();
+    if(this.currentProject != null){
+      this.columnService.GetProjectColumnsTasks({"id": this.currentProject.id}).subscribe((response) => {
         if(response.data != null){
           this.columns = response.data;
         }

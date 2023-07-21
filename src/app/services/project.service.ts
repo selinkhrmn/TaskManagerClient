@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { ResponseModel } from '../interfaces/responseModel';
 import { Project } from '../interfaces';
 import { ProjectDto } from '../interfaces/project';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +17,31 @@ export class ProjectService {
   private project$ = new BehaviorSubject<any>({});
   selectedProject$ = this.project$.asObservable();
   
-  constructor(private http: HttpClient) { 
+  constructor(
+    private http: HttpClient,
+    public tokenService: TokenService) { 
     this.getProjectLocal();
   }
+
+  headers = this.tokenService.getHeaders();
+  httpOptions = {
+      headers: this.headers
+  };
   
   getAllProjects(): Observable<ResponseModel<Project>> {
-    return this.http.get<ResponseModel<Project>>(`${this.baseUrl}/GetAllProjects`);
+    return this.http.get<ResponseModel<Project>>(`${this.baseUrl}/GetAllProjects`, this.httpOptions);
   }
 
   createProject(project: Partial<Project>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project, this.httpOptions);
   }
 
   updateProject(project: Partial<any>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project, this.httpOptions);
   }
 
   deleteProject(project: Partial<Project>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project, this.httpOptions);
   }
 
   setCurrentProject(proj: any) {

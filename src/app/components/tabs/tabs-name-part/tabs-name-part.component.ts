@@ -3,6 +3,7 @@ import { TabsComponent } from '../tabs.component';
 import { Router } from '@angular/router';
 import { ColumnService } from 'src/app/services/column.service';
 import { ProjectService } from 'src/app/services';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-tabs-name-part',
@@ -16,7 +17,8 @@ export class TabsNamePartComponent {
     private tabs: TabsComponent,
     private router: Router,
     private columnService: ColumnService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    public tokenService: TokenService
   ) {}
 
 

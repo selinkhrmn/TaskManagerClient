@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from '../interfaces';
+import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,24 +17,30 @@ export class TaskService {
   selectedTask$ = this.task$.asObservable();
   
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient,
+    public tokenService: TokenService) {
    }
 
-  createTask(tasks: Partial<Task>) {
-    debugger;
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, tasks);
+   headers = this.tokenService.getHeaders();
+   httpOptions = {
+       headers: this.headers
+   };
+
+  createTask(task: Partial<Task>) {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
+
   }
 
   updateTask(task : Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task, this.httpOptions);
   }
 
   deleteTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, {body: task });
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, {body: task }, this.httpOptions);
   }
 
   updateTaskColumnId(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task, this.httpOptions);
   }
 
 
