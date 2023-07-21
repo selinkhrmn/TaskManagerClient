@@ -92,7 +92,7 @@ export class ColumnsComponent {
         event.currentIndex,
       );
      
-      this.taskService.updateTaskColumnId({"id": event.container.data[0].id, "columnId": column.id}).subscribe((res) => {
+      this.taskService.updateTaskColumnId({"id": event.container.data[event.currentIndex].id, "columnId": column.id}).subscribe((res) => {
     
       });
     }
