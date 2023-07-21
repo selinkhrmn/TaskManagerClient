@@ -2,7 +2,7 @@
     <label>Name</label>
     <input [(ngModel)] = 'columnName' >
     <div class="button_container">
-        <button mat-raised-button color="primary" (click)="UpdateColumn()">Save</button>
+        <button mat-raised-button color="primary" (click)="UpdateColumn();closeDialog()">Save</button>
         <button mat-button (click)="closeDialog()">Cancel</button>
     </div>
 </div>

@@ -19,7 +19,24 @@
 .project_info {
     width: 100%;
     display: flex;
+    justify-content: space-between;
 
+    .admin_pages {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        border-bottom: 3px solid gray;
+        
+        button {
+            font-weight: 600;
+        }
+
+        button:hover {
+            color: white;
+            background-color: black;
+            border-bottom: 2px solid white;
+        }
+    }
 }
 
 .details {

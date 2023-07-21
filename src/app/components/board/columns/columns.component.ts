@@ -79,7 +79,6 @@ export class ColumnsComponent {
       });
       
     }
-    
   }
 
   drop(event: CdkDragDrop<taskDto[]>, column: ColumnTask) {
@@ -126,6 +125,7 @@ export class ColumnsComponent {
     const dialogRef = this.dialog.open(EditColumnComponent,{data: {data: columnName, currentColumnId: currentColumnId} });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.ngOnInit()
     });
   }
   

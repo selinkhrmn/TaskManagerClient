@@ -29,9 +29,11 @@
       (cdkDropListDropped)="drop($event, column)"
       #droppedContainer
     >
+    
       <div class="example-box" *ngFor="let task of column.tasks" cdkDrag>
         {{ task.name }}
       </div>
+
     </div>
   </div>
   

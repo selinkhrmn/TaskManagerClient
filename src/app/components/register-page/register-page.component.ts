@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services';
 import { User, User1 } from 'src/app/interfaces/user';
 
@@ -7,7 +7,7 @@ import { User, User1 } from 'src/app/interfaces/user';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent  {
   constructor(private authService: AuthService) {}
 
   user: User1 = {
@@ -19,8 +19,9 @@ export class RegisterPageComponent {
     email: ''
   };
 
-  username : string = this.user.name + '.' + this.user.surname;
-  
+  updateUserName() {
+    this.user.userName = this.user.name + '.' + this.user.surname
+  }
   
   register() {
     

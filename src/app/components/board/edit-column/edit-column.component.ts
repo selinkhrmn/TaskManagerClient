@@ -55,6 +55,9 @@ export class EditColumnComponent implements OnInit {
         'id': this.currentColumnId,
         'name': this.columnName
       })
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        console.log(res.data);
+        
+      });
   }
 }
