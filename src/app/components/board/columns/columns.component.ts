@@ -155,7 +155,7 @@ export class ColumnsComponent {
 
   DeleteColumn() {
     return this.columnService.DeleteColumn({'id': this.currentColumnId}).subscribe((res) => {
-
+      this.ngOnInit()
     })
 }
 }
