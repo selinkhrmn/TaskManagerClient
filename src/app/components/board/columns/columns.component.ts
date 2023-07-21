@@ -130,11 +130,19 @@ export class ColumnsComponent {
   }
   
   openDialog(tId: number) { 
+    debugger
     this.taskService.getTask({"id" : tId}).subscribe((res)=> {
       this.tasks = res.data;
-      const dialogRef = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
      })
-  } 
+     const dialog = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
+     
+     dialog.afterOpened().subscribe((res)=> {
+      console.log(res);
+      
+      
+      
+     })
+    } 
 
   // GetAllProjectColumns() {
   //   return this.columnService.GetAllProjectColumns({'projectId':  this.currentProjectId}).subscribe((res) => {

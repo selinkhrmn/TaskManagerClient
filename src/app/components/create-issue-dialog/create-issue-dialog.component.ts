@@ -46,8 +46,8 @@ export class CreateIssueDialogComponent {
   task : Partial<Task> = {
     name: "",
     projectId: 0,
-    columnId: 0,
-    priority : 0,
+    columnId: 1,
+    priority : 3,
     endDate: new Date()
   }
 
