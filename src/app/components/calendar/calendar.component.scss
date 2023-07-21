@@ -1,18 +1,26 @@
 .calendar {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    border: 1px solid #d7d3d3;
     width: 1200px;
     padding: 10px;
     margin-top: 20px; 
+    background-color: #ffffff; /* Beyaz arka plan rengi */
+    border: 1px solid #dddddd; /* İsteğe bağlı: Takvimi çevreleyen ince bir sınır ekleyin */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* İsteğe bağlı: Takvime hafif bir gölge ekleyin */
+    border-left: 1px solid #f7f3f3;
+    border-top: 1px solid #cccccc;
 }
 
 .calendar-header {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Sağdaki ve soldaki öğeler arasında maksimum boşluk bırak */
     align-items: center;
+    
+    
+    
 }
 
 .calendar-days {
@@ -38,6 +46,7 @@
 button {
     padding: 5px 10px;
     font-size: 0.8em; /* Düğme yazı boyutunu azalt */
+    background-color: #e4c7e6; /* Beyaz arka plan rengi */
 }
 .calendar-days div, .weekdays div {
     height: 100px; /* Bu değeri istediğiniz yüksekliğe ayarlayabilirsiniz */
@@ -72,11 +81,91 @@ button {
     border-bottom: none;
 }
 
-/* Takvimin dış sınırlarını belirleyelim */
-.calendar {
-    border-left: 1px solid #cccccc;
-    border-top: 1px solid #cccccc;
-}
+
 .calendar-header button {
     margin: 0 10px;  /* İki düğme arasında biraz boşluk bırakmak için. */
+    border-radius: 5px;       /* Köşeleri yuvarlar */
+    border: 1px solid #cccccc; 
 }
+.calendar-header > button {
+    border-radius: 5px;  /* Köşeleri yuvarlar */
+    border: 1px solid #cccccc;  /* İnceltilmiş kenar çizgisi */
+    padding: 5px 10px;  /* Butona iç boşluk ekler */
+}
+
+.calendar-header > button:hover {
+    background-color: #f5f5f5;  /* Butonun üzerine gelindiğinde hafif bir renk değişikliği */
+}
+
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* İçeriklerini ortalar */
+    flex-grow: 1; /* Mümkün olduğunda maksimum genişliği kullan */
+}
+
+
+
+/* ... diğer stil tanımlamaları ... */
+
+.spacer {
+    flex-grow: 1;
+}
+
+
+.right-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Bu, .right-controls bölümünü sağa taşır */
+}
+
+.right-controls button {
+    margin-left: 3px;  /* Sağdaki butonlar arasında boşluk oluştur */
+}
+.calendar-header button {
+    display: flex;
+    align-items: center;
+}
+
+.calendar-header button i {
+    font-size: 18px; /* Ikon boyutunu ayarlar */
+    margin-right: 5px; /* Ikon ile metin arasında bir boşluk bırakır */
+    color: #ffffff; /* Ikon rengini beyaz yapar */
+}
+
+.calendar-header button .icon-left {
+    display: flex;
+    flex-direction: row-reverse; /* Ikonu metnin sağında hizalar */
+    align-items: center;
+}
+
+.calendar-header button .icon-right {
+    display: flex;
+    align-items: center;
+}
+
+.calendar-header button .icon-left i,
+.calendar-header button .icon-right i {
+    margin-right: 0;
+    margin-left: 5px; /* Ikon ile metin arasında boşluk bırakır */
+}
+.calendar-days div.is-today {
+    background-color: #71ad83;
+    color: #ffffff;
+  }
+  /* Tooltip özelleştirmesi */
+  .custom-tooltip + .tooltip .tooltip-inner {
+    color: #fff;
+  
+}
+/* ... Other styles ... */
+
+.calendar-header button i.material-icons {
+    font-size: 15px; /* Ikon boyutunu ayarlar */
+    margin-right: 5px; /* Ikon ile metin arasında bir boşluk bırakır */
+    color: #212222; /* Ikon rengini mavi (#007bff) yapar */
+  }
+  
+  /* ... Other styles ... */
+  

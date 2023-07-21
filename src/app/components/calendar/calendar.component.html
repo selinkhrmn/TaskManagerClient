@@ -1,8 +1,31 @@
 <div class="calendar">
     <div class="calendar-header">
-      <button (click)="prevMonth()">Önceki Ay</button>
-      {{ months[currentMonth] }} {{ currentYear }}
-      <button (click)="nextMonth()">Sonraki Ay</button>
+      <div class="center-content">
+        <button (click)="prevMonth()">
+          <i class="material-icons icon-left">keyboard_arrow_left</i>Önceki Ay
+        </button>
+        <div class="current-date">{{ months[currentMonth] }} {{ currentYear }}</div>
+        <button (click)="nextMonth()">
+          Sonraki Ay<i class="material-icons icon-right">keyboard_arrow_right</i>
+        </button>
+      </div>
+      <div class="right-controls">
+        <button (click)="goToToday()" data-toggle="tooltip" data-placement="bottom" title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
+          <i class="material-icons">today</i>Bugün
+        </button>
+        <button>
+          <i class="material-icons">share</i>Paylaş
+        </button>
+        <button>
+          <i class="material-icons">event</i>Planlanmamış
+        </button>
+        <button>
+          <i class="material-icons">filter_list</i>Filtre
+        </button>
+        <button>
+          <i class="material-icons">more_horiz</i>Daha fazlası
+        </button>
+      </div>
     </div>
     <div class="weekdays">
       <div>Pzr</div>
@@ -14,7 +37,8 @@
       <div>Cmt</div>
     </div>
     <div class="calendar-days">
-      <div *ngFor="let day of days">{{ day }}</div>
-    </div>
+        <div *ngFor="let dayObj of days" [class.is-today]="dayObj.isToday">{{ dayObj.day }}</div>
+      </div>
+      
   </div>
   
