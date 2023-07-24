@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from '../interfaces';
 import { TokenService } from './token.service';
+import { ProjectDto } from '../interfaces/project';
 @Injectable({
   providedIn: 'root'
 })
@@ -41,6 +42,12 @@ export class TaskService {
 
   updateTaskColumnId(task: Partial<Task>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task, this.httpOptions);
+  }
+
+  getAllProjectTask(id: Partial<ProjectDto>) {
+    debugger;
+
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
   }
 
 

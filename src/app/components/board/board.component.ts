@@ -28,11 +28,7 @@ export class BoardComponent {
           this.columns = response.data;
         }
       });
-    }
-    
-
-    //YAPILACAK
-       
+    }   
   }
 
   

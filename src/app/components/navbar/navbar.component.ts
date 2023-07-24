@@ -6,12 +6,14 @@ import { TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ColumnsComponent } from '../board/columns/columns.component';
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  providers:[ColumnsComponent]
 })
 export class NavbarComponent {
 
@@ -22,7 +24,8 @@ export class NavbarComponent {
       private dialog : MatDialog,
       private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
       public taskService : TaskService,
-      private router: Router
+      private router: Router,
+      public columnComp: ColumnsComponent
 
 
     ) {}
@@ -52,7 +55,7 @@ export class NavbarComponent {
           }
           this.taskService.createTask(task).subscribe((res)=>{
             console.log(res);
-            
+            this.columnComp.ngOnInit();
           })
           
         }

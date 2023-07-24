@@ -1,5 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { select, scaleBand, scaleLinear, axisBottom, axisLeft, scaleOrdinal, format } from 'd3';
+import { Project } from 'src/app/interfaces';
+import { ProjectDto } from 'src/app/interfaces/project';
+import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 
 
@@ -8,15 +11,27 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements AfterViewInit {
+export class SummaryComponent implements AfterViewInit, OnInit {
   UserName: string = '';
   Ogesayisitam: string = '';
   Ogesayisiguncelleme: string = '';
   Ogesayisiolus: string = '';
   Ogesayisitamt: string = '';
 
-  constructor(public tokenService: TokenService) {
+  constructor(
+    public tokenService: TokenService, 
+    public projectService: ProjectService,
+    private taskService: TaskService ) {
 
+  }
+
+  
+  ngOnInit(): void {
+    let project: ProjectDto = this.projectService.getProjectLocal();
+    this.taskService.getAllProjectTask({id :project.id}).subscribe((res)=> {
+      console.log(res.data); // seçili projeye ait bütün tasklar ListTask tipinde!
+      
+    })
   }
   // Veri seti
   private chartData = [
@@ -82,4 +97,6 @@ export class SummaryComponent implements AfterViewInit {
       .attr('transform', `translate(${margin.left},0)`)
       .call(yAxis);
   }
+
+
 }
