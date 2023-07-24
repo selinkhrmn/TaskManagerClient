@@ -45,6 +45,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ListComponent } from './components/list/list.component';
+
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     EditColumnComponent,
     CalendarComponent,
     RegisterPageComponent,
+    ListComponent,
   ],
   imports: [
     AllFormsModule,

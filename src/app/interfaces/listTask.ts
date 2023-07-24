@@ -9,7 +9,6 @@ export interface ListTask {
     DueDate: Date;
     Priority: number;
     UpdateDate:Date;
-  
     CreateDate:Date;
     
     

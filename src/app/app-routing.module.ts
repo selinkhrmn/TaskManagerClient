@@ -13,6 +13,7 @@ import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { canActivateGuard } from './guards/guards.guard';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
+import { ListComponent } from './components/list/list.component';
 export const routes: Routes = [
   {
     path: '',
@@ -27,6 +28,12 @@ export const routes: Routes = [
       {
         path: 'summary',
         component: SummaryComponent,
+        canActivate: [canActivateGuard],
+
+      },
+      {
+        path: 'list',
+        component: ListComponent,
         canActivate: [canActivateGuard],
 
       },

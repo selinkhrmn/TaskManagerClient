@@ -1,10 +1,10 @@
 <div class="calendar">
     <div class="calendar-header">
         <div class="user-info">
-            
+
             <span class="user-name"> {{tokenService.tokenNameSurname()}}</span>
-            
-          </div>
+
+        </div>
         <div class="search-bar">
             <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara">
             <button (click)="searchDay()" class="search-button">
@@ -13,11 +13,11 @@
         </div>
         <div class="user-info">
             <button (click)="addPerson()" class="add-person-button">
-              <i class="material-icons">person_add</i>Kişi Ekle
+                <i class="material-icons">person_add</i>Kişi Ekle
             </button>
-            
-          </div>
-        
+
+        </div>
+
 
         <div class="center-content">
 
@@ -62,20 +62,19 @@
         <div>Pzr</div>
     </div>
     <div class="calendar-days">
-        <div *ngFor="let dayObj of days" 
-        [class.is-today]="isToday(dayObj.day)" 
-        (click)="toggleDescription(dayObj)">
-     {{ dayObj.day }}
-     <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
-        <ng-template #userDescription>
-          <p>{{ dayObj.description }}</p>
-        </ng-template>
-        <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)" placeholder="Ne Yapılmalı ?">
-      
-        <!-- Sağ tarafta yer alan butonlar için bir container ekleyelim -->
-      
-      </div>
-      
+        <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)" (click)="toggleDescription(dayObj)">
+            {{ dayObj.day }}
+            <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
+                <ng-template #userDescription>
+                    <p>{{ dayObj.description }}</p>
+                </ng-template>
+                <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)"
+                    placeholder="Ne Yapılmalı ?">
+
+                <!-- Sağ tarafta yer alan butonlar için bir container ekleyelim -->
+
+            </div>
+
         </div>
 
     </div>

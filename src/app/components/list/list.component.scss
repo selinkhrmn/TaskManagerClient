@@ -1,0 +1,121 @@
+.overflow-table-container {
+    width: 120%;
+    height: 500px;  // Bu değeri tablonun içeriğine göre ayarlayabilirsiniz.
+   
+    border: 1px solid #ccc;
+
+    table {
+        width: 100%;
+        min-width: 1500px; // Bu değeri tablonuzun genişliğine göre ayarlayabilirsiniz.
+        border-collapse: collapse;
+        background: #ffffff;
+      
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 150px;  // Her sütunu 150px genişlikte yapar
+            max-width: 150px; // Sütunun genişlemesini engeller
+            overflow: hidden;  // İçerik sütun genişliğini aşarsa görüntülenmez
+            text-overflow: ellipsis;  // İçerik sütun genişliğini aşarsa "..." ile gösterilir
+            white-space: nowrap;  
+        }
+      
+        th {
+            background-color: #ffffff;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+      
+        tr:hover {
+            background-color: #ffffff;
+        }
+    }
+    
+}
+.outer-container {
+    
+        width: 100%;
+        height: 300px;
+        overflow: auto;  // Hem yatay hem de dikey kaydırmayı etkinleştirir
+        border: 0px solid #ccc;
+    
+    
+}
+mat-icon {
+    font-size: 22px;  // İkon boyutunu küçültür. İsterseniz bu değeri ayarlayabilirsiniz.
+    color: rgb(170, 106, 106);    // İkon rengini beyaz yapar.
+    vertical-align: middle;  // Metinle aynı hizada olmasını sağlar.
+}
+
+
+/* ... other styles ... */
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+   margin-right: 15px;
+}
+
+  
+.search-input {
+  display: flex;
+  align-items: center;
+  margin-right: 8px; /* Add some space between the search input and button */
+}
+
+input {
+  flex: 1;
+  height: 20px;
+  font-size: 12px;
+}
+
+button {
+  margin-left: -10px;
+  border-radius: 50%;
+  color: white;
+  
+  padding: 5px;
+  font-size: 12px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.user-name {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #dadadb;
+  color: rgb(175, 89, 89);
+  padding: 13px;
+}
+
+.user-name:hover {
+  background-color: rgb(145, 80, 80);
+}
+
+.add-person-button {
+  border-radius: 10%;
+  background-color: #dadadb;
+  color: rgb(175, 89, 89);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  margin-left: 2px; /* Adjust the margin to bring the button closer to the user name */
+}
+
+.add-person-button i {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+/* ... other styles ... */
