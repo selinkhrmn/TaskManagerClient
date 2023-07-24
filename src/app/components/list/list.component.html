@@ -1,7 +1,5 @@
 <div class="header">
-    <div class="user-info">
-            <span class="user-name" (click)="handleUsernameClick()">{{ tokenService.tokenNameSurname() }}</span>
-        </div>
+    <span class="user-name" (click)="handleUsernameClick()">{{ tokenService.tokenNameSurname() }}</span>
     <div class="search-bar">
         <div class="search-input">
             <input matInput #searchInput placeholder="Listeyi arayın">
@@ -9,16 +7,28 @@
                 <mat-icon>search</mat-icon>
             </button>
         </div>
-
-        
     </div>
 
     <div class="user-info">
         <button (click)="addPerson()" class="add-person-button">
             <i class="material-icons">person_add</i>Kişi Ekle
         </button>
+        <button>
+            <i class="material-icons">share</i>Paylaş
+        </button>
+        <button>
+            <i class="material-icons">event</i>Planlanmamış
+        </button>
+        <button>
+            <i class="material-icons">filter_list</i>Filtre
+        </button>
+        <button>
+            <i class="material-icons">more_horiz</i>Daha fazlası
+        </button>
+        
     </div>
 </div>
+
 
 
 <div class="outer-container">

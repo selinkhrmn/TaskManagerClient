@@ -46,76 +46,104 @@
 }
 mat-icon {
     font-size: 22px;  // İkon boyutunu küçültür. İsterseniz bu değeri ayarlayabilirsiniz.
-    color: rgb(170, 106, 106);    // İkon rengini beyaz yapar.
+    color: rgb(84, 110, 177);    // İkon rengini beyaz yapar.
     vertical-align: middle;  // Metinle aynı hizada olmasını sağlar.
 }
 
 
 /* ... other styles ... */
 
-.header {
-  display: flex;
-  align-items: center;
-}
-.search-bar {
-  display: flex;
-  align-items: center;
-   margin-right: 15px;
-}
-
-  
-.search-input {
-  display: flex;
-  align-items: center;
-  margin-right: 8px; /* Add some space between the search input and button */
-}
-
-input {
-  flex: 1;
-  height: 20px;
-  font-size: 12px;
-}
-
-button {
-  margin-left: -10px;
-  border-radius: 50%;
-  color: white;
-  
-  padding: 5px;
-  font-size: 12px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-}
-
-.user-name {
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: #dadadb;
-  color: rgb(175, 89, 89);
-  padding: 13px;
-}
-
-.user-name:hover {
-  background-color: rgb(145, 80, 80);
-}
-
-.add-person-button {
-  border-radius: 10%;
-  background-color: #dadadb;
-  color: rgb(175, 89, 89);
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  margin-left: 2px; /* Adjust the margin to bring the button closer to the user name */
-}
-
-.add-person-button i {
-  font-size: 16px;
-  margin-right: 10px;
-}
-
 /* ... other styles ... */
+
+.header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    width: 300px;  // Arama çubuğunun genişliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+    height: 40px;  // Arama çubuğunun yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+}
+
+.search-input input {
+    height: 25px;  // Input elemanının yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+    font-size: 16px;  // Input elemanındaki yazının boyutunu ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+}
+
+  
+  input {
+    flex: 1;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  button {
+    margin-left: 5px;
+    border-radius: 50%;
+    color:  rgb(123, 123, 123);
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    font-size: 12px;
+  }
+  
+  .user-info {
+
+    align-items: center;
+    display: flex;
+    margin-left: auto; /* Align the buttons to the right */
+    padding: 5px; /* Add some padding to the container */
+  }
+  
+  .user-info button {
+    align-items: center;
+    display: flex;
+ 
+    width: 110px;  // Buton genişliğini ayarlayın.
+    height: 40px;  // Buton yüksekliğini ayarlayın.
+    border-radius: 10%;
+    border: none;
+}
+
+  
+  .user-name {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #dadadb;
+    color: rgb(122, 30, 50);
+    padding: 18px;
+    margin-left: 2px;
+    margin-right:5px;
+  }
+  
+  .user-name:hover {
+    background-color: rgb(55, 3, 20);
+  }
+  
+  .add-person-button {
+    border-radius: 10%;
+    background-color: #ffffff;
+    color: rgb(123, 123, 123);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    margin-left: 2px;
+    margin-right: 2px; /* Adjust the margin to bring the button closer to the search bar */
+  }
+  
+  .add-person-button i {
+    font-size: 16px;
+    margin-right: 5px; /* Adjust the icon margin to improve spacing */
+  }
+  .search-bar button {
+    background-color: transparent;
+    margin-left: -10px;
+}
+
+  
+  /* ... other styles ... */
+  
