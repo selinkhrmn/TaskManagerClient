@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class CreateProjectComponent implements OnInit {
   projectName : string;
   projects : Project[] = [];
-  
+  data: Object ;
 
   constructor(
     private bottomSheet: MatBottomSheet,
@@ -21,19 +21,18 @@ export class CreateProjectComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.projectService.getAllProjects().subscribe((response) => {
       if(response.data != null){
         this.projects = response.data;
       }
     });
-       
   }
-  
+   
   createProject(){
+    debugger
     this.projectService.createProject({name: this.projectName}).subscribe((res) => {
       this.selectedProject(res.data);
-      this.ngOnInit();
     });
   }
 
