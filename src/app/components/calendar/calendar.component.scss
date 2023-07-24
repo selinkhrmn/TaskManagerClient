@@ -222,8 +222,8 @@ button {
 .description-box {
     position: absolute;
     top: -40px;
-    left: 20%;
-    width: 160%;
+    left: 40%;
+    width: 140%;
     height: 180%;
     transform: translateX(-50%);
     background-color: #B19088;
@@ -342,21 +342,3 @@ button {
 
 /* ... (Existing styles) ... */
 
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: -5px;
-   
-  }
-  
-  .button-container button {
-    padding: 1px 1px;
-    font-size: 9px;
-    background-color: #D9D0C1;
-    color: #000000;
-    margin-bottom: 5px;
-    font-weight: bold;
-    width: 150%;
-    height: 105%;
-  }
-  
