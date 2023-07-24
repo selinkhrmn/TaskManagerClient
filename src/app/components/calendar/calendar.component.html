@@ -67,15 +67,20 @@
         (click)="toggleDescription(dayObj)">
      {{ dayObj.day }}
      <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
-                <!-- Eğer dayObj.description boşsa varsayılan metni göster, değilse dayObj.description'ı göster -->
-                <ng-template #userDescription>
-                    <p>{{ dayObj.description }}</p>
-                </ng-template>
-                <!-- Kullanıcıya açıklama girmesi için bir input ekleyin -->
-                <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)"
-                    placeholder="Ne Yapılmalı ?">
-            </div>
-
+        <ng-template #userDescription>
+          <p>{{ dayObj.description }}</p>
+        </ng-template>
+        <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)" placeholder="Ne Yapılmalı ?">
+      
+        <!-- Sağ tarafta yer alan butonlar için bir container ekleyelim -->
+        <div class="button-container">
+            <button (click)="saveDescription()">Tamam</button>
+            <button (click)="addTask()">Yapılacaklar</button>
+            <button (click)="clearDescription()">Devam</button>
+          </div>
+          
+      </div>
+      
         </div>
 
     </div>

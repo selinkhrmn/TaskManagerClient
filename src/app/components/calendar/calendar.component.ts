@@ -156,6 +156,21 @@ export class CalendarComponent {
       this.currentYear === today.getFullYear()
     );
   }
+  saveDescription(): void {
+    console.log('Kaydedilen açıklama:', this.days[this.searchedDay].description);
+  }
+
+  addTask(): void {
+    console.log('Yapılacaklar butonuna tıklandı');
+  }
+
+  clearDescription(): void {
+    this.days[this.searchedDay].description = '';
+  }
+
+  getTodayText(dayObj: DayObject): string {
+    return dayObj.isToday ? "Bugün" : "";
+  }
 }
 
 

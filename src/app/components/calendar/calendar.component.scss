@@ -23,9 +23,9 @@
     /* Sağdaki ve soldaki öğeler arasında maksimum boşluk bırak */
     align-items: center;
 
-   
 
-   
+
+
 
 
 }
@@ -33,10 +33,9 @@
 .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    position: relative;  // Bu satırı ekleyin
+    position: relative; // Bu satırı ekleyin
     text-align: center;
     padding: 5px
-    
 }
 
 .calendar-days div {
@@ -135,12 +134,13 @@ button {
 .center-content {
     display: flex;
     align-items: center;
-    margin-left: 30px; 
+    margin-left: 30px;
     flex-grow: 1;
     /* Mümkün olduğunda maksimum genişliği kullan */
 
-  justify-content: flex-start; /* Change this line to align items to the left */
- 
+    justify-content: flex-start;
+    /* Change this line to align items to the left */
+
 
 }
 
@@ -218,105 +218,145 @@ button {
     /* Ikon ile metin arasında bir boşluk bırakır */
     color: #212222;
 }
+
 .description-box {
     position: absolute;
-    top: -50px;
-    left: 50%;
-    width: 95%;
-    height: 50%;
+    top: -40px;
+    left: 20%;
+    width: 160%;
+    height: 180%;
     transform: translateX(-50%);
-    background-color: rgb(31, 102, 73);
+    background-color: #B19088;
     display: flex;
     justify-content: center;
     align-items: center;
 
     // Use box-shadow and outline to create a thinner border effect
-    box-shadow: 0 0 0 1px rgb(18, 104, 51), 0 0 0 10px transparent; // Adjust the 2px value for thickness
+    box-shadow: 0 0 0 1px rgb(49, 48, 117), 0 0 0 10px transparent; // Adjust the 2px value for thickness
     outline: 1px solid transparent; // Adjust the 1px value for thickness
-    border-radius: 5px; // You can adjust the radius if needed
+    border-radius: 10px; // You can adjust the radius if needed
 
     input {
-        background-color: rgb(229, 226, 226); /* Pink background color for the search input */
-        color: #ffffff; /* White text color for visibility */
+        background-color: #f1f1f1;
+        /* Pink background color for the search input */
+        width: 150%;
+        height: 110%;
+        color: #000000;
+        /* White text color for visibility */
+        border-radius: 10px
     }
-  }
+}
 
 .calendar-days div {
     position: relative;
     text-align: center;
     padding: 5px;
-    overflow: visible;  // Bu satırı ekleyin
+    overflow: visible; // Bu satırı ekleyin
     // Diğer stiller...
-    color: rgb(2, 2, 2);  /* Varsayılan olarak gri renk */
+    color: rgb(2, 2, 2);
+    /* Varsayılan olarak gri renk */
 }
 
 
 
-  .search-bar {
+.search-bar {
     display: flex;
     align-items: center;
     margin-left: 5px;
-  }
-  
-  .search-bar input {
+}
+
+.search-bar input {
     padding: 5px;
     font-size: 14px;
     margin-right: -9px;
-  }
-  
-  .search-button {
+}
+
+.search-button {
     background-color: #e4c7e6;
     border: none;
     margin-left: 1px;
-  }
-  
-  .search-button i {
+}
+
+.search-button i {
     font-size: 18px;
     color: #ffffff;
-  }
-  
+}
 
 
-  /* ... (Existing styles) ... */
-  .calendar-days div.is-current-month {
+
+/* ... (Existing styles) ... */
+.calendar-days div.is-current-month {
     font-weight: bold;
-    color: black;  /* Ayın kendi günleri siyah renk ve kalın yazı tipi */
-  }
- /* ... (Existing styles) ... */
+    color: black;
+    /* Ayın kendi günleri siyah renk ve kalın yazı tipi */
+}
 
- .user-info {
+/* ... (Existing styles) ... */
+
+.user-info {
     display: flex;
     align-items: center;
-  }
-  
-  .user-name {
-    font-size: 14px; /* Yazı boyutunu istediğiniz gibi ayarlayabilirsiniz */
-    border-radius: 20px; /* Yuvarlak köşeler için 20px border-radius değeri */
-    padding: 20px 20px; /* İçeriğin içinde biraz boşluk bırakmak için padding ekleyebilirsiniz */
-    background-color: #89518d; /* Arkaplan rengini belirleyebilirsiniz */
-    color: #ffffff; /* Yazı rengini beyaz yaparak metnin daha iyi görünmesini sağlayabilirsiniz */
-    cursor: default; /* Kullanıcı adının üzerine tıklanamaz hale gelmesini sağlar */
+}
+
+.user-name {
+    font-size: 14px;
+    /* Yazı boyutunu istediğiniz gibi ayarlayabilirsiniz */
+    border-radius: 20px;
+    /* Yuvarlak köşeler için 20px border-radius değeri */
+    padding: 20px 20px;
+    /* İçeriğin içinde biraz boşluk bırakmak için padding ekleyebilirsiniz */
+    background-color: #89518d;
+    /* Arkaplan rengini belirleyebilirsiniz */
+    color: #ffffff;
+    /* Yazı rengini beyaz yaparak metnin daha iyi görünmesini sağlayabilirsiniz */
+    cursor: default;
+    /* Kullanıcı adının üzerine tıklanamaz hale gelmesini sağlar */
     margin-right: 15px;
-  }
-  /* ... (Existing styles) ... */
+}
+
+/* ... (Existing styles) ... */
 
 .calendar-days div.is-today {
-    background-color: #71ad83; /* Bugünün arka plan rengi */
-    color: #ffffff; /* Bugünün yazı rengi (beyaz) */
-  }
-  
-  .calendar-days div.is-today::after {
-    content: "Bugün"; /* Bugünün altında "Bugün" yazısı */
+    background-color: #71ad83;
+    /* Bugünün arka plan rengi */
+    color: #ffffff;
+    /* Bugünün yazı rengi (beyaz) */
+}
+
+.calendar-days div.is-today::after {
+    content: "Bugün";
+    /* Bugünün altında "Bugün" yazısı */
     position: absolute;
-    bottom: 0px; /* "Bugün" yazısının altındaki mesafe */
+    bottom: 0px;
+    /* "Bugün" yazısının altındaki mesafe */
     left: 50%;
     transform: translateX(-50%);
-    background-color:  #71ad83; /* "Bugün" yazısı arka plan rengi */
+    background-color: #71ad83;
+    /* "Bugün" yazısı arka plan rengi */
     padding: -25px 1px;
     border-radius: 4px;
     font-size: 14px;
-    color: #ffffff; /* "Bugün" yazısı rengi (beyaz) */
+    color: #ffffff;
+    /* "Bugün" yazısı rengi (beyaz) */
+}
+
+/* ... (Existing styles) ... */
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -5px;
+   
   }
   
-  /* ... (Existing styles) ... */
+  .button-container button {
+    padding: 1px 1px;
+    font-size: 9px;
+    background-color: #D9D0C1;
+    color: #000000;
+    margin-bottom: 5px;
+    font-weight: bold;
+    width: 150%;
+    height: 105%;
+  }
   
