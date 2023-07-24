@@ -77,7 +77,6 @@ export class ColumnsComponent {
           this.columns = response.data;
         }
       });
-      
     }
   }
 

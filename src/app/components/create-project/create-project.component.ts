@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
 import { ProjectService } from 'src/app/services/project.service';
@@ -28,11 +28,16 @@ export class CreateProjectComponent implements OnInit {
       }
     });
   }
+
+  ngOnChanges(changes : SimpleChanges) {
+    console.log(changes);
+    
+  }
    
   createProject(){
-    debugger
     this.projectService.createProject({name: this.projectName}).subscribe((res) => {
       this.selectedProject(res.data);
+      this.ngOnInit()
     });
   }
 

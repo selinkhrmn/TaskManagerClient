@@ -28,13 +28,10 @@ export class Sidenav2Component implements OnInit{
       if(response.data != null){
         this.projects = response.data;
       }
+      
     });
   }
 
-  ngOnChanges(changes : SimpleChanges) {
-    console.log(changes);
-    
-  }
 
   selectProject(selectProject: Project){
     this.selectedProject = selectProject;
@@ -65,6 +62,10 @@ export class Sidenav2Component implements OnInit{
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateProjectComponent,{height: '95.5%',width: '80%', panelClass: 'dialog'});
+  }
+
+  reload() {
+    window.location.reload();
   }
   
 }

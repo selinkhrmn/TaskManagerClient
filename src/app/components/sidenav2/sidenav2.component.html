@@ -6,10 +6,6 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-
-    <!-- <div class="icon_holder" (click)="openDialog()" >
-            <img src="../../../assets/plus.png">
-        </div> -->
   </div>
 
   <div
@@ -17,14 +13,10 @@
     *ngFor="let project of projects"
     (click)="selectProject(project)"
   >
-    <div class="card">
+    <div class="card" (click)="reload()">
       {{ project.name }}
       {{ project.id }}
     </div>
   </div>
-  <!-- <mat-selection-list [multiple]="false">
-        <mat-list-option *ngFor="let project of projects" [value]="project">
-          {{project.name}}
-        </mat-list-option>
-      </mat-selection-list> -->
+
 </div>

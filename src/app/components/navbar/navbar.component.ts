@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateIssueDialogComponent } from '../create-issue-dialog/create-issue-dialog.component';
 import { TokenService } from 'src/app/services/token.service';
-import { TaskService } from 'src/app/services';
+import { AuthService, TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -25,7 +25,8 @@ export class NavbarComponent {
       private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
       public taskService : TaskService,
       private router: Router,
-      public columnComp: ColumnsComponent
+      public columnComp: ColumnsComponent,
+      public authService: AuthService
 
 
     ) {}
@@ -37,9 +38,7 @@ export class NavbarComponent {
     }
   
     logOut(){
-      localStorage.removeItem("token");
-      localStorage.clear();
-      this.router.navigate([""]);
+      this.authService.logOut();
      }
 
     openCreateIssueDialog() {

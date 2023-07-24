@@ -24,7 +24,7 @@ export class ProjectDetailsComponent {
     public tokenService: TokenService) {
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     this.projectService.selectedProject$?.subscribe((value) => {
       this.currentProject = value;
       this.currentProjectName = value.name;
@@ -38,6 +38,8 @@ export class ProjectDetailsComponent {
 
   deleteProject() {
     this.projectService.deleteProject({ id: this.projectId }).subscribe(() => {
+      console.log(this.projectId);
+      
       this.ngOnInit();
     });
   }

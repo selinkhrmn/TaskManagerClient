@@ -11,25 +11,30 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { BoardComponent } from './components/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { canActivateGuard } from './guards/guards.guard';
+import { canActivateGuard, isLoggedIn, loginCheck } from './guards/guards.guard';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
+<<<<<<< Updated upstream
 import { ListComponent } from './components/list/list.component';
+=======
+import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
+>>>>>>> Stashed changes
 export const routes: Routes = [
   {
     path: '',
     component: LoginPageComponent,
-    
+    canActivate: [loginCheck]
   },
   {
     path: 'home',
     component: HomepageComponent,
-    canActivate: [canActivateGuard],
+    canActivate: [canActivateGuard,isLoggedIn],
+    
     children: [
       {
         path: 'summary',
         component: SummaryComponent,
-        canActivate: [canActivateGuard],
-
+        canActivate: [canActivateGuard,isLoggedIn],
+        
       },
       {
         path: 'list',
@@ -51,6 +56,7 @@ export const routes: Routes = [
         data: {
           role: 'admin'
         }
+        
       },
       {
         path: 'create-issue-dialog',
@@ -65,10 +71,11 @@ export const routes: Routes = [
       {
         path: 'task',
         component: TaskComponent,
-        canActivate: [canActivateGuard],
-      }
+        canActivateChild: [canActivateGuard],
+      },
     ],
   },
+  
   {
     path: 'create-project',
     component: CreateProjectComponent,

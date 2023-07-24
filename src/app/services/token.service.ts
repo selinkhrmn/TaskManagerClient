@@ -52,11 +52,11 @@ export class TokenService {
     return this.role === role;
   }
 
-  loggedIn(){
+  loggedIn(): boolean{
     const token = localStorage.getItem("token");
     console.log(token);
-    
-    return !this.jwtHelper.isTokenExpired(token);
+    console.log(!this.jwtHelper.isTokenExpired(token));
+    return this.jwtHelper.isTokenExpired(token);
   }
 
   public getHeaders(): HttpHeaders {

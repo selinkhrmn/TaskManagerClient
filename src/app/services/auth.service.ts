@@ -7,6 +7,7 @@ import { User, User1 } from '../interfaces/user';
 import { ResponseModel } from '../interfaces/responseModel';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     decodedToken: any;
 
     constructor(private http: HttpClient,
-        public tokenService: TokenService) { }
+        public tokenService: TokenService, private router: Router) { }
 
     login(user: User) {
 
@@ -33,6 +34,13 @@ export class AuthService {
             })
         )
     }
+
+    logOut(){
+        localStorage.removeItem("token");
+        localStorage.clear();
+        this.router.navigate(['']);
+       }
+  
 
     register(user: Partial<User1>){
         // debugge
