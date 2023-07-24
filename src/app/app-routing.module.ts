@@ -11,61 +11,61 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { BoardComponent } from './components/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { AuthGuard } from './guards/guards.guard';
+import { canActivateGuard } from './guards/guards.guard';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
 export const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     component: LoginPageComponent,
+    
   },
   {
-    path: '',
+    path: 'home',
     component: HomepageComponent,
+    canActivate: [canActivateGuard],
     children: [
       {
         path: 'summary',
         component: SummaryComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [canActivateGuard],
+
       },
       {
         path: 'calendar',
         component: CalendarComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [canActivateGuard],
+
       },
       {
         path: 'project-settings',
         component: ProjectDetailsComponent,
-        // canActivate: [AuthGuard],
-        // data: {
-        //   role: 'admin'
-        // }
+        canActivate: [canActivateGuard],
+
+        data: {
+          role: 'admin'
+        }
       },
       {
         path: 'create-issue-dialog',
         component: CreateIssueDialogComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [canActivateGuard],
       },
       {
         path: 'board',
         component: BoardComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [canActivateGuard],
       },
       {
         path: 'task',
         component: TaskComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [canActivateGuard],
       }
     ],
   },
   {
     path: 'create-project',
     component: CreateProjectComponent,
-    // canActivate: [AuthGuard],
-  },
-  {
-    path: 'home',
-    component: HomepageComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [canActivateGuard],
   },
   {
     path: 'login',
@@ -82,7 +82,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  // providers:[AuthGuard],
+  // providers:[canActivateGuard],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })

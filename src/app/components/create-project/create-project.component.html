@@ -21,7 +21,7 @@
       <button mat-raised-button routerLink="summary" (click)="closeDialog()">
         Cancel
       </button>
-      <button mat-raised-button (click)="createProject()">
+      <button mat-raised-button (click)="createProject();ngOnInit();closeDialog()">
         Create project
       </button>
     </div>
