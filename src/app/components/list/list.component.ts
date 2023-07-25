@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ListTask } from 'src/app/interfaces/listTask';
 import { TokenService } from 'src/app/services/token.service';
+import { TaskService } from 'src/app/services';
+import { Task } from 'src/app/interfaces/task';
 
 @Component({
   selector: 'app-list',
@@ -9,6 +11,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  tasks : Partial<Task>[] = [];
   data: ListTask[] = [];
   filteredData: ListTask[] = [];
   columns: string[] = [
@@ -26,11 +29,18 @@ export class ListComponent implements OnInit {
 
   constructor(
     private http: HttpClient, // Inject HttpClient here
-    public tokenService: TokenService
+    public tokenService: TokenService,
+    private taskService : TaskService
   ) {}
 
   ngOnInit(): void {
+    debugger
     this.loadData();
+    this.taskService.getAllProjectTask({"id" : 1}).subscribe((res) => {
+        this.tasks = res.data;
+        
+      }
+    );
   }
 
   loadData(): void {

@@ -39,7 +39,7 @@
                 <th mat-header-cell *matHeaderCellDef>
                     <mat-icon>label</mat-icon> ID
                 </th>
-                <td mat-cell *matCellDef="let ListTask">{{ ListTask.id }}</td>
+                <td mat-cell *matCellDef="let ListTask ">{{ ListTask.id }}</td>
             </ng-container>
 
             <ng-container matColumnDef="name">
@@ -109,5 +109,10 @@
 
 
         </table>
+       
     </div>
+  
+</div>
+<div class="add-button-container">
+    <button mat-raised-button color="primary" (click)="addPerson()">Oluştur</button>
 </div>
