@@ -7,6 +7,8 @@ import { Task } from 'src/app/interfaces/task';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ColumnsComponent } from '../board/columns/columns.component';
+import { TranslocoService} from '@ngneat/transloco';
+
 
 
 @Component({
@@ -26,7 +28,8 @@ export class NavbarComponent {
       public taskService : TaskService,
       private router: Router,
       public columnComp: ColumnsComponent,
-      public authService: AuthService
+      public authService: AuthService,
+      public translocoService: TranslocoService
 
 
     ) {}
@@ -62,6 +65,10 @@ export class NavbarComponent {
       });
       
       
+    }
+
+    changeLanguage(language: 'tr' | 'en') {
+      this.translocoService.setActiveLang(language);
     }
 
 }

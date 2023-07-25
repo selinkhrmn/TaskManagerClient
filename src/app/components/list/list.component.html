@@ -4,26 +4,26 @@
         <div class="search-input">
             <input matInput #searchInput placeholder="Listeyi arayın">
             <button mat-icon-button (click)="filterByName(searchInput.value)">
-                <mat-icon>search</mat-icon>
+                <mat-icon>{{'search' | transloco}}</mat-icon>
             </button>
         </div>
     </div>
 
     <div class="user-info">
         <button (click)="addPerson()" class="add-person-button">
-            <i class="material-icons">person_add</i>Kişi Ekle
+            <i class="material-icons">person_add</i>{{'addPeople' | transloco}}
         </button>
         <button>
-            <i class="material-icons">share</i>Paylaş
+            <i class="material-icons">share</i>{{'share' | transloco}}
         </button>
         <button>
-            <i class="material-icons">event</i>Planlanmamış
+            <i class="material-icons">event</i>{{'unplanned' | transloco}}
         </button>
         <button>
-            <i class="material-icons">filter_list</i>Filtre
+            <i class="material-icons">filter_list</i>{{'filter' | transloco}}
         </button>
         <button>
-            <i class="material-icons">more_horiz</i>Daha fazlası
+            <i class="material-icons">more_horiz</i>{{'more' | transloco}}
         </button>
         
     </div>
@@ -33,67 +33,67 @@
 
 <div class="outer-container">
     <div class="overflow-table-container">
-        <table mat-table [dataSource]="filteredData">
+        <table mat-table [dataSource]="data">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>label</mat-icon> ID
+                    <mat-icon>label</mat-icon> {{'id' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask ">{{ ListTask.id }}</td>
             </ng-container>
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>text_fields</mat-icon> Name
+                    <mat-icon>text_fields</mat-icon> {{'name' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.name }}</td>
             </ng-container>
 
             <ng-container matColumnDef="columnId">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>view_column</mat-icon> Column
+                    <mat-icon>view_column</mat-icon> {{'column' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.columnId }}</td>
             </ng-container>
 
             <ng-container matColumnDef="assigneeId">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>person</mat-icon> Assignee ID
+                    <mat-icon>person</mat-icon> {{'assignee' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.assigneeId }}</td>
             </ng-container>
 
             <ng-container matColumnDef="reporterId">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>report</mat-icon> reporterId
+                    <mat-icon>report</mat-icon> {{'reporter' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.reporterId }}</td>
             </ng-container>
 
             <ng-container matColumnDef="DueDate">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>calendar_today</mat-icon> DueDate
+                    <mat-icon>calendar_today</mat-icon> {{'dueDate' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.DueDate }}</td>
             </ng-container>
 
             <ng-container matColumnDef="Priority">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>priority_high</mat-icon> Priority
+                    <mat-icon>priority_high</mat-icon> {{'priority' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.Priority }}</td>
             </ng-container>
 
             <ng-container matColumnDef="UpdateDate">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>update</mat-icon> UpdateDate
+                    <mat-icon>update</mat-icon> {{'updateDate' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.UpdateDate }}</td>
             </ng-container>
 
             <ng-container matColumnDef="CreateDate">
                 <th mat-header-cell *matHeaderCellDef>
-                    <mat-icon>create</mat-icon> CreateDate
+                    <mat-icon>create</mat-icon> {{'createdDate' | transloco}}
                 </th>
                 <td mat-cell *matCellDef="let ListTask">{{ ListTask.CreateDate }}</td>
             </ng-container>
