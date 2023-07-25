@@ -52,7 +52,7 @@ export class NavbarComponent {
             priority : response.priority,
             endDate : response.endDate
           }
-          this.taskService.createTask(task).subscribe((res)=>{
+          this.taskService.createNewTask(task).subscribe((res:any)=>{
             console.log(res);
             this.columnComp.ngOnInit();
           })

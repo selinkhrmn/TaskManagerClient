@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ListTask } from 'src/app/interfaces/listTask';
 import { TokenService } from 'src/app/services/token.service';
-import { TaskService } from 'src/app/services';
+import { ProjectService, TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
+import { Project } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,7 @@ import { Task } from 'src/app/interfaces/task';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  tasks : Partial<Task>[] = [];
+  // tasks : Partial<Task>[] = [];
   data: ListTask[] = [];
   filteredData: ListTask[] = [];
   columns: string[] = [
@@ -30,18 +31,37 @@ export class ListComponent implements OnInit {
   constructor(
     private http: HttpClient, // Inject HttpClient here
     public tokenService: TokenService,
-    private taskService : TaskService
+    private taskService : TaskService,
+    private projectService : ProjectService
   ) {}
 
+  
   ngOnInit(): void {
-    debugger
-    this.loadData();
-    this.taskService.getAllProjectTask({"id" : 1}).subscribe((res) => {
-        this.tasks = res.data;
+
+    this.taskService.getAllProjectTask({"id" : this.projectService.getCurrentProject().id}).subscribe((res) => {
+      if(res && res.data) {
         
+        this.data = res.data.map(task => ({
+          id: task.id, // Varsayılan
+          name: task.name, // Varsayılan
+          columnId: task.columnId.toString(), // Eğer columnId sayısal bir değerse
+          // assigneeId, reporterId ve DueDate özellikleri Task modelinde bulunmuyor. 
+          // Bu yüzden örnek bir değer verdim. Düzeltmek için gerçek değerleri sağlamanız gerekiyor.
+          assigneeId: 0, // Örnek değer, bu değeri gerçekte ne olması gerekiyorsa ona göre güncelleyin.
+          reporterId: 0, // Örnek değer
+          DueDate: new Date(), // Örnek değer
+          Priority: task.priority, // Küçük harfle başlayan priority
+          UpdateDate: task.updatedDate, // Küçük harfle başlayan updatedDate
+          CreateDate: task.createdDate, // Küçük harfle başlayan createdDate
+        }));
+        
+        this.filteredData = [...this.data];
       }
-    );
+    });
   }
+  
+  
+  
 
   loadData(): void {
     this.http.get<ListTask[]>('YOUR_BACKEND_URL_HERE').subscribe(
@@ -54,12 +74,12 @@ export class ListComponent implements OnInit {
       }
     );
   }
-
   filterByName(searchText: string): void {
     this.filteredData = this.data.filter(item =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     );
   }
+  
   handleUsernameClick(): void {
     // Your logic when the user clicks on the user name goes here
     console.log('User name clicked!');
