@@ -24,6 +24,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@kolkov/angular-editor": "^3.0.0-beta.0",
+    "@ngneat/transloco": "^4.2.2",
     "@tinymce/tinymce-angular": "^7.0.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.3.0",
