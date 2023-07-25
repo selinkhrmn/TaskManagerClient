@@ -3,9 +3,7 @@
     <div class="search-bar">
         <div class="search-input">
             <input matInput #searchInput placeholder="Listeyi arayın">
-            <button mat-icon-button 
-            (click)="filterByName(searchInput.value)"
-            >
+            <button mat-icon-button (click)="filterByName(searchInput.value)">
                 <mat-icon>search</mat-icon>
             </button>
         </div>
@@ -35,7 +33,7 @@
 
 <div class="outer-container">
     <div class="overflow-table-container">
-        <table mat-table [dataSource]="data">
+        <table mat-table [dataSource]="filteredData">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>

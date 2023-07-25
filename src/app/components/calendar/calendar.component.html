@@ -9,7 +9,8 @@
             <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara">
             <button (click)="searchDay()" class="search-button">
                 <i class="material-icons">search</i>
-            </button>
+              </button>
+              
         </div>
         <div class="user-info">
             <button (click)="addPerson()" class="add-person-button">
@@ -62,16 +63,19 @@
         <div>Pzr</div>
     </div>
     <div class="calendar-days">
-        <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)" (click)="toggleDescription(dayObj)">
-            {{ dayObj.day }}
+        <div
+          *ngFor="let dayObj of days"
+          [class.is-today]="isToday(dayObj.day)"
+          [class.is-searched]="dayObj.isSearchedDayValid" 
+          (click)="toggleDescription(dayObj)"
+        >
+          {{ dayObj.day }}
             <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
                 <ng-template #userDescription>
                     <p>{{ dayObj.description }}</p>
                 </ng-template>
                 <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)"
                     placeholder="Ne Yapılmalı ?">
-
-                <!-- Sağ tarafta yer alan butonlar için bir container ekleyelim -->
 
             </div>
 

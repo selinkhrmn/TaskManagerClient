@@ -75,10 +75,12 @@ export class ListComponent implements OnInit {
     );
   }
   filterByName(searchText: string): void {
+    console.log("filterByName fonksiyonu çağrıldı:", searchText);
     this.filteredData = this.data.filter(item =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
+        item.name.toLowerCase().includes(searchText.toLowerCase())
     );
-  }
+}
+
   
   handleUsernameClick(): void {
     // Your logic when the user clicks on the user name goes here
