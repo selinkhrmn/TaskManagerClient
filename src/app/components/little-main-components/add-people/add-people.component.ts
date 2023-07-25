@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-add-people',
@@ -9,7 +10,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class AddPeopleComponent{
 
  constructor(
-  public tokenService: TokenService
+  public tokenService: TokenService,
+  public translocoService: TranslocoService
  ){
 
  }

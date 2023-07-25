@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-login-page',
@@ -21,7 +22,8 @@ export class LoginPageComponent{
   constructor(
     private authService: AuthService,
     public router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    public translocoService: TranslocoService) {
   }
 
   signIn() {

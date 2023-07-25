@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-tabs',
@@ -12,7 +13,8 @@ export class TabsComponent implements OnInit {
   currentProject: Project;
   currentProjectName : string;
 
-  constructor(public projectService: ProjectService){}
+  constructor(public projectService: ProjectService,
+    public translocoService : TranslocoService){}
 
   ngOnInit(): void {
     this.projectService.selectedProject$.subscribe((value) => {

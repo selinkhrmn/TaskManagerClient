@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { TaskService } from 'src/app/services/task.service';
+import { TranslocoService} from '@ngneat/transloco';
 
 interface DialogData{
   task: Task;
@@ -24,7 +25,8 @@ export class TaskComponent  {
 
   constructor(
     private taskService : TaskService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public translocoService : TranslocoService
       ) {
     
   }

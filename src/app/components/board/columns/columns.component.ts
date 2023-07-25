@@ -29,6 +29,7 @@ import { ProjectService } from 'src/app/services';
 import { EditColumnComponent } from '../edit-column/edit-column.component';
 import { columnDto } from 'src/app/interfaces/columnDto';
 import { ProjectDto } from 'src/app/interfaces/project';
+import { TranslocoService} from '@ngneat/transloco';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -64,7 +65,8 @@ export class ColumnsComponent {
     private columnService : ColumnService, 
     private taskService: TaskService,
     public dialog: MatDialog, 
-    private projectService : ProjectService) {
+    private projectService : ProjectService,
+    public translocoService: TranslocoService) {
      
   }
 

@@ -3,14 +3,14 @@
 <div mat-dialog-content>
     <div class="row">
         <mat-form-field class="col-6">
-            <mat-label>Project Name</mat-label>
+            <mat-label>{{'projectName' | transloco}}</mat-label>
             <mat-select [(ngModel)] = "task.projectId" (ngModelChange)="onChangeProject($event)" ngDefaultControl>
               <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>  
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
-            <mat-label>Column Name</mat-label>
+            <mat-label>{{'columnName' | transloco}}</mat-label>
             <mat-select [(ngModel)]="task.columnId" ngDefaultControl>
               <mat-option *ngFor="let column of columns" [value]="column.id" >{{column.name}}</mat-option>  
             </mat-select>
@@ -23,13 +23,13 @@
 
     <div class="row">
         <mat-form-field>
-            <mat-label>Task Name</mat-label>
+            <mat-label>{{'taskName' | transloco}}</mat-label>
             <input matInput type="text" [(ngModel)]="task.name" ngDefaultControl>
         </mat-form-field>
     </div>
 
     <div class="row ">
-        <mat-label>Description</mat-label>
+        <mat-label>{{'description' | transloco}}</mat-label>
 
         <angular-editor [placeholder]="'Enter text here...'" [config]="config"></angular-editor>
 
@@ -48,13 +48,13 @@
 
     <div class="row">
         <mat-form-field class="col-6">
-            <mat-label>Assignee</mat-label>
+            <mat-label>{{'assignee' | transloco}}</mat-label>
             <mat-select>
               <!-- <mat-option *ngFor=""></mat-option>   -->
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-6">
-            <mat-label>Reporter</mat-label>
+            <mat-label>{{'reporter' | transloco}}</mat-label>
             <mat-select>
               <!-- <mat-option *ngFor=""></mat-option>   -->
             </mat-select>
@@ -63,7 +63,7 @@
 
     <div class="row">
         <mat-form-field class="col-12">
-            <mat-label>Priority</mat-label>
+            <mat-label>{{'priority' | transloco}}</mat-label>
             <mat-select [(ngModel)]="task.priority">
               <mat-option *ngFor="let priority of priorities" [value]="priority.value" ngDefaultControl
             >{{priority.name}}</mat-option>  
@@ -86,7 +86,7 @@
             <mat-datepicker #pickerStart></mat-datepicker>
         </mat-form-field> -->
         <mat-form-field class="col-12">
-            <mat-label>Due Date</mat-label>
+            <mat-label>{{'dueDate' | transloco}}</mat-label>
             <input [(ngModel)]="task.endDate" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value" ngDefaultControl>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
@@ -98,6 +98,6 @@
 
 <div mat-dialog-actions class="button">
     
-<button mat-flat-button mat-dialog-close>Cancel</button>
-<button mat-flat-button color="primary" (click)="closeDialog()">Create</button>
+<button mat-flat-button mat-dialog-close>{{'cancel' | transloco}}</button>
+<button mat-flat-button color="primary" (click)="closeDialog()">{{'create' | transloco}}</button>
 </div>

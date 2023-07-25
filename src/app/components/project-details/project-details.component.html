@@ -14,17 +14,17 @@
         <div class="img_container">
           <img src="../../../assets/hosgeldiniz.png" />
         </div>
-        <button mat-raised-button>Change icon</button>
+        <button mat-raised-button>{{'projectDetail.changeIcon' | transloco}}</button>
       </div>
       
 
       <div class="input_field">
-        <label>Name</label>
+        <label>{{'name' | transloco}}</label>
         <input [(ngModel)]="currentProjectName" />
       </div>
       <div class="save_button">
-        <button mat-raised-button (click)="saveProjectDetails()">Save</button>
-        <button mat-raised-button (click)="deleteProject()">Delete</button>
+        <button mat-raised-button (click)="saveProjectDetails()">{{'save' | transloco}}</button>
+        <button mat-raised-button (click)="deleteProject()">{{'delete' | transloco}}</button>
       </div>
     </div>
 

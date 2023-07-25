@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class SearchBarComponent {
 
   tab_name = 'Board'
-  constructor() {
+  constructor(public transloco: TranslocoService) {
 
   }
   

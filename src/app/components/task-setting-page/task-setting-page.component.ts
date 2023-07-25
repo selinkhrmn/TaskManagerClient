@@ -9,6 +9,7 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { Task } from 'src/app/interfaces/task';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { ProjectService, TaskService } from 'src/app/services';
+import { TranslocoService} from '@ngneat/transloco';
 
 
 
@@ -34,7 +35,8 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
 
   constructor(
     private taskService : TaskService,
-    private projectService : ProjectService
+    private projectService : ProjectService,
+    public translocoService : TranslocoService
   ) {
     
     

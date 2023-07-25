@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-add-people-page',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AddPeoplePageComponent {
 
+  constructor(public translocoService: TranslocoService){}
 }

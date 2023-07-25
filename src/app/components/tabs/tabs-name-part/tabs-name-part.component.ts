@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ColumnService } from 'src/app/services/column.service';
 import { ProjectService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-tabs-name-part',
@@ -18,7 +19,8 @@ export class TabsNamePartComponent {
     private router: Router,
     private columnService: ColumnService,
     private projectService: ProjectService,
-    public tokenService: TokenService
+    public tokenService: TokenService,
+    public translocoService: TranslocoService
   ) {}
 
 

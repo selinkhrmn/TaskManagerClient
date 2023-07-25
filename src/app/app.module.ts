@@ -54,6 +54,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
+import { TranslocoRootModule } from './transloco-root.module';
 
 
 
@@ -129,7 +130,8 @@ import { TaskSettingPageComponent } from './components/task-setting-page/task-se
         tokenGetter: () => localStorage.getItem('token')
       }
     }),
-    MatRadioModule
+    MatRadioModule,
+    TranslocoRootModule
   ],
 
   providers: [JwtHelperService,

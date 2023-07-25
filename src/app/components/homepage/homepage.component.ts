@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,9 @@ import { ProjectService } from 'src/app/services';
 export class HomepageComponent implements OnInit {
   projects : Project[];
   constructor(
-    private projectService : ProjectService
+    private projectService : ProjectService,
+    public translocoService : TranslocoService
+
   ){
 
   }

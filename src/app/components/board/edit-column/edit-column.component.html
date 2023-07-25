@@ -1,8 +1,8 @@
 <div class="container">
-    <label>Name</label>
+    <label>{{'name' | transloco}}</label>
     <input [(ngModel)] = 'columnName' >
     <div class="button_container">
-        <button mat-raised-button color="primary" (click)="UpdateColumn();closeDialog()">Save</button>
-        <button mat-button (click)="closeDialog()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="UpdateColumn();closeDialog()">{{'save' | transloco}}</button>
+        <button mat-button (click)="closeDialog()">{{'cancel' | transloco}}</button>
     </div>
 </div>

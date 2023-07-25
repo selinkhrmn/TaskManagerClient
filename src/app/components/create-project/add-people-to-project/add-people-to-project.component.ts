@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-add-people-to-project',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-people-to-project.component.scss']
 })
 export class AddPeopleToProjectComponent {
-
+    constructor(public translocoService: TranslocoService){}
 }

@@ -1,16 +1,16 @@
 <div class="back_arrow_img" (click)="closeDialog()">
   <img src="assets/back.png" />
-  Back to project templates
+  {{'backToProjectTemplate' | transloco}}
 </div>
 <div class="body">
   <div class="container">
-    <h4>Create Project</h4>
+    <h4>{{'createProject' | transloco}}</h4>
     <p>
       Explore what's possible when you collaborate with your team. Edit project
       details anytime in project settings.
     </p>
     <div class="input_field">
-      <label>Name</label>
+      <label>{{'name' | transloco}}</label>
       <input
         matInput
         (keyup.enter)="createProject()"
@@ -19,15 +19,15 @@
     </div>
     <div class="button_field">
       <button mat-raised-button routerLink="summary" (click)="closeDialog()">
-        Cancel
+        {{'cancel' | transloco}}
       </button>
       <button mat-raised-button (click)="createProject();ngOnInit();closeDialog()">
-        Create project
+        {{'createProject' | transloco}}
       </button>
     </div>
   </div>
   <div class="image_container">
     <img src="../../../assets/meeting.jpg" />
   </div>
-  <button>Next</button>
+  <button>{{'next' | transloco}}</button>
 </div>

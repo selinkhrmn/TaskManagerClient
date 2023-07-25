@@ -4,6 +4,7 @@ import { CreateProjectPageComponent } from './create-project-page/create-project
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/interfaces';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-create-project',
@@ -18,7 +19,8 @@ export class CreateProjectComponent implements OnInit {
   constructor(
     private bottomSheet: MatBottomSheet,
     public projectService: ProjectService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public translocoService : TranslocoService
   ) {}
 
   ngOnInit() {

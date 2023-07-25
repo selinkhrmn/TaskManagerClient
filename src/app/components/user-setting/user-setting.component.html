@@ -1,19 +1,19 @@
 <h1 mat-dialog-title>Add Person</h1>
 <div mat-dialog-content>
     <mat-form-field appearance="outline">
-        <mat-label>Person Selection</mat-label>
+        <mat-label>{{'userSettings.personSelection' | transloco}}</mat-label>
         <input matInput placeholder=" Enter E-mail">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Role Selection</mat-label>
+        <mat-label>{{'rolSelection' | transloco}}</mat-label>
         <mat-select>
-        <mat-option value="Admin">Admin</mat-option>
-        <mat-option value="User">User</mat-option>
+        <mat-option value="Admin">{{'admin' | transloco}}</mat-option>
+        <mat-option value="User">{{'user' | transloco}}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 <div mat-dialog-action [align]="'end'">
-<button mat-raised-button color="blue" mat-dialog-close>Close</button>
-<button mat-raised-button color="primary" mat-dialog-close>Save</button>
+<button mat-raised-button color="blue" mat-dialog-close>{{'close' | transloco}}</button>
+<button mat-raised-button color="primary" mat-dialog-close>{{'save' | transloco}}</button>
 </div>

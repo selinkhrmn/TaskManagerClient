@@ -4,6 +4,7 @@ import { Project } from 'src/app/interfaces';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
+import { TranslocoService} from '@ngneat/transloco';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   constructor(
     public tokenService: TokenService, 
     public projectService: ProjectService,
-    private taskService: TaskService ) {
+    private taskService: TaskService ,
+    public translocoService : TranslocoService) {
 
   }
 

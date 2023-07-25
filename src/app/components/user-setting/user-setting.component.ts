@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-user-setting',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-setting.component.scss']
 })
 export class UserSettingComponent {
-
+constructor(public translocoService : TranslocoService){}
 }

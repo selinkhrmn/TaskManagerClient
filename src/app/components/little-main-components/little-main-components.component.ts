@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-little-main-components',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./little-main-components.component.scss']
 })
 export class LittleMainComponentsComponent {
-
+  constructor(public translocoService : TranslocoService) {}
 }

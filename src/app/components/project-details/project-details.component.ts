@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/services';
 import { Sidenav2Component } from '../sidenav2/sidenav2.component';
 import { HomepageComponent } from '../homepage/homepage.component';
 import { TokenService } from 'src/app/services/token.service';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-project-details',
@@ -21,7 +22,8 @@ export class ProjectDetailsComponent {
     public projectService: ProjectService,
     private sideNav: Sidenav2Component,
     private homePageComponent: HomepageComponent,
-    public tokenService: TokenService) {
+    public tokenService: TokenService,
+    public translocoService: TranslocoService) {
   }
 
   ngOnInit() {debugger

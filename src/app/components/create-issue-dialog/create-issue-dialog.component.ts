@@ -12,6 +12,7 @@ import { Column } from 'src/app/interfaces/column';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { IPriority } from 'src/app/interfaces/IPriority';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { TranslocoService} from '@ngneat/transloco';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -71,7 +72,8 @@ export class CreateIssueDialogComponent {
     private taskService: TaskService,
     private columnService: ColumnService,
     private projectService: ProjectService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public translocoService: TranslocoService
 
   ) {
     this.getAllProjects();

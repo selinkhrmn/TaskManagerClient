@@ -4,6 +4,7 @@ import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectService } from 'src/app/services';
 import { ColumnService } from 'src/app/services/column.service';
+import { TranslocoService} from '@ngneat/transloco';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -17,7 +18,8 @@ export class BoardComponent {
 
   constructor(
     private columnService : ColumnService, 
-    public projectService: ProjectService ) {}
+    public projectService: ProjectService,
+    public translocoService : TranslocoService) {}
   
   ngOnInit(): void {
 

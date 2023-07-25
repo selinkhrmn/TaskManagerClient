@@ -11,11 +11,11 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item  (click)="getColumnId(column.id);openEditDialog(column.name, column.id)">
           <mat-icon>edit</mat-icon>
-          <span>Edit</span>
+          <span>{{'edit' | transloco}}</span>
         </button>
         <button mat-menu-item (click)="getColumnId(column.id);DeleteColumn()">
           <mat-icon>delete_outline</mat-icon>
-          <span>Delete</span>
+          <span>{{'delete' | transloco}}</span>
         </button>
       </mat-menu>
     </div>
@@ -41,20 +41,20 @@
     <mat-drawer-container class="create_column_container">
       <mat-drawer #drawer class="example-sidenav" mode="side">
         <div class="just">
-          <h3>Name:</h3>
+          <h3>{{'name' | transloco}}:</h3>
           <input [(ngModel)]="columnName"/>
           <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
 
           <button mat-button (click)="drawer.toggle()">
-            Back
+            {{'back' | transloco}}
           </button>
           <button mat-raised-button (click)="drawer.toggle();createColumn()" color="primary">
-            Create
+            {{'create' | transloco}}
           </button>
         </div>
       </mat-drawer>
       <div class="button_container">
-        <label>Add column</label>
+        <label>{{'addColumn' | transloco}}</label>
         <button mat-mini-fab color="warn" (click)="drawer.toggle()">
           <mat-icon>add</mat-icon>
         </button>

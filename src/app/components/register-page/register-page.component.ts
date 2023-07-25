@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services';
 import { User, User1 } from 'src/app/interfaces/user';
+import { TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-register-page',
@@ -8,7 +9,8 @@ import { User, User1 } from 'src/app/interfaces/user';
   styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent  {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+    public translocoService : TranslocoService) {}
 
   user: User1 = {
     name: '',

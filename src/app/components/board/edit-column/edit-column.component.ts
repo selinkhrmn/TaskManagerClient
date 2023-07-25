@@ -3,6 +3,7 @@ import { ColumnsComponent } from '../columns/columns.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ColumnService, ProjectService } from 'src/app/services';
 import { Column } from 'src/app/interfaces/column';
+import { TranslocoService} from '@ngneat/transloco';
 
 interface DialogData {
   data: string,
@@ -25,7 +26,8 @@ export class EditColumnComponent implements OnInit {
     private dialogRef: MatDialogRef<ColumnsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private projectService: ProjectService,
-    private columnService: ColumnService
+    private columnService: ColumnService,
+    public translocoService: TranslocoService
   ) {}
   ngOnInit(): void {
 

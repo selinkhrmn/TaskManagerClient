@@ -1,0 +1,100 @@
+{
+    "admin": "Yönetici",
+    "user": "Kullanıcı",
+    "close": "Kapat",
+    "back" : "Geri dön",
+    "save": "Kaydet",
+    "create": "Oluştur",
+    "projects": "Projeler",
+    "name" : "İsim",
+    "id" : "Numara",
+    "column" : "Kolon",
+    "assignee" : "Atanan",
+    "reporter": "Atayan",
+    "dueDate" : "Bitiş Tarihi",
+    "priority" : "Öncelik",
+    "updateDate" : "Yenilenme Tarihi",
+    "startedDate" : "Başlama Tarihi",
+    "createdDate" : "Oluşturula Tarihi",
+    "addPeople" : "Kişi ekle",
+    "share": "Paylaş",
+    "unplanned" : "Planlanmamış",
+    "filter": "Filtre",
+    "more" : "Daha fazla",
+    "logOut" : "Çıkış",
+    "rolSelection": "Rol seçimi",
+    "add" : "Ekle",
+    "cancel" : "İptal",
+    "edit" : "Düzenle",
+    "delete" : "Sil",
+    "addColumn" : "Kolon ekle",
+    "projectName" : "Project İsmi",
+    "columnName" : "Kolon ismi",
+    "taskName" : "Task ismi",
+    "description" : "Açıklama",
+    "createProject" : "Proje Oluştur",
+    "next" : "İleri",
+    "backToProjectTemplate" : "Proje şablonuna geri dön",
+    "search" : "Ara",
+    "password" : "Şifre",
+    "needHelp" : "Yardıma ihtiyacınız mı var?",
+    "contactTaskManager" : "Task Manager ile iletişime geç",
+    "logIn" : "Giriş",
+    "username" : "Kullanıcı Adı",
+    "surname" : "Soyad",
+
+    "navigation": {
+        "yourWork": "İşlerin"
+    },
+    "tabs": {
+        "summary": "Özet",
+        "board": "Tablo",
+        "list": "Liste",
+        "calender": "Takvim",
+        "timeline": "Zaman çizelgesi",
+        "forms": "Formlar",
+        "reports": "Raporlar",
+        "projectSettings": "Proje Ayarları"
+    },
+    "projectSettings": {
+        "userSettings": "Kullanıcı Ayarları",
+        "taskSetting": "Görev ayarları",
+        "projectDetail": "Proje Ayrıntıları"
+    },
+    "userSettings": {
+        "personSelection": "Kişi seçimi"
+
+    },
+    "taskSetting": {
+        "filter": "Filtre",
+        "taskId": "Görev numarası",
+        "projectId": "Proje numarası",
+        "taskStatus": "Görev durumu"
+    },
+    "projectDetail": {
+        "changeIcon": "Resmi değiştir"
+    },
+    "summary" : {
+        "welcome" : "Hoş geldiniz",
+        "completedinthelast7days" : "Son 7 günde tamamlandı.",
+        "updatedinthelast7days" : "Son 7 günde güncellendi.",
+        "createdinthelast7days" : "Son 7 günde oluşturuldu."
+        
+    },
+    "board" : 
+    {
+        "searchBoard" : "Tablo ara"
+    },
+    "list" : {
+        "searchInList" : "Listeyi ara"
+    },
+    "calendar" : {
+        "searchDate" : "Tarih ara"
+    },
+    "languages": {
+        "tr": "Türkçe",
+        "en": "İngilizce",
+        "changeLanguages" : "Dili değiştir"
+    }
+
+}
