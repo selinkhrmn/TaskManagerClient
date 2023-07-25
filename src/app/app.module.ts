@@ -45,12 +45,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-<<<<<<< Updated upstream
 import { ListComponent } from './components/list/list.component';
-
-=======
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
->>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -81,11 +77,8 @@ import { AddPeopleToProjectComponent } from './components/create-project/add-peo
     EditColumnComponent,
     CalendarComponent,
     RegisterPageComponent,
-<<<<<<< Updated upstream
     ListComponent,
-=======
     AddPeopleToProjectComponent,
->>>>>>> Stashed changes
   ],
   imports: [
     AllFormsModule,

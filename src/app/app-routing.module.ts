@@ -13,11 +13,8 @@ import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { canActivateGuard, isLoggedIn, loginCheck } from './guards/guards.guard';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
-<<<<<<< Updated upstream
 import { ListComponent } from './components/list/list.component';
-=======
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
->>>>>>> Stashed changes
 export const routes: Routes = [
   {
     path: '',
