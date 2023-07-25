@@ -48,6 +48,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ListComponent } from './components/list/list.component';
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { UserSettingComponent } from './components/user-setting/user-setting.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +87,8 @@ import { AddPeopleToProjectComponent } from './components/create-project/add-peo
     RegisterPageComponent,
     ListComponent,
     AddPeopleToProjectComponent,
+    UserSettingComponent,
+    
   ],
   imports: [
     AllFormsModule,
@@ -103,7 +113,14 @@ import { AddPeopleToProjectComponent } from './components/create-project/add-peo
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    FormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+
+
+  
+    
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token')
