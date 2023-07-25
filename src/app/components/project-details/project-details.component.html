@@ -1,35 +1,36 @@
-<div class="body">
-  <div class="navbar">
-    <div class="project_info">
-      <div class="labels">
-        <label>Projects /</label>
-      <label>Project Name /</label>
-      <label>Project Settings</label>
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+  <mat-tab label="User Setting">
+    <app-user-setting></app-user-setting>
+  </mat-tab>
+
+  <mat-tab label="Task Setting">
+    <app-task-setting-page></app-task-setting-page>
+  </mat-tab>
+
+  <mat-tab label="Project Detail">
+    <div class="container">
+    <div class="project-info">
+      <div class="info-container">
+        <div class="img_container">
+          <img src="../../../assets/hosgeldiniz.png" />
+        </div>
+        <button mat-raised-button>Change icon</button>
       </div>
       
-      <div class="admin_pages">
-        <button mat-button routerLink="user-settings">User settings</button>
-        <button mat-button routerLink="task-settings">Task settings</button>
+
+      <div class="input_field">
+        <label>Name</label>
+        <input [(ngModel)]="currentProjectName" />
+      </div>
+      <div class="save_button">
+        <button mat-raised-button (click)="saveProjectDetails()">Save</button>
+        <button mat-raised-button (click)="deleteProject()">Delete</button>
       </div>
     </div>
-    <div class="details">
-      <label>Details</label>
-      <!-- <button mat-icon-button><mat-icon>more_vert</mat-icon></button> -->
-    </div>
-  </div>
-  <div class="container">
-    <div class="img_container">
-      <img src="../../../assets/hosgeldiniz.png" />
-    </div>
-    <button mat-raised-button>Change icon</button>
 
-    <div class="input_field">
-      <label>Name</label>
-      <input [(ngModel)]="currentProjectName" />
-    </div>
-    <div class="save_button">
-      <button mat-raised-button (click)="saveProjectDetails()">Save</button>
-      <button mat-raised-button (click)="deleteProject()">Delete</button>
-    </div>
+
+
+
   </div>
-</div>
+  </mat-tab>
+</mat-tab-group>

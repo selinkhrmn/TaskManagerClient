@@ -53,6 +53,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
+import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
 
 
 
@@ -89,8 +90,10 @@ import { UserSettingComponent } from './components/user-setting/user-setting.com
     AddPeopleToProjectComponent,
     UserSettingComponent,
     
+    
   ],
   imports: [
+    TaskSettingPageComponent,
     AllFormsModule,
     MaterialModule,
     CdkModule,

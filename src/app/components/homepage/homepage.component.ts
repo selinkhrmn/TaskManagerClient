@@ -8,7 +8,6 @@ import { ProjectService } from 'src/app/services';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-
   projects : Project[];
   constructor(
     private projectService : ProjectService

@@ -15,6 +15,8 @@ import { canActivateGuard, isLoggedIn, loginCheck } from './guards/guards.guard'
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
+import { UserSettingComponent } from './components/user-setting/user-setting.component';
+import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
 export const routes: Routes = [
   {
     path: '',
@@ -52,7 +54,8 @@ export const routes: Routes = [
 
         data: {
           role: 'admin'
-        }
+        },
+        
         
       },
       {
@@ -70,6 +73,17 @@ export const routes: Routes = [
         component: TaskComponent,
         canActivateChild: [canActivateGuard],
       },
+      {
+        path: 'task-setting',
+        component: TaskSettingPageComponent,
+        canActivateChild: [canActivateGuard],
+      },
+      {
+        path: 'user-setting',
+        component: UserSettingComponent,
+        canActivateChild: [canActivateGuard],
+      },
+
     ],
   },
   

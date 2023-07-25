@@ -19,11 +19,12 @@
 .project_info {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     .admin_pages {
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
         gap: 10px;
         border-bottom: 3px solid gray;
         
@@ -117,4 +118,9 @@
     }
 
     
+}
+
+.info-container {
+    justify-content: center;
+    align-items: center;
 }
