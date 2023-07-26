@@ -1,15 +1,32 @@
 <div class="wrapper">
   <div class="left_side">
-    <div class="navbar">
-      <label taskName>{{taskName}} {{taskId}} {{taskProjectId}}</label>
-      <button mat-button><mat-icon> attach_file</mat-icon>Attach</button>
+    <div class="navbar" (click)="onTaskNameClick()">
+      <ng-container *ngIf="!editingTaskName">
+        <label>{{ task.name }}</label>
+      </ng-container>
+      <input type="text" class="inputName" *ngIf="editingTaskName" [(ngModel)]="task.name" (blur)="onTaskNameBlur()">
     </div>
-
+    
     <div class="description">
-      <label>{{'description' | transloco}}</label>
-      <textarea></textarea>
-      <button mat-raised-button>Save</button>
+      <label>{{ 'description' | transloco }}</label>
+      <input type="file" #fileInput multiple style="display: none;" (change)="onFileSelect($event)" />
+      <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
+      <br>
+      <div *ngIf="selectedFiles.length > 0">
+        <p>Selected Files:</p>
+        <ul>
+          <li *ngFor="let fileData of selectedFiles">
+            <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon">
+            {{ fileData.file.name }}
+          </li>
+        </ul>
+      </div>
+      <!-- <textarea [(ngModel)]="descriptionText"></textarea> -->
+      <button mat-raised-button (click)="onSave()">Save</button>
     </div>
+    
+    
+    
 
     <div class="tab_bar">
       <label>Activity</label>
@@ -52,14 +69,16 @@
         <div class="priority card">
             <label>{{'priority' | transloco}}</label>
             <div class="priority">
-                <!--dropdown button ile priority yi göreceğiz-->
+               {{ task.priority}}
             </div>
         </div>
         <div class="due_date card">
             <label>{{'dueDate' | transloco}}</label>
-            <div class="due_date">
-                <!--dropdown button ile due date i göreceğiz-->
-            </div>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskDueDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
         <div class="time_tracking card">
             <label>Time Tracking</label>
