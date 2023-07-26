@@ -1,7 +1,6 @@
 .container {
-  margin-top: 20px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
 }
 
@@ -23,15 +22,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #2E97F2;
+  color: #012619;
   .right_side_wrapper {
     width: 300px;
     height: 500px;
     border-radius: 8px;
     padding: 20px;
-    background-color: #f6f8fa;
-    box-shadow: 5px 5px #2E97F2;
-    // #012619
+    background-color: hsla(210, 18%, 87%, 1);
+    box-shadow: 5px 5px #012619;
     .topside {
       text-align: center;
       height: 40%;
@@ -46,24 +44,19 @@
         justify-content: space-evenly;
         width: 100%;
         height: 100%;
-        font-weight: 600;
-        color: #2E97F2;
+        
+        color: #012619;
         border-radius: 4px;
         background-color: transparent;
-        border: 1px solid #2E97F2;
-        box-shadow: 5px 5px #2E97F2;
-
-        label {
-          font-size: 28px;
-        }
-        
+        border: 1px solid #012619;
+        box-shadow: 5px 5px #012619;
       }
       .the_person {
         width: 100%;
         height: fit-content;
         // border: 1px solid #056cf2;
         color: white;
-        background-color: #2E97F2;
+        background-color: #012619;
         border-radius: 8px;
         margin-top: 10px;
         display: flex;
@@ -75,12 +68,15 @@
 
           &:hover {
             background-color: #fff;
-            color: #2E97F2;
+            color: #012619;
           }
         }
       }
     }
 
+    label {
+      font-size: 22px;
+    }
 
     .projects {
       height: 60%;
@@ -91,7 +87,6 @@
       label {
         margin-bottom: 10px;
         font-weight: 600;
-        font-size: 28px;
       }
 
       .projects_container {
@@ -100,32 +95,12 @@
         height: 180px;
         display: flex;
         flex-direction: column;
-        border: 1px solid #2E97F2;
-        box-shadow: 5px 5px #2E97F2;
+        border: 1px solid #012619;
+        box-shadow: 5px 5px #012619;
         border-radius: 8px;
         overflow: auto;
 
       }
     }
   }
-}
-:host {
-  display: block;
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateX(-100%);
-    transition: transform 1s ease-in-out;
-
-  }
-  100% {
-    transform: translateX(0);
-    transition: transform 1s ease-in-out;
-
-  }
-}
-
-.container.slide-in {
-  animation: slideIn 0.3s ease-in-out;
 }
