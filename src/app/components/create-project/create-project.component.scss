@@ -1,19 +1,25 @@
+.wrapper {
+  display: flex;
+
+}
+
 .body {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Kanit", sans-serif;
-  padding: 20px;
+  // padding: 30px;
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
   gap: 80px;
-
-  // animation: slide-right;
-  // animation-duration: 1s;
 }
+
 .back_arrow_img {
   margin-top: 10px;
-  margin-left: 10px;
+
   border-radius: 4px;
-  width: fit-content;
+  width: 150px;
   height: fit-content;
   padding: 20px;
   cursor: pointer;
@@ -71,11 +77,22 @@
   }
 }
 
-// @keyframes slide-right {
-//   0% {
-//     transform: translateX(-100%);
-//   }
-//   100% {
-//     transform: translateX(0);
-//   }
-// }
+:host {
+  display: block;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  50%{
+    transform: translateX(50%);
+
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.wrapper.slide-out {
+  animation: slideOut 0.3s ease-in-out;
+}
