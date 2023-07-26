@@ -1,9 +1,14 @@
+.wrapper {
+  display: flex;
+
+}
+
 .body {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Kanit", sans-serif;
-  padding: 20px;
+  padding: 10px;
   gap: 80px;
 
   // animation: slide-right;

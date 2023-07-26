@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
   <div class="container-fluid">
     <div>
@@ -11,8 +10,15 @@
 
     <ul class="navbar-nav me-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
-          aria-haspopup="true" aria-expanded="false">{{'navigation.yourWork' | transloco}}</a>
+        <a
+          class="nav-link dropdown-toggle text-light"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >{{ "navigation.yourWork" | transloco }}</a
+        >
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
@@ -22,8 +28,15 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
-          aria-haspopup="true" aria-expanded="false">{{'projects' | transloco}}</a>
+        <a
+          class="nav-link dropdown-toggle text-light"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >{{ "projects" | transloco }}</a
+        >
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
@@ -32,9 +45,15 @@
           <a class="dropdown-item" href="#">Separated link</a>
         </div>
       </li>
-      <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-        [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
-        {{'create' | transloco}}
+      <button
+        class="btn btn-light"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        [disabled]="!tokenService.hasRole('Admin')"
+        (click)="openCreateIssueDialog()"
+      >
+        {{ "create" | transloco }}
       </button>
     </ul>
 
@@ -48,16 +67,26 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <button class="mx-2 fa-lg language" [matMenuTriggerFor]="changeLang" mat-button>
-            {{'languages.changeLanguages' | transloco}}
-          </button>
-          <div style="
+        <button
+          class="mx-2 fa-lg language"
+          [matMenuTriggerFor]="changeLang"
+          mat-button
+        >
+          <img src="../../../assets/languages.png">
+
+          <!-- {{'languages.changeLanguages' | transloco}} -->
+        </button>
+        <div
+        class="user_profile"
+          style="
             width: fit-content;
             height: fit-content;
             border-radius: 50%;
-            background-color: #f6f8fa;">
-          <img src="../../assets/kullanıcı.png" alt="" style="width: 30px" />
-          
+            
+          "
+        >
+        
+          <img src="../../assets/user (4).png" alt="" style="width: 30px" />
         </div>
 
         <div class="dropdown">
@@ -65,9 +94,14 @@
             {{tokenService.tokenUsername()}}
           </button> -->
           <div *ngIf="hasToken()" class="menu">
-            <button mat-button [matMenuTriggerFor]="menu"> {{ tokenService.tokenUsername() }}</button>
+            <button mat-button [matMenuTriggerFor]="menu">
+              
+              {{ tokenService.tokenUsername() | titlecase}}
+            </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="logOut()">{{'logOut' | transloco}} <mat-icon>exit_to_app</mat-icon> </button>
+              <button mat-menu-item (click)="logOut()">
+                {{ "logOut" | transloco }} <mat-icon>exit_to_app</mat-icon>
+              </button>
               <!-- <button mat-menu-item [routerLink]="'/profile'">Profile <mat-icon>how_to_reg</mat-icon></button> -->
             </mat-menu>
           </div>
@@ -78,6 +112,10 @@
 </nav>
 
 <mat-menu #changeLang>
-  <button mat-menu-item (click)="changeLanguage('tr')">{{'languages.tr' | transloco}}</button>
-  <button mat-menu-item (click)="changeLanguage('en')">{{'languages.en' | transloco}}</button>
+  <button mat-menu-item (click)="changeLanguage('tr')">
+    {{ "languages.tr" | transloco }}
+  </button>
+  <button mat-menu-item (click)="changeLanguage('en')">
+    {{ "languages.en" | transloco }}
+  </button>
 </mat-menu>

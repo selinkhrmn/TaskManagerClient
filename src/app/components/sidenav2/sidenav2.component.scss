@@ -11,7 +11,7 @@
   margin-top: 30px;
 
   label {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .icon_holder {
@@ -51,9 +51,11 @@
     border: none;
     cursor: pointer;
     font-size: 16px;
+
     &:hover {
       // border: 1px solid gray;
-      background-color: #f6f8fa;
+      // color: white;
+      background-color: #D8D9D7;
     }
   }
 }

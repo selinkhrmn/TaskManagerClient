@@ -158,7 +158,7 @@ export class ColumnsComponent {
   createColumn() {
     this.getProjectLocal();
     this.columnService.CreateColumn({'projectId' : this.currentProjectId, 'name': this.columnName}).subscribe((res)=> {
-      
+    this.ngOnInit()
   })}
 
   DeleteColumn() {

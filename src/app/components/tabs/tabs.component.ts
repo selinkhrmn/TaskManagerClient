@@ -23,7 +23,7 @@ export class TabsComponent implements OnInit {
     this.currentProjectName = this.projectService.getCurrentProject()?.name;
   }
 
-  projectImageUrl = '../../../assets/app-development.png';
+  projectImageUrl = '../../../assets/hosgeldiniz.png';
   colorBucketImageUrl = '../../../assets/color-bucket.png';
 
 

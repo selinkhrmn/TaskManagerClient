@@ -1,29 +1,7 @@
-.input_holder { 
-    width: fit-content;
-    height: fit-content;
-
-    display: flex;
-    padding: 4px;
-
-
-
-    input {
-        margin-left: 15px;
-        padding: 5px;
-        border: 1px solid #000000;
-        border-radius: 3px;
-        outline: none;
-    }
-
-    .image_holder {
-        cursor: pointer;
-        position: relative;
-        img {
-            width: 10px;
-            height: 10px;
-            position: absolute;
-            top:8px;
-            right: 12px;
-        }
-    }
-}
+.example-form {
+    // margin-left: 10px;
+    min-width: 150px;
+    max-width: 500px;
+    // width: 100%;
+ 
+  }

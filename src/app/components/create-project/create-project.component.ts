@@ -15,7 +15,9 @@ export class CreateProjectComponent implements OnInit {
   projectName : string;
   projects : Project[] = [];
   data: Object ;
-
+  isVisible = false;
+  showFirstComponent = true;
+  showSecondComponent = false;
   constructor(
     private bottomSheet: MatBottomSheet,
     public projectService: ProjectService,
@@ -63,5 +65,8 @@ export class CreateProjectComponent implements OnInit {
     });
   }
 
-
+  onButtonClick() {
+    this.showFirstComponent = false;
+    this.showSecondComponent = true;
+  }
 }

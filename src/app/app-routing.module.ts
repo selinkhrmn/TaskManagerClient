@@ -48,7 +48,7 @@ export const routes: Routes = [
       {
         path: 'project-settings',
         component: ProjectDetailsComponent,
-        canActivate: [canActivateGuard, isAdminGuard],
+        canActivate: [canActivateGuard, ],
       },
       {
         path: 'create-issue-dialog',
@@ -73,7 +73,7 @@ export const routes: Routes = [
       {
         path: 'user-setting',
         component: UserSettingComponent,
-        canActivateChild: [canActivateGuard, isAdminGuard],
+        canActivateChild: [canActivateGuard,],
       },
 
     ],

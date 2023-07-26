@@ -1,6 +1,8 @@
 // SCSS dosyası
 .navbar {
-  background-color: gray;
+  background:#4F5954;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
 }
 .navbar-brand {
   padding: 12px;
@@ -13,8 +15,50 @@
     }
   }
   
+  
 .language {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px 10px 10px 10px;
+  // background-color: rgb(255, 255, 255);
 
+  // border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: transparent;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+  }
 }  
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.menu {
+  margin-right: 10px;
+  
+  button {  
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.user_profile {
+  img {
+    width: 20px;
+    height: 30px;
+  }
+}
+
+.dropdown {
+  display: flex;
+  
+}

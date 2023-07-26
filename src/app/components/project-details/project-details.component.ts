@@ -26,12 +26,13 @@ export class ProjectDetailsComponent {
     public translocoService: TranslocoService) {
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     this.projectService.selectedProject$?.subscribe((value) => {
       this.currentProject = value;
       this.currentProjectName = value.name;
     });
     this.currentProjectName = this.projectService.getCurrentProject().name;
+    this.projectId = this.projectService.getCurrentProject().id
   }
 
   // public getAllProjectsFrom(): void {
@@ -41,8 +42,7 @@ export class ProjectDetailsComponent {
   deleteProject() {
     this.projectService.deleteProject({ id: this.projectId }).subscribe(() => {
       console.log(this.projectId);
-      
-      this.ngOnInit();
+      //window.location.reload()      
     });
   }
 

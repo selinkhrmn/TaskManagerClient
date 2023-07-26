@@ -1,7 +1,8 @@
-<mat-form-field>
+<h1>Tasks</h1>
+<mat-form-field class="filter">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Meeting" #input>
-  </mat-form-field>
+</mat-form-field>
   
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
