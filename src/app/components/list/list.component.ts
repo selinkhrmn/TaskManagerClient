@@ -63,6 +63,7 @@ export class ListComponent implements OnInit {
   }
 
   filterByName(searchText: string): void {
+    console.log("filterByName fonksiyonu çağrıldı:", searchText);
     this.filteredData = this.data.filter(item =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     );
