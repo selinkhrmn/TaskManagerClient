@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ListTask } from 'src/app/interfaces/listTask';
 import { TokenService } from 'src/app/services/token.service';
-import { TaskService } from 'src/app/services';
+import { ProjectService, TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
-import { TranslocoService} from '@ngneat/transloco';
+import { Project } from 'src/app/interfaces';
+
+// TranslocoService'i import edin.
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-list',
@@ -12,46 +15,48 @@ import { TranslocoService} from '@ngneat/transloco';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  tasks : Partial<Task>[] = [];
   data: ListTask[] = [];
   filteredData: ListTask[] = [];
   columns: string[] = [
-    'id',
-    'name',
-    'columnId',
-    'assigneeId',
-    'reporterId',
-    'DueDate',
-    'ListTask.Priority',
-    'UpdateDate',
-    'CreateDate',
-    // Add other properties from ListTask interface if you want them displayed on the table.
+    'id', 'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
+    'ListTask.Priority', 'UpdateDate', 'CreateDate',
   ];
 
+  // Bileşenin yapıcı (constructor) fonksiyonuna TranslocoService'i enjekte edin.
   constructor(
-    private http: HttpClient, // Inject HttpClient here
+    private http: HttpClient,
     public tokenService: TokenService,
     private taskService : TaskService,
-    public translocoService: TranslocoService
+    private projectService : ProjectService,
+    private translocoService: TranslocoService // Bu satırı ekleyin.
   ) {}
 
   ngOnInit(): void {
-    debugger
-    this.loadData();
-    this.taskService.getAllProjectTask({"id" : 1}).subscribe((res) => {
-        this.tasks = res.data;
-        
+    this.taskService.getAllProjectTask({"id" : this.projectService.getCurrentProject().id}).subscribe((res) => {
+      if(res && res.data) {
+        this.data = res.data.map(task => ({
+          id: task.id,
+          name: task.name,
+          columnId: task.columnId.toString(),
+          assigneeId: 0, 
+          reporterId: 0,
+          DueDate: new Date(),
+          Priority: task.priority,
+          UpdateDate: task.updatedDate,
+          CreateDate: task.createdDate,
+        }));
+        this.filteredData = [...this.data];
       }
-    );
+    });
   }
 
   loadData(): void {
     this.http.get<ListTask[]>('YOUR_BACKEND_URL_HERE').subscribe(
-      (response: ListTask[]) => { // Define the response type explicitly
+      (response: ListTask[]) => {
         this.data = response;
-        this.filteredData = [...this.data]; // Başlangıçta tüm verileri arama sonuçlarına kopyalayın
+        this.filteredData = [...this.data];
       },
-      (error: any) => { // Define the error type explicitly
+      (error: any) => {
         console.error('Veri yüklenirken bir hata oluştu:', error);
       }
     );
@@ -62,12 +67,18 @@ export class ListComponent implements OnInit {
       item.name.toLowerCase().includes(searchText.toLowerCase())
     );
   }
+
   handleUsernameClick(): void {
-    // Your logic when the user clicks on the user name goes here
     console.log('User name clicked!');
   }
+
   addPerson(): void {
-    // Burada "Kişi Ekle" butonuna tıklandığında yapılması gereken işlemleri ekleyebilirsiniz.
     console.log("Kişi Ekle butonuna tıklandı!");
+  }
+
+  // Örnek Transloco kullanım metodu:
+  someMethod(): void {
+    const translatedText = this.translocoService.translate('your_translation_key');
+    console.log(translatedText);
   }
 }
