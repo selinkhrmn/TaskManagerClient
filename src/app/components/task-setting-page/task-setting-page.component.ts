@@ -23,14 +23,16 @@ import { TranslocoService} from '@ngneat/transloco';
 
 
 export class TaskSettingPageComponent implements AfterViewInit, OnInit {
-  currentProject : Partial<ProjectDto>;
-  
-  displayedColumns: string[] = ['id', 'projectId', 'name', 'status'];
+  currentProject : ProjectDto;
+  projectName: string;
+
+  displayedColumns: string[] = ['id', 'projectName', 'name', 'status'];
   dataSource: MatTableDataSource<Task>;
   tasks : Task[] = [];
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  
   
 
   constructor(
@@ -45,6 +47,7 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
   ngOnInit() : void{
     debugger
     this.currentProject = this.projectService.getCurrentProject();
+   
     this.taskService.getAllProjectTask({"id" : this.currentProject.id}).subscribe((res)=>
     {
       if( res.data != null) {
@@ -59,6 +62,9 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
       
       
     });
+    this.projectName = this.currentProject.name;
+    console.log(this.projectName);
+    
 
   }
 
