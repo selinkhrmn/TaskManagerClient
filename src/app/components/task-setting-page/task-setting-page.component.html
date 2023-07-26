@@ -1,11 +1,15 @@
-<mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Meeting" #input>
-  </mat-form-field>
-  
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+<h1>Tasks</h1>
+<mat-form-field class="container">
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. Meeting"
+    #input
+  />
+</mat-form-field>
 
+<<<<<<< Updated upstream
       <!-- user - projectname - taskname - taskStatus  -->
   
       <!-- User Name Column -->
@@ -45,3 +49,46 @@
   </div>
   
   
+=======
+<div class="mat-elevation-z8 container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- user - projectname - taskname - taskStatus  -->
+
+    <!-- User Name Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>task Id</th>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Project Name Column -->
+    <ng-container matColumnDef="projectId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>project Id</th>
+      <td mat-cell *matCellDef="let row">{{ row.projectId }}</td>
+    </ng-container>
+
+    <!-- Task Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>task name</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- Task Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>task status</th>
+      <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+</div>
+>>>>>>> Stashed changes
