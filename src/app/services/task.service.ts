@@ -43,9 +43,11 @@ export class TaskService {
   }
 
   getAllProjectTask(id: Partial<ProjectDto>) {
-    
-
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
+  }
+
+  getTaskById(id : Partial<Task>)  {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, id, this.httpOptions);
   }
 
 
@@ -57,8 +59,5 @@ export class TaskService {
 
   // }
 
-  getTask(Id : Partial<Task>)  {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, Id);
-  }
-
+  
 }

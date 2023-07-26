@@ -136,10 +136,7 @@ export class CreateIssueDialogComponent {
         priority: this.task.priority,
         endDate : this.task.endDate
       });
-      
     }
-    
-    
   }
 
 

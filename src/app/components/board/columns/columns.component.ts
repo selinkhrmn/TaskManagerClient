@@ -130,18 +130,15 @@ export class ColumnsComponent {
     });
   }
   
-  openDialog(tId: number) { 
-    debugger
-    this.taskService.getTask({"id" : tId}).subscribe((res)=> {
-      this.tasks = res.data;
-     })
-     const dialog = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
-     
-     dialog.afterOpened().subscribe((res)=> {
-      console.log(res);
-      
-      
-      
+  openTaskDialog(tId: number) { 
+    this.taskService.getTaskById({"id" : tId}).subscribe((res)=> {
+      if(res.isSuccessful == true){
+        this.tasks = res.data;
+        const dialog = this.dialog.open(TaskComponent,{data: {task: this.tasks}, height: '80%',width: '90%', panelClass: 'dialog'});
+        dialog.afterClosed().subscribe((res)=> {
+          this.ngOnInit();
+         })
+      }
      })
     } 
 
