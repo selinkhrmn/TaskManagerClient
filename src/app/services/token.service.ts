@@ -54,8 +54,7 @@ export class TokenService {
 
   loggedIn(): boolean{
     const token = localStorage.getItem("token");
-    console.log(token);
-    console.log(!this.jwtHelper.isTokenExpired(token));
+    
     return this.jwtHelper.isTokenExpired(token);
   }
 

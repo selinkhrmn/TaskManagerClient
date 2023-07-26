@@ -11,7 +11,7 @@ import { CreateIssueDialogComponent } from './components/create-issue-dialog/cre
 import { BoardComponent } from './components/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { canActivateGuard, isLoggedIn, loginCheck } from './guards/guards.guard';
+import { canActivateGuard, isAdminGuard, isLoggedIn, loginCheck } from './guards/guards.guard';
 import { PasswordChangePageComponent } from './components/password-change-page/password-change-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
@@ -27,13 +27,11 @@ export const routes: Routes = [
     path: 'home',
     component: HomepageComponent,
     canActivate: [canActivateGuard,isLoggedIn],
-    
     children: [
       {
         path: 'summary',
         component: SummaryComponent,
         canActivate: [canActivateGuard,isLoggedIn],
-        
       },
       {
         path: 'list',
@@ -50,18 +48,12 @@ export const routes: Routes = [
       {
         path: 'project-settings',
         component: ProjectDetailsComponent,
-        canActivate: [canActivateGuard],
-
-        data: {
-          role: 'admin'
-        },
-        
-        
+        canActivate: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'create-issue-dialog',
         component: CreateIssueDialogComponent,
-        canActivate: [canActivateGuard],
+        canActivate: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'board',
@@ -76,12 +68,12 @@ export const routes: Routes = [
       {
         path: 'task-setting',
         component: TaskSettingPageComponent,
-        canActivateChild: [canActivateGuard],
+        canActivateChild: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'user-setting',
         component: UserSettingComponent,
-        canActivateChild: [canActivateGuard],
+        canActivateChild: [canActivateGuard, isAdminGuard],
       },
 
     ],

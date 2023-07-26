@@ -45,3 +45,16 @@ export const loginCheck: CanActivateFn = () => {
     return true;
   }
 };
+
+
+export const isAdminGuard: CanActivateFn = () => {
+  const router = inject(Router);
+  const tokenService = inject(TokenService);
+
+  if (localStorage.getItem('token') && tokenService.hasRole('user') ) {
+    return true;
+  } else {
+    router.navigate(['']);
+    return false;
+  }
+};
