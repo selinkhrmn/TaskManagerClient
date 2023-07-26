@@ -30,7 +30,7 @@
       #droppedContainer
     >
     
-      <div class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openTaskDialog(task.id)">
+      <div class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openDialog(task.id)">
         {{ task.name }}
       </div>
 
