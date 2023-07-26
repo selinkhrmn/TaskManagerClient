@@ -51,7 +51,7 @@ export const isAdminGuard: CanActivateFn = () => {
   const router = inject(Router);
   const tokenService = inject(TokenService);
 
-  if (localStorage.getItem('token') && tokenService.hasRole('user') ) {
+  if (localStorage.getItem('token') && tokenService.hasRole('admin') ) {
     return true;
   } else {
     router.navigate(['']);
