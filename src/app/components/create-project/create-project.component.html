@@ -1,9 +1,8 @@
-<div class="wrapper">
-  <div class="back_arrow_img" (click)="closeDialog()">
+<div class="back_arrow_img" (click)="closeDialog()">
   <img src="assets/back.png" />
-  {{'Back' | transloco}}
+  {{'backToProjectTemplate' | transloco}}
 </div>
-<div class="body" *ngIf="showFirstComponent" [@slideIn]="showFirstComponent">
+<div class="body">
   <div class="container">
     <h4>{{'createProject' | transloco}}</h4>
     <p>
@@ -22,7 +21,7 @@
       <button mat-raised-button routerLink="summary" (click)="closeDialog()">
         {{'cancel' | transloco}}
       </button>
-      <button mat-raised-button (click)="createProject();ngOnInit();onButtonClick();">
+      <button mat-raised-button (click)="createProject();ngOnInit();closeDialog()">
         {{'createProject' | transloco}}
       </button>
     </div>
@@ -30,6 +29,5 @@
   <div class="image_container">
     <img src="../../../assets/meeting.jpg" />
   </div>
-</div>
-<app-add-people-to-project *ngIf="showSecondComponent" [@slideOut]="showSecondComponent"></app-add-people-to-project>
+  <button>{{'next' | transloco}}</button>
 </div>

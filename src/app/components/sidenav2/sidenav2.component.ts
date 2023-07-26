@@ -63,7 +63,7 @@ export class Sidenav2Component implements OnInit{
     this.router.navigate(['create-project'])
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateProjectComponent,{height: '95.5%',width: '100%',panelClass: 'dialog'});
+    const dialogRef = this.dialog.open(CreateProjectComponent,{height: '95.5%',width: '80%', panelClass: 'dialog'});
   }
 
   reload() {
