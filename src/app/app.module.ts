@@ -55,6 +55,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
 import { TranslocoRootModule } from './transloco-root.module';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
 
 
 
@@ -90,6 +91,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     ListComponent,
     AddPeopleToProjectComponent,
     UserSettingComponent,
+    AdminPageComponent
     
     
   ],

@@ -44,6 +44,10 @@ export class NavbarComponent {
       this.authService.logOut();
      }
 
+    routerToAdminPage() {
+      this.router.navigate(['admin-page']);
+    }
+
     openCreateIssueDialog() {
       const dialog = this.dialog.open(CreateIssueDialogComponent, {data : {table : this.table},width:'60%'});
       dialog.afterClosed().subscribe((response) => {

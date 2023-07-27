@@ -99,6 +99,9 @@
               {{ tokenService.tokenUsername() | titlecase}}
             </button>
             <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="routerToAdminPage()">
+                Admin Page <mat-icon>face</mat-icon>
+              </button>
               <button mat-menu-item (click)="logOut()">
                 {{ "logOut" | transloco }} <mat-icon>exit_to_app</mat-icon>
               </button>

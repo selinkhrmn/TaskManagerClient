@@ -17,6 +17,7 @@ import { ListComponent } from './components/list/list.component';
 import { AddPeopleToProjectComponent } from './components/create-project/add-people-to-project/add-people-to-project.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
 export const routes: Routes = [
   {
     path: '',
@@ -76,9 +77,14 @@ export const routes: Routes = [
         canActivateChild: [canActivateGuard,],
       },
 
+
     ],
   },
-  
+  {
+    path: 'admin-page',
+    component: AdminPageComponent,
+    // canActivateChild: [canActivateGuard,]
+  },
   {
     path: 'create-project',
     component: CreateProjectComponent,
