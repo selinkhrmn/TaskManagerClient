@@ -18,6 +18,11 @@ import { AddPeopleToProjectComponent } from './components/create-project/add-peo
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
+import { AdminProjectsComponent } from './components/admin-page/admin-projects/admin-projects.component';
+import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
+import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -101,7 +106,26 @@ export const routes: Routes = [
   {
     path: 'password-change',
     component: PasswordChangePageComponent
-  }
+  },
+   {
+    path: 'admin-page',
+    component : AdminPageComponent,
+    children : [
+      {
+        path: 'admin-projects',
+        component : AdminProjectsComponent
+      },
+      {
+        path: 'admin-tasks',
+        component : AdminTasksComponent
+      },
+      {
+        path: 'admin-users',
+        component : AdminUsersComponent
+      },
+
+    ]
+   }
 ];
 
 @NgModule({

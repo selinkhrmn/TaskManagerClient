@@ -58,6 +58,9 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
 import { DialogComponent } from './components/user-setting/dialog/dialog.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
+import { AdminProjectsComponent } from './components/admin-page/admin-projects/admin-projects.component';
+import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
+import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 
 
 @NgModule({
@@ -94,11 +97,11 @@ import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/adm
     AdminPageComponent,
     DialogComponent,
     UserSettingComponent,
-
-
-    UserSettingComponent,
     AdminPageComponent,
-    AdminSidenavComponent
+    AdminSidenavComponent,
+    AdminProjectsComponent,
+    AdminUsersComponent,
+    AdminTasksComponent
     
   ],
   imports: [
