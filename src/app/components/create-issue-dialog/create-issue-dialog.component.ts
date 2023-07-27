@@ -102,6 +102,7 @@ export class CreateIssueDialogComponent {
   onIconSelectionChange() {
     const priorityNumber = this.priorityService.getIconPriority(this.selectedIcon);
     console.log('Selected Priority Number:', priorityNumber);
+    this.task.priority = priorityNumber;
 
   }
 
