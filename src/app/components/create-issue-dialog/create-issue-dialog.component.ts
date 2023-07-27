@@ -14,6 +14,8 @@ import { IPriority } from 'src/app/interfaces/IPriority';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { TranslocoService} from '@ngneat/transloco';
 import { PriorityService } from 'src/app/services/priority.service';
+import { UserService } from 'src/app/services/user.service';
+import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -27,15 +29,6 @@ interface DialogData {
 })
 export class CreateIssueDialogComponent {
 
-  
-  // priorities: IPriority[] = [
-  //   { name: "highest", value: 5 },
-  //   { name: "high", value: 4 },
-  //   { name: "medium", value: 3 },
-  //   { name: "low", value: 2 },
-  //   { name: "lowest", value: 1 }
-  // ];
-
   iconOptions: string[]; 
   selectedIcon: string;
 
@@ -43,10 +36,10 @@ export class CreateIssueDialogComponent {
   columns: Column[] = [];
   currentDate = new FormControl(new Date());
   currentProject: ProjectDto;
-  project: ProjectDto = {
-    name: '',
-    id: 0
-  }
+
+  reporter: ProjectUserDto[] = [];
+  assignees: ProjectUserDto[] = [];
+ 
 
   task : Partial<Task> = {
     name: "",
@@ -78,7 +71,8 @@ export class CreateIssueDialogComponent {
     private projectService: ProjectService,
     private snackBar: MatSnackBar,
     public translocoService: TranslocoService,
-    public priorityService: PriorityService
+    public priorityService: PriorityService,
+    public userService: UserService
 
   ) {
     this.getAllProjects();
@@ -89,11 +83,11 @@ export class CreateIssueDialogComponent {
 
 
   ngOnInit() {
-    this.projectService.selectedProject$?.subscribe((value) => {
-      this.currentProject = value;
-    });
+    // this.projectService.selectedProject$?.subscribe((value) => {
+    //   this.currentProject = value;
+    // });
 
-    this.project = this.projectService?.getProjectLocal();
+    // this.project = this.projectService?.getProjectLocal();
   }
 
 
@@ -109,14 +103,19 @@ export class CreateIssueDialogComponent {
 
   onChangeProject(event: any) {
     this.columns = [];
-    this.project.id = event.id;
-    this.project.name = event.name;
     let pro : Partial<ProjectDto> ={
     }
     pro.id = event.id;
     this.columnService.GetAllProjectColumns({ "id": pro.id }).subscribe((response) => {
       if (response.data != null) {
         this.columns = response.data;
+      }
+    });
+
+    this.userService.GetAllProjectUsers({"id": pro.id}).subscribe((response) => {
+      if (response.isSuccessful == true) {
+        this.assignees = response.data;
+        this.reporter = response.data;
       }
     });
   }

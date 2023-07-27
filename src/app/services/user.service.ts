@@ -5,13 +5,16 @@ import { Observable } from 'rxjs';
 import { ResponseModel } from '../interfaces/responseModel';
 import { UserDto } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
+import { ProjectDto } from '../interfaces/project';
+import { ProjectUserDto } from '../interfaces/projectUserDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseUrl = `${environment.baseUrl}/identity/Users`;
+  baseUrlIdentity = `${environment.baseUrl}/identity/Users`;
+  baseUrl =  `${environment.baseUrl}/business/ProjectUser`;
 
   constructor(
     private http: HttpClient,
@@ -25,7 +28,11 @@ export class UserService {
   };
 
   getAllUsers(): Observable<ResponseModel<UserDto>> {
-    return this.http.get<ResponseModel<UserDto>>(`${this.baseUrl}/GetAllUsers`, this.httpOptions);
+    return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`, this.httpOptions);
+  }
+
+  GetAllProjectUsers(id: Partial<ProjectDto>) {
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
 }

@@ -49,14 +49,16 @@
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>{{'assignee' | transloco}}</mat-label>
-            <mat-select>
-              <!-- <mat-option *ngFor=""></mat-option>   -->
+            <mat-select [(ngModel)]="task.assigneeId" ngDefaultControl>
+              <mat-option *ngFor="let user of assignees" [value]="user.id" >{{user.username}}</mat-option>  
             </mat-select>
         </mat-form-field>
+
+       
         <mat-form-field class="col-6">
             <mat-label>{{'reporter' | transloco}}</mat-label>
-            <mat-select>
-              <!-- <mat-option *ngFor=""></mat-option>   -->
+            <mat-select [(ngModel)]="task.reporterId" ngDefaultControl>
+              <mat-option *ngFor="let user of reporter" [value]="user.id" >{{user.username}}</mat-option>  
             </mat-select>
         </mat-form-field>
     </div>
