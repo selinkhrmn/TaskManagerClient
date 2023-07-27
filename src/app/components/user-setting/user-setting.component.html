@@ -1,69 +1,50 @@
-<div class="container">
-  <div class="navbar">
-    <h1>Users</h1>
-    <div class="add_user">
-      <button mat-raised-button color="primary" (click)="openDialog()">
-        Add User
-      </button>
-    </div>
-  </div>
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>supervised_user_circle</mat-icon>
+  </button>
+  <span>Access</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button color="warn" (click)="openDialog()">Add People</button>
+  <button mat-raised-button color="warn" (click)="openManageRoles()">Manage Roles</button>
+</mat-toolbar>
 
-  <div class="main">
-    <div class="topbar">
-      <label>Username</label>
-      <label>Name</label>
-      <label>Surname</label>
-      <label>Email</label>
-      <!-- <label>Role</label> -->
-    </div>
-    <div class="users_table">
-      <div class="card" *ngFor="let user of users">
-        <div class="one_by_one">
-          <label>{{ user.username }}</label>
-        </div>
-        <div class="one_by_one second_one">
-          <label>{{ user.name }}</label>
-        </div>
-        <div class="one_by_one third_one">
-          <label>{{ user.surname }}</label>
-        </div>
-        <div class="one_by_one">
-          <p>{{ user.email }}</p>
-        </div>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search</mat-label>
+    <input type="name,role,e-mail" matInput [formControl]="emailFormControl" placeholder="Search for name, role or e-mail address">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Roles</mat-label>
+    <mat-select [formControl]="roleFormControl" placeholder="Select Role">
+      <mat-option value="admin">Admin</mat-option>
+      <mat-option value="user">User</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
 
-        <!-- <label></label> -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <h1 mat-dialog-title>Add Person</h1>
-<div mat-dialog-content>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'userSettings.personSelection' | transloco}}</mat-label>
-@ -16,4 +42,4 @@
-<div mat-dialog-action [align]="'end'">
-<button mat-raised-button color="blue" mat-dialog-close>{{'close' | transloco}}</button>
-<button mat-raised-button color="primary" mat-dialog-close>{{'save' | transloco}}</button>
-</div>
-</div> -->
-
-<!-- <h1 mat-dialog-title>Add Person</h1>
-<div mat-dialog-content>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'userSettings.personSelection' | transloco}}</mat-label>
-        <input matInput placeholder=" Enter E-mail">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'rolSelection' | transloco}}</mat-label>
-        <mat-select>
-        <mat-option value="Admin">{{'admin' | transloco}}</mat-option>
-        <mat-option value="User">{{'user' | transloco}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
-<div mat-dialog-action [align]="'end'">
-<button mat-raised-button color="blue" mat-dialog-close>{{'close' | transloco}}</button>
-<button mat-raised-button color="primary" mat-dialog-close>{{'save' | transloco}}</button>
-</div> -->
+<table class="example-table">
+  <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>E-mail</th>
+    <th>Roles</th>
+  </tr>
+  <tr>
+    <td>Tuana</td>
+    <td>ÜLKER</td>
+    <td>tuana@example.com</td>
+    <td>Admin</td>
+  </tr>
+  <tr>
+    <td>Cihan</td>
+    <td>IŞILDAR</td>
+    <td>cihan@example.com</td>
+    <td>Admin</td>
+  </tr>
+  <tr>
+    <td>Azra Sima</td>
+    <td>GÜMÜŞTEKİN</td>
+    <td>azrasima@example.com</td>
+    <td>User</td>
+  </tr>
+</table>

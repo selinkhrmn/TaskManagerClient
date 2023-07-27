@@ -52,11 +52,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { TaskSettingPageComponent } from './components/task-setting-page/task-setting-page.component';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
-
+import { DialogComponent } from './components/user-setting/dialog/dialog.component';
+import { UserSettingComponent } from './components/user-setting/user-setting.component';
 
 
 @NgModule({
@@ -90,10 +90,10 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     RegisterPageComponent,
     ListComponent,
     AddPeopleToProjectComponent,
-    UserSettingComponent,
-    AdminPageComponent
-    
-    
+    AdminPageComponent,
+    DialogComponent,
+    UserSettingComponent
+
   ],
   imports: [
     TaskSettingPageComponent,
@@ -123,6 +123,7 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
+
 
 
   

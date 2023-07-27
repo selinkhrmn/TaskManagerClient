@@ -1,0 +1,18 @@
+<h1 mat-dialog-title style="text-align: center;">Add Person</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%;margin-top: 20px;">
+        <mat-label>Person Selection</mat-label>
+        <input matInput placeholder=" Enter E-mail">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Role Selection</mat-label>
+        <mat-select>
+            <mat-option value="Admin">Admin</mat-option>
+            <mat-option value="User">User</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addPerson()">Save</button>
+    </div>

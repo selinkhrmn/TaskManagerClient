@@ -1,39 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslocoService} from '@ngneat/transloco';
-import { RegisterPageComponent } from '../register-page/register-page.component';
-import { UserService } from 'src/app/services/user.service';
-import { UserDto } from 'src/app/interfaces/user';
+import { DialogComponent } from './dialog/dialog.component';
+import { FormControl, Validators } from '@angular/forms'; // Import FormControl and Validators
 
 @Component({
-  selector: 'app-user-setting',
+  selector: 'app-root',
   templateUrl: './user-setting.component.html',
-  styleUrls: ['./user-setting.component.scss']
+  styleUrls: ['./user-setting.component.css'],
 })
-export class UserSettingComponent implements OnInit{
+export class UserSettingComponent {
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  roleFormControl = new FormControl(''); // Create the roleFormControl
 
-  users : UserDto[] = [];
+  constructor(private dialog: MatDialog) {}
 
-  constructor(
-    public translocoService : TranslocoService,
-    public dialog: MatDialog,
-    public userService: UserService){}
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '30%'
+    });
+  }
 
-  ngOnInit(): void {
-      this.userService.getAllUsers().subscribe((res) => {
-        if(res.isSuccessful == true){
-          this.users = res.data;
-          
-        }
-      })
-
-  
-  }    
-  
-
-openDialog(): void {
-  const dialogRef = this.dialog.open(RegisterPageComponent,{height: '650px',width: '400px',panelClass: 'dialog'});
-}
-
-
+  openManageRoles() {
+    // Implement the function logic here
+    // For example:
+    console.log('Manage Roles clicked');
+  }
 }
