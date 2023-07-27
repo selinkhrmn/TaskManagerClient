@@ -101,10 +101,8 @@ export class CreateIssueDialogComponent {
 
   onIconSelectionChange() {
     const priorityNumber = this.priorityService.getIconPriority(this.selectedIcon);
-
-    // Now you have the priorityNumber, you can send it to the API
     console.log('Selected Priority Number:', priorityNumber);
-    // Call your API here with the priorityNumber
+
   }
 
 
@@ -112,7 +110,10 @@ export class CreateIssueDialogComponent {
     this.columns = [];
     this.project.id = event.id;
     this.project.name = event.name;
-    this.columnService.GetAllProjectColumns({ "id": this.project.id }).subscribe((response) => {
+    let pro : Partial<ProjectDto> ={
+    }
+    pro.id = event.id;
+    this.columnService.GetAllProjectColumns({ "id": pro.id }).subscribe((response) => {
       if (response.data != null) {
         this.columns = response.data;
       }
