@@ -82,4 +82,5 @@ export class ListComponent implements OnInit {
     const translatedText = this.translocoService.translate('your_translation_key');
     console.log(translatedText);
   }
+
 }

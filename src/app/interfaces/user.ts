@@ -18,3 +18,14 @@ export interface User1 {
       password :string
       role: string;
 }
+
+export interface UserDto{
+    id: string;
+    name: string;
+    surname: string;
+    username: string;
+    email: string;
+    role?: string;
+
+
+}

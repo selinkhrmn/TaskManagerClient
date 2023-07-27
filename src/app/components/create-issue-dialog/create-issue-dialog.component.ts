@@ -13,6 +13,7 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { IPriority } from 'src/app/interfaces/IPriority';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { TranslocoService} from '@ngneat/transloco';
+import { PriorityService } from 'src/app/services/priority.service';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -27,13 +28,16 @@ interface DialogData {
 export class CreateIssueDialogComponent {
 
   
-  priorities: IPriority[] = [
-    { name: "highest", value: 5 },
-    { name: "high", value: 4 },
-    { name: "medium", value: 3 },
-    { name: "low", value: 2 },
-    { name: "lowest", value: 1 }
-  ];
+  // priorities: IPriority[] = [
+  //   { name: "highest", value: 5 },
+  //   { name: "high", value: 4 },
+  //   { name: "medium", value: 3 },
+  //   { name: "low", value: 2 },
+  //   { name: "lowest", value: 1 }
+  // ];
+
+  iconOptions: string[]; 
+  selectedIcon: string;
 
   projects: Project[] = [];
   columns: Column[] = [];
@@ -73,11 +77,13 @@ export class CreateIssueDialogComponent {
     private columnService: ColumnService,
     private projectService: ProjectService,
     private snackBar: MatSnackBar,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    public priorityService: PriorityService
 
   ) {
     this.getAllProjects();
     this.getCurrentProject();
+    this.iconOptions = this.priorityService.getOptions();
   }
 
 
@@ -88,8 +94,17 @@ export class CreateIssueDialogComponent {
     });
 
     this.project = this.projectService?.getProjectLocal();
+  }
 
 
+ 
+
+  onIconSelectionChange() {
+    const priorityNumber = this.priorityService.getIconPriority(this.selectedIcon);
+
+    // Now you have the priorityNumber, you can send it to the API
+    console.log('Selected Priority Number:', priorityNumber);
+    // Call your API here with the priorityNumber
   }
 
 

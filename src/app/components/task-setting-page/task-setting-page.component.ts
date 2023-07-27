@@ -45,7 +45,6 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() : void{
-    debugger
     this.currentProject = this.projectService.getCurrentProject();
    
     this.taskService.getAllProjectTask({"id" : this.currentProject.id}).subscribe((res)=>

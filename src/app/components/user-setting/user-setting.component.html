@@ -10,17 +10,19 @@
 
   <div class="main">
     <div class="topbar">
+      <label>Username</label>
       <label>Name</label>
       <label>Surname</label>
       <label>Email</label>
-      <label>Role</label>
+      <!-- <label>Role</label> -->
     </div>
     <div class="users_table">
-      <div class="card">
-        <label></label>
-        <label></label>
-        <label></label>
-        <label></label>
+      <div class="card" *ngFor="let user of users">
+        <label>{{user.username}}</label>
+        <label>{{user.name}}</label>
+        <label>{{user.surname}}</label>
+        <label>{{user.email}}</label>
+        <!-- <label></label> -->
       </div>
     </div>
   </div>

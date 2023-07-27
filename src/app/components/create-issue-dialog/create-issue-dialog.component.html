@@ -64,11 +64,18 @@
     <div class="row">
         <mat-form-field class="col-12">
             <mat-label>{{'priority' | transloco}}</mat-label>
-            <mat-select [(ngModel)]="task.priority">
+            <!-- <mat-select [(ngModel)]="task.priority">
               <mat-option *ngFor="let priority of priorities" [value]="priority.value" ngDefaultControl
             >{{priority.name}}</mat-option>  
-            </mat-select>
+            </mat-select> -->
+
+            <mat-select [(ngModel)]="selectedIcon" (ngModelChange)="onIconSelectionChange()">
+                <mat-option *ngFor="let iconUrl of iconOptions" [value]="iconUrl">
+                  <img [src]="iconUrl" alt="Icon">
+                </mat-option>
+              </mat-select>
         </mat-form-field>
+        
         <!-- <mat-form-field class="col-6">
             <mat-label>Select Labels</mat-label>
             <mat-select>
