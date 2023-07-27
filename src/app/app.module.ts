@@ -57,6 +57,7 @@ import { TranslocoRootModule } from './transloco-root.module';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { DialogComponent } from './components/user-setting/dialog/dialog.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
+import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
 
 
 @NgModule({
@@ -92,8 +93,13 @@ import { UserSettingComponent } from './components/user-setting/user-setting.com
     AddPeopleToProjectComponent,
     AdminPageComponent,
     DialogComponent,
-    UserSettingComponent
+    UserSettingComponent,
 
+
+    UserSettingComponent,
+    AdminPageComponent,
+    AdminSidenavComponent
+    
   ],
   imports: [
     TaskSettingPageComponent,

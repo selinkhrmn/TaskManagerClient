@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services';
 import { User, User1 } from 'src/app/interfaces/user';
 import { TranslocoService} from '@ngneat/transloco';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-page',
@@ -10,7 +11,7 @@ import { TranslocoService} from '@ngneat/transloco';
 })
 export class RegisterPageComponent  {
   constructor(private authService: AuthService,
-    public translocoService : TranslocoService) {}
+    public translocoService : TranslocoService,public dialog: MatDialog,) {}
 
   user: User1 = {
     name: '',
@@ -38,5 +39,8 @@ export class RegisterPageComponent  {
       });
       console.log(this.user);
     }
+  }
+  closeDialog() {
+    const dialogRef = this.dialog.closeAll()
   }
 }

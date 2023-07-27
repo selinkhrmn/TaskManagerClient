@@ -35,4 +35,7 @@ export class UserService {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
+  AddUserToProject(projectUser : Partial<ProjectUserDto>) {
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
+  }
 }

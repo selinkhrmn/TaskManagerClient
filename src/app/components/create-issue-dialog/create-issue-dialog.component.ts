@@ -57,7 +57,8 @@ export class CreateIssueDialogComponent {
     placeholder: 'Enter text here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial'
+    defaultFontName: "'Kanit', sans-serif"
+
   };
 
 

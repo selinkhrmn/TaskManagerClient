@@ -62,7 +62,7 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
       
     });
     this.projectName = this.currentProject.name;
-    console.log(this.projectName);
+    // console.log(this.projectName);
     
 
   }

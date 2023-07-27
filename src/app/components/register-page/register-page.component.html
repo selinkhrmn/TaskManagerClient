@@ -6,7 +6,7 @@
         <label>{{'name' | transloco}}</label>
         <input placeholder="John" [(ngModel)] = 'user.name' (ngModelChange)="updateUserName()"/>
         <label>{{'password' | transloco}}</label>
-        <input placeholder="John" [(ngModel)] = 'user.password'/>
+        <input placeholder="JohnDoe123" [(ngModel)] = 'user.password'/>
         <label>{{'surname' | transloco}}</label>
         <input placeholder="Doe"  [(ngModel)] = 'user.surname'  (ngModelChange)="updateUserName()" />
         <label>{{'username' | transloco}}</label>
@@ -14,10 +14,10 @@
         <label>E-mail</label> 
         <input placeholder="john.doe@email.com" [(ngModel)] = 'user.email'/>
         <mat-radio-group aria-label="Select an option " [(ngModel)] = 'user.role'>
-            <mat-radio-button value="admin"></mat-radio-button>
+            <mat-radio-button value="admin">{{'admin' | transloco}}</mat-radio-button>
             <mat-radio-button value="user">{{'user' | transloco}}</mat-radio-button>
           </mat-radio-group>
-        <button (click)="register()">{{'save' | transloco}}</button>
+        <button (click)="register();closeDialog()">{{'save' | transloco}}</button>
         <button routerLink="">{{'back' | transloco}}</button>
       </div>
     </div>

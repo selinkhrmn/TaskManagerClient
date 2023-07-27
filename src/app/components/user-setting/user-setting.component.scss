@@ -8,7 +8,7 @@
   }
   
   
-  .example-icon,
+  .example-icon
   button {
     color: white; 
     margin: 0 8px;
@@ -39,6 +39,76 @@
   mat-form-field {
     width: 100%;
   }
+
+// .container{
+//     padding-left: 40px;
+//     padding-top: 10px;
+    
+//     .navbar {
+
+//         h1 {
+//             font-size: 36px;
+//         }
+
+//         .add_user {
+//             display: flex;
+//             gap: 10px;
+//         }
+//     }
+// }
+
+// .topbar {
+//     margin-top: 30px;
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: 10px;
+//     label {
+//         font-size: 18px;
+//         font-weight: 600;
+//     }
+// }
+
+// .dialog {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .users_table {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     gap: 10px;
+
+//     // overflow: hidden;
+// }
+
+// .card {
+//     width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding: 10px;
+//     position: relative;
+//     .one_by_one  {
+//         width: 27%;
+//     }
+
+//     .one_by_one:last-child {
+//         text-align: end;
+//     }
+
+//     .second_one {
+//         position: absolute;
+//         left: 405px;
+//     }
+
+//     .third_one {
+//         position: absolute;
+//         left: 780px;
+//     }
+    
   
   
   input {
@@ -78,3 +148,4 @@
     background-color: #f2f2f2; 
   }
   
+// }
