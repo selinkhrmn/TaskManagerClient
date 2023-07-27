@@ -71,10 +71,19 @@
 
             <mat-select [(ngModel)]="selectedIcon" (ngModelChange)="onIconSelectionChange()">
                 <mat-option *ngFor="let iconUrl of iconOptions" [value]="iconUrl">
-                  <img [src]="iconUrl" alt="Icon">
+                  <img class="icon-option" [src]="iconUrl" alt="Icon">
+                  {{ priorityService.getIconName(iconUrl) }} (Priority: {{ priorityService.getIconPriority(iconUrl) }})
                 </mat-option>
               </mat-select>
+              
         </mat-form-field>
+
+        <!-- <select [(ngModel)]="selectedIcon" (ngModelChange)="onIconSelectionChange()">
+      <option *ngFor="let iconAddress of iconOptions" [value]="iconAddress">
+        <img class="icon-option" [src]="iconAddress" alt="Icon">
+        {{ priorityIconService.getIconName(iconAddress) }} (Priority: {{ priorityIconService.getIconPriority(iconAddress) }})
+      </option>
+    </select> -->
         
         <!-- <mat-form-field class="col-6">
             <mat-label>Select Labels</mat-label>

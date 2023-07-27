@@ -7,17 +7,20 @@ export class PriorityService {
 
   constructor() { }
 
-  private PriorityIconMapping: { [iconAddess: string]: number } = {
-    '../../assets/hosgeldiniz.png': 1,
-    '../../assets/color.png': 2,
-    '../../assets/meeting.png': 3,
-    '../../assets/okay.png': 4,
-    '../../assets/sedna.png': 5,
-
+  private priorityIconMapping: { [iconAddress: string]: { priority: number; name: string } } = {
+    '../../assets/hosgeldiniz.png': { priority: 1, name: 'Easy' },
+    '../../assets/color.png': { priority: 2, name: 'Medium' },
+    '../../assets/meeting.png': { priority: 3, name: 'Hard' },
+    '../../assets/okay.png': { priority: 4, name: 'Normal' },
+    '../../assets/sedna.png': { priority: 5, name: 'Difficult' },
   };
 
-  getIconPriority(iconAddess: string): number {
-    return this.PriorityIconMapping[iconAddess] || 0; 
+  getIconPriority(iconAddress: string): number {
+    return this.priorityIconMapping[iconAddress].priority || 0;
+  }
+
+  getIconName(iconAddress: string): string {
+    return this.priorityIconMapping[iconAddress].name || 'Unknown'; 
   }
 
   getOptions(){
