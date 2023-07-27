@@ -1,4 +1,5 @@
 import { Base } from "./base";
+import { User } from "./user";
 
 export interface Task extends Base {
     name: string;
@@ -7,4 +8,5 @@ export interface Task extends Base {
     priority : number;
     userUpdatedDate : Date;
     endDate : Date;
+    reporter : User;
 }

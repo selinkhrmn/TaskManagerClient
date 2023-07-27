@@ -8,11 +8,11 @@ export class PriorityService {
   constructor() { }
 
   private priorityIconMapping: { [iconAddress: string]: { priority: number; name: string } } = {
-    '../../assets/hosgeldiniz.png': { priority: 1, name: 'Easy' },
-    '../../assets/color.png': { priority: 2, name: 'Medium' },
-    '../../assets/meeting.png': { priority: 3, name: 'Hard' },
-    '../../assets/okay.png': { priority: 4, name: 'Normal' },
-    '../../assets/sedna.png': { priority: 5, name: 'Difficult' },
+    '../../assets/lowest.png': { priority: 1, name: 'Easy' },
+    '../../assets/low.png': { priority: 2, name: 'Medium' },
+    '../../assets/medium.png': { priority: 3, name: 'Hard' },
+    '../../assets/high.png': { priority: 4, name: 'Normal' },
+    '../../assets/highest.png': { priority: 5, name: 'Difficult' },
   };
 
   getIconPriority(iconAddress: string): number {
@@ -24,7 +24,7 @@ export class PriorityService {
   }
 
   getOptions(){
-    let options = ['../../assets/hosgeldiniz.png','../../assets/color.png' ];
+    let options = ['../../assets/highest.png','../../assets/high.png','../../assets/medium.png','../../assets/low.png','../../assets/lowest.png' ];
     return options;
   }
 }
