@@ -1,10 +1,10 @@
-
-
 <div class="container">
   <div class="navbar">
     <h1>Users</h1>
     <div class="add_user">
-      <button mat-raised-button color="primary" (click)="openDialog()">Add User</button>
+      <button mat-raised-button color="primary" (click)="openDialog()">
+        Add User
+      </button>
     </div>
   </div>
 
@@ -18,10 +18,19 @@
     </div>
     <div class="users_table">
       <div class="card" *ngFor="let user of users">
-        <label>{{user.username}}</label>
-        <label>{{user.name}}</label>
-        <label>{{user.surname}}</label>
-        <label>{{user.email}}</label>
+        <div class="one_by_one">
+          <label>{{ user.username }}</label>
+        </div>
+        <div class="one_by_one second_one">
+          <label>{{ user.name }}</label>
+        </div>
+        <div class="one_by_one third_one">
+          <label>{{ user.surname }}</label>
+        </div>
+        <div class="one_by_one">
+          <p>{{ user.email }}</p>
+        </div>
+
         <!-- <label></label> -->
       </div>
     </div>
@@ -38,14 +47,6 @@
 <button mat-raised-button color="primary" mat-dialog-close>{{'save' | transloco}}</button>
 </div>
 </div> -->
-
-
-
-
-
-
-
-
 
 <!-- <h1 mat-dialog-title>Add Person</h1>
 <div mat-dialog-content>

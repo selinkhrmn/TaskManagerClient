@@ -9,8 +9,8 @@
   padding: 20px;
   width: 70%;
   height: 100%;
-  background: #ffffff;
-
+  background: #adb5bd;
+  color: #42526e;
   button {
     background: #f4f5f7;
     font-size: 14px;
@@ -18,16 +18,22 @@
   }
 
   .navbar {
-    padding: 10px;
     width: 100%;
     height: 20%;
     display: flex;
     align-items: center;
     justify-content: start;
     font-weight: 700;
-
+    
+    label {
+      border-radius: 5px;
+      padding: 10px;
+      color: white;
+      // background: #f4f5f7;
+      text-align: center;
+    }
     label:first-child {
-      font-size: 22px;
+      font-size: 28px;
     }
 
     button {
@@ -51,7 +57,9 @@
     align-items: start;
     font-size: 18px;
     font-weight: 700;
-
+    border-radius: 5px;
+    background: #DFE1E6;
+    margin-bottom: 10px;
     textarea {
       width: 100%;
     }
@@ -65,7 +73,14 @@
     flex-direction: column;
     justify-content: space-evenly;
     font-size: 18px;
-
+    border-radius: 5px;
+    background: #DFE1E6;
+    h1 {
+      padding: 5px;
+      
+      font-weight: 600;
+      // text-align: center;
+    }
     .tabs {
       height: 10%;
       width: 35%;
