@@ -6,7 +6,7 @@ import { ResponseModel } from '../interfaces/responseModel';
 import { UserDto } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 import { ProjectDto } from '../interfaces/project';
-import { ProjectUserDto } from '../interfaces/projectUserDto';
+import { AddProjectUser, ProjectUserDto } from '../interfaces/projectUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,8 @@ export class UserService {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
-  AddUserToProject(projectUser : Partial<ProjectUserDto>) {
+  AddUserToProject(projectUser : Partial<AddProjectUser>) {
+    debugger
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
   }
 }

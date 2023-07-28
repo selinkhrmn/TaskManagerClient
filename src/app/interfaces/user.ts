@@ -1,6 +1,7 @@
 import { Base } from "./base";
 
 export interface User {
+    id?: number;
     name?:  string;
     surname?: string;
     usernameOrEmail: string;

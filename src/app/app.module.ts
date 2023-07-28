@@ -62,7 +62,6 @@ import { AdminProjectsComponent } from './components/admin-page/admin-projects/a
 import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
 import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

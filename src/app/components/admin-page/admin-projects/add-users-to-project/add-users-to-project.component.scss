@@ -1,0 +1,47 @@
+.container{
+        padding-top: 10px;
+        
+        .navbar {
+    
+            h1 {
+                font-size: 36px;
+            }
+    
+            .add_user {
+                display: flex;
+                gap: 10px;
+            }
+        }
+    }
+ 
+    .topbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .users_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+   .buttons {
+display: flex; 
+justify-content: center;  }
+
+.checkbox {
+    width: 100%;
+    border-radius: 3px;
+    background-color: #e9ecef;
+    font-weight: 600;
+}
