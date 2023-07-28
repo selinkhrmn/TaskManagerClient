@@ -17,6 +17,9 @@ import { ProjectService } from 'src/app/services';
   styleUrls: ['./user-setting.component.scss'],
 })
 export class UserSettingComponent {
+deleteUser(arg0: number) {
+throw new Error('Method not implemented.');
+}
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   roleFormControl = new FormControl(''); // Create the roleFormControl
   constructor(

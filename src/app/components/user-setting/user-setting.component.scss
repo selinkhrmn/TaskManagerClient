@@ -1,4 +1,5 @@
 .example-spacer {
+<<<<<<< Updated upstream
     flex: 1 1 auto;
   }
   
@@ -149,3 +150,84 @@
   }
   
 // }
+=======
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #2196f3; 
+  color: white; 
+}
+
+
+.example-icon,
+button {
+  color: white; 
+  margin: 0 8px;
+}
+
+
+span {
+  font-size: 20px; 
+}
+
+
+.project-heading {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 32px;
+}
+
+
+.example-form {
+  display: flex;
+  margin-right: 35px;
+  margin-top: 50px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+
+input {
+  width: 100%;
+}
+
+mat-select {
+  width: 100%;
+}
+
+.mat-select-arrow {
+  color: white; 
+}
+
+
+.mat-select-panel {
+  background-color: #f5f5f5; 
+}
+.example-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px; 
+}
+
+.example-table th, .example-table td {
+  padding: 8px;
+  border: 1px solid #ddd; 
+  text-align: center;
+}
+
+.example-table th {
+  background-color: #f2f2f2; 
+  color: #333; 
+}
+
+.example-table tr:nth-child(even) {
+  background-color: #f2f2f2; 
+}
+.delete-button {
+  color: #000000; 
+  margin: 0 8px;
+}
+>>>>>>> Stashed changes
