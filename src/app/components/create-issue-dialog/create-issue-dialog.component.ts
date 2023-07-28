@@ -29,7 +29,7 @@ interface DialogData {
 })
 export class CreateIssueDialogComponent {
 
-  iconOptions: string[]; 
+  priorities: string[]; 
   selectedIcon: string;
 
   projects: Project[] = [];
@@ -78,7 +78,7 @@ export class CreateIssueDialogComponent {
   ) {
     this.getAllProjects();
     this.getCurrentProject();
-    this.iconOptions = this.priorityService.getOptions();
+    this.priorities = this.priorityService.getOptions();
   }
 
 
@@ -96,7 +96,6 @@ export class CreateIssueDialogComponent {
 
   onIconSelectionChange() {
     const priorityNumber = this.priorityService.getIconPriority(this.selectedIcon);
-    console.log('Selected Priority Number:', priorityNumber);
     this.task.priority = priorityNumber;
 
   }
@@ -106,7 +105,7 @@ export class CreateIssueDialogComponent {
     this.columns = [];
     let pro : Partial<ProjectDto> ={
     }
-    pro.id = event.id;
+    pro.id = event;
     this.columnService.GetAllProjectColumns({ "id": pro.id }).subscribe((response) => {
       if (response.data != null) {
         this.columns = response.data;
@@ -121,8 +120,6 @@ export class CreateIssueDialogComponent {
     });
   }
 
-
-  // //bütün projeleri servis üstünden çekip proje arrayına atanıyor.
   public getAllProjects() {
     this.projectService.getAllProjects().subscribe((response) => {
       if (response.data != null) {
@@ -131,10 +128,28 @@ export class CreateIssueDialogComponent {
 
       }
     });
+  }
+
+  addTask(){
+    if(this.task.name != null && this.task.projectId != null && this.task.columnId != null && this.task.priority != null) {
+      debugger;
+      this.closeDialog();
+    }
+    else{
+      alert("Input areas");
+      return ;
+    }
 
   }
 
-  // returned current project from local storage.
+  closeDialog() {
+      this.dialogRef.close({
+        isAdded: true,
+        task: this.task
+      });
+    
+  }
+
   public getCurrentProject() {
     this.projectService.selectedProject$?.subscribe((value) => {
       this.currentProject = value;
@@ -142,19 +157,6 @@ export class CreateIssueDialogComponent {
     this.currentProject = this.projectService.getCurrentProject();
   }
 
-
-  closeDialog() {
-    if(this.task.name != null || this.task.projectId != null || this.task.columnId != null || this.task.priority != null) {
-      this.dialogRef.close({
-        isAdded: true,
-        name: this.task.name,
-        projectId: this.task.projectId,
-        columnId: this.task.columnId,
-        priority: this.task.priority,
-        endDate : this.task.endDate
-      });
-    }
-  }
 
 
 }

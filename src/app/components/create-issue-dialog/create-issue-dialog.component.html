@@ -4,23 +4,17 @@
   <div class="row">
     <mat-form-field class="col-6">
       <mat-label>{{ "projectName" | transloco }}</mat-label>
-      <mat-select
-        [(ngModel)]="task.projectId"
-        (ngModelChange)="onChangeProject($event)"
-        ngDefaultControl
-      >
-        <mat-option *ngFor="let project of projects" [value]="project">{{
-          project.name
-        }}</mat-option>
+      <mat-select [(ngModel)]="task.projectId" (ngModelChange)="onChangeProject($event)" ngDefaultControl>
+        <mat-option *ngFor="let project of projects" [value]="project.id">
+          {{ project.name }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="col-6">
       <mat-label>{{ "columnName" | transloco }}</mat-label>
       <mat-select [(ngModel)]="task.columnId" ngDefaultControl>
-        <mat-option *ngFor="let column of columns" [value]="column.id">{{
-          column.name
-        }}</mat-option>
+        <mat-option *ngFor="let column of columns" [value]="column.id">
+          {{ column.name }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -37,10 +31,7 @@
   <div class="row">
     <mat-label>{{ "description" | transloco }}</mat-label>
 
-    <angular-editor
-      [placeholder]="'Enter text here...'"
-      [config]="config"
-    ></angular-editor>
+    <angular-editor [placeholder]="'Enter text here...'" [config]="config"></angular-editor>
   </div>
   <br />
 
@@ -52,102 +43,52 @@
        
     </div> -->
 
-    <div class="row">
-        <mat-form-field class="col-6">
-            <mat-label>{{'assignee' | transloco}}</mat-label>
-            <mat-select [(ngModel)]="task.assigneeId" ngDefaultControl>
-              <mat-option *ngFor="let user of assignees" [value]="user.id" >{{user.username}}</mat-option>  
-            </mat-select>
-        </mat-form-field>
-
-       
-        <mat-form-field class="col-6">
-            <mat-label>{{'reporter' | transloco}}</mat-label>
-            <mat-select [(ngModel)]="task.reporterId" ngDefaultControl>
-              <mat-option *ngFor="let user of reporter" [value]="user.id" >{{user.username}}</mat-option>  
-            </mat-select>
-        </mat-form-field>
-    </div>
   <div class="row">
     <mat-form-field class="col-6">
-      <mat-label>{{ "assignee" | transloco }}</mat-label>
-      <mat-select>
-        <!-- <mat-option *ngFor=""></mat-option>   -->
+      <mat-label>{{ 'assignee' | transloco }}</mat-label>
+      <mat-select [(ngModel)]="task.assigneeId" ngDefaultControl>
+        <mat-option *ngFor="let user of assignees" [value]="user.id">
+          <img src="{{ user.profileImageUrl }}" alt="Profile Image" width="30" height="30">
+          {{ user.username }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
+    
+
+
     <mat-form-field class="col-6">
-      <mat-label>{{ "reporter" | transloco }}</mat-label>
-      <mat-select>
-        <!-- <mat-option *ngFor=""></mat-option>   -->
+      <mat-label>{{'reporter' | transloco}}</mat-label>
+      <mat-select [(ngModel)]="task.reporterId" ngDefaultControl>
+        <mat-option *ngFor="let user of reporter" [value]="user.id">{{user.username}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
-  <div class="row">
-    <mat-form-field class="col-12">
-      <mat-label>{{ "priority" | transloco }}</mat-label>
-      <!-- <mat-select [(ngModel)]="task.priority">
-              <mat-option *ngFor="let priority of priorities" [value]="priority.value" ngDefaultControl
-            >{{priority.name}}</mat-option>  
-            </mat-select> -->
 
-      <mat-select
-        [(ngModel)]="selectedIcon"
-        (ngModelChange)="onIconSelectionChange()"
-      >
-        <mat-option *ngFor="let iconUrl of iconOptions" [value]="iconUrl">
+  <div class="row">
+    <mat-form-field class="col-6">
+      <mat-label>{{ "priority" | transloco }}</mat-label>
+      <mat-select [(ngModel)]="selectedIcon" (ngModelChange)="onIconSelectionChange()">
+        <mat-option *ngFor="let iconUrl of priorities" [value]="iconUrl">
           <img class="icon-option" [src]="iconUrl" alt="Icon" />
-          {{ priorityService.getIconName(iconUrl) }} (Priority:
-          {{ priorityService.getIconPriority(iconUrl) }})
+          {{ priorityService.getIconName(iconUrl) }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <!-- <select [(ngModel)]="selectedIcon" (ngModelChange)="onIconSelectionChange()">
-      <option *ngFor="let iconAddress of iconOptions" [value]="iconAddress">
-        <img class="icon-option" [src]="iconAddress" alt="Icon">
-        {{ priorityIconService.getIconName(iconAddress) }} (Priority: {{ priorityIconService.getIconPriority(iconAddress) }})
-      </option>
-    </select> -->
-
-    <!-- <mat-form-field class="col-6">
-            <mat-label>Select Labels</mat-label>
-            <mat-select>
-              <mat-option *ngFor=""></mat-option>
-            </mat-select>
-        </mat-form-field> -->
-  </div>
-
-  <div class="row">
-    <!-- <mat-form-field class="col-6">
-            <mat-label>Start Date</mat-label>
-            <input matInput [matDatepicker]="pickerStart" [value]="currentDate.value">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
-            <mat-datepicker #pickerStart></mat-datepicker>
-        </mat-form-field> -->
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-6">
       <mat-label>{{ "dueDate" | transloco }}</mat-label>
-      <input
-        [(ngModel)]="task.endDate"
-        matInput
-        [matDatepicker]="pickerEnd"
-        [value]="currentDate.value"
-        ngDefaultControl
-      />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="pickerEnd"
-      ></mat-datepicker-toggle>
+      <input [(ngModel)]="task.endDate" matInput [matDatepicker]="pickerEnd" [value]="currentDate.value"
+        ngDefaultControl />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
       <mat-datepicker #pickerEnd></mat-datepicker>
     </mat-form-field>
   </div>
-</div>
 
 <div mat-dialog-actions class="button">
   <button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>
-  <button mat-flat-button color="primary" (click)="closeDialog()">
+  <button mat-flat-button color="primary" (click)="addTask()">
     {{ "create" | transloco }}
   </button>
 </div>

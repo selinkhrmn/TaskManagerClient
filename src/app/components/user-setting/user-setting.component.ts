@@ -18,7 +18,7 @@ import { ProjectService } from 'src/app/services';
 })
 export class UserSettingComponent {
 deleteUser(arg0: number) {
-throw new Error('Method not implemented.');
+
 }
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   roleFormControl = new FormControl(''); // Create the roleFormControl
@@ -69,9 +69,7 @@ throw new Error('Method not implemented.');
 //   const dialogRef = this.dialog.open(AddUserToProjectComponent,{height: '100%',width: '100%',panelClass: 'dialog'});
 
   openManageRoles() {
-    // Implement the function logic here
-    // For example:
-    console.log('Manage Roles clicked');
+   
   }
 }
 

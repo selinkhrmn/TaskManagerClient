@@ -30,12 +30,9 @@ export class AddUserToProjectComponent implements OnInit {
   }
 
   AddUserToProject() {
-    let user : ProjectUserDto ={
-      username: '',
-      id: ''
-    }
+   
     this.userService.AddUserToProject({}).subscribe((res) => {
-      console.log(res);
+  
       
     })
   }

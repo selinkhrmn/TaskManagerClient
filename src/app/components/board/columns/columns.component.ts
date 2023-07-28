@@ -100,7 +100,7 @@ export class ColumnsComponent {
   }
 
   dropColumn(event: CdkDragDrop<any[]>) {
-    console.log(event);
+
     
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -119,13 +119,11 @@ export class ColumnsComponent {
 
   getColumnId(columnId: number) {
     this.currentColumnId = columnId;
-    console.log('Column ID:', this.currentColumnId);
   }
 
   openEditDialog(columnName : string, currentColumnId: number) {
     const dialogRef = this.dialog.open(EditColumnComponent,{data: {data: columnName, currentColumnId: currentColumnId} });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.ngOnInit()
     });
   }

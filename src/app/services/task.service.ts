@@ -11,31 +11,32 @@ import { ProjectDto } from '../interfaces/project';
   providedIn: 'root'
 })
 export class TaskService {
-  task : Task;
+  task: Task;
   baseUrl = `${environment.baseUrl}/business/Task`;
-  
+
   private task$ = new BehaviorSubject<any>({});
   selectedTask$ = this.task$.asObservable();
-  
 
-  constructor(private http : HttpClient,
+
+  constructor(private http: HttpClient,
     public tokenService: TokenService) {
-   }
+  }
 
-   headers = this.tokenService.getHeaders();
-   httpOptions = {
-       headers: this.headers
-   };
-   createNewTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
+  headers = this.tokenService.getHeaders();
+  httpOptions = {
+    headers: this.headers
+  };
+
+  createTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
-}
+  }
 
-  updateTask(task : Partial<Task>) {
+  updateTask(task: Partial<Task>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task, this.httpOptions);
   }
 
   deleteTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, {body: task }, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, { body: task }, this.httpOptions);
   }
 
   updateTaskColumnId(task: Partial<Task>) {
@@ -46,7 +47,7 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
   }
 
-  getTaskById(id : Partial<Task>)  {
+  getTaskById(id: Partial<Task>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, id, this.httpOptions);
   }
 
@@ -59,5 +60,5 @@ export class TaskService {
 
   // }
 
-  
+
 }

@@ -34,8 +34,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   ngOnChanges(changes : SimpleChanges) {
-    console.log(changes);
-    
+  
   }
    
   createProject(){

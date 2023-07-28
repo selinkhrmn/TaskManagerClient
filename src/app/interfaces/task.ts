@@ -8,7 +8,7 @@ export interface Task extends Base {
     priority : number;
     userUpdatedDate : Date;
     endDate : Date;
-    reporterId : string;
     assigneeId: string;
+    reporterId : string;
 
 }

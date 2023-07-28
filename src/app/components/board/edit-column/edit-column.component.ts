@@ -32,7 +32,6 @@ export class EditColumnComponent implements OnInit {
   ngOnInit(): void {
 
       this.columnName = this.data.data;
-      console.log(this.columnName);
       this.currentColumnId = this.data.currentColumnId
   
   }
@@ -49,8 +48,6 @@ export class EditColumnComponent implements OnInit {
   UpdateColumn() {
     
     this.getProjectLocal();
-    console.log(this.data);
-    console.log(this.columnName);
     
     this.columnService
       .UpdateColumn({
@@ -58,7 +55,6 @@ export class EditColumnComponent implements OnInit {
         'name': this.columnName
       })
       .subscribe((res) => {
-        console.log(res.data);
         
       });
   }

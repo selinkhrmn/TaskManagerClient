@@ -53,7 +53,7 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
              this.tasks = res.data; 
       }
 
-      console.log(this.tasks);
+   
       this.dataSource = new MatTableDataSource<Task>(this.tasks);
       // console.log(this.dataSource);
 
