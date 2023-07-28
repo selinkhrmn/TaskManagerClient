@@ -31,7 +31,8 @@ deleteUser(arg0: number) {
 
   openDialog() {
     this.dialog.open(RegisterPageComponent, {
-      width: '30%'
+      width: '30%',
+      height: '90%'
     });
   }
 
