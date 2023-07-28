@@ -99,11 +99,11 @@ import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-t
     AdminPageComponent,
     AdminSidenavComponent,
     AdminProjectsComponent,
-    AdminUsersComponent,
     AdminTasksComponent
     
   ],
   imports: [
+    AdminUsersComponent,
     TaskSettingPageComponent,
     AllFormsModule,
     MaterialModule,
