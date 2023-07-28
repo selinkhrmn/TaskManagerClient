@@ -20,6 +20,7 @@ import {
 } from '@angular/material/checkbox';
 import { AddProjectUser, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-users-to-project',
@@ -54,7 +55,8 @@ export class AddUsersToProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -95,5 +97,9 @@ export class AddUsersToProjectComponent implements OnInit {
     this.userService.AddUserToProject(this.addedUser).subscribe((res) => {
       console.log(res);
     })
+  }
+  
+  closeDialog() {
+    const dialogRef = this.dialog.closeAll()
   }
 }
