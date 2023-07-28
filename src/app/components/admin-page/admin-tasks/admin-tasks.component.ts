@@ -99,7 +99,7 @@ export class AdminTasksComponent implements OnInit{
   // }
 
   ngOnInit() : void {
-    debugger
+    
     this.projectService.getAllProjects().subscribe((res)=> {
       if(res.data != null) {
         this.projects = res.data;
@@ -133,6 +133,7 @@ export class AdminTasksComponent implements OnInit{
     
       
     }); 
+    this.projectName = this.projectService.getCurrentProject().name;
   }
 
 
