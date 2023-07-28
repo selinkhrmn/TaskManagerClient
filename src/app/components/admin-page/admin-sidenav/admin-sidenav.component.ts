@@ -10,5 +10,7 @@ export class AdminSidenavComponent {
 
   constructor(private router : Router) {}
 
-
+  navigateToHome() {
+    this.router.navigate(['home/summary'])
+  }
 }

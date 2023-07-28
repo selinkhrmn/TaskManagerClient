@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="topbar">
+    <h1>Add Users to Certain Project</h1>
+  </div>
+
+  <div class="main">
+    <mat-form-field>
+      <mat-label>Projects</mat-label>
+      <select [(ngModel)]="projectId" matNativeControl required>
+        <option *ngFor="let project of projects" [value]="project.id">
+          {{ project.name }}
+        </option>
+      </select>
+
+    </mat-form-field>
+  </div>
+
+  <div class="users_part">
+    <section class="example-section" *ngFor="let user of users; let i = index">
+      <p>
+        <mat-checkbox
+          class="checkbox"
+          (change)="toggleUser(user.username, user.id, i)"
+        >
+          {{ user.username }}</mat-checkbox
+        >
+      </p>
+    </section>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="AddUserToProject();closeDialog()">
+      Save
+    </button>
+  </div>
+</div>

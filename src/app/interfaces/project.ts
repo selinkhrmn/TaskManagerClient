@@ -7,4 +7,5 @@ export interface Project extends Base {
 export interface ProjectDto{
     name: string;
     id: number;
+    createdDate: Date;
 }
