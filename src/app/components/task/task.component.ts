@@ -6,6 +6,12 @@ import { taskDto } from 'src/app/interfaces/taskDto';
 import { TaskService } from 'src/app/services/task.service';
 import { TranslocoService} from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ProjectService } from 'src/app/services';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import {  ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 interface DialogData{
   task: Task;
@@ -30,9 +36,11 @@ export class TaskComponent  {
   task : Task = Object.assign({}, this.data.task);
   taskDueDate = new FormControl(this.task.endDate);
   editingTaskName = false;
+  editorContent: string;
   descriptionText: string = '';
   selectedFiles: FileData[] = [];
-
+  @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
+  addSubtopicClicked = false;
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
@@ -40,17 +48,23 @@ export class TaskComponent  {
     docx: 'path-to-docx-icon',
     pdf: 'path-to-pdf-icon',
   };
-
+ 
   constructor(
     private taskService : TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public translocoService : TranslocoService,
+    public projectService: ProjectService,
     private dialogRef: MatDialogRef<TaskComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private location: Location
     ) { }
 
     
-  
+    
+    logChange($event: any) {
+      console.log('Content changed:', $event);
+    }
   onTaskNameClick() {
     this.editingTaskName = true;
   }
@@ -95,6 +109,25 @@ export class TaskComponent  {
   closeDialog() {
     this.dialogRef.close();
   }
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '12rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: "'Kanit', sans-serif"
 
+  };
+ // Add this method to your component class
+closeDetails() {
+  // Implement the logic to close the "Details" section
+  // For example, you can set a variable to hide the "Details" section or navigate to another page.
+}
+
+onCloseDetails() {
+  this.location.back();
+}
 
 }

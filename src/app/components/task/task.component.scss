@@ -1,23 +1,36 @@
+
+
 .wrapper {
   width: 100%;
   height: 100%;
   display: flex;
-  border: 2px solid gray;
+ 
+  background-color: white;  // Bu satırı ekleyin.
+  > *:last-child {
+    margin-bottom: 0; // Son çocuk elemanın alt marjını sıfırla
+  }
 }
 
 .left_side {
-  padding: 20px;
-  width: 70%;
+  position: relative; 
+  padding: 40px;
+  margin-top: 0; // margin üst boşluğunu sıfırlar
+  padding-top: 0;
+  text-align: center;
+  width: 100%;
   height: 100%;
-  background: #adb5bd;
-  color: #42526e;
+  background: white; 
+  color: #01050b;
+  margin-right: 80px;
+
   button {
-    background: #f4f5f7;
+    background: #26628714;
     font-size: 14px;
     font-weight: 700;
   }
-
+  
   .navbar {
+    margin-top: 0;
     width: 100%;
     height: 20%;
     display: flex;
@@ -44,50 +57,115 @@
   .inputName {
     border: none;
     outline: none;
-    background: transparent;
-    /* Add any additional styling here */
+    background-color: #7f99b319;
+    width: 100%;       // Genişliği maksimuma çıkarıyoruz. İhtiyaçlarınıza göre ayarlayabilirsiniz.
+    height: 40px;      // Yüksekliği 40px olarak ayarlıyoruz. İhtiyaçlarınıza göre bu değeri değiştirebilirsiniz.
+    justify-content: center; // Yatay ortalamayı sağlar
   }
 
   .description {
+    
+    position: relative;
     padding: 10px;
     height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: start;
+    text-align: center;
     font-size: 18px;
     font-weight: 700;
     border-radius: 5px;
-    background: #DFE1E6;
+    background:#7f99b319;
     margin-bottom: 10px;
+    .top_side {
+     
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10%;
+      border-bottom: 0.25px solid #227ad934;
+      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+    }
+  
+    h2 {
+      font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
+      
+    }
     textarea {
       width: 100%;
     }
-  }
-
+    button {
+      font-size: 15px; // Adjust the font size to make the button smaller
+      margin-left: 0; // Remove the default left margin
+      margin-right: 20px; // Add some right margin to separate it from other elements
+      align-self: flex-start; // Move the button to the left within its container
+    
+  
+      svg {
+        margin-right: 5px; // Adding some space between the icon and the button text
+      }
+    }
+  
+    .add-subtopic-button {
+      background:#26628714; // You can adjust the background color as needed
+    }
+    .button-container {
+      display: flex;
+      justify-content: start; /* or "space-between" if you want them to occupy the entire width */
+      text-align: center;
+      button {
+        margin-right: 10px; /* Space between the buttons */
+        align-items: start;
+        text-align: center; /* Center the text inside the button */
+        
+        &:last-child {
+          margin-right: 0; /* Ensure the last button doesn't have extra margin */
+        }
+      }
+    }}
+    
+  
   .tab_bar {
-    height: 50%;
+    height: 45%;
+    display: flex;
+    justify-content: flex-start;
     padding: 10px;
     font-weight: 700;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+   
     font-size: 18px;
     border-radius: 5px;
-    background: #DFE1E6;
-    h1 {
+    background: #7f99b319; 
+    h1,h2,h3 {
       padding: 5px;
       
       font-weight: 600;
       // text-align: center;
     }
+    .top_side {
+     
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10%;
+      border-bottom: 0.25px solid #227ad934;
+      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+      
+    }
+  
     .tabs {
       height: 10%;
-      width: 35%;
+      width: 40%;
       // background-color: burlywood;
       display: flex;
       align-items: center;
       justify-content: space-between;
+       h3 {
+  margin: 0;
+  padding-right: 10px;
+}
+
 
       button {
         margin-left: 10px;
@@ -125,42 +203,130 @@
 
 
 .right_side {
+ 
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #42526e;
-    border-left: 2px dashed gray;
-    background: #adb5bd;
+    color: #020e19;
+    padding-left: -10px;  // Çizginin solunda hafif bir boşluk bırakıyoruz.
+    border-left: 1px solid #ffffff;  // Çizgiyi daha kalın ve belirgin yapıyoruz.
+    box-shadow: -2px 0px 15px #0e4e9354;  // Çizgiye daha derin bir gölge ekliyoruz.
+    background: #ffffff;
+    margin-right: 90px;
     .container {
-      width: 70%;
-      height: 80%;
-      background: #DFE1E6;
-      border-radius: 12px;
-      padding: 20px;
+      width: 120%;  // Genişliği artırıyoruz.
+    height: 85%;  // Yüksekliği artırıyoruz.
+      background: #7f99b319;  
+      border-radius: 10px;
+      padding: 45px;
+      margin-right: 70;
+      position: relative;
+      h2 {
+        font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
+      }
+       
     }
 
     .top_side {
+     
       display: flex;
-      justify-content: start;
+      justify-content: space-between;
       align-items: center;
-      height: 10%;
-      border-bottom: 1px solid black;
-
-      label {
-        font-size: 22px;
-        font-weight: 700;
-      }
+      height: 5%;
+      border-bottom: 0.25px solid #227ad934;
+      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
 
       
     }
-
+    
+    .icons {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 9999; /* Ensure the icons appear above other content if necessary */
+    }
+    
     .body {
       height: 90%;
        .card {
         margin-top: 25px;
         padding: 10px;
       }
+      .due_date {
+        padding: 20px;  // padding değerini artırarak kartın iç boşluğunu artırabiliriz.
+        margin: 10px 0;  // margin değerini ekleyerek kartın etrafındaki boşluğu artırabiliriz.
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);  // bir gölge ekleyerek kartın diğerlerinden farklı olduğunu vurgulayabiliriz.
     }
-   
+    label {
+      display: flex;           // Flexbox kullanarak içerikleri düzenliyoruz.
+      align-items: center;     // İçerikleri dikey olarak merkezde hizalıyoruz.
+      justify-content: center; 
+      margin-bottom: 10px;  }}
+ 
+    label {
+        margin: 0; // Varsa etrafındaki boşlukları kaldır
+        line-height: normal; // Label'ın yüksekliğini kontrol eder
+    }
+  }
+// ...
+
+// ... (Önceki kodların devamı) ...
+
+.card {
+  display: flex;
+  flex-direction: row; // Yatay yönde sırala
+  align-items: center; // İçerikleri merkeze hizala
+  
+  .icon {
+    margin-right: 50px; // İkon ile içerik arasında bir boşluk bırak
+  }
+}
+.project-heading {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  color: rgba(9, 21, 70, 0.717); /* İkon rengini yeşil olarak ayarladık */
+  margin-right: 2px; /* İkon ile metin arasına biraz boşluk bıraktık */
+}
+
+.subtopic-input-container {
+  margin-top: 10px;
+}
+
+.subtopic-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.small-textarea::placeholder {
+  font-size: 15px; /* Yeni yazı boyutunu burada ayarlayabilirsiniz */
+}
+
+
+.savebuton {
+  text-align: left;
+}
+
+.savebuton button {
+  margin-left: 10px;
+}
+
+.project-heading {
+  /* ... existing styles ... */
+
+  /* Add border and border radius to .project-heading */
+  border: 1px solid rgba(37, 98, 159, 0.169); /* Pale blue color with lower opacity */
+  border-radius: 10px; /* Adjust the border-radius to make it more rounded */
+  padding: 2px; /* Add padding to create some space between the text and the border */
+
+  /* Align the icon and text horizontally */
+  display: flex;
+  align-items: center;
+  background: #236bb735;
 }

@@ -9,6 +9,7 @@
         <mat-icon>more_horiz</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        
         <button mat-menu-item  (click)="getColumnId(column.id);openEditDialog(column.name, column.id)">
           <mat-icon>edit</mat-icon>
           <span>{{'edit' | transloco}}</span>
@@ -33,7 +34,7 @@
       <div class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openTaskDialog(task.id)">
         {{ task.name }}
       </div>
-
+  
     </div>
   </div>
   
