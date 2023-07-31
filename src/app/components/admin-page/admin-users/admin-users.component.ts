@@ -32,7 +32,6 @@ export class AdminUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger
     this.userService.getAllUsers().subscribe((res)=> {
     if(res.data != null ){
       this.users = res.data;

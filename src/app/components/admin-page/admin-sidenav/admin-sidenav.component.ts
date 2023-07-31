@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-admin-sidenav',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class AdminSidenavComponent {
 
-  constructor(private router : Router) {}
+  constructor(
+    private router : Router,
+    public tokenService: TokenService) {}
 
   navigateToHome() {
     this.router.navigate(['home/summary'])

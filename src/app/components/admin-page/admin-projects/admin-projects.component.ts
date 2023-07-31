@@ -17,9 +17,10 @@ import { ProjectDto } from 'src/app/interfaces/project';
 export class AdminProjectsComponent {
   @ViewChild(MatSort) sort: MatSort;
 
+  
   projects : Project[] = [];
   dataSource : MatTableDataSource<ProjectDto>;
-  displayedColumns: string[] = ['Name','CreatedDate'];
+  displayedColumns: string[] = ['Name','CreatedDate', 'ProjectDate'];
   constructor(public dialog: MatDialog,private projectService: ProjectService) { }
 
   ngOnInit() {
@@ -36,4 +37,11 @@ export class AdminProjectsComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUsersToProjectComponent,{height: '90%',width: '50%', panelClass: 'dialog'});
   }
+
+ getProjectDate(createdDate: Date){
+  const millisecondsPerDay = 24 * 60 * 60 * 1000; 
+  const timeDifference = new Date().valueOf() - new Date(createdDate).valueOf();
+  return Math.abs(Math.floor(timeDifference / millisecondsPerDay));
+}
+
 }

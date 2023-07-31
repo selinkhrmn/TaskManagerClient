@@ -24,7 +24,7 @@ export class AdminTasksComponent implements OnInit{
   project : Project;
   projectId : number;
 
-  displayedColumns: string[] = ['id', 'projectName', 'name', 'status'];
+  displayedColumns: string[] = ['projectName', 'name', 'assign', 'status'];
   dataSource: MatTableDataSource<Task>;
   dataTask : MatTableDataSource<Task>;
   tasks: Task[] = [];
