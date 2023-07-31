@@ -44,13 +44,20 @@ export class ProjectService {
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project, this.httpOptions);
   }
 
+  getProject(id : Partial<Project>){
+    debugger
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/GetProject`, id, this.httpOptions);
+  }
+
+
   setCurrentProject(proj: any) {
     this.project = proj;
     this.project$.next(proj);
     localStorage.setItem('current-project', JSON.stringify({"id": this.project.id, "name": this.project.name} ));
   }
 
-  getCurrentProject() {
+  getCurrentProject() { 
+    console.log(this.project);
     return this.project;
   }
 
