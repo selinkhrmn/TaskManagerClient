@@ -1,16 +1,35 @@
-<div class="wrapper">
+<div class="wrapper" #wrapper>
   <div class="left_side">
+
     <div class="navbar" (click)="onTaskNameClick()">
+      <h3 class="project-heading"><mat-icon class="icon">check_circle</mat-icon>Proje Name :{{ projectService.getProjectLocal().name
+        }}</h3>
       <ng-container *ngIf="!editingTaskName">
         <label>{{ task.name }}</label>
       </ng-container>
-      <input type="text" class="inputName" *ngIf="editingTaskName" [(ngModel)]="task.name" (blur)="onTaskNameBlur()">
+      <input type="text" class="inputName" [(ngModel)]="task.name" (blur)="onTaskNameBlur()">
+
     </div>
-    
+
     <div class="description">
-      <label>{{ 'description' | transloco }}</label>
+      <div class="top_side">
+        <h2><label>{{ 'description' | transloco }}</label></h2>
+      </div>
+<br>
       <input type="file" #fileInput multiple style="display: none;" (change)="onFileSelect($event)" />
-      <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
+      <div class="button-container">
+        <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
+        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">Add
+          Subtopic<mat-icon>add_circle</mat-icon></button>
+      </div>
+
+      <!-- Add the input box here with *ngIf directive -->
+      <div *ngIf="addSubtopicClicked" class="subtopic-input-container">
+        <input type="text" class="subtopic-input" placeholder="What should be done ?">
+      </div>
+
+
+      <!-- Rest of the code... -->
       <br>
       <div *ngIf="selectedFiles.length > 0">
         <p>Selected Files:</p>
@@ -22,63 +41,107 @@
         </ul>
       </div>
       <!-- <textarea [(ngModel)]="descriptionText"></textarea> -->
-      <button mat-raised-button (click)="onSave()">Save</button>
+      <button mat-button>{{'save' | transloco}}</button>
     </div>
-    
-    
-    
-
     <div class="tab_bar">
-      <h1>Activity</h1>
-      <div class="tabs">
-        <label>Show:</label>
-        <button mat-button>All</button>
-        <button mat-button>Comments</button>
+      <div class="top_side">
+      <h2><label>{{ 'Activity' | transloco }}</label></h2>
       </div>
+      <br>
+      <div class="tabs">
+        <div class="left-aligned-buttons">
+          <label>
+            <h3>Show:</h3>
+          </label>
+          <button mat-button>All</button>
+          <button mat-button>Comments</button>
+        </div>
+      </div>
+      <br>
 
       <div class="footer">
         <div class="comments">
-          <div class="image_holder">
-            <img src="../../../assets/kullanıcı.png" />
-          </div>
-          <textarea placeholder="Add a comment..."></textarea>
+          <mat-icon class="icon">badge</mat-icon>
+          <textarea placeholder="Add a comment..." class="small-textarea"></textarea>
         </div>
-        <button mat-button>{{'save' | transloco}}</button>
+
       </div>
+      <br>
+      <div class="savebuton"><button mat-button>{{'save' | transloco}}</button></div>
+
     </div>
+
+
+
   </div>
+
   <div class="right_side">
+    <div class="icons">
+
+      
+      <mat-icon class="icon" (click)="onCloseDetails()">close</mat-icon> <!-- Close icon -->
+    </div>
     <div class="container">
-        <div class="top_side">
-            <label>Details</label>
-        </div>
-        <div class="body">
-          <div class="assignee card">
+
+
+      <div class="top_side">
+        <h2>
+          <label>Details</label>
+        </h2>
+      </div>
+
+      <!-- Rest of your HTML content -->
+
+
+
+
+
+      <div class="body">
+
+        <!-- Assignee -->
+        <div class="assignee card">
+          <mat-icon class="icon">person</mat-icon>
+          <div>
             <label>{{'assignee' | transloco}}</label>
             <div class="assigned_person">
-                <!--dropdown button ile atanan kişiyi göreceğiz-->
-                <!--Ayrıca class isimlerini de düzenle-->
+              <!--dropdown button ile atanan kişiyi göreceğiz-->
             </div>
+          </div>
         </div>
+
+        <!-- Reporter -->
         <div class="reporter card">
+          <mat-icon class="icon">report</mat-icon>
+          <div>
             <label>{{'reporter' | transloco}}</label>
             <div class="reported_person">
-                <!--dropdown button ile reporter kişiyi göreceğiz-->
+              <!--dropdown button ile reporter kişiyi göreceğiz-->
             </div>
+          </div>
         </div>
+
+        <!-- Priority -->
         <div class="priority card">
+          <mat-icon class="icon">priority_high</mat-icon>
+          <div>
             <label>{{'priority' | transloco}}</label>
-            <div class="priority">
-               {{ task.priority}}
+            <div class="priority-value">
+              {{ task.priority }}
             </div>
+          </div>
         </div>
+
+        <!-- Due Date -->
         <div class="due_date card">
+
+          <div>
             <label>{{'dueDate' | transloco}}</label>
             <mat-form-field>
               <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskDueDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+          </div>
         </div>
         <!-- <div class="time_tracking card">
             <label>Time Tracking</label>
@@ -90,7 +153,7 @@
             <div class="start_date">
             </div>
         </div> -->
-        </div>
+      </div>
     </div>
   </div>
 </div>
