@@ -27,4 +27,15 @@ export class PriorityService {
     let options = ['../../assets/highest.png','../../assets/high.png','../../assets/medium.png','../../assets/low.png','../../assets/lowest.png' ];
     return options;
   }
+
+  getIcon(priority: number): string | undefined {
+    for (const iconAddress in this.priorityIconMapping) {
+      if (this.priorityIconMapping.hasOwnProperty(iconAddress)) {
+        if (this.priorityIconMapping[iconAddress].priority === priority) {
+          return iconAddress;
+        }
+      }
+    }
+    return undefined; 
+  }
 }

@@ -51,7 +51,7 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
     this.taskService.getAllProjectTask({"id" : this.currentProject.id}).subscribe((res)=>
     {
       if( res.data != null) {
-             this.tasks = res.data; 
+             //this.tasks = res.data; 
       }
 
    

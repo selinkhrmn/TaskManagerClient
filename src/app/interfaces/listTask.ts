@@ -2,14 +2,14 @@ export interface ListTask {
     
     id: number;
     name: string;
-    columnId: string;
+    columnId: number;
     //kategori: string;
-    assigneeId: number;
-    reporterId:number;
-    DueDate: Date;
-    Priority: number;
-    UpdateDate:Date;
-    CreateDate:Date;
+    assigneeId: string;
+    reporterId:string;
+    dueDate: Date;
+    priority: number;
+    updateDate:Date;
+    createDate:Date;
     
     
   }

@@ -17,7 +17,7 @@ import { ProjectDto } from 'src/app/interfaces/project';
 export class AdminProjectsComponent {
   @ViewChild(MatSort) sort: MatSort;
 
-  
+  project: any;
   projects : Project[] = [];
   dataSource : MatTableDataSource<ProjectDto>;
   displayedColumns: string[] = ['Name','CreatedDate', 'ProjectDate'];
@@ -44,4 +44,9 @@ export class AdminProjectsComponent {
   return Math.abs(Math.floor(timeDifference / millisecondsPerDay));
 }
 
+  getProject(id : Partial<Project>) {
+    this.projectService.getProject(id).subscribe((res) => {
+      console.log(res);
+    })
+  }
 }

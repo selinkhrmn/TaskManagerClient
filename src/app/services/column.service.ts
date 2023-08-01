@@ -9,6 +9,7 @@ import { OnInit } from '@angular/core';
 import { Project } from '../interfaces';
 import { ProjectDto } from '../interfaces/project';
 import { TokenService } from './token.service';
+import { ColumnDto } from '../interfaces/columnDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,7 +38,7 @@ export class ColumnService {
   }
 
   GetAllProjectColumns(id: Partial<ProjectDto>) {
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/GetAllProjectColumns`, id, this.httpOptions);
+    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/GetAllProjectColumns`, id, this.httpOptions);
   }
 
   GetProjectColumnsTasks(id: Partial<ProjectDto>): Observable<ResponseModel<ColumnTask>> {

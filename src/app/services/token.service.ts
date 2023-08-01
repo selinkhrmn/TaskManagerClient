@@ -38,6 +38,10 @@ export class TokenService {
   tokenUsername(){
     return this.decodeToken().Username;
   }
+
+  tokenUserId(){
+    return this.decodeToken().UserId;
+  }
   
   tokenNameSurname(){
     let token = this.decodeToken();
