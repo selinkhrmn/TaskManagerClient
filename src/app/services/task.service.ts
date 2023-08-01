@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from '../interfaces';
 import { TokenService } from './token.service';
 import { ProjectDto } from '../interfaces/project';
+import { ListTask } from '../interfaces/listTask';
+import { UserDto } from '../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,6 +46,7 @@ export class TaskService {
   }
 
   getAllProjectTask(id: Partial<ProjectDto>) {
+    debugger
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
   }
 
@@ -51,6 +54,10 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, id, this.httpOptions);
   }
 
+  GetAllTaskForUser(id : Partial<UserDto>) {
+    debugger
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
+  }
 
 
   // setTask(task: any) {

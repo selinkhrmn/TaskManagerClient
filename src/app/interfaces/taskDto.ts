@@ -5,5 +5,13 @@ export class taskDto {
     name: string;
     columnId: number;
     priority: number;
-    user : User;
+    assignee : User;
+}
+
+export class TaskUserDto {
+    id : number;
+    name : string;
+    projectId : number;
+    priority : number;
+    assigneeId : string;
 }

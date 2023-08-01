@@ -66,5 +66,9 @@ export class TokenService {
     });
   }
 
+  getTokenId() {
+    let token = this.decodeToken();
+    return token.UserId;
+  }
   
 }

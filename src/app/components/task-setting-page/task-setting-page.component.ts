@@ -10,6 +10,7 @@ import { Task } from 'src/app/interfaces/task';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TranslocoService} from '@ngneat/transloco';
+import { ListTask } from 'src/app/interfaces/listTask';
 
 
 
@@ -54,15 +55,16 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
       }
 
    
+   
       this.dataSource = new MatTableDataSource<Task>(this.tasks);
-      // console.log(this.dataSource);
+     
 
       
       
       
     });
     this.projectName = this.currentProject.name;
-    // console.log(this.projectName);
+    
     
 
   }
