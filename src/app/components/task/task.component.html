@@ -53,10 +53,13 @@
           <label>
             <h3>Show:</h3>
           </label>
-          <button mat-button>All</button>
-          <button mat-button>Comments</button>
+          <div class="button-container">
+            <button mat-button>All</button>
+            <button mat-button>Comments</button>
+          </div>
         </div>
       </div>
+      
       <br>
 
       <div class="footer">
@@ -82,58 +85,63 @@
       <mat-icon class="icon" (click)="onCloseDetails()">close</mat-icon> <!-- Close icon -->
     </div>
     <div class="container">
-
-
       <div class="top_side">
         <h2>
           <label>Details</label>
         </h2>
       </div>
-
-      <!-- Rest of your HTML content -->
-
-
-
-
-
+    
       <div class="body">
-
-        <!-- Assignee -->
-        <div class="assignee card">
-          <mat-icon class="icon">person</mat-icon>
-          <div>
-            <label>{{'assignee' | transloco}}</label>
-            <div class="assigned_person">
-              <!--dropdown button ile atanan kişiyi göreceğiz-->
+        <div class="row justify-content-between"> <!-- "justify-content-between" ile kartları yatayda hizalar -->
+          <!-- Assignee -->
+          <div class="assignee card col-6"> <!-- "col-5" ile kartların yatayda 5/12 genişlikte olmasını sağlar -->
+            <mat-icon class="icon">person</mat-icon>
+            <div>
+              <label>{{'assignee' | transloco}}</label>
+              <div class="assigned_person">
+                <!--dropdown button ile atanan kişiyi göreceğiz-->
+              </div>
+            </div>
+          </div>
+    
+          <!-- Reporter -->
+          <div class="reporter card col-5"> <!-- "col-5" ile kartların yatayda 5/12 genişlikte olmasını sağlar -->
+            <mat-icon class="icon">report</mat-icon>
+            <div>
+              <label>{{'reporter' | transloco}}</label>
+              <div class="reported_person">
+                <!--dropdown button ile reporter kişiyi göreceğiz-->
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Reporter -->
-        <div class="reporter card">
-          <mat-icon class="icon">report</mat-icon>
-          <div>
-            <label>{{'reporter' | transloco}}</label>
-            <div class="reported_person">
-              <!--dropdown button ile reporter kişiyi göreceğiz-->
+    
+        <div class="row justify-content-between"> <!-- "justify-content-between" ile kartları yatayda hizalar -->
+          <!-- Priority -->
+          <div class="priority card col-6"> <!-- "col-5" ile kartların yatayda 5/12 genişlikte olmasını sağlar -->
+            <mat-icon class="icon">priority_high</mat-icon>
+            <div>
+              <label>{{'priority' | transloco}}</label>
+              <div class="priority-value">
+                {{ task.priority }}
+              </div>
+            </div>
+          </div>
+    
+          <!-- Reporting -->
+          <div class="priority card col-5"> <!-- "col-5" ile kartların yatayda 5/12 genişlikte olmasını sağlar -->
+            <mat-icon class="icon">person</mat-icon>
+            <div>
+              <label>Reporting</label>
+              <div class="priority-value">
+                {{ tokenService.tokenFullName() }}
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Priority -->
-        <div class="priority card">
-          <mat-icon class="icon">priority_high</mat-icon>
-          <div>
-            <label>{{'priority' | transloco}}</label>
-            <div class="priority-value">
-              {{ task.priority }}
-            </div>
-          </div>
-        </div>
-
+    
         <!-- Due Date -->
-        <div class="due_date card">
-
+        <div class="due_date card col-12">
           <div>
             <label>{{'dueDate' | transloco}}</label>
             <mat-form-field>
@@ -143,17 +151,8 @@
             </mat-form-field>
           </div>
         </div>
-        <!-- <div class="time_tracking card">
-            <label>Time Tracking</label>
-            <div class="time_tracking">
-            </div>
-        </div> -->
-        <!-- <div class="start_date card">
-            <label>{{'startedDate' | transloco}}</label>
-            <div class="start_date">
-            </div>
-        </div> -->
       </div>
     </div>
+    
   </div>
 </div>

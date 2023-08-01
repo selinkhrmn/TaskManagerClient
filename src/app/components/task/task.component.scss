@@ -10,7 +10,23 @@
     margin-bottom: 0; // Son çocuk elemanın alt marjını sıfırla
   }
 }
+.left-aligned-buttons {
+  /* Add the following styles to make the buttons inline-block */
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0;
+  
+  label {
+    /* Adjust the styles as needed */
+    margin-right:20px;
+  }
 
+  button {
+    /* Adjust the styles as needed */
+    margin: 0;
+  }
+
+}
 .left_side {
   position: relative; 
   padding: 40px;
@@ -24,7 +40,7 @@
   margin-right: 80px;
 
   button {
-    background: #26628714;
+    background: #b9cfdd11;
     font-size: 14px;
     font-weight: 700;
   }
@@ -57,7 +73,7 @@
   .inputName {
     border: none;
     outline: none;
-    background-color: #7f99b319;
+    background: #d8dbdf2b;
     width: 100%;       // Genişliği maksimuma çıkarıyoruz. İhtiyaçlarınıza göre ayarlayabilirsiniz.
     height: 40px;      // Yüksekliği 40px olarak ayarlıyoruz. İhtiyaçlarınıza göre bu değeri değiştirebilirsiniz.
     justify-content: center; // Yatay ortalamayı sağlar
@@ -75,7 +91,7 @@
     font-size: 18px;
     font-weight: 700;
     border-radius: 5px;
-    background:#7f99b319;
+    background: #d8dbdf18;
     margin-bottom: 10px;
     .top_side {
      
@@ -86,7 +102,8 @@
       border-bottom: 0.25px solid #227ad934;
       box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
     }
-  
+   
+    
     h2 {
       font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
       
@@ -107,14 +124,15 @@
     }
   
     .add-subtopic-button {
-      background:#26628714; // You can adjust the background color as needed
+      background: #b9cfdd11; // You can adjust the background color as needed
     }
     .button-container {
       display: flex;
+      
       justify-content: start; /* or "space-between" if you want them to occupy the entire width */
       text-align: center;
       button {
-        margin-right: 10px; /* Space between the buttons */
+        margin-right: 5px; /* Space between the buttons */
         align-items: start;
         text-align: center; /* Center the text inside the button */
         
@@ -136,7 +154,7 @@
    
     font-size: 18px;
     border-radius: 5px;
-    background: #7f99b319; 
+    background: #d8dbdf18; 
     h1,h2,h3 {
       padding: 5px;
       
@@ -155,15 +173,38 @@
     }
   
     .tabs {
+      display: flex;
+  align-items: center; /* İçerikleri dikeyde ortalamak için */
       height: 10%;
       width: 40%;
       // background-color: burlywood;
-      display: flex;
-      align-items: center;
+      
       justify-content: space-between;
        h3 {
   margin: 0;
   padding-right: 10px;
+}
+.left-aligned-buttons {
+  /* Add the following styles to make the buttons inline-block */
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0;
+
+  label {
+    /* Adjust the styles as needed */
+    margin-right: 10px;
+  }
+
+  button {
+    /* Adjust the styles as needed */
+    margin: 0;
+  }
+}
+
+.button-container {
+  /* Add the following styles to make the buttons inline-block */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 
@@ -172,7 +213,7 @@
       }
     }
   }
-
+ 
   .footer {
     
     .comments {
@@ -211,17 +252,20 @@
     color: #020e19;
     padding-left: -10px;  // Çizginin solunda hafif bir boşluk bırakıyoruz.
     border-left: 1px solid #ffffff;  // Çizgiyi daha kalın ve belirgin yapıyoruz.
-    box-shadow: -2px 0px 15px #0e4e9354;  // Çizgiye daha derin bir gölge ekliyoruz.
+    
     background: #ffffff;
     margin-right: 90px;
     .container {
-      width: 120%;  // Genişliği artırıyoruz.
+      width: 170%;  // Genişliği artırıyoruz.
     height: 85%;  // Yüksekliği artırıyoruz.
-      background: #7f99b319;  
+    background: #d8dbdf0f;  
       border-radius: 10px;
       padding: 45px;
-      margin-right: 70;
+     
       position: relative;
+      border: 1px solid #4e57a050;
+ 
+  margin: 20px;
       h2 {
         font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
       }
@@ -234,8 +278,8 @@
       justify-content: space-between;
       align-items: center;
       height: 5%;
-      border-bottom: 0.25px solid #227ad934;
-      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid #227ad934;
+      
 
       
     }
@@ -281,7 +325,7 @@
   align-items: center; // İçerikleri merkeze hizala
   
   .icon {
-    margin-right: 50px; // İkon ile içerik arasında bir boşluk bırak
+    margin-right: 10px; // İkon ile içerik arasında bir boşluk bırak
   }
 }
 .project-heading {
@@ -330,3 +374,4 @@
   align-items: center;
   background: #236bb735;
 }
+/* Assignee ve Reporter arasına boşluk bırakmak için .card sınıfına margin-bottom ekleyebiliriz */

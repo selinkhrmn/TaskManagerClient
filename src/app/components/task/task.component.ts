@@ -11,6 +11,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import {  ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { TokenService } from 'src/app/services/token.service';
 
 
 interface DialogData{
@@ -57,6 +58,7 @@ export class TaskComponent  {
     private dialogRef: MatDialogRef<TaskComponent>,
     private fb: FormBuilder,
     private router: Router,
+    public tokenService: TokenService, 
     private location: Location
     ) { }
 
