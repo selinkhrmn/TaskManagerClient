@@ -115,7 +115,7 @@ export class AdminTasksComponent implements OnInit{
       
       if( res.data != null) {
         res.data.forEach(element => {
-          this.tasks.push(element);
+          // this.tasks.push(element);
         });
              console.log(this.tasks);
              

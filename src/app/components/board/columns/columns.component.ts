@@ -27,7 +27,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/interfaces/column';
 import { ProjectService } from 'src/app/services';
 import { EditColumnComponent } from '../edit-column/edit-column.component';
-import { columnDto } from 'src/app/interfaces/columnDto';
+import { ColumnDto } from 'src/app/interfaces/columnDto';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { TranslocoService} from '@ngneat/transloco';
 @Component({

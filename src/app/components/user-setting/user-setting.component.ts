@@ -62,9 +62,7 @@ mail: any;
   }
 
   GetAllProjectUsers() {
-    debugger
     this.userService.GetAllProjectUsers({ 'id': this.currentProjectId }).subscribe((res) => {
-      debugger
       console.log(res.data);
       this.users = res.data
       

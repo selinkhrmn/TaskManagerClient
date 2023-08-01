@@ -16,6 +16,7 @@ import { TranslocoService} from '@ngneat/transloco';
 import { PriorityService } from 'src/app/services/priority.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
+import { ColumnDto } from 'src/app/interfaces/columnDto';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -33,7 +34,7 @@ export class CreateIssueDialogComponent {
   selectedIcon: string;
 
   projects: Project[] = [];
-  columns: Column[] = [];
+  columns: ColumnDto[] = [];
   currentDate = new FormControl(new Date());
   currentProject: ProjectDto;
 
