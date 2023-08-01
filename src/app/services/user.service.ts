@@ -35,11 +35,16 @@ export class UserService {
   }
 
   GetAllProjectUsers(id: Partial<ProjectDto>) {
+    debugger
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
   AddUserToProject(projectUser : Partial<AddProjectUser>) {
     debugger
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
+  }
+
+  DeleteUserFromProject(id: string, projectId: number) {
+    return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, {userId:id, projectId: projectId}, this.httpOptions);
   }
 }

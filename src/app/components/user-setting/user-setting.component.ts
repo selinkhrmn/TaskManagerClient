@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
-import { FormControl, Validators } from '@angular/forms'; // Import FormControl and Validators
+import { FormControl, Validators } from '@angular/forms';
 
-import { TranslocoService} from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 import { RegisterPageComponent } from '../register-page/register-page.component';
-import { UserService } from 'src/app/services/user.service';
-import { UserDto } from 'src/app/interfaces/user';
+import { User, UserDto } from 'src/app/interfaces/user';
 import { AddPeopleToProjectComponent } from '../create-project/add-people-to-project/add-people-to-project.component';
 import { AddUserToProjectComponent } from '../add-user-to-project/add-user-to-project.component';
 import { ProjectService } from 'src/app/services';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
+import { ProjectDto } from 'src/app/interfaces/project';
+import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
+
+
 
 @Component({
   selector: 'app-user-setting',
@@ -17,60 +22,76 @@ import { ProjectService } from 'src/app/services';
   styleUrls: ['./user-setting.component.scss'],
 })
 export class UserSettingComponent {
-deleteUser(arg0: number) {
 
-}
+
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  roleFormControl = new FormControl(''); // Create the roleFormControl
+  roleFormControl = new FormControl('');
+
+  users: any[] = [];
+
+  currentProjectId: number;
+
+mail: any;
+
+ 
   constructor(
-    public translocoService : TranslocoService,
+    public translocoService: TranslocoService,
     public dialog: MatDialog,
     public userService: UserService,
-    public projectService: ProjectService){}
+    public projectService: ProjectService) { }
 
 
   openDialog() {
     this.dialog.open(RegisterPageComponent, {
-      width: '30%',
-      height: '90%'
+      width: '30%'
     });
   }
 
-  users : UserDto[] = [];
-  currentProjectId : number;
 
 
   ngOnInit() {
     this.getProjectId()
-      this.GetAllProjectUsers()
-  }    
+    this.GetAllProjectUsers()
+  }
 
   getProjectId() {
-    const project = this.projectService.getCurrentProject();
+    const project = this.projectService.getProjectLocal();
     this.currentProjectId = project.id
     console.log(project.id);
-    
+
   }
 
   GetAllProjectUsers() {
-    this.userService.GetAllProjectUsers({'id' : this.currentProjectId}).subscribe((res) => {
-      console.log(res);
+    debugger
+    this.userService.GetAllProjectUsers({ 'id': this.currentProjectId }).subscribe((res) => {
+      debugger
+      console.log(res.data);
+      this.users = res.data
+      
+      console.log(this.users);
       console.log(this.currentProjectId);
-      
-      
+
+
     })
   }
-  
+deleteUser(id : any)
+   {
+    console.log(id);
+    
+    this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
+        console.log('User deleted successfully');
+        this.ngOnInit();
+      },
+      (error: any) => {
+        console.error('Error deleting user:', error);
+      }
+    );
+  }
 
-// openDialog(): void {
-//   const dialogRef = this.dialog.open(RegisterPageComponent,{height: '650px',width: '400px',panelClass: 'dialog'});
-// }
-
-// openDialog1(): void {
-//   const dialogRef = this.dialog.open(AddUserToProjectComponent,{height: '100%',width: '100%',panelClass: 'dialog'});
-
-  openManageRoles() {
-   
+  openManageRoles(): void {
+    console.log('Manage Roles clicked');
   }
 }
+
+  
 
