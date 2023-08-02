@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { TranslocoService} from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
+import { ResponseModel } from 'src/app/interfaces/responseModel';
+import { UserDto } from 'src/app/interfaces/user';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+
+
 
 @Component({
   selector: 'app-add-people-to-project',
@@ -7,5 +13,25 @@ import { TranslocoService} from '@ngneat/transloco';
   styleUrls: ['./add-people-to-project.component.scss']
 })
 export class AddPeopleToProjectComponent {
-    constructor(public translocoService: TranslocoService){}
+  users: UserDto[] = [];
+  
+
+  constructor(public translocoService: TranslocoService,
+    private userService : UserService) { }
+  ngOnInit() 
+  {
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    this.userService.getAllUsers().subscribe(resp=>{
+      if(resp.isSuccessful){
+        this.users=resp.data
+
+      }else{
+        //alert error
+      }
+    });
+  }
+
 }

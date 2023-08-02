@@ -7,17 +7,17 @@
     <div class="right_side_wrapper">
       <div class="topside">
         <div class="labels">
-           <label>Add People</label>
-        <label>To Your Project</label> 
+          <label>Add People</label>
+          <label>To Your Project</label>
         </div>
-        
+
         <div class="the_person">
           <button mat-button>Cihan</button>
           <button mat-button>Admin</button>
         </div>
       </div>
 
-      <div class="projects">
+      <!-- <div class="projects">
         <label>{{'Users' | transloco}}</label>
         <div class="projects_container">
           <mat-radio-button>User1</mat-radio-button>
@@ -25,7 +25,14 @@
           <mat-radio-button>User3</mat-radio-button>
           <mat-radio-button>User4</mat-radio-button>
         </div>
+      </div> -->
+      <div class="projects">
+        <label>{{ 'Users' | transloco }}</label>
+        <div class="projects_container">
+          <mat-radio-button *ngFor="let user of users" [value]="user.id">{{ user.name }}</mat-radio-button>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
