@@ -13,6 +13,7 @@ import { CreateIssueDialogComponent } from '../../create-issue-dialog/create-iss
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ListTask } from 'src/app/interfaces/listTask';
 import { TaskUserDto } from 'src/app/interfaces/taskDto';
+import { TaskComponent } from '../../task/task.component';
 
 @Component({
   selector: 'app-admin-tasks',
@@ -20,6 +21,7 @@ import { TaskUserDto } from 'src/app/interfaces/taskDto';
   styleUrls: ['./admin-tasks.component.scss']
 })
 export class AdminTasksComponent implements OnInit {
+
   currentProject: ProjectDto;
   projectName: string;
   projects: Project[] = [];
@@ -37,6 +39,7 @@ taskUserDto : TaskUserDto[] = [];
 
 // @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatTable) table: MatTable<Task>;
+id: any;
 
 
 
@@ -93,4 +96,18 @@ openCreateIssueDialog() {
 
 
 }
+
+openTaskDialog(id : number) {
+ this.taskService.getTaskById({"id" : id}).subscribe((res) => {
+  this.taskArray = res.data;
+  
+  
+  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray}, width : '60%'});
+  dialogS.afterClosed().subscribe((res) => {
+    window.location.reload();
+  })
+ })
+
+
+  }
 }

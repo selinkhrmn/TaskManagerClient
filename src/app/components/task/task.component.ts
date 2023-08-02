@@ -99,7 +99,6 @@ export class TaskComponent  {
   }
 
   updateTask(){
-    debugger;
     if(this.data.task != this.task ){
       this.taskService.updateTask(this.task).subscribe((res)=> {
         console.log(res.data);
@@ -110,6 +109,7 @@ export class TaskComponent  {
 
   closeDialog() {
     this.dialogRef.close();
+    
   }
   config: AngularEditorConfig = {
     editable: true,

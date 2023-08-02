@@ -54,7 +54,6 @@ export class TaskService {
   }
 
   GetAllTaskForUser(id : Partial<UserDto>) {
-    debugger
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
   }
 
