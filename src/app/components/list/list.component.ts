@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ListTask } from 'src/app/interfaces/listTask';
 import { TokenService } from 'src/app/services/token.service';
@@ -12,13 +12,18 @@ import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { UserService } from 'src/app/services/user.service';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class ListComponent implements OnInit {
+  @ViewChild('filterMenu', { static: true }) filterMenu: MatMenuTrigger;
+
   listData: ListTask[] = [];
   filteredData: ListTask[] = [];
   columns: string[] = [
@@ -33,7 +38,7 @@ export class ListComponent implements OnInit {
   projectColumns: ColumnDto[] = [];
   selectedColumns: number[] = [];
   isColumnMenuOpen = false;
-
+  customMenuClass = 'custom-menu-panel'
 
   constructor(
     private http: HttpClient,
@@ -51,8 +56,8 @@ export class ListComponent implements OnInit {
     this.taskService.getAllProjectTask({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         console.log(res.data);
-        this.listData = res.data;
-        this.filteredData = res.data;
+        // this.listData = res.data;
+        // this.filteredData = res.data;
       }
     });
 
