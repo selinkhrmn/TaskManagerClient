@@ -8,8 +8,8 @@ export interface ListTask {
     reporterId:string;
     dueDate: Date;
     priority: number;
-    updateDate:Date;
-    createDate:Date;
+    updatedDate:Date;
+    createdDate:Date;
     
     
   }

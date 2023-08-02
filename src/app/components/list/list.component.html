@@ -1,7 +1,7 @@
 <div class="header">
   <span class="user-name" (click)="handleUsernameClick()">{{
     tokenService.tokenNameSurname()
-  }}</span>
+    }}</span>
   <div class="search-bar">
     <div class="search-input">
       <input matInput #searchInput placeholder="Listeyi arayın" />
@@ -34,33 +34,21 @@
   </div>
 </div>
 <mat-menu #filterMenu="matMenu" [class]="customMenuClass">
-  <button
-  class="custom-menu-item"
-    mat-menu-item
-    [class.active]="activeFilters.includes('AssignedToMe')"
-    (click)="applyFilter('AssignedToMe')"
-  >
-    <mat-icon>account_circle</mat-icon> Assigned To me
-    <mat-icon
-      *ngIf="activeFilters.includes('AssignedToMe')"
-      class="selected-icon"
-      >check_circle
-    </mat-icon
-    >
+  <div>NEDEN</div>
+  <div>BÖYLE</div>
+  <div>mfkgelrgm</div>
+  <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('AssignedToMe')"
+    (click)="applyFilter('AssignedToMe')">
+    <mat-icon>account_circle</mat-icon> Assigned To Me
+    <mat-icon *ngIf="activeFilters.includes('AssignedToMe')" class="selected-icon">check_circle
+    </mat-icon>
   </button>
+  
 
-  <button
-  class="custom-menu-item"
-    mat-menu-item
-    [class.active]="activeFilters.includes('DueDateThisWeek')"
-    (click)="applyFilter('DueDateThisWeek')"
-  >
+  <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('DueDateThisWeek')"
+    (click)="applyFilter('DueDateThisWeek')">
     Due date this week <mat-icon>notification_important</mat-icon>
-    <mat-icon
-      *ngIf="activeFilters.includes('DueDateThisWeek')"
-      class="selected-icon"
-      >check_circle</mat-icon
-    >
+    <mat-icon *ngIf="activeFilters.includes('DueDateThisWeek')" class="selected-icon">check_circle</mat-icon>
   </button>
 
   <button class="custom-menu-item" mat-menu-item (click)="applyFilter('CompletedTasks')">
@@ -71,50 +59,25 @@
   </button>
   <div class="date-input-container">
     <mat-form-field class="mat-form-field">
-      <input
-        matInput
-        [matDatepicker]="fromDatePicker"
-        placeholder="From Date"
-        [(ngModel)]="fromDate"
-      />
-      <mat-datepicker-toggle
-      class="mat-datepicker-toggle"
-        matSuffix
-        [for]="fromDatePicker"
-      ></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="fromDatePicker" placeholder="From Date" [(ngModel)]="fromDate" />
+      <mat-datepicker-toggle class="mat-datepicker-toggle" matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #fromDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-icon class="custom-icon">arrow_forward</mat-icon>
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="toDatePicker"
-        placeholder="To Date"
-        [(ngModel)]="toDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="toDatePicker"
-      ></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="toDatePicker" placeholder="To Date" [(ngModel)]="toDate" />
+      <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #toDatePicker></mat-datepicker>
     </mat-form-field>
   </div>
-  <button class="custom-menu-item" mat-menu-item (click)="applyFilter('AssignedTo')"></button>
+
+  <button class="custom-menu-item" mat-menu-item (click)="applyFilter('AssignedTo')">Assigned To</button>
   <!-- Kişiler gelecek çoook kişi var ise üç nokta -->
-  <button
-  class="custom-menu-item"
-    *ngIf="selectedColumns.length == 0"
-    mat-menu-item
-    (click)="applyFilter('Columns')"
-  >
+
+  <button class="custom-menu-item" *ngIf="selectedColumns.length == 0" mat-menu-item (click)="applyFilter('Columns')">
     Columns
   </button>
-  <button
-  class="custom-menu-item"
-    *ngIf="selectedColumns.length != 0"
-    mat-menu-item
-    (click)="applyFilter('Columns')"
-  >
+  <button class="custom-menu-item" *ngIf="selectedColumns.length != 0" mat-menu-item (click)="applyFilter('Columns')">
     Columns {{ selectedColumns.length }}
   </button>
   <div class="column-filter">
@@ -128,31 +91,15 @@
   </button>
   <div class="date-input-container">
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="fromDatePicker"
-        placeholder="From Date"
-        [(ngModel)]="updatedFromDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="fromDatePicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #fromDatePicker></mat-datepicker>
+      <input matInput [matDatepicker]="updatedFromDatePicker" placeholder="From Date" [(ngModel)]="updatedFromDate" />
+      <mat-datepicker-toggle matSuffix [for]="updatedFromDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #updatedFromDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-icon class="custom-icon">arrow_forward</mat-icon>
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="toDatePicker"
-        placeholder="To Date"
-        [(ngModel)]="updatedToDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="toDatePicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #toDatePicker></mat-datepicker>
+      <input matInput [matDatepicker]="updatedToDatePicker" placeholder="To Date" [(ngModel)]="updatedToDate" />
+      <mat-datepicker-toggle matSuffix [for]="updatedToDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #updatedToDatePicker></mat-datepicker>
     </mat-form-field>
   </div>
 
@@ -161,38 +108,31 @@
   </button>
   <div class="date-input-container">
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="fromDatePicker"
-        placeholder="From Date"
-        [(ngModel)]="createdFromDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="fromDatePicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #fromDatePicker></mat-datepicker>
+      <input matInput [matDatepicker]="createdFromDatePicker" placeholder="From Date" [(ngModel)]="createdFromDate" />
+      <mat-datepicker-toggle matSuffix [for]="createdFromDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdFromDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-icon class="custom-icon">arrow_forward</mat-icon>
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="toDatePicker"
-        placeholder="To Date"
-        [(ngModel)]="createdToDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="toDatePicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #toDatePicker></mat-datepicker>
+      <input matInput [matDatepicker]="createdToDatePicker" placeholder="To Date" [(ngModel)]="createdToDate" />
+      <mat-datepicker-toggle matSuffix [for]="createdToDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdToDatePicker></mat-datepicker>
     </mat-form-field>
   </div>
 
-  <button class="custom-menu-item" mat-menu-item (click)="applyFilter('Reporter')"></button>
-  <!-- <button mat-menu-item (click)="applyFilter('Priorities')">
-    <img class="priority-icon" [src]="priorities[0]" alt="Icon" />
-  </button> -->
+  <button class="custom-menu-item" mat-menu-item (click)="applyFilter('Reporter')">Reporter</button>
+
+  <button mat-menu-item (click)="applyFilter('Priorities')"><mat-icon>priority_high</mat-icon> Priorities {{selectedPriorities.length}}
+  </button>
+  <div class="priority-images">
+    <img (click)="handlePriorityClick(1)" [class.selected]="selectedPriorities.includes(1)" src="../../assets/lowest.png" alt="Easy" />
+    <img (click)="handlePriorityClick(2)" [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png" alt="Medium" />
+    <img (click)="handlePriorityClick(3)" [class.selected]="selectedPriorities.includes(3)" src="../../assets/medium.png" alt="Normal" />
+    <img (click)="handlePriorityClick(4)" [class.selected]="selectedPriorities.includes(4)" src="../../assets/high.png" alt="Difficult" />
+    <img (click)="handlePriorityClick(5)" [class.selected]="selectedPriorities.includes(5)" src="../../assets/highest.png" alt="Difficult" />
+  </div>
+  
+
 </mat-menu>
 
 <div class="outer-container">
@@ -253,11 +193,7 @@
           <mat-icon>priority_high</mat-icon> {{ "priority" | transloco }}
         </th>
         <td mat-cell *matCellDef="let ListTask">
-          <img
-            [src]="priorityService.getIcon(ListTask.priority)"
-            alt="Priority Icon"
-            class="priority-icon"
-          />
+          <img [src]="priorityService.getIcon(ListTask.priority)" alt="Priority Icon" class="priority-icon" />
         </td>
       </ng-container>
 
@@ -279,9 +215,7 @@
         </td>
       </ng-container>
 
-      <tr
-        mat-header-row
-        *matHeaderRowDef="[
+      <tr mat-header-row *matHeaderRowDef="[
           'name',
           'columnId',
           'assigneeId',
@@ -290,11 +224,8 @@
           'Priority',
           'UpdateDate',
           'CreateDate'
-        ]"
-      ></tr>
-      <tr
-        mat-row
-        *matRowDef="
+        ]"></tr>
+      <tr mat-row *matRowDef="
           let row;
           columns: [
             'name',
@@ -306,8 +237,7 @@
             'UpdateDate',
             'CreateDate'
           ]
-        "
-      ></tr>
+        "></tr>
     </table>
   </div>
 </div>

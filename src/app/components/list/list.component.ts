@@ -39,6 +39,8 @@ export class ListComponent implements OnInit {
   selectedColumns: number[] = [];
   isColumnMenuOpen = false;
   customMenuClass = 'custom-menu-panel'
+  selectedPriorities: number[] = [];
+  appliedFilter: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -56,8 +58,8 @@ export class ListComponent implements OnInit {
     this.taskService.getAllProjectTask({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         console.log(res.data);
-        // this.listData = res.data;
-        // this.filteredData = res.data;
+         this.listData = res.data;
+         this.filteredData = res.data;
       }
     });
 
@@ -77,9 +79,6 @@ export class ListComponent implements OnInit {
 
   }
 
-  toggleColumnMenu() {
-    this.isColumnMenuOpen = !this.isColumnMenuOpen;
-  }
 
   applyFilter(filter: string) {
     // if (this.activeFilters.includes(filter)) {
@@ -89,9 +88,17 @@ export class ListComponent implements OnInit {
     //   this.activeFilters.push(filter);
     // }
 
+    this.filteredData = this.listData;
     if (filter === 'Columns') {
-      this.filterByColumns(); // Update the selected columns immediately
-    } else {
+      this.filterByColumns();
+    }
+    else if(filter === 'Priorities'){
+      if(this.selectedPriorities.length != 0){
+        debugger;
+        this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority)); 
+      }
+    }
+    else {
       if (this.activeFilters.includes(filter)) {
         this.activeFilters = this.activeFilters.filter(f => f !== filter);
       } else {
@@ -100,9 +107,9 @@ export class ListComponent implements OnInit {
     }
 
 
-    this.filteredData = this.listData;
 
     if (this.activeFilters.includes('AssignedToMe')) {
+      debugger;
       this.filteredData = this.filteredData.filter(t => t.assigneeId == this.tokenService.tokenUserId());
     }
 
@@ -127,10 +134,9 @@ export class ListComponent implements OnInit {
       const fromDate = new Date(this.fromDate);
       if (this.fromDate && this.toDate) {
         const toDate = new Date(this.toDate);
-
-        this.filteredData = this.listData.filter(t => {
-          const taskCreateDate = new Date(t.createDate);
-          const taskUpdatedDate = new Date(t.updateDate);
+        this.filteredData = this.filteredData.filter(t => {
+          const taskCreateDate = new Date(t.createdDate);
+          const taskUpdatedDate = new Date(t.updatedDate);
           const taskDueDate = new Date(t.dueDate);
           return ((taskCreateDate >= fromDate && taskCreateDate <= toDate) ||
             (taskUpdatedDate >= fromDate && taskUpdatedDate <= toDate) ||
@@ -138,9 +144,9 @@ export class ListComponent implements OnInit {
         });
       }
       else if (this.fromDate) {
-        this.filteredData = this.listData.filter(t => {
-          const taskCreateDate = new Date(t.createDate);
-          const taskUpdatedDate = new Date(t.updateDate);
+        this.filteredData = this.filteredData.filter(t => {
+          const taskCreateDate = new Date(t.createdDate);
+          const taskUpdatedDate = new Date(t.updatedDate);
           const taskDueDate = new Date(t.dueDate);
           return ((taskCreateDate >= fromDate) ||
             (taskUpdatedDate >= fromDate) ||
@@ -169,10 +175,17 @@ export class ListComponent implements OnInit {
       //user objesi oluşturulacak, seçilen user ona verilecek buraya sadece id gerekli
       //this.filteredData = this.filteredData.filter(t => t.reporterId == this.user.id);
     }
-    if (this.activeFilters.includes('Priority')) {
-
-    }
   }
+
+  handlePriorityClick(priority: number) {
+    if (this.selectedPriorities.includes(priority)) {
+      this.selectedPriorities = this.selectedPriorities.filter(p => p !== priority);
+    } else {
+      this.selectedPriorities.push(priority);
+    }
+    this.applyFilter('Priorities');
+  }
+  
 
   filterByColumns() {
     const selectedColumnIds = this.selectedColumns;
@@ -182,7 +195,7 @@ export class ListComponent implements OnInit {
     }
     this.activeFilters = this.activeFilters.filter(filter => filter !== 'Columns');
 
-    return this.listData.filter(item => {
+    return this.filteredData.filter(item => {
       return selectedColumnIds.includes(item.columnId);
     });
   }
@@ -190,15 +203,15 @@ export class ListComponent implements OnInit {
   checkDates(fromDate: Date, toDate: Date) {
     const from = new Date(fromDate);
     const to = new Date(toDate);
-    if (fromDate && this.toDate) {
+    if (fromDate && toDate) {
       this.filteredData = this.filteredData.filter(t => {
-        const taskUpdatedDate = new Date(t.updateDate);
+        const taskUpdatedDate = new Date(t.updatedDate);
         return (taskUpdatedDate >= from && taskUpdatedDate <= to);
       });
     }
     else if (fromDate) {
       this.filteredData = this.filteredData.filter(t => {
-        const taskUpdatedDate = new Date(t.updateDate);
+        const taskUpdatedDate = new Date(t.updatedDate);
         return (taskUpdatedDate >= fromDate);
       });
     }

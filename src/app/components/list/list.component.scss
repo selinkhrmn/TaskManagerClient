@@ -1,59 +1,63 @@
 .overflow-table-container {
-    width: 120%;
-    height: 500px;  // Bu değeri tablonun içeriğine göre ayarlayabilirsiniz.
-   
-    border: 1px solid #ccc;
+  width: 120%;
+  height: 500px; // Bu değeri tablonun içeriğine göre ayarlayabilirsiniz.
 
-    table {
-        width: 100%;
-        min-width: 1500px; // Bu değeri tablonuzun genişliğine göre ayarlayabilirsiniz.
-        border-collapse: collapse;
-        background: #ffffff;
-      
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            width: 150px;  // Her sütunu 150px genişlikte yapar
-            max-width: 150px; // Sütunun genişlemesini engeller
-            overflow: hidden;  // İçerik sütun genişliğini aşarsa görüntülenmez
-            text-overflow: ellipsis;  // İçerik sütun genişliğini aşarsa "..." ile gösterilir
-            white-space: nowrap;  
-        }
-      
-        th {
-            background-color: #ffffff;
-        }
-      
-        tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-      
-        tr:hover {
-            background-color: #ffffff;
-        }
+  border: 1px solid #ccc;
+
+  table {
+    width: 100%;
+    min-width: 1500px; // Bu değeri tablonuzun genişliğine göre ayarlayabilirsiniz.
+    border-collapse: collapse;
+    background: #ffffff;
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      width: 150px; // Her sütunu 150px genişlikte yapar
+      max-width: 150px; // Sütunun genişlemesini engeller
+      overflow: hidden; // İçerik sütun genişliğini aşarsa görüntülenmez
+      text-overflow: ellipsis; // İçerik sütun genişliğini aşarsa "..." ile gösterilir
+      white-space: nowrap;
     }
-    
+
+    th {
+      background-color: #ffffff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    tr:hover {
+      background-color: #ffffff;
+    }
+  }
+
 }
+
 .outer-container {
-    
-        width: 100%;
-        height: 500px;
-        overflow: auto;  // Hem yatay hem de dikey kaydırmayı etkinleştirir
-        border: 0px solid #ccc;
-    
-    
+
+  width: 100%;
+  height: 500px;
+  overflow: auto; // Hem yatay hem de dikey kaydırmayı etkinleştirir
+  border: 0px solid #ccc;
+
+
 }
+
 mat-icon {
-    font-size: 22px;  // İkon boyutunu küçültür. İsterseniz bu değeri ayarlayabilirsiniz.
-    color: rgb(84, 110, 177);    // İkon rengini beyaz yapar.
-    vertical-align: middle;  // Metinle aynı hizada olmasını sağlar.
+  font-size: 22px; // İkon boyutunu küçültür. İsterseniz bu değeri ayarlayabilirsiniz.
+  color: rgb(84, 110, 177); // İkon rengini beyaz yapar.
+  vertical-align: middle; // Metinle aynı hizada olmasını sağlar.
 }
 
 .priority-icon {
-  width: 20px; 
+  width: 20px;
   height: 20px;
 }
+
 .filter-menu .active {
   font-weight: bold;
 }
@@ -62,7 +66,7 @@ mat-icon {
   // margin-left: auto;
   position: absolute;
   right: 0;
-  color: green; 
+  color: green;
 }
 
 button.mat-menu-item {
@@ -85,11 +89,29 @@ button.mat-menu-item {
   // overflow: auto;
 }
 
-.mat-form-field{
- input {
-  height: 100%;
-  width: 120px;
- }
+.mat-form-field {
+  input {
+    height: 100%;
+    width: 120px;
+  }
+}
+
+.priority-images img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  transition: transform 0.2s;
+}
+
+.priority-images {
+  display: flex;
+  align-items: center;
+  left: 10px;
+}
+
+.priority-images img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
@@ -99,119 +121,130 @@ button.mat-menu-item {
 .custom-icon {
   margin: 5px;
 }
+
 .custom-menu-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 8px 16px; /* Adjust padding as needed */
-  border-radius: 4px; /* Adjust border-radius as needed */
+  padding: 8px 16px;
+  /* Adjust padding as needed */
+  border-radius: 4px;
+  /* Adjust border-radius as needed */
   // background-color: #2196F3; /* Adjust background color as needed */
-  color: white; /* Adjust text color as needed */
-  font-weight: bold; /* Adjust font weight as needed */
+  color: white;
+  /* Adjust text color as needed */
+  font-weight: bold;
+  /* Adjust font weight as needed */
   position: relative;
-  margin:3px; //tüm butonlar arası mesafe
+  margin: 3px; //tüm butonlar arası mesafe
 }
+
 .filter_wrapper {
   width: 900px !important;
 }
 
-.date-input-container{
-// display: flex;  
-// width: 100%;
-// height: 100%;
-// gap: 10px;
-// justify-content: center;
-// align-items: center;
-}
+// .date-input-container{
+// // display: flex;  
+// // width: 100%;
+// // height: 100%;
+// // gap: 10px;
+// // justify-content: center;
+// // align-items: center;
+// }
 
 .header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-bar {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-input {
-    width: 400px;  // Arama çubuğunun genişliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
-    height: 40px;  // Arama çubuğunun yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 400px; // Arama çubuğunun genişliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  height: 40px; // Arama çubuğunun yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
 }
 
 .search-input input {
-    height: 25px;  // Input elemanının yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
-    font-size: 16px;  // Input elemanındaki yazının boyutunu ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  height: 25px; // Input elemanının yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  font-size: 16px; // Input elemanındaki yazının boyutunu ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
 }
 
-  
-  input {
-    flex: 1;
-    height: 20px;
-    font-size: 12px;
-  }
-  
-  button {
-    margin-left: 5px;
-    border-radius: 50%;
-    color:  rgb(150, 146, 146);
-    background-color: rgb(255, 255, 255);
-    padding: 5px;
-    font-size: 12px;
-  }
-  
-  .user-info {
 
-    align-items: center;
-    display: flex;
-    margin-left: auto; /* Align the buttons to the right */
-    padding: 5px; /* Add some padding to the container */
-  }
-  
-  .user-info button {
-    align-items: center;
-    display: flex;
- 
-    width: 110px;  // Buton genişliğini ayarlayın.
-    height: 40px;  // Buton yüksekliğini ayarlayın.
-    border-radius: 10%;
-    border: none;
+input {
+  flex: 1;
+  height: 20px;
+  font-size: 12px;
 }
 
-  
-  .user-name {
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: #5f5fcc;
-    color:  #ffffff;
-    padding: 18px;
-    margin-left: 2px;
-    margin-right:5px;
-  }
-  
-  .user-name:hover {
-    background-color: rgb(55, 3, 20);
-  }
-  
-  .add-person-button {
-    border-radius: 10%;
-    background-color: #ffffff;
-    color: rgb(123, 123, 123);
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    margin-left: 2px;
-    margin-right: 2px; /* Adjust the margin to bring the button closer to the search bar */
-  }
-  
-  .add-person-button i {
-    font-size: 16px;
-    margin-right: 5px; /* Adjust the icon margin to improve spacing */
-  }
-  .search-bar button {
-    background-color: transparent;
-    margin-left: -10px;
+button {
+  margin-left: 5px;
+  border-radius: 50%;
+  color: rgb(150, 146, 146);
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  font-size: 12px;
 }
 
-  
-  /* ... other styles ... */
+.user-info {
+
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  /* Align the buttons to the right */
+  padding: 5px;
+  /* Add some padding to the container */
+}
+
+.user-info button {
+  align-items: center;
+  display: flex;
+
+  width: 110px; // Buton genişliğini ayarlayın.
+  height: 40px; // Buton yüksekliğini ayarlayın.
+  border-radius: 10%;
+  border: none;
+}
+
+
+.user-name {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #5f5fcc;
+  color: #ffffff;
+  padding: 18px;
+  margin-left: 2px;
+  margin-right: 5px;
+}
+
+.user-name:hover {
+  background-color: rgb(55, 3, 20);
+}
+
+.add-person-button {
+  border-radius: 10%;
+  background-color: #ffffff;
+  color: rgb(123, 123, 123);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  margin-right: 2px;
+  /* Adjust the margin to bring the button closer to the search bar */
+}
+
+.add-person-button i {
+  font-size: 16px;
+  margin-right: 5px;
+  /* Adjust the icon margin to improve spacing */
+}
+
+.search-bar button {
+  background-color: transparent;
+  margin-left: -10px;
+}
+
+
+/* ... other styles ... */
