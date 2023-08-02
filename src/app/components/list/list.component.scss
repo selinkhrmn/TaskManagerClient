@@ -59,7 +59,9 @@ mat-icon {
 }
 
 .selected-icon {
-  margin-left: auto;
+  // margin-left: auto;
+  position: absolute;
+  right: 0;
   color: green; 
 }
 
@@ -86,10 +88,12 @@ button.mat-menu-item {
 .mat-form-field{
  input {
   height: 100%;
+  width: 120px;
  }
+}
 
-
-
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  width: 150px;
 }
 
 .custom-icon {
@@ -104,6 +108,8 @@ button.mat-menu-item {
   // background-color: #2196F3; /* Adjust background color as needed */
   color: white; /* Adjust text color as needed */
   font-weight: bold; /* Adjust font weight as needed */
+  position: relative;
+  margin:3px; //tüm butonlar arası mesafe
 }
 .filter_wrapper {
   width: 900px !important;
