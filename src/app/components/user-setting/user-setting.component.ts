@@ -57,24 +57,16 @@ mail: any;
   getProjectId() {
     const project = this.projectService.getProjectLocal();
     this.currentProjectId = project.id
-    console.log(project.id);
 
   }
 
   GetAllProjectUsers() {
     this.userService.GetAllProjectUsers({ 'id': this.currentProjectId }).subscribe((res) => {
-      console.log(res.data);
       this.users = res.data
-      
-      console.log(this.users);
-      console.log(this.currentProjectId);
-
-
     })
   }
 deleteUser(id : any)
    {
-    console.log(id);
     
     this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
         console.log('User deleted successfully');

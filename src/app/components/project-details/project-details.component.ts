@@ -41,7 +41,6 @@ export class ProjectDetailsComponent {
 
   deleteProject() {
     this.projectService.deleteProject({ id: this.projectId }).subscribe(() => {
-      console.log(this.projectId);
       //window.location.reload()      
     });
   }

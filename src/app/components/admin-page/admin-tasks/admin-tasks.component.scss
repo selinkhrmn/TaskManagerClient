@@ -16,12 +16,15 @@ h1 {
 
 .filter {
     display: flex;
-   
-    padding-left: 100px;
-    padding-right: 100px;
+   padding-right: 10px;
+    padding-left: 20px;
 
 }
 
-.buttons {
-    justify-content: center;
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content:center
+
 }
+

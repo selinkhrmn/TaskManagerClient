@@ -9,6 +9,9 @@ import { User, UserDto } from 'src/app/interfaces/user';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
+import { AddPeopleComponent } from '../../little-main-components/add-people/add-people.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterPageComponent } from '../../register-page/register-page.component';
 
 @Component({
   selector: 'app-admin-users',
@@ -25,7 +28,8 @@ export class AdminUsersComponent implements OnInit {
   constructor(
     public translocoService : TranslocoService,
     public userService : UserService,
-    public tokenService : TokenService
+    public tokenService : TokenService,
+    public dialog: MatDialog
   ) {
     
     
@@ -55,5 +59,9 @@ export class AdminUsersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  addPeople(){
+    const dialogRef = this.dialog.open(RegisterPageComponent,{height: '90%',width: '30%', panelClass: 'dialog'});
   }
 }

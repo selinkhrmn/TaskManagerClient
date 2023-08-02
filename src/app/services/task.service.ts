@@ -46,7 +46,7 @@ export class TaskService {
   }
 
   getAllProjectTask(id: Partial<ProjectDto>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
+    return this.http.post<ResponseModel<ListTask>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
   }
 
   getTaskById(id: Partial<Task>) {
