@@ -17,6 +17,8 @@ import { PriorityService } from 'src/app/services/priority.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
+import { FileService } from 'src/app/services/file.service';
+import { FileData } from 'src/app/interfaces/FileData';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -42,12 +44,26 @@ export class CreateIssueDialogComponent {
   assignees: ProjectUserDto[] = [];
  
 
+  
+  descriptionText: string = '';
+  Files: FileData[];
+  addSubtopicClicked = false;
+  fileIcons: { [extension: string]: string } = {
+    jpg: '../../../assets/hosgeldiniz.png',
+    png: '../../../assets/hosgeldiniz.png',
+   // pptx: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/.pptx_icon_%282019%29.svg',
+    docx: 'path-to-docx-icon',
+    pdf: 'path-to-pdf-icon',
+  };
+  // v:File;
+
   task : Partial<Task> = {
     name: "",
     projectId: 0,
     columnId: 1,
     priority : 3,
-    endDate: new Date()
+    endDate: new Date(),
+    // files: this.v;
   }
 
   config: AngularEditorConfig = {
@@ -74,7 +90,8 @@ export class CreateIssueDialogComponent {
     private snackBar: MatSnackBar,
     public translocoService: TranslocoService,
     public priorityService: PriorityService,
-    public userService: UserService
+    public userService: UserService,
+    private fileService: FileService
 
   ) {
     this.getAllProjects();
@@ -159,5 +176,14 @@ export class CreateIssueDialogComponent {
   }
 
 
+  upload(event: Event){
+    this.fileService.uploadFile(event);
+    this.Files = this.fileService.selectedFiles;
+  }
+
+  onSave() {
+    console.log('Description:', this.descriptionText);
+    console.log('Selected Files:', this.Files);
+  }
 
 }

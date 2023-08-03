@@ -12,16 +12,15 @@ import {  ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
+import { FileService } from 'src/app/services/file.service';
+import { FileData } from 'src/app/interfaces/FileData';
 
 
 interface DialogData{
   task: Task;
 }
 
-interface FileData {
-  file: File;
-  iconUrl: string; 
-}
+
 
 @Component({
   selector: 'app-task',
@@ -39,7 +38,7 @@ export class TaskComponent  {
   editingTaskName = false;
   editorContent: string;
   descriptionText: string = '';
-  selectedFiles: FileData[] = [];
+  Files: FileData[];
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   addSubtopicClicked = false;
   fileIcons: { [extension: string]: string } = {
@@ -59,7 +58,8 @@ export class TaskComponent  {
     private fb: FormBuilder,
     private router: Router,
     public tokenService: TokenService, 
-    private location: Location
+    private location: Location,
+    private fileService: FileService
     ) { }
 
     
@@ -76,26 +76,31 @@ export class TaskComponent  {
     this.updateTask();
   }
 
- 
+ upload(event: Event){
+  debugger;
+this.fileService.uploadFile(event);
 
-  onFileSelect(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement?.files) {
-      this.selectedFiles = Array.from(inputElement.files).map((file) => ({
-        file,
-        iconUrl: this.getFileIconUrl(file),
-      }));
-    }
-  }
+this.Files = this.fileService.selectedFiles;
+ }
 
-  getFileIconUrl(file: File): string {
-    const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-    return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
-  }
+  // onFileSelect(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement?.files) {
+  //     this.selectedFiles = Array.from(inputElement.files).map((file) => ({
+  //       file,
+  //       iconUrl: this.getFileIconUrl(file),
+  //     }));
+  //   }
+  // }
+
+  // getFileIconUrl(file: File): string {
+  //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
+  //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
+  // }
 
   onSave() {
     console.log('Description:', this.descriptionText);
-    console.log('Selected Files:', this.selectedFiles);
+    console.log('Selected Files:', this.Files);
   }
 
   updateTask(){

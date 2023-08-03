@@ -16,7 +16,7 @@
         <h2><label>{{ 'description' | transloco }}</label></h2>
       </div>
 <br>
-      <input type="file" #fileInput multiple style="display: none;" (change)="onFileSelect($event)" />
+      <input type="file" #fileInput multiple style="display: none;" (change)="upload($event)" />
       <div class="button-container">
         <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
         <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">Add
@@ -31,10 +31,10 @@
 
       <!-- Rest of the code... -->
       <br>
-      <div *ngIf="selectedFiles.length > 0">
+      <div *ngIf="Files.length > 0">
         <p>Selected Files:</p>
         <ul>
-          <li *ngFor="let fileData of selectedFiles">
+          <li *ngFor="let fileData of Files">
             <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon">
             {{ fileData.file.name }}
           </li>

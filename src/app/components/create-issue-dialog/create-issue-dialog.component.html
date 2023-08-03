@@ -29,6 +29,16 @@
   </div>
 
   <div class="row">
+      <input type="file" #fileInput multiple style="display: none" (change)="upload($event)" />
+      <div class="button-container">
+        <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
+        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked =true">Add
+          Subtopic<mat-icon>add_circle</mat-icon></button>
+      </div>
+  </div>
+
+
+  <div class="row">
     <mat-label>{{ "description" | transloco }}</mat-label>
 
     <angular-editor [placeholder]="'Enter text here...'" [config]="config"></angular-editor>
@@ -85,6 +95,7 @@
       <mat-datepicker #pickerEnd></mat-datepicker>
     </mat-form-field>
   </div>
+</div>
 
 <div mat-dialog-actions class="button">
   <button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>

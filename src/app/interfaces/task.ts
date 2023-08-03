@@ -10,5 +10,6 @@ export interface Task extends Base {
     endDate : Date;
     assigneeId: string;
     reporterId : string;
+    files : File;
 
 }
