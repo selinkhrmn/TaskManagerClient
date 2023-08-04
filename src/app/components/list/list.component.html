@@ -34,9 +34,9 @@
   </div>
 </div>
 <mat-menu #filterMenu="matMenu" [class]="customMenuClass">
-  <div>NEDEN</div>
+  <!-- <div>NEDEN</div>
   <div>BÖYLE</div>
-  <div>mfkgelrgm</div>
+  <div>mfkgelrgm</div> -->
   <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('AssignedToMe')"
     (click)="applyFilter('AssignedToMe')">
     <mat-icon>account_circle</mat-icon> Assigned To Me
@@ -122,14 +122,20 @@
 
   <button class="custom-menu-item" mat-menu-item (click)="applyFilter('Reporter')">Reporter</button>
 
-  <button mat-menu-item (click)="applyFilter('Priorities')"><mat-icon>priority_high</mat-icon> Priorities {{selectedPriorities.length}}
+  <button class="custom-menu-item" mat-menu-item (click)="applyFilter('Priorities')"><mat-icon>priority_high</mat-icon> Priorities {{selectedPriorities.length}}
   </button>
   <div class="priority-images">
-    <img (click)="handlePriorityClick(1)" [class.selected]="selectedPriorities.includes(1)" src="../../assets/lowest.png" alt="Easy" />
-    <img (click)="handlePriorityClick(2)" [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png" alt="Medium" />
-    <img (click)="handlePriorityClick(3)" [class.selected]="selectedPriorities.includes(3)" src="../../assets/medium.png" alt="Normal" />
-    <img (click)="handlePriorityClick(4)" [class.selected]="selectedPriorities.includes(4)" src="../../assets/high.png" alt="Difficult" />
-    <img (click)="handlePriorityClick(5)" [class.selected]="selectedPriorities.includes(5)" src="../../assets/highest.png" alt="Difficult" />
+    <div class="img_div">    <img (click)="handlePriorityClick(1)" [class.selected]="selectedPriorities.includes(1)" src="../../assets/lowest.png" alt="Easy" />
+</div>
+    <div class="img_div">    <img (click)="handlePriorityClick(2)" [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png" alt="Medium" />
+</div>
+    <div class="img_div">    <img (click)="handlePriorityClick(3)" [class.selected]="selectedPriorities.includes(3)" src="../../assets/medium.png" alt="Normal" />
+</div>
+    <div class="img_div">    <img (click)="handlePriorityClick(4)" [class.selected]="selectedPriorities.includes(4)" src="../../assets/high.png" alt="Difficult" />
+</div>
+    <div class="img_div">    <img (click)="handlePriorityClick(5)" [class.selected]="selectedPriorities.includes(5)" src="../../assets/highest.png" alt="Difficult" />
+</div>
+
   </div>
   
 
