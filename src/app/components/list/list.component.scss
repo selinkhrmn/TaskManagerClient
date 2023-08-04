@@ -69,6 +69,24 @@ mat-icon {
   color: green;
 }
 
+.clear-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.clear-button button {
+  border: none; 
+  background: none; 
+  padding: 0; 
+  font-size: inherit; 
+  cursor: pointer;
+}
+
+.clear-button button:hover {
+  color: #e36116;
+}
+
 button.mat-menu-item {
   display: flex;
   align-items: center;
