@@ -32,11 +32,17 @@
       <input type="file" #fileInput multiple style="display: none" (change)="upload($event)" />
       <div class="button-container">
         <button mat-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon>Attach</button>
-        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked =true">Add
-          Subtopic<mat-icon>add_circle</mat-icon></button>
-      </div>
   </div>
-
+  <br>
+      <!-- <div *ngIf="Files.length > 0"> -->
+        <p>Selected Files:</p>
+        <ul>
+          <li *ngFor="let fileData of Files">
+            <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon">
+            {{ fileData.file.name }}
+          </li>
+        </ul>
+      </div>
 
   <div class="row">
     <mat-label>{{ "description" | transloco }}</mat-label>
