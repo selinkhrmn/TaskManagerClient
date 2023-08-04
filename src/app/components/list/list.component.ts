@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate',
   ];
-  fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
+  fromDate: Date; updatedFromDate: Date; createdFromDate: Date | undefined;
   toDate: Date; updatedToDate: Date; createdToDate: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
@@ -58,8 +58,8 @@ export class ListComponent implements OnInit {
     this.taskService.getAllProjectTask({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         console.log(res.data);
-         this.listData = res.data;
-         this.filteredData = res.data;
+        this.listData = res.data;
+        this.filteredData = res.data;
       }
     });
 
@@ -81,35 +81,17 @@ export class ListComponent implements OnInit {
 
 
   applyFilter(filter: string) {
-    // if (this.activeFilters.includes(filter)) {
-    //   this.activeFilters = this.activeFilters.filter(f => f !== filter);
-    // }
-    // else {
-    //   this.activeFilters.push(filter);
-    // }
-
     this.filteredData = this.listData;
-    if (filter === 'Columns') {
-      this.filterByColumns();
-    }
-    else if(filter === 'Priorities'){
-      if(this.selectedPriorities.length != 0){
-        debugger;
-        this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority)); 
-      }
-    }
-    else {
-      if (this.activeFilters.includes(filter)) {
+    if (this.activeFilters.includes(filter)) {
+      if(filter == 'AssignedToMe' || filter == 'DueDateThisWeek' || filter == 'CompletedTasks'){
         this.activeFilters = this.activeFilters.filter(f => f !== filter);
-      } else {
-        this.activeFilters.push(filter);
       }
+    } 
+    else {
+      this.activeFilters.push(filter);
     }
-
-
 
     if (this.activeFilters.includes('AssignedToMe')) {
-      debugger;
       this.filteredData = this.filteredData.filter(t => t.assigneeId == this.tokenService.tokenUserId());
     }
 
@@ -127,8 +109,6 @@ export class ListComponent implements OnInit {
 
     }
     // else if (filter === 'CompletedTasks') {
-
-
     // }
     if (this.activeFilters.includes('BetweenDates')) {
       const fromDate = new Date(this.fromDate);
@@ -154,50 +134,57 @@ export class ListComponent implements OnInit {
         });
       }
     }
+
     if (this.activeFilters.includes('AssignedTo')) {
       //user objesi oluşturulacak, seçilen user ona verilecek buraya sadece id gerekli
       //this.filteredData = this.filteredData.filter(t => t.assigneeId == this.user.id);
     }
-    if (this.activeFilters.includes('Columns')) {
-      this.filteredData = this.filterByColumns();
+
+    if(this.activeFilters.includes('Columns') && this.selectedColumns.length != 0){
+      this.filteredData = this.filteredData.filter(t => this.selectedColumns.includes(t.columnId));
     }
+
     if (this.activeFilters.includes('UpdatedDate')) {
       if (this.updatedFromDate) {
         this.filteredData = this.checkDates(this.updatedFromDate, this.updatedToDate);
       }
     }
+
     if (this.activeFilters.includes('CreatedDate')) {
       if (this.createdFromDate) {
         this.filteredData = this.checkDates(this.createdFromDate, this.createdToDate);
       }
     }
+
     if (this.activeFilters.includes('Reporter')) {
       //user objesi oluşturulacak, seçilen user ona verilecek buraya sadece id gerekli
       //this.filteredData = this.filteredData.filter(t => t.reporterId == this.user.id);
+    }
+
+    if(this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0){
+      this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
     }
   }
 
   handlePriorityClick(priority: number) {
     if (this.selectedPriorities.includes(priority)) {
       this.selectedPriorities = this.selectedPriorities.filter(p => p !== priority);
-    } else {
+    } 
+    else {
       this.selectedPriorities.push(priority);
     }
     this.applyFilter('Priorities');
   }
-  
 
-  filterByColumns() {
-    const selectedColumnIds = this.selectedColumns;
 
-    if (selectedColumnIds.length === 0) {
-      return this.listData;
+  handleColumnSelect(columnId: number) {
+    if (this.selectedColumns.includes(columnId)) {
+      this.selectedColumns = this.selectedColumns.filter(id => id !== columnId);
+    } 
+    else {
+      this.selectedColumns.push(columnId);
     }
-    this.activeFilters = this.activeFilters.filter(filter => filter !== 'Columns');
-
-    return this.filteredData.filter(item => {
-      return selectedColumnIds.includes(item.columnId);
-    });
+    this.applyFilter('Columns');
   }
 
   checkDates(fromDate: Date, toDate: Date) {
@@ -215,9 +202,28 @@ export class ListComponent implements OnInit {
         return (taskUpdatedDate >= fromDate);
       });
     }
-    return this.filteredData
+    return this.filteredData;
   }
 
+  cancelPriorities() {
+    if (this.selectedPriorities.length != 0) {
+      this.selectedPriorities = [];
+    }
+    this.applyFilter('Priorities');
+  }
+
+  cancelCreateDates() {
+    this.createdFromDate = undefined
+    // this.createdToDate = undefined;
+  }
+
+  clearFilter(){
+    this.selectedColumns = [];
+    this.selectedPriorities = [];
+    this.activeFilters = [];
+    //dates;
+    this.filteredData = this.listData;
+  }
 
   loadData(): void {
     this.http.get<ListTask[]>('YOUR_BACKEND_URL_HERE').subscribe(
