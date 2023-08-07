@@ -5,6 +5,7 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { TranslocoService} from '@ngneat/transloco';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     public tokenService: TokenService, 
     public projectService: ProjectService,
     private taskService: TaskService ,
-    public translocoService : TranslocoService) {
+    public translocoService : TranslocoService,
+    private router: Router) {
 
   }
 
@@ -100,5 +102,26 @@ export class SummaryComponent implements AfterViewInit, OnInit {
       .call(yAxis);
   }
 
+  toggleFilter(filter: string) { 
+    const today = new Date();
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 7);
+    const selectedFilter = {
+      name: '',
+      fromDate: sevenDaysAgo,
+      toDate: today
+    };
 
+    if (filter === 'UpdatedDate') {
+      selectedFilter.name = 'UpdatedDate';
+      this.taskService.setSelectedFilter(selectedFilter);
+    } 
+    else if (filter === 'CreatedDate') {
+      selectedFilter.name = 'CreatedDate';
+      this.taskService.setSelectedFilter(selectedFilter);
+    } 
+
+
+    this.router.navigate(['/home/list']);
+  }
 }

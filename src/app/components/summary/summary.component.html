@@ -31,7 +31,7 @@
                 </div>
                 <div class="col">
                     <div class="button-container">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" (click)="toggleFilter('UpdatedDate')">
                             <div class="p-4 d-flex align-items-center">
                                 <img src="../../assets/güncellenme.png" alt="" class="me-2">
                                 <div>
@@ -45,9 +45,9 @@
 
                 <div class="col">
                     <div class="button-container">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" (click)="toggleFilter('CreatedDate')">
                             <div class="p-4 d-flex align-items-center">
-                                <img src="../../assets/olustur.png" alt="" class="me-2">
+                                <img src="../../assets/olustur.png" alt="" class="me-2" >
                                 <div>
                                     <h4>Son 7 günde</h4>
                                     <h5>{{ Ogesayisiolus }} öğe oluşturuldu.</h5>

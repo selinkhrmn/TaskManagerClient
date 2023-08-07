@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate',
   ];
-  fromDate: Date; updatedFromDate: Date; createdFromDate: Date | undefined;
+  fromDate: Date; updatedFromDate: Date; createdFromDate: Date ;
   toDate: Date; updatedToDate: Date; createdToDate: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
@@ -62,6 +62,7 @@ export class ListComponent implements OnInit {
         console.log(res.data);
         this.listData = res.data;
         this.filteredData = res.data;
+        this.applySummaryFilters();
       }
     });
 
@@ -78,23 +79,39 @@ export class ListComponent implements OnInit {
     })
 
     this.userService.getAllUsers().subscribe((res) => {
-      if(res.isSuccessful == true){
+      if (res.isSuccessful == true) {
         this.userList = res.data;
       }
     })
     this.priorities = this.priorityService.getOptions();
-
-
   }
+
+  applySummaryFilters() {
+    const selectedFilter = this.taskService.getSelectedFilter();
+    if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
+      this.updatedFromDate = new Date(selectedFilter.fromDate);
+      this.updatedToDate = new Date(selectedFilter.toDate);
+      console.log(this.updatedFromDate);
+
+      this.applyFilter('UpdatedDate');
+    }
+    if (selectedFilter && selectedFilter.name === 'CreatedDate') {
+      this.createdFromDate = new Date(selectedFilter.fromDate);
+      this.createdToDate = new Date(selectedFilter.toDate);
+      this.applyFilter('CreatedDate');
+    }
+  }
+
 
 
   applyFilter(filter: string) {
     this.filteredData = this.listData;
+
     if (this.activeFilters.includes(filter)) {
-      if(filter == 'AssignedToMe' || filter == 'DueDateThisWeek' || filter == 'CompletedTasks'){
+      if (filter == 'AssignedToMe' || filter == 'DueDateThisWeek' || filter == 'CompletedTasks') {
         this.activeFilters = this.activeFilters.filter(f => f !== filter);
       }
-    } 
+    }
     else {
       this.activeFilters.push(filter);
     }
@@ -148,19 +165,38 @@ export class ListComponent implements OnInit {
       //this.filteredData = this.filteredData.filter(t => t.assigneeId == this.user.id);
     }
 
-    if(this.activeFilters.includes('Columns') && this.selectedColumns.length != 0){
+    if (this.activeFilters.includes('Columns') && this.selectedColumns.length != 0) {
       this.filteredData = this.filteredData.filter(t => this.selectedColumns.includes(t.columnId));
     }
 
     if (this.activeFilters.includes('UpdatedDate')) {
-      if (this.updatedFromDate) {
-        this.filteredData = this.checkDates(this.updatedFromDate, this.updatedToDate);
+      if (this.updatedFromDate && this.updatedToDate) {
+        this.filteredData = this.filteredData.filter(t => {
+          const taskUpdatedDate = new Date(t.updatedDate);
+          return (taskUpdatedDate >= this.updatedFromDate && taskUpdatedDate <= this.updatedToDate);
+        });
+      }
+      else if (this.updatedFromDate) {
+        this.filteredData = this.filteredData.filter(t => {
+          const taskUpdatedDate = new Date(t.updatedDate);
+          return (taskUpdatedDate >= this.updatedFromDate);
+        });
       }
     }
 
+
     if (this.activeFilters.includes('CreatedDate')) {
-      if (this.createdFromDate) {
-        this.filteredData = this.checkDates(this.createdFromDate, this.createdToDate);
+      if (this.createdFromDate && this.createdToDate) {
+        this.filteredData = this.filteredData.filter(t => {
+          const taskCreatedDate = new Date(t.createdDate);
+          return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
+        });
+      }
+      else if (this.createdFromDate) {
+        this.filteredData = this.filteredData.filter(t => {
+          const taskCreatedDate = new Date(t.createdDate);
+          return (taskCreatedDate >= this.createdFromDate);
+        });
       }
     }
 
@@ -169,7 +205,7 @@ export class ListComponent implements OnInit {
       //this.filteredData = this.filteredData.filter(t => t.reporterId == this.user.id);
     }
 
-    if(this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0){
+    if (this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0) {
       this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
     }
   }
@@ -177,7 +213,7 @@ export class ListComponent implements OnInit {
   handlePriorityClick(priority: number) {
     if (this.selectedPriorities.includes(priority)) {
       this.selectedPriorities = this.selectedPriorities.filter(p => p !== priority);
-    } 
+    }
     else {
       this.selectedPriorities.push(priority);
     }
@@ -188,29 +224,11 @@ export class ListComponent implements OnInit {
   handleColumnSelect(columnId: number) {
     if (this.selectedColumns.includes(columnId)) {
       this.selectedColumns = this.selectedColumns.filter(id => id !== columnId);
-    } 
+    }
     else {
       this.selectedColumns.push(columnId);
     }
     this.applyFilter('Columns');
-  }
-
-  checkDates(fromDate: Date, toDate: Date) {
-    const from = new Date(fromDate);
-    const to = new Date(toDate);
-    if (fromDate && toDate) {
-      this.filteredData = this.filteredData.filter(t => {
-        const taskUpdatedDate = new Date(t.updatedDate);
-        return (taskUpdatedDate >= from && taskUpdatedDate <= to);
-      });
-    }
-    else if (fromDate) {
-      this.filteredData = this.filteredData.filter(t => {
-        const taskUpdatedDate = new Date(t.updatedDate);
-        return (taskUpdatedDate >= fromDate);
-      });
-    }
-    return this.filteredData;
   }
 
   cancelPriorities() {
@@ -221,11 +239,11 @@ export class ListComponent implements OnInit {
   }
 
   cancelCreateDates() {
-    this.createdFromDate = undefined
+    //this.createdFromDate = undefined
     // this.createdToDate = undefined;
   }
 
-  clearFilter(){
+  clearFilter() {
     this.selectedColumns = [];
     this.selectedPriorities = [];
     this.activeFilters = [];

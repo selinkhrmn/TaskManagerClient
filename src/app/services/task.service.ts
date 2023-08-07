@@ -18,7 +18,8 @@ export class TaskService {
 
   private task$ = new BehaviorSubject<any>({});
   selectedTask$ = this.task$.asObservable();
-
+  
+  selectedFilter: { name: string; fromDate: Date; toDate: Date } | null = null;
 
   constructor(private http: HttpClient,
     public tokenService: TokenService) {
@@ -57,13 +58,14 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
   }
 
+  setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
+    this.selectedFilter = filter;
+  }
 
-  // setTask(task: any) {
-  //   this.task = task;
-  //   this.task$.next(task);
-  //   localStorage.setItem('tasks', JSON.stringify({"column-id" : this.task.columnId,"project-id" : this.task.projectId ,"name": this.task.name} ));
+  getSelectedFilter() {
+    return this.selectedFilter;
+  }
 
-  // }
 
 
 }
