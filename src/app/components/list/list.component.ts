@@ -13,6 +13,7 @@ import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { UserService } from 'src/app/services/user.service';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { UserDto } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-list',
@@ -26,6 +27,7 @@ export class ListComponent implements OnInit {
 
   listData: ListTask[] = [];
   filteredData: ListTask[] = [];
+  userList: UserDto[] = [];
   columns: string[] = [
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate',
@@ -72,6 +74,12 @@ export class ListComponent implements OnInit {
     this.columnService.GetAllProjectColumns({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectColumns = res.data;
+      }
+    })
+
+    this.userService.getAllUsers().subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.userList = res.data;
       }
     })
     this.priorities = this.priorityService.getOptions();

@@ -193,14 +193,14 @@
         <th mat-header-cell *matHeaderCellDef>
           <mat-icon>person</mat-icon> {{ "assignee" | transloco }}
         </th>
-        <td mat-cell *matCellDef="let ListTask">{{ ListTask.assigneeId }}</td>
+        <td mat-cell *matCellDef="let ListTask">{{ ListTask.assigneeId | user:userList }}</td>
       </ng-container>
 
       <ng-container matColumnDef="reporterId">
         <th mat-header-cell *matHeaderCellDef>
           <mat-icon>report</mat-icon> {{ "reporter" | transloco }}
         </th>
-        <td mat-cell *matCellDef="let ListTask">{{ ListTask.reporterId }}</td>
+        <td mat-cell *matCellDef="let ListTask">{{ ListTask.reporterId | user:userList }}</td>
       </ng-container>
 
       <ng-container matColumnDef="DueDate">
