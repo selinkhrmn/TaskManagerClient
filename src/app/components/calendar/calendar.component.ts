@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 interface DayObject {
   day: number;
@@ -8,6 +11,9 @@ interface DayObject {
   isSearchedDay: boolean;
   isSearchedDayValid?: boolean;
   description?: string;
+  projectNames?: string[]; // Birden fazla proje adını saklamak için bir dizi
+  showAllTasks?: boolean; // Tüm görevleri göstermek için
+
 }
 
 @Component({
@@ -31,57 +37,66 @@ export class CalendarComponent {
   weekdays: string[] = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Pzr"];
   months: string[] = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
-  constructor(public tokenService: TokenService) {}
-
+  constructor(public tokenService: TokenService, private projectService: ProjectService, private taskService: TaskService) {}
   ngOnInit(): void {
     const today = new Date();
     this.currentMonth = today.getMonth();
     this.currentYear = today.getFullYear();
     this.generateDays();
-  }
 
-  generateDays(): void {
+  }
+  
+
+  async generateDays(): Promise<void> {
     const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
     const lastDate = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-    const previousMonthLastDate = new Date(this.currentYear, this.currentMonth, 0).getDate();
+    let id: number = this.projectService.getProjectLocal().id;
+    this.taskService.getAllProjectTask({ "id": id })
+    .subscribe
+    (response => {
+        if (response && response.data) {
+            const tasksForProjectData = response.data;
+            
+            this.days = [];
+            for (let dayNumber = 1; dayNumber <= lastDate; dayNumber++) {
+                const isToday = this.today.getDate() === dayNumber && this.today.getMonth() === this.currentMonth && this.today.getFullYear() === this.currentYear;
+                const isSearchedDay = dayNumber === this.searchedDay && this.searchedDay !== -1;
+                const isSearchedDayValid = isSearchedDay && this.currentMonth === this.searchedMonth && this.currentYear === this.searchedYear;
 
-    let offset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+                const tasksForTheDay = tasksForProjectData.filter((task: any) => {
+                  
+                  const taskDate = new Date(task.dueDate);
+                  return taskDate.getDate() === dayNumber &&
+                      taskDate.getMonth() === this.currentMonth &&
+                      taskDate.getFullYear() === this.currentYear;
+              });
+              const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
+                const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
 
-    this.days = [];
 
-    for (let i = 0; i < offset; i++) {
-      this.days.push({ 
-        day: previousMonthLastDate - offset + i + 1, 
-        isToday: false, 
-        showDescription: false,
-        isSearchedDay: false
-      });
-    }
-
-    for (let dayNumber = 1; dayNumber <= lastDate; dayNumber++) {
-      const isToday = this.today.getDate() === dayNumber && this.today.getMonth() === this.currentMonth && this.today.getFullYear() === this.currentYear;
-      const isSearchedDay = dayNumber === this.searchedDay && this.searchedDay !== -1;
-      const isSearchedDayValid = isSearchedDay && this.currentMonth === this.searchedMonth && this.currentYear === this.searchedYear;
-  
-      this.days.push({ 
-        day: dayNumber,
-        isToday: isToday,
-        showDescription: false,
-        isSearchedDay: isSearchedDay,
-        isSearchedDayValid: isSearchedDayValid
-      });
-    }
-
-    const daysAdded = this.days.length;
-    for (let i = daysAdded; i < 42; i++) {
-      this.days.push({ 
-        day: i - daysAdded + 1, 
-        isToday: false, 
-        showDescription: false,
-        isSearchedDay: false
-      });
-    }
+                this.days.push({
+                    day: dayNumber,
+                    isToday: isToday,
+                    showDescription: false,
+                    isSearchedDay: isSearchedDay,
+                    isSearchedDayValid: isSearchedDayValid,
+                    projectNames: projectNamesForTheDay
+                });
+            }
+        }
+    },
+    error => {
+      console.error('Görevleri alırken hata:', error);
+   });
   }
+
+  showAllTasks(dayObj: DayObject): void {
+    // Diğer tüm günlerin kutucuklarını gizleyin
+    this.days.forEach(d => d.showAllTasks = false);
+
+    // Seçilen gün için kutucuğu gösterin
+    dayObj.showAllTasks = true;
+}
 
   prevMonth(): void {
     this.currentMonth--;

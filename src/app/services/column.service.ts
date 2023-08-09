@@ -34,6 +34,7 @@ export class ColumnService {
   }
 
   UpdateColumn(column: Partial<Column>) {
+    
     return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/UpdateColumn`,column, this.httpOptions );
   }
 
