@@ -5,29 +5,30 @@
   <div class="search-bar">
     <div class="search-input">
       <input matInput #searchInput placeholder="Listeyi arayın" />
-      <button mat-icon-button (click)="filterByName(searchInput.value)">
+      <button mat-icon-button (click)="filterByName(searchInput.value)" >
         <mat-icon>search</mat-icon>
       </button>
     </div>
   </div>
 
   <div class="user-info">
-    <button (click)="addPerson()" class="add-person-button">
-      <i class="material-icons">person_add</i>{{ "addPeople" | transloco }}
-    </button>
-    <button>
-      <i class="material-icons">share</i>{{ "share" | transloco }}
-    </button>
-    <button>
-      <i class="material-icons">event</i>{{ "unplanned" | transloco }}
-    </button>
     <button [matMenuTriggerFor]="filterMenu">
       <i class="material-icons">filter_list</i>{{ "filter" | transloco }}
       <span *ngIf="activeFilters.length != 0"> &nbsp;{{ activeFilters.length }} applied</span>
     </button>
-    <button>
-      <i class="material-icons">more_horiz</i>{{ "more" | transloco }}
+    &nbsp;
+    <button (click)="openDialog()" class="add-person-button">
+      <i class="material-icons">person_add</i>{{ "addPeople" | transloco }}
     </button>
+    <!-- <button>
+      <i class="material-icons">share</i>{{ "share" | transloco }}
+    </button> -->
+    <button>
+      <i class="material-icons">event</i>{{ "unplanned" | transloco }}
+    </button>
+    <!-- <button>
+      <i class="material-icons">more_horiz</i>{{ "more" | transloco }}
+    </button> -->
   </div>
 </div>
 <mat-menu #filterMenu="matMenu" [class]="customMenuClass">
@@ -273,7 +274,7 @@
 </div>
 
 <div class="add-button-container">
-  <button mat-raised-button color="primary" (click)="addPerson()">
+  <button mat-raised-button color="primary" (click)="openDialog()">
     Oluştur
   </button>
 </div>

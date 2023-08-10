@@ -62,6 +62,7 @@ import { AdminProjectsComponent } from './components/admin-page/admin-projects/a
 import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
 import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 import { UserPipe } from 'src/pipes/user.pipe';
+import { AddUsersToProjectComponent } from './components/admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { UserPipe } from 'src/pipes/user.pipe';
     AdminSidenavComponent,
     AdminProjectsComponent,
     AdminTasksComponent,
-    UserPipe
+    UserPipe,
+    AddUsersToProjectComponent
     
   ],
   imports: [

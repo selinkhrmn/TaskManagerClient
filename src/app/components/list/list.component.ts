@@ -14,6 +14,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { UserDto } from 'src/app/interfaces/user';
+import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list',
@@ -52,7 +54,8 @@ export class ListComponent implements OnInit {
     private translocoService: TranslocoService,
     public priorityService: PriorityService,
     public userService: UserService,
-    private columnService: ColumnService
+    private columnService: ColumnService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -276,6 +279,10 @@ export class ListComponent implements OnInit {
 
   addPerson(): void {
     console.log("Kişi Ekle butonuna tıklandı!");
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddUsersToProjectComponent,{height: '90%',width: '50%', panelClass: 'dialog'});
   }
 
   // Örnek Transloco kullanım metodu:

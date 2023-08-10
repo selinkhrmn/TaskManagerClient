@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ResponseModel } from '../interfaces/responseModel';
 import { UserDto } from '../interfaces/user';
@@ -12,14 +12,14 @@ import { AddProjectUser, ProjectUserDto } from '../interfaces/projectUserDto';
   providedIn: 'root'
 })
 export class UserService {
-  user : UserDto;
+  user: UserDto;
 
   baseUrlIdentity = `${environment.baseUrl}/identity/Users`;
-  baseUrl =  `${environment.baseUrl}/business/ProjectUser`;
+  baseUrl = `${environment.baseUrl}/business/ProjectUser`;
 
   constructor(
     private http: HttpClient,
-    public tokenService: TokenService) { 
+    public tokenService: TokenService) {
 
   }
   private user$ = new BehaviorSubject<any>({});
@@ -27,7 +27,7 @@ export class UserService {
 
   headers = this.tokenService.getHeaders();
   httpOptions = {
-      headers: this.headers
+    headers: this.headers
   };
 
   getAllUsers(): Observable<ResponseModel<UserDto>> {
@@ -38,12 +38,24 @@ export class UserService {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
-  AddUserToProject(projectUser : Partial<AddProjectUser>) {
+  AddUserToProject(projectUser: Partial<AddProjectUser>) {
     debugger
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
   }
 
   DeleteUserFromProject(id: string, projectId: number) {
-    return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, {userId:id, projectId: projectId}, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, { userId: id, projectId: projectId }, this.httpOptions);
   }
+
+ 
+  GetProjectSelectedUsers(projectId: number): Observable<ResponseModel<ProjectUserDto>> {
+    const url = `${this.baseUrl}/GetSelectedUsersForProject`;
+    const params = new HttpParams().set('projectId', projectId.toString());
+    return this.http.get<ResponseModel<ProjectUserDto>>(url, { params: params });
+  }
+  
+  
+
+
 }
+
