@@ -55,7 +55,7 @@ export class EditColumnComponent implements OnInit {
         'name': this.columnName
       })
       .subscribe((res) => {
-        
+        debugger
       });
   }
 }

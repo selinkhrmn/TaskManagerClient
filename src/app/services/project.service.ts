@@ -61,6 +61,7 @@ export class ProjectService {
     return this.project;
   }
 
+
   public getProjectLocal() {
     const data = localStorage.getItem('current-project');
     this.project = data ? JSON.parse(data) : null;

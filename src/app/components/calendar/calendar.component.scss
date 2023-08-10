@@ -1,3 +1,18 @@
+.more-tasks-icon {
+    cursor: pointer;
+}
+
+
+.all-tasks-popup {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    z-index: 1;
+    padding: 10px;
+    max-width: 200px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
 .calendar {
     display: flex;
     flex-direction: column;
