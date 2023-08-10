@@ -8,7 +8,7 @@ export interface ProjectUserDto{
 }
 
 
-export interface AddProjectUser{
+export interface ProjectUserList{
     users : Partial<UserDto>[];
     projectId :number;
 }

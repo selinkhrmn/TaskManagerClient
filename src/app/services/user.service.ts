@@ -6,7 +6,7 @@ import { ResponseModel } from '../interfaces/responseModel';
 import { UserDto } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 import { ProjectDto } from '../interfaces/project';
-import { AddProjectUser, ProjectUserDto } from '../interfaces/projectUserDto';
+import { ProjectUserList, ProjectUserDto } from '../interfaces/projectUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,14 +38,17 @@ export class UserService {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
   }
 
-  AddUserToProject(projectUser: Partial<AddProjectUser>) {
-    debugger
+  AddUserToProject(projectUser: Partial<ProjectUserList>) {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
   }
 
-  DeleteUserFromProject(id: string, projectId: number) {
-    return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, { userId: id, projectId: projectId }, this.httpOptions);
+  DeleteUserFromProject(projectUser: Partial<ProjectUserList>) {
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/DeleteUserFromProject`, projectUser, this.httpOptions);
   }
+
+  // DeleteUserFromProject(id: string, projectId: number) {
+  //   return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, { userId: id, projectId: projectId }, this.httpOptions);
+  // }
 
  
   GetProjectSelectedUsers(projectId: number): Observable<ResponseModel<ProjectUserDto>> {

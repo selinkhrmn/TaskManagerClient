@@ -10,11 +10,11 @@ import { MatInputModule } from '@angular/material/input';
 import { UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 
-import { AddProjectUser, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
+import { ProjectUserList, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDto } from 'src/app/interfaces/project';
 
-export interface userChecked{
+export interface userChecked {
   user: UserDto;
   checked: boolean;
 }
@@ -25,13 +25,10 @@ export interface userChecked{
   styleUrls: ['./add-users-to-project.component.scss'],
 })
 export class AddUsersToProjectComponent implements OnInit {
-  toppings = new FormControl('');
   projects: Project[] = [];
   users: UserDto[] = [];
   projectId: number;
-  checkedUsernames: string[] = [];
-  checkedUserIds: string[] = [];
-   addedUser : AddProjectUser = {
+  addedUser: ProjectUserList = {
     users: [],
     projectId: 0
   };
@@ -44,13 +41,13 @@ export class AddUsersToProjectComponent implements OnInit {
     private userService: UserService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    if(this.projectId == null){
+    if (this.projectId == null) {
       this.projectId = this.projectService.getProjectLocal().id;
     }
-    
+
     this.userService.getAllUsers().subscribe((res) => {
       this.users = res.data;
       this.userService.GetProjectSelectedUsers(this.projectId).subscribe((resr) => {
@@ -72,7 +69,7 @@ export class AddUsersToProjectComponent implements OnInit {
   onChangeProject(event: any) {
     this.projectId = event;
     console.log(event);
-    
+
     this.userService.GetProjectSelectedUsers(this.projectId).subscribe((resr) => {
       this.selectedUsers = resr.data;
       this.userCheckedList = this.users.map((user) => ({
@@ -83,36 +80,67 @@ export class AddUsersToProjectComponent implements OnInit {
   }
 
 
-  toggleUser(username: string, userId: string, index: number): void {
-    let userDetails: Partial<UserDto> = {};
+  // toggleUser(username: string, userId: string, index: number): void {
+  
+  
+  //   const userIndex = this.userCheckedList.findIndex(user => user.user.id === userId);
+  //   console.log(this.userCheckedList[userIndex].user.name);
+    
+  //   // if (userIndex !== -1) {
+  //   //   debugger;
+  //   //   this.userCheckedList[userIndex].checked = !this.userCheckedList[userIndex].checked;
+  //   // }
 
-    const isChecked = this.userList.some((user: UserDto) => user.username === username);
-    if (!isChecked) {
-      userDetails.id = userId;
-      userDetails.username = username;
-      this.userList.push(userDetails);
-      this.addedUser.users = this.userList
-    } 
-    else {
-      this.userList = this.userList.filter(
-        (user: UserDto) => user.id !== userId
-      );
-    }
-  }
+  
+  // }
 
-  isSelected(userId: string){
+  isSelected(userId: string): boolean {
     const isSelected = this.selectedUsers.some((selectedUser) => selectedUser.userId === userId);
     return isSelected;
   }
   
-
   AddUserToProject() {
     this.addedUser.projectId = this.projectId;
-    this.userService.AddUserToProject(this.addedUser).subscribe((res) => {
-    
+
+    const addUsers: Partial<UserDto>[] = [];
+    const removeUsers: Partial<UserDto>[] = [];
+  
+    this.userCheckedList.forEach(userFromList => {
+      if (userFromList.checked && !this.isSelected(userFromList.user.id)) {
+        addUsers.push(userFromList.user);
+      } 
+      else if (!userFromList.checked && this.isSelected(userFromList.user.id)) {
+        removeUsers.push(userFromList.user);
+      }
     });
+
+    if(removeUsers.length != 0){
+      const removeRequest: ProjectUserList = {
+        users: removeUsers,
+        projectId: this.projectId
+      };
+
+      this.userService.DeleteUserFromProject(removeRequest).subscribe((res) => {
+
+      });
+    }
+    
+    if(addUsers.length != 0){
+      const addRequest: ProjectUserList = {
+        users: addUsers,
+        projectId: this.projectId
+      };
+
+      this.userService.AddUserToProject(addRequest).subscribe((res) => {
+
+      });
+    }
+   
+  
+    //this.userCheckedList.forEach(user => user.checked = false);
   }
   
+
   closeDialog() {
     const dialogRef = this.dialog.closeAll();
   }

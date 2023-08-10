@@ -16,10 +16,10 @@
   </div>
 
   <div class="users_part">
-    <section class="example-section" *ngFor="let user of userCheckedList; let i = index">
+    <section class="example-section" *ngFor="let userList of userCheckedList; let i = index">
       <p>
-        <mat-checkbox class="checkbox" [(ngModel)]="user.checked">
-          {{ user.user.username }}
+        <mat-checkbox class="checkbox" [(ngModel)]="userList.checked"> 
+          {{ userList.user.username }}
         </mat-checkbox>
       </p>
     </section>

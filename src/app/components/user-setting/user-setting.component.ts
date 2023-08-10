@@ -68,14 +68,14 @@ mail: any;
 deleteUser(id : any)
    {
     
-    this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
-        console.log('User deleted successfully');
-        this.ngOnInit();
-      },
-      (error: any) => {
-        console.error('Error deleting user:', error);
-      }
-    );
+    // this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
+    //     console.log('User deleted successfully');
+    //     this.ngOnInit();
+    //   },
+    //   (error: any) => {
+    //     console.error('Error deleting user:', error);
+    //   }
+    // );
   }
 
   openManageRoles(): void {
