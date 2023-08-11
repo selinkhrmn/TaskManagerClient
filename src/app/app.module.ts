@@ -66,6 +66,7 @@ import { AddUsersToProjectComponent } from './components/admin-page/admin-projec
 import { NbLayoutModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
 import { ResizableModule } from 'angular-resizable-element';
 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -143,7 +144,10 @@ import { ResizableModule } from 'angular-resizable-element';
     NbSidebarModule,
     NbThemeModule,
     ResizableModule,
-    
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(
+      {positionClass: 'toast-bottom-right',}
+    ),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token')

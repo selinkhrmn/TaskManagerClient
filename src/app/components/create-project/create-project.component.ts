@@ -5,6 +5,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslocoService} from '@ngneat/transloco';
+import notie from 'notie'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-project',
@@ -22,7 +24,8 @@ export class CreateProjectComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     public projectService: ProjectService,
     public dialog: MatDialog,
-    public translocoService : TranslocoService
+    public translocoService : TranslocoService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -38,10 +41,12 @@ export class CreateProjectComponent implements OnInit {
   }
    
   createProject(){
+    
     this.projectService.createProject({name: this.projectName}).subscribe((res) => {
       this.selectedProject(res.data);
       this.ngOnInit()
     });
+    this.toastr.success('Project Created!')
   }
 
 

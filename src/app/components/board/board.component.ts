@@ -5,6 +5,8 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectService } from 'src/app/services';
 import { ColumnService } from 'src/app/services/column.service';
 import { TranslocoService} from '@ngneat/transloco';
+import notie from 'notie'
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -22,6 +24,7 @@ export class BoardComponent {
     public translocoService : TranslocoService) {}
   
   ngOnInit(): void {
+    notie.alert({ text: 'Info!' })
 
     this.project = this.projectService?.getProjectLocal();
     if(this.project != null){
@@ -32,6 +35,7 @@ export class BoardComponent {
       });
     }   
   }
+  
 
   
 }

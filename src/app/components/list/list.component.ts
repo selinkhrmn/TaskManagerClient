@@ -5,6 +5,8 @@ import { TokenService } from 'src/app/services/token.service';
 import { ColumnService, ProjectService, TaskService } from 'src/app/services';
 import { Task } from 'src/app/interfaces/task';
 import { Project } from 'src/app/interfaces';
+import notie from 'notie'
+import { ToastrService } from 'ngx-toastr';
 
 // TranslocoService'i import edin.
 import { TranslocoService } from '@ngneat/transloco';
@@ -61,8 +63,11 @@ export class ListComponent implements OnInit {
     public priorityService: PriorityService,
     public userService: UserService,
     private columnService: ColumnService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
+
   ) { }
+
 
   ngOnInit(): void {
     let id: number = this.projectService.getProjectLocal().id;
@@ -101,8 +106,8 @@ export class ListComponent implements OnInit {
   }
   stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
+  
   }
-
 
   applySummaryFilters() {
     const selectedFilter = this.taskService.getSelectedFilter();
@@ -118,11 +123,13 @@ export class ListComponent implements OnInit {
       this.createdToDate = new Date(selectedFilter.toDate);
       this.applyFilter('CreatedDate');
     }
+
   }
 
 
 
   applyFilter(filter: string) {
+    
     this.filteredData = this.listData;
     //this.getUserIds();
 
@@ -133,6 +140,8 @@ export class ListComponent implements OnInit {
     }
     else {
       this.activeFilters.push(filter);
+      this.toastr.info('Filter Applied!');
+
     }
 
     if (this.activeFilters.includes('AssignedToMe')) {
@@ -276,6 +285,7 @@ export class ListComponent implements OnInit {
       this.selectedPriorities.push(priority);
     }
     this.applyFilter('Priorities');
+    
   }
 
 
@@ -309,6 +319,8 @@ export class ListComponent implements OnInit {
     this.selectedReporters = [];
     //dates;
     this.filteredData = this.listData;
+    notie.alert({ type: 'error', text: 'Filter(s) Cleared!' })
+
   }
 
   clearAssignees(){
