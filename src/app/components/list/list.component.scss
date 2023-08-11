@@ -107,7 +107,6 @@ button.mat-menu-item {
   height: 100%;
   margin-bottom: 20px; //dikkat
   // height: 500px;
-  overflow: scroll;
 }
 
 .mat-form-field {
@@ -117,6 +116,44 @@ button.mat-menu-item {
   }
   overflow: auto;
 
+}
+#mat-menu-panel-2 {
+  max-width:270px;
+width: 270px;
+padding: 0;
+margin: 0;
+.usersCard{
+  width: 100%;
+  height: 40px;
+}
+}
+.checkboxPart {
+  border-top: 1px dashed black;
+
+  .example-section {
+    display: flex;
+  flex-direction: column;
+  gap: 3px;
+  }
+  
+}
+.example-form2 {
+  width: 100%;
+}
+
+.example-form-field2 {
+  width: 100%;
+}
+.reporterMenu {
+
+  .reporterMenuContainer {
+    display: flex;
+
+    h3 {
+      margin: 0;
+      text-align: center;
+    }
+  }
 }
 
 .priority-images {

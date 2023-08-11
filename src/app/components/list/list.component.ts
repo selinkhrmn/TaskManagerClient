@@ -45,6 +45,7 @@ export class ListComponent implements OnInit {
   customMenuClass = 'custom-menu-panel'
   selectedPriorities: number[] = [];
   appliedFilter: number = 0;
+  value = 'Clear me';
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,7 @@ export class ListComponent implements OnInit {
     this.userService.GetAllProjectUsers({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectUsers = res.data;
+        
       }
     })
 
@@ -84,11 +86,15 @@ export class ListComponent implements OnInit {
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
         this.userList = res.data;
+        console.log(this.userList);
+        
       }
     })
     this.priorities = this.priorityService.getOptions();
   }
-
+  stopPropagation(event: { stopPropagation: () => void; }){
+    event.stopPropagation();
+}
   applySummaryFilters() {
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
