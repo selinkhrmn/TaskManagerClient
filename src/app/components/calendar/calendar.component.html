@@ -9,8 +9,8 @@
             <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara">
             <button (click)="searchDay()" class="search-button">
                 <i class="material-icons">search</i>
-              </button>
-              
+            </button>
+
         </div>
         <div class="user-info">
             <button (click)="addPerson()" class="add-person-button">
@@ -63,40 +63,26 @@
         <div>Pzr</div>
     </div>
     <div class="calendar-days">
-        <div *ngFor="let dayObj of days"
-            [class.is-today]="isToday(dayObj.day)"
-            [class.is-searched]="dayObj.isSearchedDayValid"
-            (click)="toggleDescription(dayObj)">
-            
+        <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
+            [class.is-searched]="dayObj.isSearchedDayValid" (click)="toggleDescription(dayObj)">
+
             {{ dayObj.day }}
 
-            <!-- Sadece ilk görevi göster -->
             <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
                 <mat-icon class="icon">check_circle</mat-icon>
-                Task Name: {{ dayObj.projectNames[0] }}
+                Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span> 
+                
+                <!-- Eğer birden fazla görev varsa üç nokta göster -->
+                <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
+                    (click)="toggleTaskDetails(dayObj)">
+                    more_horiz
+                </mat-icon>
+                
             </h3>
 
-            <!-- Eğer birden fazla görev varsa üç nokta göster -->
-            <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" 
-                class="icon more-tasks-icon" 
-                (click)="showAllTasks(dayObj)">
-          more_horiz
-      </mat-icon>
-      
+           
+            
 
-            <!-- Tüm görevleri gösteren kutucuk -->
-            <div *ngIf="dayObj.showAllTasks" class="all-tasks-popup">
-                <div *ngFor="let projectName of dayObj.projectNames">
-                    {{ projectName }}
-                </div>
-            </div>
-
-            <div class="description-box" *ngIf="dayObj.showDescription" (click)="$event.stopPropagation()">
-                <ng-template #userDescription>
-                    <p>{{ dayObj.description }}</p>
-                </ng-template>
-                <input [(ngModel)]="dayObj.description" (focus)="clearDefaultDescription(dayObj)" placeholder="Ne Yapılmalı ?">
-            </div>
         </div>
     </div>
 

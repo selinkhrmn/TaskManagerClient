@@ -2,15 +2,19 @@
     cursor: pointer;
 }
 
-
+.icon {
+    color: lightblue;
+  }
+  .bold-text {
+    font-weight: bold;
+  }
+    
+  
 .all-tasks-popup {
-    position: absolute;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    z-index: 1;
-    padding: 10px;
-    max-width: 200px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+   
+
+    max-width: 400px;
+   background: #d0aaaa;
 }
 
 .calendar {
@@ -37,11 +41,6 @@
     justify-content: space-between;
     /* Sağdaki ve soldaki öğeler arasında maksimum boşluk bırak */
     align-items: center;
-
-
-
-
-
 
 }
 
@@ -234,33 +233,8 @@ button {
     color: #212222;
 }
 
-.description-box {
-    position: absolute;
-    top: -40px;
-    left: 40%;
-    width: 140%;
-    height: 180%;
-    transform: translateX(-50%);
-    background-color: #B19088;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    // Use box-shadow and outline to create a thinner border effect
-    box-shadow: 0 0 0 1px rgb(49, 48, 117), 0 0 0 10px transparent; // Adjust the 2px value for thickness
-    outline: 1px solid transparent; // Adjust the 1px value for thickness
-    border-radius: 10px; // You can adjust the radius if needed
 
-    input {
-        background-color: #f1f1f1;
-        /* Pink background color for the search input */
-        width: 150%;
-        height: 110%;
-        color: #000000;
-        /* White text color for visibility */
-        border-radius: 10px
-    }
-}
 
 .calendar-days div {
     position: relative;
@@ -359,5 +333,27 @@ button {
 
 .calendar-days .is-searched {
     background-color: #ffcc80; /* Change the background color as per your preference */
+  }
+  
+  .project-heading,
+  .icon-more-tasks-icon {
+    
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 5px; /* Task adı ile üç nokta arasına boşluk bırak */
+  }
+  .icon-more-tasks-icon {
+    cursor: pointer;
+    background: #939fb12d;
+    font-size: 22px;
+    color: rgba(107, 22, 30, 0.326);
+    border-radius: 50%; /* Yuvarlak kenarlar */
+    width: 30px; /* İsteğe bağlı olarak genişliği ayarlayabilirsiniz */
+    height: 22px; /* İsteğe bağlı olarak yüksekliği ayarlayabilirsiniz */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
