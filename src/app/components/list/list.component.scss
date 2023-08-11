@@ -156,6 +156,19 @@ margin: 0;
   }
 }
 
+
+.assigneeMenu {
+
+  .assigneeMenuContainer {
+    display: flex;
+
+    h3 {
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
+
 .priority-images {
   display: flex;
   align-items: center;

@@ -16,6 +16,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { UserDto } from 'src/app/interfaces/user';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserPipe } from 'src/pipes/user.pipe';
 
 @Component({
   selector: 'app-list',
@@ -34,7 +35,7 @@ export class ListComponent implements OnInit {
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate',
   ];
-  fromDate: Date; updatedFromDate: Date; createdFromDate: Date ;
+  fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
   toDate: Date; updatedToDate: Date; createdToDate: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
@@ -46,6 +47,10 @@ export class ListComponent implements OnInit {
   selectedPriorities: number[] = [];
   appliedFilter: number = 0;
   value = 'Clear me';
+  assignees: string[] = [];
+  reporters: string[] = [];
+  selectedAssignees: string[] = [];
+  selectedReporters: string[] = [];
 
   constructor(
     private http: HttpClient,
@@ -56,7 +61,7 @@ export class ListComponent implements OnInit {
     public priorityService: PriorityService,
     public userService: UserService,
     private columnService: ColumnService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -67,13 +72,15 @@ export class ListComponent implements OnInit {
         this.listData = res.data;
         this.filteredData = res.data;
         this.applySummaryFilters();
+        this.getUserIds();
+
       }
     });
 
     this.userService.GetAllProjectUsers({ "id": id }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectUsers = res.data;
-        
+
       }
     })
 
@@ -87,14 +94,16 @@ export class ListComponent implements OnInit {
       if (res.isSuccessful == true) {
         this.userList = res.data;
         console.log(this.userList);
-        
+
       }
     })
     this.priorities = this.priorityService.getOptions();
   }
-  stopPropagation(event: { stopPropagation: () => void; }){
+  stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
-}
+  }
+
+
   applySummaryFilters() {
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
@@ -115,6 +124,7 @@ export class ListComponent implements OnInit {
 
   applyFilter(filter: string) {
     this.filteredData = this.listData;
+    //this.getUserIds();
 
     if (this.activeFilters.includes(filter)) {
       if (filter == 'AssignedToMe' || filter == 'DueDateThisWeek' || filter == 'CompletedTasks') {
@@ -169,9 +179,8 @@ export class ListComponent implements OnInit {
       }
     }
 
-    if (this.activeFilters.includes('AssignedTo')) {
-      //user objesi oluşturulacak, seçilen user ona verilecek buraya sadece id gerekli
-      //this.filteredData = this.filteredData.filter(t => t.assigneeId == this.user.id);
+    if (this.activeFilters.includes('AssignedTo') && this.selectedAssignees.length != 0) {
+      this.filteredData = this.filteredData.filter(task => this.selectedAssignees.includes(task.assigneeId));
     }
 
     if (this.activeFilters.includes('Columns') && this.selectedColumns.length != 0) {
@@ -209,15 +218,55 @@ export class ListComponent implements OnInit {
       }
     }
 
-    if (this.activeFilters.includes('Reporter')) {
-      //user objesi oluşturulacak, seçilen user ona verilecek buraya sadece id gerekli
-      //this.filteredData = this.filteredData.filter(t => t.reporterId == this.user.id);
+    if (this.activeFilters.includes('Reporter') && this.selectedReporters.length != 0) {
+      this.filteredData = this.filteredData.filter(task => this.selectedReporters.includes(task.reporterId));
     }
+    
 
     if (this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0) {
       this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
     }
   }
+
+  getUserIds(): void {
+    const getAssignees = new Set<string>();
+    const getReporters = new Set<string>();
+
+    this.listData.forEach(task => {
+      if (!getAssignees.has(task.assigneeId)) {
+        getAssignees.add(task.assigneeId);
+        this.assignees.push(task.assigneeId);
+      }
+
+      if (!getReporters.has(task.reporterId)) {
+        getReporters.add(task.reporterId);
+        this.reporters.push(task.reporterId);
+      }
+    });
+  }
+
+  selectAssignee(userId: string){
+    const index = this.selectedAssignees.indexOf(userId);
+    if (index === -1) {
+      this.selectedAssignees.push(userId);
+    } else {
+      this.selectedAssignees.splice(index, 1);
+    }
+    this.applyFilter('AssignedTo');
+  }
+
+  selectReporter(userId: string){
+    const index = this.selectedReporters.indexOf(userId);
+    if (index === -1) {
+      this.selectedReporters.push(userId);
+    } else {
+      this.selectedReporters.splice(index, 1);
+    }
+    this.applyFilter('Reporter');
+  }
+
+
+
 
   handlePriorityClick(priority: number) {
     if (this.selectedPriorities.includes(priority)) {
@@ -256,8 +305,18 @@ export class ListComponent implements OnInit {
     this.selectedColumns = [];
     this.selectedPriorities = [];
     this.activeFilters = [];
+    this.selectedAssignees = [];
+    this.selectedReporters = [];
     //dates;
     this.filteredData = this.listData;
+  }
+
+  clearAssignees(){
+    this.selectedAssignees = [];
+  }
+
+  clearReporters(){
+    this.selectedReporters = [];
   }
 
   loadData(): void {
@@ -288,7 +347,7 @@ export class ListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddUsersToProjectComponent,{height: '90%',width: '50%', panelClass: 'dialog'});
+    const dialogRef = this.dialog.open(AddUsersToProjectComponent, { height: '90%', width: '50%', panelClass: 'dialog' });
   }
 
   // Örnek Transloco kullanım metodu:
@@ -296,7 +355,4 @@ export class ListComponent implements OnInit {
     const translatedText = this.translocoService.translate('your_translation_key');
     console.log(translatedText);
   }
-
-
-
 }

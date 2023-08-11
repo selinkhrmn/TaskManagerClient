@@ -31,7 +31,6 @@ export class UserService {
   };
 
   getAllUsers(): Observable<ResponseModel<UserDto>> {
-    debugger
     return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`, this.httpOptions);
   }
 
