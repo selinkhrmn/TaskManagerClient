@@ -126,6 +126,10 @@ export class CalendarComponent {
   toggleDescription(dayObj: DayObject): void {
     dayObj.showDescription = !dayObj.showDescription;
   }
+  toggleTaskDetails(dayObj: DayObject): void {
+    // Görev detaylarını açmak veya kapatmak için dayObj.showAllTasks durumunu tersine çevirin
+    dayObj.showAllTasks = !dayObj.showAllTasks;
+}
 
   clearDefaultDescription(dayObj: DayObject): void {
     if(dayObj.description === "This is the description for " + dayObj.day + " " + this.months[this.currentMonth] + " " + this.currentYear) {
