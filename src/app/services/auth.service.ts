@@ -59,12 +59,13 @@ export class AuthService {
         const httpOptions = {
             headers: headers
         };
-
+        debugger
         return this.http.post(this.baseUrl + '/RegisterUser', user, httpOptions).pipe(
             map((response: any) => {
                 const result = response;
                 if (result) {
                     localStorage.setItem("isSuccessful", result.isSuccessful);
+                    
                 }
             })
         );

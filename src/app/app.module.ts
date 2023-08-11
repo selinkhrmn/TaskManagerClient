@@ -63,6 +63,9 @@ import { AdminUsersComponent } from './components/admin-page/admin-users/admin-u
 import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 import { UserPipe } from 'src/pipes/user.pipe';
 import { AddUsersToProjectComponent } from './components/admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
+import { NbLayoutModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
+import { ResizableModule } from 'angular-resizable-element';
+
 
 @NgModule({
   declarations: [
@@ -105,6 +108,7 @@ import { AddUsersToProjectComponent } from './components/admin-page/admin-projec
     UserPipe,
     AddUsersToProjectComponent
     
+
   ],
   imports: [
     AdminUsersComponent,
@@ -135,10 +139,10 @@ import { AddUsersToProjectComponent } from './components/admin-page/admin-projec
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-
-
-
-  
+    NbLayoutModule,
+    NbSidebarModule,
+    NbThemeModule,
+    ResizableModule,
     
     JwtModule.forRoot({
       config: {

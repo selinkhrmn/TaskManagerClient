@@ -31,6 +31,7 @@ export class UserService {
   };
 
   getAllUsers(): Observable<ResponseModel<UserDto>> {
+    debugger
     return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`, this.httpOptions);
   }
 
@@ -57,7 +58,19 @@ export class UserService {
     return this.http.get<ResponseModel<ProjectUserDto>>(url, { params: params });
   }
   
-  
+  ChangePasswordWithToken(token: string, newPassword: string): Observable<any> {
+    const payload = { token, newPassword };
+    const url = `${this.baseUrlIdentity}/ChangePasswordWithToken`; // Replace with the appropriate endpoint URL
+    return this.http.post(url, payload);
+  }
+
+  ForgotPassword(email : string) :Observable<any>{
+    debugger
+    const payload = { email };
+    const url = `${this.baseUrlIdentity}/ForgotPassword`; // Replace with the appropriate endpoint URL
+
+    return this.http.post(url, payload)
+  }
 
 
 }

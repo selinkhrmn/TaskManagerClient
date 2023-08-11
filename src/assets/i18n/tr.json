@@ -42,7 +42,8 @@
     "logIn" : "Giriş",
     "username" : "Kullanıcı Adı",
     "surname" : "Soyad",
-
+    "new password": "Yeni Şifre",
+    "confirm password": "Şifreyi Tekrar Gir",
     "navigation": {
         "yourWork": "İşlerin"
     },

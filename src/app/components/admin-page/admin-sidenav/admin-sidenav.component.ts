@@ -14,6 +14,6 @@ export class AdminSidenavComponent {
     public tokenService: TokenService) {}
 
   navigateToHome() {
-    this.router.navigate(['home/summary'])
+    this.router.navigate(['home'])
   }
 }

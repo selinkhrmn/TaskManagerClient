@@ -42,7 +42,8 @@
     "logIn" : "Log In",
     "username" : "Username",
     "surname" : "Surname",
-
+    "new password": "New Password",
+    "confirm password": "Confirm Password",
     "navigation": {
         "yourWork": "Your Work"
     },

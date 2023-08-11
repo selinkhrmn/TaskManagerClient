@@ -4,11 +4,11 @@
       <!-- <p>Fear not. We'll email you instructions to reset your password.</p> -->
       <div class="container">
         <label>{{'name' | transloco}}</label>
-        <input placeholder="John" [(ngModel)] = 'user.name' (ngModelChange)="updateUserName()"/>
+        <input (keydown.space)="$event.preventDefault()" placeholder="John" [(ngModel)] = 'user.name' (ngModelChange)="updateUserName()"/>
         <label>{{'password' | transloco}}</label>
-        <input placeholder="JohnDoe123" [(ngModel)] = 'user.password'/>
+        <input (keydown.space)="$event.preventDefault()" placeholder="JohnDoe123" [(ngModel)] = 'user.password'/>
         <label>{{'surname' | transloco}}</label>
-        <input placeholder="Doe"  [(ngModel)] = 'user.surname'  (ngModelChange)="updateUserName()" />
+        <input (keydown.space)="$event.preventDefault()" placeholder="Doe"  [(ngModel)] = 'user.surname'  (ngModelChange)="updateUserName()" />
         <label>{{'username' | transloco}}</label>
         <input   [(ngModel)]="user.userName" disabled="">
         <label>E-mail</label> 
