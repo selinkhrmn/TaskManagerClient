@@ -31,6 +31,7 @@ export class TaskService {
   };
 
   createTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
+    debugger
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
   }
  
@@ -67,6 +68,10 @@ export class TaskService {
     return this.selectedFilter;
   }
 
+  // CreateTaskForColumn(task: Partial<Task>) {
+  // debugger
+  //   return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTaskForColumn`,task, this.httpOptions);
+  // }
 
 
 }

@@ -6,7 +6,7 @@
 }
 .navbar-brand {
   padding: 12px;
-  font-size: 28px;
+  font-size: 36px;
     .sedna {
       font-weight: normal;
     }
@@ -40,7 +40,9 @@
 
 .btn {
   margin-left: 10px;
+  float: right;
 }
+
 
 .menu {
   margin-right: 10px;
@@ -61,4 +63,44 @@
 .dropdown {
   display: flex;
   
+}
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+
+  .language {
+    img {
+      width: 25px; /* Adjust image width for smaller screens */
+      height: 25px; /* Adjust image height for smaller screens */
+    }
+  }
+
+  .nav-item {
+    margin-left: 5px; /* Reduce margin for better spacing */
+  }
+
+  .btn {
+    margin-left: 5px; /* Reduce margin for better spacing */
+  }
+
+  .menu {
+    margin-right: 5px; /* Reduce margin for better spacing */
+    
+    button {
+      font-size: 14px; /* Adjust font size for smaller screens */
+    }
+  }
+
+  .user_profile {
+    img {
+      width: 15px; /* Adjust image width for smaller screens */
+      height: 25px; /* Adjust image height for smaller screens */
+    }
+  }
+
+  .dropdown {
+    /* Keep the existing styles for smaller screens */
+  }
 }

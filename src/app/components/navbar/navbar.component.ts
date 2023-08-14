@@ -51,9 +51,12 @@ export class NavbarComponent {
     openCreateIssueDialog() {
       const dialog = this.dialog.open(CreateIssueDialogComponent, {data : {table : this.table},width:'60%'});
       dialog.afterClosed().subscribe((response) => {
+        console.log(response);
+        
         if(response.isAdded) {
           this.taskService.createTask(response.task).subscribe((res)=>{
-              window.location.reload();
+            
+              // window.location.reload();
           })
         }
       });
