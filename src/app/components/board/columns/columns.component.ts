@@ -30,6 +30,7 @@ import { EditColumnComponent } from '../edit-column/edit-column.component';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { TranslocoService} from '@ngneat/transloco';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -55,7 +56,9 @@ export class ColumnsComponent {
   columnName : string;
   updatedColumnName : string;
   currentProject:  ProjectDto;
-
+  taskName: string;
+  defaultEndDate = new Date(2040,1,1);
+  userId : string;
   @Output() currentColumnId: number;
 
   showFiller = false;
@@ -66,12 +69,15 @@ export class ColumnsComponent {
     private taskService: TaskService,
     public dialog: MatDialog, 
     private projectService : ProjectService,
-    public translocoService: TranslocoService) {
+    public translocoService: TranslocoService,
+    public tokenService : TokenService) {
      
   }
 
   ngOnInit(): void {  
-   
+    this.tokenUserId();
+    this.getColumnId(this.currentColumnId);
+    this.getProjectLocal();
     this.currentProject = this.projectService.getProjectLocal();
     if(this.currentProject != null){
       this.columnService.GetProjectColumnsTasks({"id": this.currentProject.id}).subscribe((response) => {
@@ -81,6 +87,11 @@ export class ColumnsComponent {
       });
     }
   }
+  stopPropagation(event: { stopPropagation: () => void; }) {
+    event.stopPropagation();
+  
+  }
+ 
 
   drop(event: CdkDragDrop<taskDto[]>, column: ColumnTask) {
     if (event.previousContainer === event.container) {
@@ -164,6 +175,26 @@ export class ColumnsComponent {
       this.ngOnInit()
     })
 }
+tokenUserId() {
+  this.userId = this.tokenService.tokenUserId();
 }
+CreateTask()  {
+  debugger
+  var taskObj = {
+    'projectId' : this.currentProjectId,
+    'name' : this.taskName,
+    'columnId' : this.currentColumnId,
+    'endDate' : this.defaultEndDate,
+    'assigneeId' : this.userId,
+    'reporterId' : this.userId,
+    'priority' : 3
+
+  }
+  this.taskService.createTask(taskObj);  
+}
+
+}
+
+
 
 //?

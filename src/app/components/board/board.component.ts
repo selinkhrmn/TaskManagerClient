@@ -24,7 +24,6 @@ export class BoardComponent {
     public translocoService : TranslocoService) {}
   
   ngOnInit(): void {
-    notie.alert({ text: 'Info!' })
 
     this.project = this.projectService?.getProjectLocal();
     if(this.project != null){

@@ -114,3 +114,30 @@
     }
   }
 }
+/* For screens up to 767px wide */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  .left_side {
+    width: 100%; /* Make the left side full width */
+    height: auto; /* Allow content to determine height */
+    img {
+      width: 100%; /* Make the image full width */
+      height: auto; /* Automatically adjust height to maintain aspect ratio */
+    }
+  }
+
+  .right_side {
+    width: 100%; /* Make the right side full width */
+    height: auto; /* Allow content to determine height */
+    padding: 10px; /* Adjust padding for better spacing */
+    
+    .right_side_wrapper {
+      width: 100%; /* Make the wrapper full width */
+      height: auto; /* Allow content to determine height */
+      padding: 10px; /* Adjust padding for better spacing */
+    }
+  }
+}

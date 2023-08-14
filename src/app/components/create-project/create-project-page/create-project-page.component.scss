@@ -15,4 +15,26 @@
   .example-sidenav {
     width: 90%;
     height: 100%;
+  }/* For screens up to 767px wide */
+@media (max-width: 767px) {
+  .example-container {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    border: none; /* Remove the border for smaller screens */
   }
+  
+  .example-sidenav-content {
+    width: 100%; /* Make the content full width for smaller screens */
+    height: auto; /* Allow content to determine height */
+    align-items: flex-start; /* Align items to the top */
+    justify-content: flex-start; /* Align content to the top */
+    padding: 20px; /* Add padding for spacing */
+  }
+  
+  .example-sidenav {
+    width: 100%; /* Make the sidenav full width for smaller screens */
+    height: auto; /* Allow content to determine height */
+    border-top: 1px solid rgba(0, 0, 0, 0.5); /* Add a top border for separation */
+    padding-top: 20px; /* Add padding for spacing */
+  }
+}
