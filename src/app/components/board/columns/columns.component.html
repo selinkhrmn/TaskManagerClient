@@ -2,39 +2,36 @@
   <div class="example-column" *ngFor="let column of columns">
     <div class="update_column">
       <div class="column_name">
-     <h2>{{ column.name }}</h2>
+        <h2>{{ column.name }}</h2>
       </div>
- 
+
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_horiz</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        
-        <button mat-menu-item  (click)="getColumnId(column.id);openEditDialog(column.name, column.id)">
+
+        <button mat-menu-item (click)="getColumnId(column.id);openEditDialog(column.name, column.id)">
           <mat-icon>edit</mat-icon>
           <span>{{'edit' | transloco}}</span>
         </button>
-        <button mat-menu-item (click)="getColumnId(column.id);DeleteColumn()">
+
+        <button *ngIf="columns.length >= 2" mat-menu-item
+          (click)="getColumnId(column.id); OpenDeleteDialog(column.id, column.name)">
           <mat-icon>delete_outline</mat-icon>
-          <span>{{'delete' | transloco}}</span>
+          <span>{{ 'delete' | transloco }}</span>
         </button>
+
+
       </mat-menu>
     </div>
-    
-    <div
-      
-      cdkDropList
-      [cdkDropListData]="column.tasks"
-      [cdkDropListConnectedTo]="['example-list']"
-      class="example-list"
-      (cdkDropListDropped)="drop($event, column)"
-      #droppedContainer
-    >
-    
+
+    <div cdkDropList [cdkDropListData]="column.tasks" [cdkDropListConnectedTo]="['example-list']" class="example-list"
+      (cdkDropListDropped)="drop($event, column)" #droppedContainer>
+
       <div class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openTaskDialog(task.id)">
         {{ task.name }}
       </div>
-  
+
     </div>
     <div class="addTask">
       <button mat-raised-button [matMenuTriggerFor]="addTask" (click)="getColumnId(column.id)">
@@ -42,17 +39,18 @@
         <mat-icon>add</mat-icon>
       </button>
       <mat-menu #addTask="matMenu" class="addTaskMenu">
-        <input [(ngModel)]="taskName"  (click)="stopPropagation($event)" (keyup.enter)="CreateTask()"> <!--Auto focus lazım input'a -->
+        <input [(ngModel)]="taskName" (click)="stopPropagation($event)" (keyup.enter)="CreateTask()">
+        <!--Auto focus lazım input'a -->
       </mat-menu>
     </div>
   </div>
-  
+
   <div class="just_container" *ngIf="currentProject.name != ''">
     <mat-drawer-container class="create_column_container">
       <mat-drawer #drawer class="example-sidenav" mode="side">
         <div class="just">
           <h3>{{'name' | transloco}}:</h3>
-          <input [(ngModel)]="columnName"/>
+          <input [(ngModel)]="columnName" />
           <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
 
           <button mat-button (click)="drawer.toggle()">

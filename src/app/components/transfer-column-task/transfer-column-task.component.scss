@@ -1,0 +1,54 @@
+/* Add these styles to your component's SCSS file */
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.header {
+  flex: 1;
+}
+
+.inline-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  gap: 10px;
+}
+
+.inline-section2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-label {
+  margin: 0;
+}
+
+.icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.inline-content {
+  margin: 0;
+}
+
+.select-field {
+  margin-left: 10px;
+  /* Adjust as needed for spacing */
+}

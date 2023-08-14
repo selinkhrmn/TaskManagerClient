@@ -1,0 +1,40 @@
+<h3 mat-dialog-title>{{ deletedColumn.name | uppercase }} sütunundaki çalışmaları taşıyın </h3>
+
+<div mat-dialog-content class="content-container">
+    <div class="header">
+        <p>
+            Kapsamdakiler de dahil olmak üzere {{ deletedColumn.name | uppercase }} durumundaki tüm çalışmaların
+            barındırılacağı yeni yeri seçin.
+            Bu çalışmayı gönderdiğiniz durum yeni oluşturulan tüm konuların gönderileceği yer olur.
+        </p>
+
+    </div>
+    <div class="main">
+        <div class="inline-section">
+            <p class="inline-label">Bu durum silinecek:</p>
+            <h3 class="inline-content">{{ deletedColumn.name }} </h3>
+        </div>
+        <div class="icon">
+            <mat-icon>arrow_forward</mat-icon>
+        </div>
+        <div class="inline-section2">
+          <mat-form-field class="select-field">
+            <mat-label>Select an option</mat-label>
+            <mat-select [(ngModel)]="transferredColumnId">
+                <ng-container *ngFor="let column of columns">
+                    <mat-option *ngIf="column.id !== deletedColumn.id" [value]="column.id">{{ column.name }}</mat-option>
+                </ng-container>
+            </mat-select>
+            
+        </mat-form-field>  
+        </div>
+        
+    </div>
+
+    <div class="buttons" mat-dialog-actions>
+        <button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>
+        <button mat-flat-button color="warn" (click)="delete()">
+            {{ "delete" | transloco }}
+        </button>
+    </div>
+</div>
