@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
     width: 100%;
     height: 100%;
@@ -29,6 +30,7 @@
     text-align: center;
     color: #012619;
   }
+
   .right_side_wrapper {
     width: 350px;
     height: 500px;
@@ -36,6 +38,7 @@
     padding: 20px;
     background-color: hsla(210, 18%, 87%, 1);
     box-shadow: 5px 5px #012619;
+
     .topside {
       text-align: center;
       height: 40%;
@@ -50,13 +53,14 @@
         justify-content: space-evenly;
         width: 100%;
         height: 100%;
-        
+
         color: #012619;
         border-radius: 4px;
         background-color: transparent;
         border: 1px solid #012619;
         box-shadow: 5px 5px #012619;
       }
+
       .the_person {
         width: 100%;
         height: fit-content;

@@ -13,13 +13,15 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-user-setting',
   templateUrl: './user-setting.component.html',
   styleUrls: ['./user-setting.component.scss'],
+  
 })
 export class UserSettingComponent {
 
@@ -82,6 +84,3 @@ deleteUser(id : any)
     console.log('Manage Roles clicked');
   }
 }
-
-  
-
