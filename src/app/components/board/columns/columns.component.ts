@@ -144,11 +144,12 @@ export class ColumnsComponent {
     this.taskService.getTaskById({ "id": tId }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
-        const dialog = this.dialog.open(TaskComponent, { data: { task: this.tasks }, height: '80%', width: '90%', panelClass: 'dialog' });
+
+        const dialog = this.dialog.open(TaskComponent, {autoFocus : false, data: { task: this.tasks }, height: '80%', width: '90%', panelClass: 'dialog' });
         dialog.afterClosed().subscribe((res) => {
           this.ngOnInit();
         })
-      }
+        }
     })
   }
 
