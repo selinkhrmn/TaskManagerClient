@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { ProjectService, TaskService } from 'src/app/services';
+import { ProjectService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskService } from 'src/app/services/task.service';
+import { TaskComponent } from '../task/task.component';
+
+
 interface DayObject {
+  taskId?: number; // taskId özelliğini ekleyin
   day: number;
   isToday: boolean;
   showDescription: boolean;
@@ -38,7 +44,8 @@ export class CalendarComponent {
   weekdays: string[] = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Pzr"];
   months: string[] = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
-  constructor(public tokenService: TokenService,private cdRef: ChangeDetectorRef, private projectService: ProjectService, private taskService: TaskService, private router: Router) {}
+  constructor(public tokenService: TokenService,private dialog: MatDialog
+,    private cdRef: ChangeDetectorRef, private projectService: ProjectService, private taskService: TaskService, private router: Router) {}
   ngOnInit(): void {
     const today = new Date();
     this.currentMonth = today.getMonth();
@@ -74,8 +81,9 @@ export class CalendarComponent {
               const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
                 const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
 
-
+                const taskIdForTheDay = tasksForTheDay.length > 0 ? tasksForTheDay[0].id : undefined;
                 this.days.push({
+                  taskId: taskIdForTheDay ,// Burada ekledik
                     day: dayNumber,
                     isToday: isToday,
                     showDescription: false,
@@ -90,7 +98,18 @@ export class CalendarComponent {
       console.error('Görevleri alırken hata:', error);
    });
   }
-
+  openTaskDialog(tId: number) {
+    this.taskService.getTaskById({ "id": tId }).subscribe((res) => {
+      if (res.isSuccessful == true) {
+        const tasks = res.data;
+        const dialog = this.dialog.open(TaskComponent, {autoFocus : false, data: { task: tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
+        dialog.afterClosed().subscribe(() => {
+          this.ngOnInit();
+        })
+      }
+    })
+  }
+  
   showAllTasks(dayObj: DayObject): void {
     // Diğer tüm günlerin kutucuklarını gizleyin
     this.days.forEach(d => d.showAllTasks = false);
@@ -223,4 +242,5 @@ yourButtonClickFunction() {
   console.log('Task Name butonuna tıklandı!');
   // Buraya tıklanınca yapılacak işlemleri ekleyebilirsiniz.
 }
+
 }

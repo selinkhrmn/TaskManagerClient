@@ -65,29 +65,29 @@
     <div class="calendar-days">
         <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
             [class.is-searched]="dayObj.isSearchedDayValid" (click)="toggleDescription(dayObj)">
-
-            {{ dayObj.day }}
-
+    
+            <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
+            <span *ngIf="isToday(dayObj.day)">{{ getTodayText(dayObj) }}</span>
+    
+            <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
+            <span *ngIf="!isToday(dayObj.day)">{{ dayObj.day }}</span>
+    
             <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
                 <mat-icon class="icon">check_circle</mat-icon>
-            
-                <!-- Task Name kısmı bir buton olarak tanımlandı -->
-                <button mat-button (click)="yourButtonClickFunction()" class="task-name-button">
-                    Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
-                </button>
-                
-            
+
+                <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)" class="task-name-button">
+    Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+</button>
+
+    
                 <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
                     (click)="toggleFilter('DueDate', dayObj.day)">
                     more_horiz
                 </mat-icon>
             </h3>
-            
-
-           
-            
-
         </div>
     </div>
+    
+    
 
 </div>

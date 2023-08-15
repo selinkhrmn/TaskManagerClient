@@ -324,22 +324,7 @@ button {
     /* Bugünün yazı rengi (beyaz) */
 }
 
-.calendar-days div.is-today::after {
-    content: "Bugün";
-    /* Bugünün altında "Bugün" yazısı */
-    position: absolute;
-    bottom: 0px;
-    /* "Bugün" yazısının altındaki mesafe */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #71ad83;
-    /* "Bugün" yazısı arka plan rengi */
-    padding: -25px 1px;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #ffffff;
-    /* "Bugün" yazısı rengi (beyaz) */
-}
+
 
 /* ... (Existing styles) ... */
 
