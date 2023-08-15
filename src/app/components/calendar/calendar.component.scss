@@ -1,32 +1,57 @@
 .more-tasks-icon {
     cursor: pointer;
 }
+
 .task-name-button {
-    background-color: rgba(173, 216, 230, 0.158); /* İçini gri yapar */
-    border: 2px solid rgba(173, 216, 230, 0.434); /* Köşeleri mavi yapar */
+    background-color: rgba(173, 216, 230, 0.158);
+    /* İçini gri yapar */
+    border: 2px solid rgba(173, 216, 230, 0.434);
+    /* Köşeleri mavi yapar */
     padding: 5px 15px;
-    font-size: 10px;
+    font-size: 9px;
     /* Diğer stil özellikleri... */
 }
 
+.priority-images {
+    display: flex;
+    align-items: center;
+    left: 10px;
+    
+    .img_div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%; //fit-content yapılabilir.
+      img {
+        width: 30px;
+        height: 30px;
+        // margin-right: 10px;
+        transition: transform 0.2s;
+        object-fit: cover;
+      }
+    }
+  }
 h3.project-heading {
     margin: 0;
     /* Diğer stil özellikleri */
 }
+
 .icon {
     font-size: 20px;
     color: lightblue;
-  }
-  .bold-text {
+}
+
+.bold-text {
     font-weight: bold;
-  }
-    
-  
+}
+
+
 .all-tasks-popup {
-   
+
 
     max-width: 400px;
-   background: #d0aaaa;
+    background: #d0aaaa;
 }
 
 .calendar {
@@ -329,28 +354,33 @@ button {
 /* ... (Existing styles) ... */
 
 .calendar-days .is-searched {
-    background-color: #ffcc80; /* Change the background color as per your preference */
-  }
-  
-  .project-heading,
-  .icon-more-tasks-icon {
-    
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      margin-top: -4px; /* Task adı ile üç nokta arasına boşluk bırak */
-  }
-  .icon-more-tasks-icon {
+    background-color: #ffcc80;
+    /* Change the background color as per your preference */
+}
+
+.project-heading,
+.icon-more-tasks-icon {
+
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: -4px;
+    /* Task adı ile üç nokta arasına boşluk bırak */
+}
+
+.icon-more-tasks-icon {
     cursor: pointer;
     background: #939fb12d;
     font-size: 22px;
     color: rgba(107, 22, 30, 0.326);
-    border-radius: 50%; /* Yuvarlak kenarlar */
-    width: 30px; /* İsteğe bağlı olarak genişliği ayarlayabilirsiniz */
-    height: 22px; /* İsteğe bağlı olarak yüksekliği ayarlayabilirsiniz */
+    border-radius: 50%;
+    /* Yuvarlak kenarlar */
+    width: 30px;
+    /* İsteğe bağlı olarak genişliği ayarlayabilirsiniz */
+    height: 22px;
+    /* İsteğe bağlı olarak yüksekliği ayarlayabilirsiniz */
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
+}
