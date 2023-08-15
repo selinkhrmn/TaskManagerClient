@@ -116,6 +116,65 @@ h2 {
   }
 }
 
+.comment_section {
+  width: 100%;
+  padding: 7px;
+  margin-top: 10px;
+
+  .top_section {
+    display: flex;
+    gap: 20px;
+
+    .user_icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #5CACF2;
+      font-size: 18px;
+      color: white;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .user_name {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    .date_time {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+
+    }
+  }
+
+  .main {
+    width: 100%;
+    margin-top: 10px;
+    .placeholder {
+      background-color: transparent;
+      width: 60px;
+    }
+  }
+
+  .edit_delete_buttons {
+    display: flex;
+    margin-top: 10px;
+    .placeholder2 {
+      background-color: transparent;
+      width: 40px;
+    }
+  }
+}
+
 .right_side {
   width: 30%;
 
