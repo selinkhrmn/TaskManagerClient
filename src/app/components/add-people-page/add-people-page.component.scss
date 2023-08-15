@@ -51,3 +51,30 @@
     align-items: center;
     gap: 10px;
 }
+
+/* For screens up to 767px wide */
+@media (max-width: 767px) {
+    .wrapper {
+      width: 90%; /* Reduce the width to fit smaller screens */
+      padding: 15px; /* Adjust padding for better spacing */
+    }
+  
+    .input_fields {
+      width: 100%; /* Make sure the input fields fill the container */
+      height: auto; /* Allow content to determine height */
+    }
+  
+    .buttons {
+      width: 100%; /* Make sure buttons fill the container */
+      justify-content: flex-end; /* Adjust alignment */
+      gap: 5px; /* Reduce the gap between buttons */
+    }
+  }
+  
+  /* For screens between 768px and 1023px wide */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .wrapper {
+      width: 70%; /* Reduce the width for medium-sized screens */
+    }
+  }
+  

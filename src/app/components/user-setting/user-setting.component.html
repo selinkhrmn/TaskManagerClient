@@ -32,8 +32,8 @@
   <tr *ngFor="let user of users">
     <td>{{user.username}}</td>
     <td>{{user.id}}</td>
-    <!-- <td>{{user.email}}</td>
-    <td>{{user.role}}</td> -->
+    <td>{{user.email}}</td>
+    <td>{{user.role}}</td>
     <td><button mat-icon-button class="delete-button" aria-label="Delete" (click)="deleteUser(user.id)">
         <mat-icon>delete</mat-icon>
       </button></td>

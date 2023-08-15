@@ -8,8 +8,7 @@
       </a>
     </div>
 
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle text-light"
           data-bs-toggle="dropdown"
@@ -44,18 +43,8 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Separated link</a>
         </div>
-      </li>
-      <button
-        class="btn btn-light"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        [disabled]="!tokenService.hasRole('Admin')"
-        (click)="openCreateIssueDialog()"
-      >
-        {{ "create" | transloco }}
-      </button>
-    </ul>
+      </li> -->
+
 
     <style>
       .user-section {
@@ -67,6 +56,16 @@
 
     <form class="d-flex">
       <div class="user-section">
+        <button
+        class="btn btn-light"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        [disabled]="!tokenService.hasRole('Admin')"
+        (click)="openCreateIssueDialog()"
+      >
+        {{ "create" | transloco }}
+      </button>
         <button
           class="mx-2 fa-lg language"
           [matMenuTriggerFor]="changeLang"

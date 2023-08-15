@@ -47,6 +47,7 @@ export class CreateProjectComponent implements OnInit {
       this.ngOnInit()
     });
     this.toastr.success('Project Created!')
+    localStorage.setItem('newProject', this.projectName);
   }
 
 

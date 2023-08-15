@@ -60,3 +60,33 @@
   }
 }
 
+/* For screens up to 767px wide */
+@media (max-width: 1010px) {
+  .container {
+    width: 100vw; /* Make the container full width */
+    height: auto; /* Allow content to determine height */
+    overflow: visible; /* Disable horizontal overflow */
+  }
+
+  .top_bar {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items horizontally */
+    margin-top: 15px; /* Adjust top margin for spacing */
+    
+    .icon_holder {
+      margin-right: 0; /* Remove right margin for better spacing */
+      margin-top: 5px; /* Adjust top margin for spacing */
+    }
+  }
+
+  .project_names {
+    width: 100%; /* Make the width full for smaller screens */
+    padding: 0 10px; /* Adjust padding for better spacing */
+  }
+
+  .card {
+    width: 100%; /* Make the cards full width */
+    margin-top: 5px; /* Adjust top margin for spacing */
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+}

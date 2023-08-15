@@ -6,5 +6,4 @@ export interface ColumnTask {
     name: string;
     id: number;
     tasks: taskDto[];
-
 }

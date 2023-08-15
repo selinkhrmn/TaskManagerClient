@@ -61,3 +61,42 @@
 		background-position: 0% 50%;
 	}
 }
+/* For screens up to 767px wide */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .container2 {
+    border-left: none;
+    border-top: 1px solid black;
+    padding-top: 10px;
+  }
+
+  .routers_container {
+    height: 60vh;
+    background-color: transparent;
+  }
+}
+
+/* For screens between 768px and 1023px wide */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .container2 {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid black;
+    padding-top: 10px;
+    padding-left: 15px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  .routers_container {
+    width: 100%;
+    height: auto;
+  }
+}

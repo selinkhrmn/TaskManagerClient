@@ -18,7 +18,7 @@
   </div>
 
   <div class="user-info">
-    <button [matMenuTriggerFor]="filterMenu">
+    <button [matMenuTriggerFor]="filterMenu" >
       <i class="material-icons">filter_list</i>{{ "filter" | transloco }}
       <span *ngIf="activeFilters.length != 0">
         &nbsp;{{ activeFilters.length }} applied</span>
@@ -44,14 +44,14 @@
   </div>
   <br />
   <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('AssignedToMe')"
-    (click)="applyFilter('AssignedToMe')">
+    (click)="applyFilter('AssignedToMe');stopPropagation($event)">
     <mat-icon>account_circle</mat-icon> Assigned To Me
     <mat-icon *ngIf="activeFilters.includes('AssignedToMe')" class="selected-icon">check_circle
     </mat-icon>
   </button>
 
   <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('DueDateThisWeek')"
-    (click)="applyFilter('DueDateThisWeek')">
+    (click)="applyFilter('DueDateThisWeek');stopPropagation($event)">
     Due date this week <mat-icon>notification_important</mat-icon>
     <mat-icon *ngIf="activeFilters.includes('DueDateThisWeek')" class="selected-icon">check_circle</mat-icon>
   </button>
@@ -62,7 +62,7 @@
 
   <span>
     <mat-icon>calendar_today</mat-icon> &nbsp; Date Range
-    <button *ngIf="fromDate != null || toDate != null" (click)="cancelCreateDates()">
+    <button *ngIf="fromDate != null || toDate != null" (click)="cancelCreateDates();stopPropagation($event)">
       (x)
     </button>
     <!--cancelDates() -->
@@ -119,16 +119,16 @@
   </span>
 
   <div *ngFor="let column of projectColumns">
-    <label>
+    <label (click)="stopPropagation($event)">
       <input type="checkbox" [value]="column.id" [checked]="selectedColumns.includes(column.id)"
-        (change)="handleColumnSelect(column.id)" />
+        (change)="handleColumnSelect(column.id)"  />
       {{ column.name }}
     </label>
   </div>
   <br />
   <span>
     <mat-icon>update</mat-icon>Update Date Range
-    <button *ngIf="updatedFromDate != null || updatedToDate != null" (click)="cancelCreateDates()">
+    <button *ngIf="updatedFromDate != null || updatedToDate != null" (click)="cancelCreateDates();stopPropagation($event)">
       (x)
     </button>
     <!--  CancelUpdateDates() -->
@@ -137,7 +137,7 @@
   <div class="date-input-container">
     <mat-form-field>
       <input matInput [matDatepicker]="updatedFromDatePicker" placeholder="From Date"
-        (dateChange)="applyFilter('UpdatedDate')" [(ngModel)]="updatedFromDate" />
+        (dateChange)="applyFilter('UpdatedDate');" [(ngModel)]="updatedFromDate" />
       <mat-datepicker-toggle matSuffix [for]="updatedFromDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #updatedFromDatePicker></mat-datepicker>
     </mat-form-field>
@@ -176,7 +176,7 @@
 
   <span>
     <mat-icon>create</mat-icon>Creation Date Range
-    <button *ngIf="createdFromDate != null || createdToDate != null" (click)="cancelCreateDates()">
+    <button *ngIf="createdFromDate != null || createdToDate != null" (click)="cancelCreateDates();stopPropagation($event)">
       (x)
     </button>
   </span>
@@ -202,7 +202,7 @@
   <button class="custom-menu-item" [matMenuTriggerFor]="innermenuReporter" mat-menu-item>
     <mat-icon>remove_red_eye</mat-icon>Reporter
     <span *ngIf="selectedReporters.length != 0">filtered user {{selectedReporters.length}} 
-      <button (click)="clearReporters()">(x)</button>
+      <button (click)="clearReporters();stopPropagation($event)">(x)</button>
     </span>
   </button>
 
@@ -230,30 +230,30 @@
 
   <span><mat-icon>priority_high</mat-icon> Priorities
     <span *ngIf="selectedPriorities.length != 0">{{ selectedPriorities.length }}
-      <button (click)="cancelPriorities()">(x)</button>
+      <button (click)="cancelPriorities();stopPropagation($event)">(x)</button>
       <!--DÜZENLEME GEREKLİ  -->
     </span>
   </span>
 
   <div class="priority-images">
     <div class="img_div">
-      <img (click)="handlePriorityClick(1)" [class.selected]="selectedPriorities.includes(1)"
+      <img (click)="handlePriorityClick(1);stopPropagation($event)" [class.selected]="selectedPriorities.includes(1)"
         src="../../assets/lowest.png" alt="Easy" />
     </div>
     <div class="img_div">
-      <img (click)="handlePriorityClick(2)" [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png"
+      <img (click)="handlePriorityClick(2);stopPropagation($event)" [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png"
         alt="Medium" />
     </div>
     <div class="img_div">
-      <img (click)="handlePriorityClick(3)" [class.selected]="selectedPriorities.includes(3)"
+      <img (click)="handlePriorityClick(3);stopPropagation($event)" [class.selected]="selectedPriorities.includes(3)"
         src="../../assets/medium.png" alt="Normal" />
     </div>
     <div class="img_div">
-      <img (click)="handlePriorityClick(4)" [class.selected]="selectedPriorities.includes(4)"
+      <img (click)="handlePriorityClick(4);stopPropagation($event)" [class.selected]="selectedPriorities.includes(4)"
         src="../../assets/high.png" alt="Difficult" />
     </div>
     <div class="img_div">
-      <img (click)="handlePriorityClick(5)" [class.selected]="selectedPriorities.includes(5)"
+      <img (click)="handlePriorityClick(5);stopPropagation($event)" [class.selected]="selectedPriorities.includes(5)"
         src="../../assets/highest.png" alt="Difficult" />
     </div>
   </div>

@@ -10,17 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-add-people-to-project',
   templateUrl: './add-people-to-project.component.html',
-  styleUrls: ['./add-people-to-project.component.scss']
+  styleUrls: ['./add-people-to-project.component.scss'],
+  
 })
 export class AddPeopleToProjectComponent {
   users: UserDto[] = [];
-  
+  newProjectName: any;
 
   constructor(public translocoService: TranslocoService,
     private userService : UserService) { }
   ngOnInit() 
   {
     this.getAllUsers();
+    this.newProjectName = localStorage.getItem('newProject');
   }
 
   getAllUsers() {
@@ -35,3 +37,4 @@ export class AddPeopleToProjectComponent {
   }
 
 }
+
