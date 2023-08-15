@@ -72,11 +72,11 @@
                 <mat-icon class="icon">check_circle</mat-icon>
                 Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span> 
                 
-                <!-- Eğer birden fazla görev varsa üç nokta göster -->
                 <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
-                    (click)="toggleTaskDetails(dayObj)">
-                    more_horiz
-                </mat-icon>
+                    (click)="toggleFilter('DueDate', dayObj.day)">
+              more_horiz
+          </mat-icon>
+          
                 
             </h3>
 

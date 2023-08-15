@@ -124,4 +124,5 @@ export class SummaryComponent implements AfterViewInit, OnInit {
 
     this.router.navigate(['/home/list']);
   }
+  
 }

@@ -59,9 +59,11 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
   }
 
-  setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
-    this.selectedFilter = filter;
-  }
+ setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
+  console.log("Setting filter:", filter);
+  this.selectedFilter = filter;
+}
+
 
   getSelectedFilter() {
     return this.selectedFilter;

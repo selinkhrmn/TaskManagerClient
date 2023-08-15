@@ -3,7 +3,8 @@ import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 interface DayObject {
   day: number;
   isToday: boolean;
@@ -37,7 +38,7 @@ export class CalendarComponent {
   weekdays: string[] = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Pzr"];
   months: string[] = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
-  constructor(public tokenService: TokenService, private projectService: ProjectService, private taskService: TaskService) {}
+  constructor(public tokenService: TokenService,private cdRef: ChangeDetectorRef, private projectService: ProjectService, private taskService: TaskService, private router: Router) {}
   ngOnInit(): void {
     const today = new Date();
     this.currentMonth = today.getMonth();
@@ -198,4 +199,25 @@ export class CalendarComponent {
   isSearchedDay(day: number): boolean {
     return day === this.searchedDay && this.searchedDay !== -1;
   }
+
+  toggleFilter(filter: string, selectedDay: number) { 
+    const selectedDate = new Date(this.currentYear, this.currentMonth, selectedDay);
+    const toDate = new Date(selectedDate);
+    toDate.setDate(toDate.getDate());
+
+
+    const selectedFilter = {
+      name: 'DueDate',
+      fromDate: selectedDate,
+      toDate: toDate,
+    };
+
+    if (filter === 'DueDate') {
+      selectedFilter.name = 'DueDate';
+      this.taskService.setSelectedFilter(selectedFilter);
+    } 
+
+    this.router.navigate(['/home/list']);
+}
+
 }

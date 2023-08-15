@@ -151,6 +151,30 @@
   </div>
 
   <span>
+    <mat-icon>update</mat-icon>DueDate Date Range
+    <button *ngIf="dueDateFrom != null || dueDateTo != null" (click)="cancelCreateDates()">
+      (x)
+    </button>
+    <!--  CancelUpdateDates() -->
+  </span>
+
+  <div class="date-input-container">
+    <mat-form-field>
+      <input matInput [matDatepicker]="dueDateFromDatePicker" placeholder="From Date"
+        (dateChange)="applyFilter('DueDate')" [(ngModel)]="dueDateFrom" />
+      <mat-datepicker-toggle matSuffix [for]="dueDateFromDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #dueDateFromDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-icon class="custom-icon">arrow_forward</mat-icon>
+    <mat-form-field>
+      <input matInput [matDatepicker]="dueDateToDatePicker" placeholder="To Date"
+        (dateChange)="applyFilter('DueDate')" [(ngModel)]="dueDateTo" />
+      <mat-datepicker-toggle matSuffix [for]="dueDateToDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #dueDateToDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <span>
     <mat-icon>create</mat-icon>Creation Date Range
     <button *ngIf="createdFromDate != null || createdToDate != null" (click)="cancelCreateDates()">
       (x)

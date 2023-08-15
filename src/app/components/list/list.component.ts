@@ -39,6 +39,7 @@ export class ListComponent implements OnInit {
   ];
   fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
   toDate: Date; updatedToDate: Date; createdToDate: Date;
+  dueDateFrom: Date;  dueDateTo: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
   projectUsers: ProjectUserDto[] = [];
@@ -77,6 +78,7 @@ export class ListComponent implements OnInit {
         this.listData = res.data;
         this.filteredData = res.data;
         this.applySummaryFilters();
+        this.CalendarFilters();
         this.getUserIds();
 
       }
@@ -125,6 +127,17 @@ export class ListComponent implements OnInit {
     }
 
   }
+  CalendarFilters() {
+    const selectedFilter = this.taskService.getSelectedFilter();
+    if (selectedFilter && selectedFilter.name === 'DueDate') {
+      this.dueDateFrom = new Date(selectedFilter.fromDate);
+      this.dueDateTo = new Date(selectedFilter.toDate);
+      this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
+      console.log(this.dueDateFrom);
+
+      this.applyFilter('DueDate');
+    }
+}
 
 
 
@@ -214,6 +227,7 @@ export class ListComponent implements OnInit {
 
     if (this.activeFilters.includes('CreatedDate')) {
       if (this.createdFromDate && this.createdToDate) {
+        this.createdToDate.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
         this.filteredData = this.filteredData.filter(t => {
           const taskCreatedDate = new Date(t.createdDate);
           return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
@@ -223,6 +237,23 @@ export class ListComponent implements OnInit {
         this.filteredData = this.filteredData.filter(t => {
           const taskCreatedDate = new Date(t.createdDate);
           return (taskCreatedDate >= this.createdFromDate);
+        });
+      }
+    }
+
+    if (this.activeFilters.includes('DueDate')) {
+      if (this.dueDateFrom && this.dueDateTo) {
+        this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
+        this.filteredData = this.filteredData.filter(t => {
+          const taskDueDate = new Date(t.dueDate);
+          
+          return (taskDueDate >= this.dueDateFrom && taskDueDate <= this.dueDateTo);
+        });
+      }
+      else if (this.dueDateFrom) {
+        this.filteredData = this.filteredData.filter(t => {
+          const taskDueDate = new Date(t.dueDate);
+          return (taskDueDate >= this.dueDateFrom);
         });
       }
     }
