@@ -45,6 +45,7 @@ export class TaskComponent implements OnInit {
   Files: FileData[];
   fileUploaded: boolean = false;
   addSubtopicClicked = false;
+  commentWantsToGetCreated: boolean;
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
@@ -58,7 +59,7 @@ export class TaskComponent implements OnInit {
   };
   comments: Comment[] = [];
   userList: UserDto[] = [];
-
+  createComment: string;
 
   constructor(
     private taskService: TaskService,
@@ -94,6 +95,20 @@ export class TaskComponent implements OnInit {
     })
   }
 
+
+  checkIfCommentAdded() {
+    if(this.commentReq.comment != null) {
+      this.commentWantsToGetCreated = true;
+    }
+    else {
+      this.commentWantsToGetCreated = false;
+    }
+  }
+
+  closeSubmitAndCancelButtons() {
+    this.commentWantsToGetCreated = false;
+    this.createComment= ''
+  }
 
 
   logChange($event: any) {
@@ -160,8 +175,8 @@ export class TaskComponent implements OnInit {
 
 
   submitComment() {
-    if (this.commentReq.comment.trim() !== '') {
-      console.log('Submitted Comment:', this.commentReq.comment);
+    if (this.createComment.trim() !== '') {
+      this.commentReq.comment = this.createComment
       this.commentService.CreateComment(this.commentReq).subscribe((res) => {
         if(res.isSuccessful == true){         
           this.commentReq.comment = '';
@@ -175,7 +190,7 @@ export class TaskComponent implements OnInit {
   editComment(id: number, comment: string){
     console.log(comment);
     this.commentReq.id = id;
-    this.commentReq.comment = "comment"; //alınan yeni input
+    this.commentReq.comment = comment; //alınan yeni input
     this.commentService.UpdateComment(this.commentReq).subscribe((res) => {
       if(res.isSuccessful){
         this.getTaskComments();

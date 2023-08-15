@@ -5,12 +5,22 @@
     </div>
 
     <div class="description">
-      <input type="file" #fileInput multiple style="display: none" (change)="upload($event)" />
+      <input
+        type="file"
+        #fileInput
+        multiple
+        style="display: none"
+        (change)="upload($event)"
+      />
       <div class="button-container">
         <button mat-button (click)="fileInput.click()">
           <mat-icon>attach_file</mat-icon>Attach
         </button>
-        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
+        <button
+          class="add-subtopic-button"
+          mat-button
+          (click)="addSubtopicClicked = true"
+        >
           Add Subtopic<mat-icon>add_circle</mat-icon>
         </button>
 
@@ -25,7 +35,11 @@
       </div>
       <!-- Add the input box here with *ngIf directive -->
       <div *ngIf="addSubtopicClicked" class="subtopic-input-container">
-        <input type="text" class="subtopic-input" placeholder="What should be done ?" />
+        <input
+          type="text"
+          class="subtopic-input"
+          placeholder="What should be done ?"
+        />
       </div>
 
       <br />
@@ -34,7 +48,12 @@
         <!-- ngIf uygulanacak-->
         <ul>
           <li *ngFor="let fileData of Files">
-            <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon" />
+            <img
+              [src]="fileData.iconUrl"
+              width="24"
+              height="24"
+              alt="File Icon"
+            />
             {{ fileData.file.name }}
           </li>
         </ul>
@@ -42,7 +61,6 @@
     </div>
     <br />
     <br />
-
 
     <div class="activityContainer">
       <div class="activity">
@@ -66,24 +84,36 @@
 
       <div class="footer">
         <div class="comments">
-          <textarea placeholder="Add a comment..." class="small-textarea" [(ngModel)]="commentReq.comment"
-            (keyupEnter)="submitComment()"></textarea>
+          <textarea
+            (keypress)="checkIfCommentAdded()"
+            placeholder="Add a comment..."
+            class="small-textarea"
+            [(ngModel)]="createComment"
+            (keyupEnter)="submitComment()"
+          ></textarea>
         </div>
       </div>
 
-      <div>
-        <button mat-button (click)="submitComment()">Submit Comment</button>
+      <div class="submitAndCancelButtons">
+        <div *ngIf="commentWantsToGetCreated">
+          <button mat-raised-button (click)="submitComment()">Submit Comment</button>
+        </div>
+
+        <div *ngIf="commentWantsToGetCreated">
+          <button mat-raised-button (click)="closeSubmitAndCancelButtons()">
+            Cancel
+          </button>
+        </div>
       </div>
 
-      <div *ngFor="let comment of comments">
+      <div *ngFor="let comment of comments; let i = index">
         <div class="comment_section">
-
           <div class="top_section">
             <div class="user_icon">
               <label>CI</label>
             </div>
             <div class="user_name">
-              <label>{{ comment.createdByUser | user:userList }}</label>
+              <label>{{ comment.createdByUser | user : userList }}</label>
             </div>
             <div class="date_time">
               <!-- <label>{{ comment.createdDate | date:'dd.MM.yyyy' }}</label> -->
@@ -92,16 +122,29 @@
           </div>
 
           <div class="main">
-            <div class="placeholder"></div>
-            <label>{{ comment.comment }}</label>
+            <div class="labelPart">
+              <div class="placeholder"></div>
+            <label  >{{ comment.comment }}</label>
+            </div>
+            <div class="inputPart">
+                <div class="placeholder"></div>
+            <input  value="{{commentReq.comment}}" />
+            </div>
+          
           </div>
 
           <div class="edit_delete_buttons">
             <div class="placeholder2"></div>
-            <button mat-button (click)="editComment(comment.id, comment.comment)">Edit</button>
-            <button mat-button (click)="deleteComment(comment.id)">Delete</button>
+            <button
+              mat-button
+              (click)="editComment(comment.id, comment.comment)"
+            >
+              Edit
+            </button>
+            <button mat-button (click)="deleteComment(comment.id)">
+              Delete
+            </button>
           </div>
-
         </div>
       </div>
     </div>
@@ -166,8 +209,16 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskDueDate" />
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    placeholder="Choose a date"
+                    [formControl]="taskDueDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
               </div>
@@ -181,8 +232,16 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" />
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <input
+                    matInput
+                    [matDatepicker]="picker1"
+                    placeholder="Choose a date"
+                    [formControl]="taskDueDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                   <input
                     matInput

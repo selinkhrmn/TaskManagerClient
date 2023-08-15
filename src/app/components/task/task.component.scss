@@ -116,6 +116,11 @@ h2 {
   }
 }
 
+.submitAndCancelButtons {
+  display: flex;
+  gap: 10px;
+}
+
 .comment_section {
   width: 100%;
   padding: 7px;
@@ -160,8 +165,18 @@ h2 {
     width: 100%;
     margin-top: 10px;
     .placeholder {
-      background-color: transparent;
       width: 60px;
+      background-color: transparent;
+    }
+
+    input {
+      font-size: 16px;
+      padding: 6px !important;
+      border: 1px solid black !important;
+    }
+
+    .inputPart {
+      display: flex;
     }
   }
 
