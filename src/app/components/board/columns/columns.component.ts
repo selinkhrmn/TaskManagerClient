@@ -141,7 +141,7 @@ export class ColumnsComponent {
   }
 
   openTaskDialog(tId: number) {
-    this.taskService.getTaskById({ "id": tId }).subscribe((res) => {
+    this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
 

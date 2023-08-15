@@ -68,6 +68,7 @@ import { ResizableModule } from 'angular-resizable-element';
 
 import { ToastrModule } from 'ngx-toastr';
 import { TransferColumnTaskComponent } from './components/transfer-column-task/transfer-column-task.component';
+import { TimePipe } from 'src/pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { TransferColumnTaskComponent } from './components/transfer-column-task/t
     AdminTasksComponent,
     UserPipe,
     AddUsersToProjectComponent,
-    TransferColumnTaskComponent
+    TransferColumnTaskComponent,
+    TimePipe
     
 
   ],
