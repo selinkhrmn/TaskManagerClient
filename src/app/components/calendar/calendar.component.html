@@ -13,9 +13,9 @@
 
         </div>
         <div class="user-info">
-            <button (click)="addPerson()" class="add-person-button">
-                <i class="material-icons">person_add</i>Kişi Ekle
-            </button>
+            <button (click)="openDialog()" class="add-person-button">
+                <i class="material-icons">person_add</i>Kişi ekle
+              </button>
 
         </div>
 
@@ -37,9 +37,11 @@
                 title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
                 <i class="material-icons">today</i>Bugün
             </button>
-            <button>
+            <button #shareButton (click)="openShareDialog(shareButton)">
                 <i class="material-icons">share</i>Paylaş
-            </button>
+             </button>
+             
+             
             <button>
                 <i class="material-icons">event</i>Planlanmamış
             </button>

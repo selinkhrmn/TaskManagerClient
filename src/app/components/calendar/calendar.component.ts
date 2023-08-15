@@ -5,7 +5,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TaskService } from 'src/app/services/task.service';
 import { TaskComponent } from '../task/task.component';
 import { OnInit, ViewChild } from '@angular/core';
@@ -22,6 +22,7 @@ import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { HttpClient } from '@angular/common/http';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { TranslocoService } from '@ngneat/transloco';
+import { ShareComponent } from './share/share.component';
 
 
 interface DayObject {
@@ -218,6 +219,17 @@ export class CalendarComponent implements OnInit {
         })
       }
     })
+  }
+  openShareDialog(shareButton: HTMLElement) {
+    const rect = shareButton.getBoundingClientRect();
+  
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = { 
+      top: `${rect.top - 50}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
+      left: `${rect.left}px`
+    };
+  
+    this.dialog.open(ShareComponent, dialogConfig);
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUsersToProjectComponent, { height: '90%', width: '50%', panelClass: 'dialog' });
