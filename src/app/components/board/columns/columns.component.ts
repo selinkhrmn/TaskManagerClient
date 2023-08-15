@@ -64,7 +64,7 @@ export class ColumnsComponent {
 
   showFiller = false;
   panelOpenState = false;
-   taskObj : Partial<Task> ={};
+  taskObj: Partial<Task> = {};
 
   constructor(
     private columnService: ColumnService,
@@ -146,11 +146,11 @@ export class ColumnsComponent {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
 
-        const dialog = this.dialog.open(TaskComponent, {autoFocus : false, data: { task: this.tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
+        const dialog = this.dialog.open(TaskComponent, { autoFocus: false, data: { task: this.tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
         dialog.afterClosed().subscribe((res) => {
           this.ngOnInit();
         })
-        }
+      }
     })
   }
 
@@ -174,17 +174,20 @@ export class ColumnsComponent {
     })
   }
 
-  DeleteColumn() {
-    return this.columnService.DeleteColumn(this.currentColumnId ).subscribe((res) => {
-      this.ngOnInit()
-    })
+  isDeleteButtonDisabled(id: number){
+    if(this.columns.length <= 1){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
+
   tokenUserId() {
     this.userId = this.tokenService.tokenUserId();
   }
-  CreateTask() {
 
-    debugger
+  CreateTask() {
     this.taskObj.columnId = this.currentColumnId
     this.taskObj.projectId = this.currentProjectId
     this.taskObj.assigneeId = this.userId
@@ -192,41 +195,46 @@ export class ColumnsComponent {
     this.taskObj.priority = 3
     this.taskObj.endDate = this.defaultEndDate
 
-    this.taskService.createTask(this.taskObj).subscribe((res)=> {
-      if(res.isSuccessful) {
+    this.taskService.createTask(this.taskObj).subscribe((res) => {
+      if (res.isSuccessful) {
         this.ngOnInit()
-      }      
+      }
     });
   }
 
-  OpenDeleteDialog(columnId: number, columnName:string){
-    if(columnId != null && columnName != null){
+  OpenDeleteDialog(columnId: number, columnName: string) {
+    if (columnId != null && columnName != null) {
       const column: ColumnDto = {
         id: columnId,
         name: columnName
       }
-      
-      const dialogRef = this.dialog.open(TransferColumnTaskComponent, { data: { column: column }, width : '540px'});
-      dialogRef.afterClosed().subscribe(result => {
-        this.columnService.TransferColumnTasks(result.transfer).subscribe((res) => {
-          if(res.isSuccessful){
-            this.columnService.DeleteColumn(column.id).subscribe((res) => {
-              if(res.isSuccessful){
-                this.ngOnInit();
-              }
-              else{
-                alert("silinemedi.")
-              }
-            })
+
+      let selectedColumn = this.columns.find(c => c.id == columnId);
+      if (selectedColumn?.tasks.length == 0) {
+        this.columnService.DeleteColumn(column.id).subscribe((res) => {
+          if (res.isSuccessful) {
+            this.ngOnInit();
           }
         })
-      });
+      }
+      else {
+        const dialogRef = this.dialog.open(TransferColumnTaskComponent, { data: { column: column }, width: '540px' });
+        dialogRef.afterClosed().subscribe(result => {
+          this.columnService.TransferColumnTasks(result.transfer).subscribe((res) => {
+            if (res.isSuccessful) {
+              this.columnService.DeleteColumn(column.id).subscribe((res) => {
+                if (res.isSuccessful) {
+                  this.ngOnInit();
+                }
+                else {
+                  alert("silinemedi.")
+                }
+              })
+            }
+          })
+        });
+      }
     }
-    
+
   }
-
 }
-
-
-
-//?

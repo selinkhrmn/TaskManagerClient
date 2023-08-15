@@ -141,7 +141,6 @@ export class TaskComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
-
   }
   config: AngularEditorConfig = {
     editable: true,
@@ -154,9 +153,6 @@ export class TaskComponent implements OnInit {
     defaultFontName: "'Kanit', sans-serif"
 
   };
-  onCloseDetails() {
-    this.location.back();
-  }
 
 
   submitComment() {
