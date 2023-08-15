@@ -15,13 +15,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddPeopleToProjectComponent {
   users: UserDto[] = [];
-  
+  newProjectName: any;
 
   constructor(public translocoService: TranslocoService,
     private userService : UserService) { }
   ngOnInit() 
   {
     this.getAllUsers();
+    this.newProjectName = localStorage.getItem('newProject');
   }
 
   getAllUsers() {
