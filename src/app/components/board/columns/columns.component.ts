@@ -58,12 +58,13 @@ export class ColumnsComponent {
   updatedColumnName: string;
   currentProject: ProjectDto;
   taskName: string;
-  defaultEndDate = new Date(2040, 1, 1);
+  defaultEndDate = new Date(1970, 1, 1);
   userId: string;
   @Output() currentColumnId: number;
 
   showFiller = false;
   panelOpenState = false;
+   taskObj : Partial<Task> ={};
 
   constructor(
     private columnService: ColumnService,
@@ -141,7 +142,7 @@ export class ColumnsComponent {
   }
 
   openTaskDialog(tId: number) {
-    this.taskService.getTaskById({ "id": tId }).subscribe((res) => {
+    this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
 
@@ -182,18 +183,20 @@ export class ColumnsComponent {
     this.userId = this.tokenService.tokenUserId();
   }
   CreateTask() {
-    debugger
-    var taskObj = {
-      'projectId': this.currentProjectId,
-      'name': this.taskName,
-      'columnId': this.currentColumnId,
-      'endDate': this.defaultEndDate,
-      'assigneeId': this.userId,
-      'reporterId': this.userId,
-      'priority': 3
 
-    }
-    this.taskService.createTask(taskObj);
+    debugger
+    this.taskObj.columnId = this.currentColumnId
+    this.taskObj.projectId = this.currentProjectId
+    this.taskObj.assigneeId = this.userId
+    this.taskObj.reporterId = this.userId
+    this.taskObj.priority = 3
+    this.taskObj.endDate = this.defaultEndDate
+
+    this.taskService.createTask(this.taskObj).subscribe((res)=> {
+      if(res.isSuccessful) {
+        this.ngOnInit()
+      }      
+    });
   }
 
   OpenDeleteDialog(columnId: number, columnName:string){

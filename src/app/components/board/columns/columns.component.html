@@ -1,4 +1,9 @@
 <div class="example-container" cdkDropListGroup>
+
+  <div class="placeholder">
+    
+  </div>
+
   <div class="example-column" *ngFor="let column of columns">
     <div class="update_column">
       <div class="column_name">
@@ -33,16 +38,17 @@
       </div>
 
     </div>
-    <div class="addTask">
+
+    <div class="addTask"  [ngClass]="{'sticky-add-task': column.tasks.length >= 9}">
       <button mat-raised-button [matMenuTriggerFor]="addTask" (click)="getColumnId(column.id)">
         Add Task
         <mat-icon>add</mat-icon>
       </button>
       <mat-menu #addTask="matMenu" class="addTaskMenu">
-        <input [(ngModel)]="taskName" (click)="stopPropagation($event)" (keyup.enter)="CreateTask()">
-        <!--Auto focus lazım input'a -->
+        <input [(ngModel)]="taskObj.name" (click)="stopPropagation($event)" (keyup.enter)="CreateTask()" > <!--Auto focus lazım input'a -->
       </mat-menu>
     </div>
+
   </div>
 
   <div class="just_container" *ngIf="currentProject.name != ''">

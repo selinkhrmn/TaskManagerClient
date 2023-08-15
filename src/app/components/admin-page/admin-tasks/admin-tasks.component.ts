@@ -108,7 +108,7 @@ export class AdminTasksComponent implements OnInit {
   }
 
   openTaskDialog(id: number) {
-    this.taskService.getTaskById({ "id": id }).subscribe((res) => {
+    this.taskService.getTaskById(id).subscribe((res) => {
       this.taskArray = res.data;
 
 

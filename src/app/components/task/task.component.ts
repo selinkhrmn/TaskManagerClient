@@ -4,19 +4,23 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 import { taskDto } from 'src/app/interfaces/taskDto';
 import { TaskService } from 'src/app/services/task.service';
-import { TranslocoService} from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from 'src/app/services';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import {  ElementRef, ViewChild } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
 import { FileService } from 'src/app/services/file.service';
 import { FileData } from 'src/app/interfaces/FileData';
+import { CommentService } from 'src/app/services/comment.service';
+import { CommentRequest, Comment } from 'src/app/interfaces/comment';
+import { UserDto } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
 
 
-interface DialogData{
+interface DialogData {
   task: Task;
 }
 
@@ -29,54 +33,82 @@ interface DialogData{
 })
 
 
-export class TaskComponent  {
+export class TaskComponent implements OnInit {
+  @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   taskName: string = this.data.task.name;
-  taskId: number =this.data.task.id;
+  taskId: number = this.data.task.id;
   taskProjectId: number = this.data.task.projectId
-  task : Task = Object.assign({}, this.data.task);
+  task: Task = Object.assign({}, this.data.task);
   taskDueDate = new FormControl(this.task.endDate);
   editorContent: string;
   descriptionText: string = '';
   Files: FileData[];
   fileUploaded: boolean = false;
-  @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   addSubtopicClicked = false;
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
-   // pptx: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/.pptx_icon_%282019%29.svg',
+    // pptx: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/.pptx_icon_%282019%29.svg',
     docx: 'path-to-docx-icon',
     pdf: 'path-to-pdf-icon',
   };
- 
+  commentReq: CommentRequest = {
+    id: this.taskId,
+    comment: ''
+  };
+  comments: Comment[] = [];
+  userList: UserDto[] = [];
+
+
   constructor(
-    private taskService : TaskService,
+    private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public translocoService : TranslocoService,
+    public translocoService: TranslocoService,
     public projectService: ProjectService,
     private dialogRef: MatDialogRef<TaskComponent>,
     private fb: FormBuilder,
     private router: Router,
-    public tokenService: TokenService, 
+    public tokenService: TokenService,
     private location: Location,
-    private fileService: FileService
-    ) { }
+    private fileService: FileService,
+    private commentService: CommentService,
+    private userService: UserService
+  ) { }
 
-    
-    
-    logChange($event: any) {
-      console.log('Content changed:', $event);
-    }
+  ngOnInit() {
+    this.getTaskComments();
+    this.userService.getAllUsers().subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.userList = res.data;
+      }
+    })
+  }
+
+  getTaskComments(){
+    this.commentService.GetTaskComments( this.data.task.id).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.comments = res.data;
+        console.log(res.data);
+        
+      }
+    })
+  }
 
 
 
- upload(event: Event){
-  this.fileUploaded = true;
-  debugger;
-this.fileService.uploadFile(event);
+  logChange($event: any) {
+    console.log('Content changed:', $event);
+  }
 
-this.Files = this.fileService.selectedFiles;
- }
+
+
+  upload(event: Event) {
+    this.fileUploaded = true;
+    debugger;
+    this.fileService.uploadFile(event);
+
+    this.Files = this.fileService.selectedFiles;
+  }
 
   // onFileSelect(event: Event) {
   //   const inputElement = event.target as HTMLInputElement;
@@ -98,18 +130,18 @@ this.Files = this.fileService.selectedFiles;
     console.log('Selected Files:', this.Files);
   }
 
-  updateTask(){
-    if(this.data.task != this.task ){
-      this.taskService.updateTask(this.task).subscribe((res)=> {
+  updateTask() {
+    if (this.data.task != this.task) {
+      this.taskService.updateTask(this.task).subscribe((res) => {
         console.log(res.data);
       })
     }
-    
+
   }
 
   closeDialog() {
     this.dialogRef.close();
-    
+
   }
   config: AngularEditorConfig = {
     editable: true,
@@ -122,14 +154,41 @@ this.Files = this.fileService.selectedFiles;
     defaultFontName: "'Kanit', sans-serif"
 
   };
- // Add this method to your component class
-closeDetails() {
-  // Implement the logic to close the "Details" section
-  // For example, you can set a variable to hide the "Details" section or navigate to another page.
-}
+  onCloseDetails() {
+    this.location.back();
+  }
 
-onCloseDetails() {
-  this.location.back();
-}
+
+  submitComment() {
+    if (this.commentReq.comment.trim() !== '') {
+      console.log('Submitted Comment:', this.commentReq.comment);
+      this.commentService.CreateComment(this.commentReq).subscribe((res) => {
+        if(res.isSuccessful == true){         
+          this.commentReq.comment = '';
+          this.getTaskComments();
+        }
+      })
+      
+    }
+  }
+
+  editComment(id: number, comment: string){
+    console.log(comment);
+    this.commentReq.id = id;
+    this.commentReq.comment = "comment"; //alınan yeni input
+    this.commentService.UpdateComment(this.commentReq).subscribe((res) => {
+      if(res.isSuccessful){
+        this.getTaskComments();
+      }
+    })
+  }
+
+  deleteComment(id: number){
+    this.commentService.DeleteComment(id).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.getTaskComments();
+      }
+    })
+  }
 
 }
