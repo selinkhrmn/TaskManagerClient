@@ -6,16 +6,16 @@
 
         </div>
         <div class="search-bar">
-            <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara">
+            <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara....     Örn:11.01.2021">
             <button (click)="searchDay()" class="search-button">
                 <i class="material-icons">search</i>
             </button>
 
         </div>
         <div class="user-info">
-            <button (click)="addPerson()" class="add-person-button">
-                <i class="material-icons">person_add</i>Kişi Ekle
-            </button>
+            <button (click)="openDialog()" class="add-person-button">
+                <i class="material-icons">person_add</i>Kişi ekle
+              </button>
 
         </div>
 
@@ -37,21 +37,249 @@
                 title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
                 <i class="material-icons">today</i>Bugün
             </button>
-            <button>
+            <button #shareButton (click)="openShareDialog(shareButton)">
                 <i class="material-icons">share</i>Paylaş
-            </button>
+             </button>
+             
+             
             <button>
                 <i class="material-icons">event</i>Planlanmamış
             </button>
-            <button>
-                <i class="material-icons">filter_list</i>Filtre
-            </button>
+            <!-- <button [matMenuTriggerFor]="filterMenu">
+                <i class="material-icons">filter_list</i>{{ "filter" | transloco }}
+                <span *ngIf="activeFilters.length != 0">
+                    &nbsp;{{ activeFilters.length }} applied</span>
+            </button> -->
             <button>
                 <i class="material-icons">more_horiz</i>Daha fazlası
             </button>
         </div>
     </div>
+    <!-- <mat-menu #filterMenu="matMenu" [class]="customMenuClass">
+        <div class="clear-button">
+            <button (click)="clearFilter()">Clear</button>
+        </div>
+        <br />
+        <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('AssignedToMe')"
+            (click)="applyFilter('AssignedToMe');stopPropagation($event)">
+            <mat-icon>account_circle</mat-icon> Assigned To Me
+            <mat-icon *ngIf="activeFilters.includes('AssignedToMe')" class="selected-icon">check_circle
+            </mat-icon>
+        </button>
 
+        <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('DueDateThisWeek')"
+            (click)="applyFilter('DueDateThisWeek');stopPropagation($event)">
+            Due date this week <mat-icon>notification_important</mat-icon>
+            <mat-icon *ngIf="activeFilters.includes('DueDateThisWeek')" class="selected-icon">check_circle</mat-icon>
+        </button>
+
+        <button class="custom-menu-item" mat-menu-item (click)="applyFilter('CompletedTasks')">
+            <mat-icon>check_circle_outline</mat-icon>Completed Tasks
+        </button>
+
+        <span>
+            <mat-icon>calendar_today</mat-icon> &nbsp; Date Range
+            <button *ngIf="fromDate != null || toDate != null" (click)="cancelCreateDates();stopPropagation($event)">
+                (x)
+            </button>
+          cancelDates() 
+        </span>
+
+        <div class="date-input-container">
+            <mat-form-field>
+                <input matInput [matDatepicker]="fromDatePicker" placeholder="From Date"
+                    (dateChange)="applyFilter('BetweenDates')" [(ngModel)]="fromDate" />
+                <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-icon class="custom-icon">arrow_forward</mat-icon>
+            <mat-form-field>
+                <input matInput [matDatepicker]="toDatePicker" placeholder="To Date"
+                    (dateChange)="applyFilter('BetweenDates')" [(ngModel)]="toDate" />
+                <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #toDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <button class="custom-menu-item" [matMenuTriggerFor]="innermenu" mat-menu-item>
+            <mat-icon>remove_red_eye</mat-icon>Assigned To
+            <span *ngIf="selectedAssignees.length != 0">filtered user {{selectedAssignees.length}}
+                <button (click)="clearAssignees()">(x)</button>
+            </span>
+        </button>
+
+        <mat-menu id="mat-menu-panel-2" class="assigneeMenu" #innermenu="matMenu" yPosition="above" xPosition="before">
+            <div class="assigneeMenuContainer">
+                <form (click)="stopPropagation($event)">
+                    <h3>Users</h3>
+                    <form class="example-form2">
+                        <mat-form-field class="example-form-field2">
+                            <mat-label>Ex. John Doe</mat-label>
+                            <input matInput type="text" [(ngModel)]="value" />
+                        </mat-form-field>
+                    </form>
+                    <div class="checkboxPart">
+                        Assigned User List
+                        <section class="example-section">
+                            <mat-checkbox *ngFor="let assignee of assignees" class="example-margin"
+                                (change)="selectAssignee(assignee)">{{ assignee | user:userList }}</mat-checkbox>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </mat-menu>
+
+        <span><mat-icon>view_column</mat-icon> Columns
+            <span *ngIf="selectedColumns.length != 0">{{ selectedColumns.length }}
+                <button (click)="cancelPriorities()">(x)</button>
+            DÜZENLEME GEREKLİ  cancelColumns() 
+            </span>
+        </span>
+
+        <div *ngFor="let column of projectColumns">
+            <label (click)="stopPropagation($event)">
+                <input type="checkbox" [value]="column.id" [checked]="selectedColumns.includes(column.id)"
+                    (change)="handleColumnSelect(column.id)" />
+                {{ column.name }}
+            </label>
+        </div>
+        <br />
+        <span>
+            <mat-icon>update</mat-icon>Update Date Range
+            <button *ngIf="updatedFromDate != null || updatedToDate != null"
+                (click)="cancelCreateDates();stopPropagation($event)">
+                (x)
+            </button>
+              CancelUpdateDates()
+        </span>
+
+        <div class="date-input-container">
+            <mat-form-field>
+                <input matInput [matDatepicker]="updatedFromDatePicker" placeholder="From Date"
+                    (dateChange)="applyFilter('UpdatedDate');" [(ngModel)]="updatedFromDate" />
+                <mat-datepicker-toggle matSuffix [for]="updatedFromDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #updatedFromDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-icon class="custom-icon">arrow_forward</mat-icon>
+            <mat-form-field>
+                <input matInput [matDatepicker]="updatedToDatePicker" placeholder="To Date"
+                    (dateChange)="applyFilter('UpdatedDate')" [(ngModel)]="updatedToDate" />
+                <mat-datepicker-toggle matSuffix [for]="updatedToDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #updatedToDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <span>
+            <mat-icon>update</mat-icon>DueDate Date Range
+            <button *ngIf="dueDateFrom != null || dueDateTo != null" (click)="cancelCreateDates()">
+                (x)
+            </button>
+             CancelUpdateDates()
+        </span>
+
+        <div class="date-input-container">
+            <mat-form-field>
+                <input matInput [matDatepicker]="dueDateFromDatePicker" placeholder="From Date"
+                    (dateChange)="applyFilter('DueDate')" [(ngModel)]="dueDateFrom" />
+                <mat-datepicker-toggle matSuffix [for]="dueDateFromDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #dueDateFromDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-icon class="custom-icon">arrow_forward</mat-icon>
+            <mat-form-field>
+                <input matInput [matDatepicker]="dueDateToDatePicker" placeholder="To Date"
+                    (dateChange)="applyFilter('DueDate')" [(ngModel)]="dueDateTo" />
+                <mat-datepicker-toggle matSuffix [for]="dueDateToDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #dueDateToDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <span>
+            <mat-icon>create</mat-icon>Creation Date Range
+            <button *ngIf="createdFromDate != null || createdToDate != null"
+                (click)="cancelCreateDates();stopPropagation($event)">
+                (x)
+            </button>
+        </span>
+
+        <div class="date-input-container">
+            <mat-form-field>
+                <input matInput [matDatepicker]="createdFromDatePicker" placeholder="From Date"
+                    (dateChange)="applyFilter('CreatedDate')" [(ngModel)]="createdFromDate" />
+                <mat-datepicker-toggle matSuffix [for]="createdFromDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #createdFromDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-icon class="custom-icon">arrow_forward</mat-icon>
+            <mat-form-field>
+                <input matInput [matDatepicker]="createdToDatePicker" placeholder="To Date"
+                    (dateChange)="applyFilter('CreatedDate')" [(ngModel)]="createdToDate" />
+                <mat-datepicker-toggle matSuffix [for]="createdToDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #createdToDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+       <button class="custom-menu-item"  [matMenuTriggerFor]="menu" mat-menu-item (click)="applyFilter('Reporter')"> 
+
+        <button class="custom-menu-item" [matMenuTriggerFor]="innermenuReporter" mat-menu-item>
+            <mat-icon>remove_red_eye</mat-icon>Reporter
+            <span *ngIf="selectedReporters.length != 0">filtered user {{selectedReporters.length}}
+                <button (click)="clearReporters();stopPropagation($event)">(x)</button>
+            </span>
+        </button>
+
+        <mat-menu id="mat-menu-panel-2" class="reporterMenu" #innermenuReporter="matMenu" yPosition="above"
+            xPosition="before">
+            <div class="reporterMenuContainer">
+                <form (click)="stopPropagation($event)">
+                    <h3>Users</h3>
+                    <form class="example-form2">
+                        <mat-form-field class="example-form-field2">
+                            <mat-label>Ex. John Doe</mat-label>
+                            <input matInput type="text" [(ngModel)]="value" />
+                        </mat-form-field>
+                    </form>
+                    <div class="checkboxPart">
+                        Reporter User List
+                        <section class="example-section">
+                            <mat-checkbox *ngFor="let reporter of reporters" class="example-margin"
+                                (change)="selectReporter(reporter)">{{ reporter | user:userList }}</mat-checkbox>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </mat-menu>
+
+
+
+        <span><mat-icon>priority_high</mat-icon> Priorities
+            <span *ngIf="selectedPriorities.length != 0">{{ selectedPriorities.length }}
+                <button (click)="cancelPriorities();stopPropagation($event)">(x)</button>
+                DÜZENLEME GEREKLİ  
+            </span>
+        </span>
+
+        <div class="priority-images">
+            <div class="img_div">
+                <img (click)="handlePriorityClick(1);stopPropagation($event)"
+                    [class.selected]="selectedPriorities.includes(1)" src="../../assets/lowest.png" alt="Easy" />
+            </div>
+            <div class="img_div">
+                <img (click)="handlePriorityClick(2);stopPropagation($event)"
+                    [class.selected]="selectedPriorities.includes(2)" src="../../assets/low.png" alt="Medium" />
+            </div>
+            <div class="img_div">
+                <img (click)="handlePriorityClick(3);stopPropagation($event)"
+                    [class.selected]="selectedPriorities.includes(3)" src="../../assets/medium.png" alt="Normal" />
+            </div>
+            <div class="img_div">
+                <img (click)="handlePriorityClick(4);stopPropagation($event)"
+                    [class.selected]="selectedPriorities.includes(4)" src="../../assets/high.png" alt="Difficult" />
+            </div>
+            <div class="img_div">
+                <img (click)="handlePriorityClick(5);stopPropagation($event)"
+                    [class.selected]="selectedPriorities.includes(5)" src="../../assets/highest.png" alt="Difficult" />
+            </div>
+        </div>
+    </mat-menu> -->
     <div class="weekdays">
 
         <div>Pzt</div>
@@ -65,21 +293,22 @@
     <div class="calendar-days">
         <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
             [class.is-searched]="dayObj.isSearchedDayValid" (click)="toggleDescription(dayObj)">
-    
+
             <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
             <span *ngIf="isToday(dayObj.day)">{{ getTodayText(dayObj) }}</span>
-    
+
             <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
             <span *ngIf="!isToday(dayObj.day)">{{ dayObj.day }}</span>
-    
+
             <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
                 <mat-icon class="icon">check_circle</mat-icon>
 
-                <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)" class="task-name-button">
-    Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
-</button>
+                <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)"
+                    class="task-name-button">
+                    Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+                </button>
 
-    
+
                 <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
                     (click)="toggleFilter('DueDate', dayObj.day)">
                     more_horiz
@@ -87,7 +316,7 @@
             </h3>
         </div>
     </div>
-    
-    
+
+
 
 </div>
