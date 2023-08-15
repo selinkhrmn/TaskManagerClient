@@ -99,7 +99,7 @@ export class CalendarComponent {
    });
   }
   openTaskDialog(tId: number) {
-    this.taskService.getTaskById({ "id": tId }).subscribe((res) => {
+    this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
         const tasks = res.data;
         const dialog = this.dialog.open(TaskComponent, {autoFocus : false, data: { task: tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
