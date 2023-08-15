@@ -1,377 +1,191 @@
-
-
 .wrapper {
   width: 100%;
   height: 100%;
   display: flex;
- 
-  background-color: white;  // Bu satırı ekleyin.
+  padding: 20px;
+  background-color: white; // Bu satırı ekleyin.
   > *:last-child {
     margin-bottom: 0; // Son çocuk elemanın alt marjını sıfırla
   }
 }
-.left-aligned-buttons {
-  /* Add the following styles to make the buttons inline-block */
-  display: inline-block;
-  vertical-align: middle;
-  margin-bottom: 0;
-  
-  label {
-    /* Adjust the styles as needed */
-    margin-right:20px;
-  }
 
-  button {
-    /* Adjust the styles as needed */
-    margin: 0;
-  }
-
+h2 {
+  padding: 0;
+  margin: 0;
+  font-weight: 600 !important;
 }
+
 .left_side {
-  position: relative; 
-  padding: 40px;
-  margin-top: 0; // margin üst boşluğunu sıfırlar
-  padding-top: 0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  background: white; 
-  color: #01050b;
-  margin-right: 80px;
-
-  button {
-    background: #b9cfdd11;
-    font-size: 14px;
-    font-weight: 700;
-  }
+  width: 70%;
+  padding: 10px;
+  overflow: auto;
   
-  .navbar {
-    margin-top: 0;
+  input {
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 24px;
+    font-weight: 600;
     width: 100%;
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    font-weight: 700;
-    
-    label {
-      border-radius: 5px;
-      padding: 10px;
-      color: white;
-      // background: #f4f5f7;
-      text-align: center;
-    }
-    label:first-child {
-      font-size: 28px;
-    }
-
-    button {
-      margin-left: 10px;
-    }
-  }
-
-  .inputName {
     border: none;
     outline: none;
-    background: #d8dbdf2b;
-    width: 100%;       // Genişliği maksimuma çıkarıyoruz. İhtiyaçlarınıza göre ayarlayabilirsiniz.
-    height: 40px;      // Yüksekliği 40px olarak ayarlıyoruz. İhtiyaçlarınıza göre bu değeri değiştirebilirsiniz.
-    justify-content: center; // Yatay ortalamayı sağlar
-  }
+    background: transparent;
 
-  .description {
-    
-    position: relative;
-    padding: 10px;
-    height: 30%;
+    &:hover {
+      background-color: #f3f3f3;
+      cursor: context-menu;
+    }
+
+    &:focus {
+      cursor: auto;
+      border: 1px solid #5CACF2;
+    }
+  }
+}
+
+.navbar {
+  height: 10%;
+  width: 100%;
+}
+
+.description {
+  height: fit-content;
+  .top_side {
+
+    input {
+      margin-top: 7px;
+      font-size: 16px;
+    }
+  }
+  .button-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 5px;
-    background: #d8dbdf18;
-    margin-bottom: 10px;
-    .top_side {
-     
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 10%;
-      border-bottom: 0.25px solid #227ad934;
-      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
-    }
-   
-    
-    h2 {
-      font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
-      
-    }
-    textarea {
-      width: 100%;
-    }
+    gap: 10px;
+    padding: 10px;
     button {
-      font-size: 15px; // Adjust the font size to make the button smaller
-      margin-left: 0; // Remove the default left margin
-      margin-right: 20px; // Add some right margin to separate it from other elements
-      align-self: flex-start; // Move the button to the left within its container
-    
-  
-      svg {
-        margin-right: 5px; // Adding some space between the icon and the button text
-      }
+      font-weight: 600;
+      background-color: #091e420a;
     }
-  
-    .add-subtopic-button {
-      background: #b9cfdd11; // You can adjust the background color as needed
+  }
+  .subtopic-input-container {
+    input {
+      font-size: 16px;
     }
-    .button-container {
+  }
+  .attachments {
+    height: auto;
+    max-height: 100px;
+
+    ul {
+      max-height: 100px;
+      overflow: auto;
+    }
+  }
+}
+
+.activityContainer {
+  height: auto;
+
+  .activity {
+    margin-bottom: 7px;
+  }
+  .tabs {
+    .left-aligned-buttons {
       display: flex;
-      
-      justify-content: start; /* or "space-between" if you want them to occupy the entire width */
-      text-align: center;
-      button {
-        margin-right: 5px; /* Space between the buttons */
-        align-items: start;
-        text-align: center; /* Center the text inside the button */
-        
-        &:last-child {
-          margin-right: 0; /* Ensure the last button doesn't have extra margin */
+      gap: 10px;
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+        button {
+          font-weight: 600;
+          background-color: #091e420a;
         }
       }
-    }}
-    
-  
-  .tab_bar {
-    height: 45%;
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px;
-    font-weight: 700;
-    display: flex;
-    flex-direction: column;
-   
-    font-size: 18px;
-    border-radius: 5px;
-    background: #d8dbdf18; 
-    h1,h2,h3 {
-      padding: 5px;
-      
-      font-weight: 600;
-      // text-align: center;
     }
-    .top_side {
-     
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 10%;
-      border-bottom: 0.25px solid #227ad934;
-      box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
-      
-    }
-  
-    .tabs {
-      display: flex;
-  align-items: center; /* İçerikleri dikeyde ortalamak için */
-      height: 10%;
-      width: 40%;
-      // background-color: burlywood;
-      
-      justify-content: space-between;
-       h3 {
-  margin: 0;
-  padding-right: 10px;
-}
-.left-aligned-buttons {
-  /* Add the following styles to make the buttons inline-block */
-  display: inline-block;
-  vertical-align: middle;
-  margin-bottom: 0;
-
-  label {
-    /* Adjust the styles as needed */
-    margin-right: 10px;
-  }
-
-  button {
-    /* Adjust the styles as needed */
-    margin: 0;
   }
 }
 
-.button-container {
-  /* Add the following styles to make the buttons inline-block */
-  display: inline-block;
-  vertical-align: middle;
-}
-
-
-      button {
-        margin-left: 10px;
-      }
-    }
-  }
- 
-  .footer {
-    
-    .comments {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 10px;
-    img {
-        width: 30px;
-        height: 30px;
-        margin-right: 30px;
-    }
-
+.footer {
+  .comments {
     textarea {
-        width: 100%;
-        padding: 10px;
+      padding: 7px;
+      width: 100%;
+      font-weight: 600;
+      color: #5e6c84;
+      border: 1px solid #dfe1e6;
     }
   }
-
-  button {
-    margin-top: 20px;
-    margin-left: 60px;
-  }
-  }
-  
 }
-
 
 .right_side {
- 
-    width: 50%;
+  width: 30%;
+
+  .close_icon {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #020e19;
-    padding-left: -10px;  // Çizginin solunda hafif bir boşluk bırakıyoruz.
-    border-left: 1px solid #ffffff;  // Çizgiyi daha kalın ve belirgin yapıyoruz.
-    
-    background: #ffffff;
-    margin-right: 90px;
-    .container {
-      width: 170%;  // Genişliği artırıyoruz.
-    height: 85%;  // Yüksekliği artırıyoruz.
-    background: #d8dbdf0f;  
-      border-radius: 10px;
-      padding: 45px;
-     
-      position: relative;
-      border: 1px solid #4e57a050;
- 
-  margin: 20px;
+    justify-content: end;
+    margin-bottom: 10px;
+    mat-icon {
+      cursor: pointer;
+    }
+  }
+  .container {
+    padding: 0;
+    height: 90%;
+    border-left: 1px solid #dfe1e6;
+
+    .top_side_details {
+      padding: 20px;
+      border-bottom: 1px solid #dfe1e6;
+
       h2 {
-        font-weight: bold; /* Adjust the font weight to your preference, e.g., normal, lighter, etc. */
+        font-weight: 700;
+        font-size: 28px;
       }
-       
-    }
-
-    .top_side {
-     
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 5%;
-      border-bottom: 1px solid #227ad934;
-      
-
-      
-    }
-    
-    .icons {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      z-index: 9999; /* Ensure the icons appear above other content if necessary */
-    }
-    
-    .body {
-      height: 90%;
-       .card {
-        margin-top: 25px;
-        padding: 10px;
-      }
-      .due_date {
-        padding: 20px;  // padding değerini artırarak kartın iç boşluğunu artırabiliriz.
-        margin: 10px 0;  // margin değerini ekleyerek kartın etrafındaki boşluğu artırabiliriz.
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);  // bir gölge ekleyerek kartın diğerlerinden farklı olduğunu vurgulayabiliriz.
-    }
-    label {
-      display: flex;           // Flexbox kullanarak içerikleri düzenliyoruz.
-      align-items: center;     // İçerikleri dikey olarak merkezde hizalıyoruz.
-      justify-content: center; 
-      margin-bottom: 10px;  }}
- 
-    label {
-        margin: 0; // Varsa etrafındaki boşlukları kaldır
-        line-height: normal; // Label'ın yüksekliğini kontrol eder
     }
   }
-// ...
 
-// ... (Önceki kodların devamı) ...
+  .body {
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px;
 
-.card {
-  display: flex;
-  flex-direction: row; // Yatay yönde sırala
-  align-items: center; // İçerikleri merkeze hizala
-  
-  .icon {
-    margin-right: 10px; // İkon ile içerik arasında bir boşluk bırak
+      .card1 {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+
+        .inside_card {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          .label_container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            text-align: center;
+            label {
+              width: fit-content;
+              height: fit-content;
+              font-weight: 600;
+            }
+          }
+
+          .right_side_card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+          }
+          .dateTime {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
   }
 }
-.project-heading {
-  display: flex;
-  align-items: center;
-}
-.icon {
-  color: rgba(9, 21, 70, 0.717); /* İkon rengini yeşil olarak ayarladık */
-  margin-right: 2px; /* İkon ile metin arasına biraz boşluk bıraktık */
-}
-
-.subtopic-input-container {
-  margin-top: 10px;
-}
-
-.subtopic-input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-
-.small-textarea::placeholder {
-  font-size: 15px; /* Yeni yazı boyutunu burada ayarlayabilirsiniz */
-}
-
-
-.savebuton {
-  text-align: left;
-}
-
-.savebuton button {
-  margin-left: 10px;
-}
-
-.project-heading {
-  /* ... existing styles ... */
-
-  /* Add border and border radius to .project-heading */
-  border: 1px solid rgba(37, 98, 159, 0.169); /* Pale blue color with lower opacity */
-  border-radius: 10px; /* Adjust the border-radius to make it more rounded */
-  padding: 2px; /* Add padding to create some space between the text and the border */
-
-  /* Align the icon and text horizontally */
-  display: flex;
-  align-items: center;
-  background: #236bb735;
-}
-/* Assignee ve Reporter arasına boşluk bırakmak için .card sınıfına margin-bottom ekleyebiliriz */

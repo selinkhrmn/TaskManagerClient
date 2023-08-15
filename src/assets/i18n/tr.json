@@ -47,6 +47,7 @@
     "navigation": {
         "yourWork": "İşlerin"
     },
+    "startedDate" : "Başlangıç Tarihi",
     "tabs": {
         "summary": "Özet",
         "board": "Tablo",

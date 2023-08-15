@@ -9,7 +9,7 @@ import { OnInit } from '@angular/core';
 import { Project } from '../interfaces';
 import { ProjectDto } from '../interfaces/project';
 import { TokenService } from './token.service';
-import { ColumnDto } from '../interfaces/columnDto';
+import { ColumnDto, TransferDto } from '../interfaces/columnDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,8 +29,8 @@ export class ColumnService {
     return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/CreateColumn`,column, this.httpOptions );
   }
 
-  DeleteColumn(id : Partial<Column>) {
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/DeleteColumn`,id, this.httpOptions );
+  DeleteColumn(id : number) {
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/DeleteColumn`,{id: id}, this.httpOptions );
   }
 
   UpdateColumn(column: Partial<Column>) {
@@ -44,6 +44,10 @@ export class ColumnService {
 
   GetProjectColumnsTasks(id: Partial<ProjectDto>): Observable<ResponseModel<ColumnTask>> {
     return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, id, this.httpOptions);
+  }
+
+  TransferColumnTasks(transferDto : TransferDto): Observable<ResponseModel<ColumnDto>>{
+    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/TransferColumnTasks`, transferDto, this.httpOptions);
   }
 
   

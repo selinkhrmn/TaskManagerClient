@@ -141,8 +141,9 @@ export class ListComponent implements OnInit {
     else {
       this.activeFilters.push(filter);
       this.toastr.info('Filter Applied!');
-
     }
+    console.log(this.activeFilters);
+    
 
     if (this.activeFilters.includes('AssignedToMe')) {
       this.filteredData = this.filteredData.filter(t => t.assigneeId == this.tokenService.tokenUserId());

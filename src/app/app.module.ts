@@ -67,6 +67,7 @@ import { NbLayoutModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
 import { ResizableModule } from 'angular-resizable-element';
 
 import { ToastrModule } from 'ngx-toastr';
+import { TransferColumnTaskComponent } from './components/transfer-column-task/transfer-column-task.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { ToastrModule } from 'ngx-toastr';
     AdminProjectsComponent,
     AdminTasksComponent,
     UserPipe,
-    AddUsersToProjectComponent
+    AddUsersToProjectComponent,
+    TransferColumnTaskComponent
     
 
   ],
@@ -154,7 +156,8 @@ import { ToastrModule } from 'ngx-toastr';
       }
     }),
     MatRadioModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    MatDialogModule
   ],
 
   providers: [JwtHelperService,

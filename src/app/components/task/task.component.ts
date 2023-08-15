@@ -35,10 +35,10 @@ export class TaskComponent  {
   taskProjectId: number = this.data.task.projectId
   task : Task = Object.assign({}, this.data.task);
   taskDueDate = new FormControl(this.task.endDate);
-  editingTaskName = false;
   editorContent: string;
   descriptionText: string = '';
   Files: FileData[];
+  fileUploaded: boolean = false;
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   addSubtopicClicked = false;
   fileIcons: { [extension: string]: string } = {
@@ -67,16 +67,11 @@ export class TaskComponent  {
     logChange($event: any) {
       console.log('Content changed:', $event);
     }
-  onTaskNameClick() {
-    this.editingTaskName = true;
-  }
 
-  onTaskNameBlur() {
-    this.editingTaskName = false;
-    this.updateTask();
-  }
+
 
  upload(event: Event){
+  this.fileUploaded = true;
   debugger;
 this.fileService.uploadFile(event);
 
