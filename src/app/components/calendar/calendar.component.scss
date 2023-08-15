@@ -1,8 +1,20 @@
 .more-tasks-icon {
     cursor: pointer;
 }
+.task-name-button {
+    background-color: rgba(173, 216, 230, 0.158); /* İçini gri yapar */
+    border: 2px solid rgba(173, 216, 230, 0.434); /* Köşeleri mavi yapar */
+    padding: 5px 15px;
+    font-size: 10px;
+    /* Diğer stil özellikleri... */
+}
 
+h3.project-heading {
+    margin: 0;
+    /* Diğer stil özellikleri */
+}
 .icon {
+    font-size: 20px;
     color: lightblue;
   }
   .bold-text {
@@ -70,7 +82,7 @@
 }
 
 button {
-    padding: 5px 10px;
+    padding: 4px 10px;
     font-size: 0.8em;
     /* Düğme yazı boyutunu azalt */
     background-color: #e4c7e6;
@@ -341,8 +353,8 @@ button {
       font-size: 12px;
       display: flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 5px; /* Task adı ile üç nokta arasına boşluk bırak */
+      gap: 3px;
+      margin-top: -4px; /* Task adı ile üç nokta arasına boşluk bırak */
   }
   .icon-more-tasks-icon {
     cursor: pointer;

@@ -70,15 +70,19 @@
 
             <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
                 <mat-icon class="icon">check_circle</mat-icon>
-                Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span> 
+            
+                <!-- Task Name kısmı bir buton olarak tanımlandı -->
+                <button mat-button (click)="yourButtonClickFunction()" class="task-name-button">
+                    Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+                </button>
                 
+            
                 <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
                     (click)="toggleFilter('DueDate', dayObj.day)">
-              more_horiz
-          </mat-icon>
-          
-                
+                    more_horiz
+                </mat-icon>
             </h3>
+            
 
            
             

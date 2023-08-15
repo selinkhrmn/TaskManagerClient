@@ -219,5 +219,8 @@ export class CalendarComponent {
 
     this.router.navigate(['/home/list']);
 }
-
+yourButtonClickFunction() {
+  console.log('Task Name butonuna tıklandı!');
+  // Buraya tıklanınca yapılacak işlemleri ekleyebilirsiniz.
+}
 }
