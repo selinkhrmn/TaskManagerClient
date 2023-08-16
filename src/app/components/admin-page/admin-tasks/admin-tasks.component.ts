@@ -15,6 +15,7 @@ import { ListTask } from 'src/app/interfaces/listTask';
 import { TaskUserDto } from 'src/app/interfaces/taskDto';
 import { TaskComponent } from '../../task/task.component';
 import { PriorityService } from 'src/app/services/priority.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-admin-tasks',
@@ -22,6 +23,9 @@ import { PriorityService } from 'src/app/services/priority.service';
   styleUrls: ['./admin-tasks.component.scss']
 })
 export class AdminTasksComponent implements OnInit {
+  @ViewChild(MatTable) table: MatTable<Task>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   currentProject: ProjectDto;
   projectName: string;
@@ -29,22 +33,9 @@ export class AdminTasksComponent implements OnInit {
   taskArray: Task[] = [];
   project: ProjectDto;
   // projectId: number;
-  task: Task;
+  task: Task[] = [];
   userList: UserDto[] = [];
   priorities: string[] = [];
-
-
-  displayedColumns: string[] = ['projectId', 'name', 'assignee', 'priority'];
-  dataSource: MatTableDataSource<Task>;
-
-
-  taskUserDto: TaskUserDto[] = [];
-
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatTable) table: MatTable<Task>;
-  id: any;
-
-
 
   constructor(
     private taskService: TaskService,
@@ -53,34 +44,41 @@ export class AdminTasksComponent implements OnInit {
     public userService: UserService,
     public tokenService: TokenService,
     public router: Router,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
     public priorityService: PriorityService
-  ) {
+  ) { }
 
+  displayedColumns: string[] = ['projectId', 'name', 'assignee', 'priority'];
+  dataSource = new MatTableDataSource<TaskUserDto>(this.task);
 
+  id: any;
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.fetchTasks()
   }
 
 
-  ngOnInit(): void {
-
+  fetchTasks(){
     this.taskService.GetAllTaskForUser({ "id": this.tokenService.getTokenId() }).subscribe((response) => {
       if (response.isSuccessful) {
         this.taskArray = response.data;
+        this.dataSource = new MatTableDataSource<TaskUserDto>(this.taskArray);
+        this.dataSource.paginator = this.paginator;
       }
-      this.dataSource = new MatTableDataSource<Task>(this.taskArray);
-    });
 
-    this.userService.getAllUsers().subscribe((res) => {
+       this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
         this.userList = res.data;
       }
+      this.priorities = this.priorityService.getOptions();
     })
-    this.priorities = this.priorityService.getOptions();
+    });
 
-  }
-
-  ngAfterViewInit() {
+   
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
   }
