@@ -5,22 +5,12 @@
     </div>
 
     <div class="description">
-      <input
-        type="file"
-        #fileInput
-        multiple
-        style="display: none"
-        (change)="upload($event)"
-      />
+      <input type="file" #fileInput multiple style="display: none" (change)="upload($event)" />
       <div class="button-container">
         <button mat-button (click)="fileInput.click()">
           <mat-icon>attach_file</mat-icon>Attach
         </button>
-        <button
-          class="add-subtopic-button"
-          mat-button
-          (click)="addSubtopicClicked = true"
-        >
+        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
           Add Subtopic<mat-icon>add_circle</mat-icon>
         </button>
 
@@ -35,11 +25,7 @@
       </div>
       <!-- Add the input box here with *ngIf directive -->
       <div *ngIf="addSubtopicClicked" class="subtopic-input-container">
-        <input
-          type="text"
-          class="subtopic-input"
-          placeholder="What should be done ?"
-        />
+        <input type="text" class="subtopic-input" placeholder="What should be done ?" />
       </div>
 
       <br />
@@ -48,12 +34,7 @@
         <!-- ngIf uygulanacak-->
         <ul>
           <li *ngFor="let fileData of Files">
-            <img
-              [src]="fileData.iconUrl"
-              width="24"
-              height="24"
-              alt="File Icon"
-            />
+            <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon" />
             {{ fileData.file.name }}
           </li>
         </ul>
@@ -84,19 +65,14 @@
 
       <div class="footer">
         <div class="comments">
-          <textarea
-            (keypress)="checkIfCommentAdded()"
-            placeholder="Add a comment..."
-            class="small-textarea"
-            [(ngModel)]="createComment"
-            (keyupEnter)="submitComment()"
-          ></textarea>
+          <textarea (keypress)="checkIfCommentAdded()" placeholder="Add a comment..." class="small-textarea"
+            [(ngModel)]="createComment" (keyupEnter)="submitComment()"></textarea>
         </div>
       </div>
 
       <div class="submitAndCancelButtons">
         <div *ngIf="commentWantsToGetCreated">
-          <button mat-raised-button (click)="submitComment()">Submit Comment</button>
+          <button mat-raised-button (click)="submitComment();getTaskComments()">Submit Comment</button>
         </div>
 
         <div *ngIf="commentWantsToGetCreated">
@@ -106,7 +82,7 @@
         </div>
       </div>
 
-      <div *ngFor="let comment of comments; let i = index">
+      <div *ngFor="let comment of comments">
         <div class="comment_section">
           <div class="top_section">
             <div class="user_icon">
@@ -122,23 +98,13 @@
           </div>
 
           <div class="main">
-            <div class="labelPart">
-              <div class="placeholder"></div>
-            <label  >{{ comment.comment }}</label>
-            </div>
-            <div class="inputPart">
-                <div class="placeholder"></div>
-            <input  value="{{commentReq.comment}}" />
-            </div>
-          
+            <div class="placeholder"></div>
+            <label>{{ comment.comment }}</label>
           </div>
 
           <div class="edit_delete_buttons">
             <div class="placeholder2"></div>
-            <button
-              mat-button
-              (click)="editComment(comment.id, comment.comment)"
-            >
+            <button mat-button (click)="editComment(comment.id, comment.comment)">
               Edit
             </button>
             <button mat-button (click)="deleteComment(comment.id)">
@@ -209,16 +175,8 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input
-                    matInput
-                    [matDatepicker]="picker"
-                    placeholder="Choose a date"
-                    [formControl]="taskDueDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskDueDate" />
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
               </div>
@@ -232,27 +190,11 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input
-                    matInput
-                    [matDatepicker]="picker1"
-                    placeholder="Choose a date"
-                    [formControl]="taskDueDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker1"
-                  ></mat-datepicker-toggle>
+                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" />
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
-                  <input
-                    matInput
-                    [matDatepicker]="picker2"
-                    placeholder="Choose a date"
-                    [formControl]="taskDueDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker2"
-                  ></mat-datepicker-toggle>
+                  <input matInput [matDatepicker]="picker2" placeholder="Choose a date" [formControl]="taskDueDate" />
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
               </div>

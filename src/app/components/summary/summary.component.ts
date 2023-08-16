@@ -6,6 +6,7 @@ import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { TranslocoService} from '@ngneat/transloco';
 import { Router } from '@angular/router';
+import { TaskDto } from 'src/app/interfaces/taskDto';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   Ogesayisiguncelleme: string = '';
   Ogesayisiolus: string = '';
   Ogesayisitamt: string = '';
+  unplannedTasks : TaskDto[] = [];
+  unassignedTasks: TaskDto[] = [];
+  
 
   constructor(
     public tokenService: TokenService, 
@@ -31,11 +35,23 @@ export class SummaryComponent implements AfterViewInit, OnInit {
 
   
   ngOnInit(): void {
-    let project: ProjectDto = this.projectService.getProjectLocal();
-    this.taskService.getAllProjectTask({id :project.id}).subscribe((res)=> {
+    let projectId = this.projectService.getProjectLocal().id;
+    this.taskService.getAllProjectTask({id :projectId}).subscribe((res)=> {
       console.log(res.data); // seçili projeye ait bütün tasklar ListTask tipinde!
-      
     })
+
+    this.taskService.getUnplannedTask(projectId).subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.unplannedTasks = res.data;
+      }
+    })
+
+    this.taskService.getUnassignedTask(projectId).subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.unassignedTasks = res.data;
+      }
+    })
+
   }
   // Veri seti
   private chartData = [

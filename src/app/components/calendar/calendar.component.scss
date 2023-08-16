@@ -339,6 +339,18 @@ button {
     /* Kullanıcı adının üzerine tıklanamaz hale gelmesini sağlar */
     margin-right: 15px;
 }
+.placeholder {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        #d3d3d32f 5px,
+        #d3d3d35d 10px
+    );
+    pointer-events: none; 
+    cursor: default; 
+}
+
 
 /* ... (Existing styles) ... */
 

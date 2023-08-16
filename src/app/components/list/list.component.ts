@@ -19,6 +19,7 @@ import { UserDto } from 'src/app/interfaces/user';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserPipe } from 'src/pipes/user.pipe';
+import { TaskDto } from 'src/app/interfaces/taskDto';
 
 @Component({
   selector: 'app-list',
@@ -37,9 +38,10 @@ export class ListComponent implements OnInit {
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate',
   ];
+  projectId: number ;
   fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
   toDate: Date; updatedToDate: Date; createdToDate: Date;
-  dueDateFrom: Date;  dueDateTo: Date;
+  dueDateFrom: Date; dueDateTo: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
   projectUsers: ProjectUserDto[] = [];
@@ -54,6 +56,7 @@ export class ListComponent implements OnInit {
   reporters: string[] = [];
   selectedAssignees: string[] = [];
   selectedReporters: string[] = [];
+  unPlannedTasks: TaskDto[] = [];
 
   constructor(
     private http: HttpClient,
@@ -71,10 +74,9 @@ export class ListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    let id: number = this.projectService.getProjectLocal().id;
-    this.taskService.getAllProjectTask({ "id": id }).subscribe((res) => {
+    this.projectId = this.projectService.getProjectLocal().id;
+    this.taskService.getAllProjectTask({ "id": this.projectId }).subscribe((res) => {
       if (res.isSuccessful == true) {
-        console.log(res.data);
         this.listData = res.data;
         this.filteredData = res.data;
         this.applySummaryFilters();
@@ -84,14 +86,14 @@ export class ListComponent implements OnInit {
       }
     });
 
-    this.userService.GetAllProjectUsers({ "id": id }).subscribe((res) => {
+    this.userService.GetAllProjectUsers({ "id": this.projectId }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectUsers = res.data;
 
       }
     })
 
-    this.columnService.GetAllProjectColumns({ "id": id }).subscribe((res) => {
+    this.columnService.GetAllProjectColumns({ "id": this.projectId }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectColumns = res.data;
       }
@@ -100,15 +102,14 @@ export class ListComponent implements OnInit {
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
         this.userList = res.data;
-        console.log(this.userList);
-
       }
     })
+
     this.priorities = this.priorityService.getOptions();
   }
   stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
-  
+
   }
 
   applySummaryFilters() {
@@ -137,12 +138,13 @@ export class ListComponent implements OnInit {
 
       this.applyFilter('DueDate');
     }
-}
+  }
+
 
 
 
   applyFilter(filter: string) {
-    
+
     this.filteredData = this.listData;
     //this.getUserIds();
 
@@ -156,7 +158,7 @@ export class ListComponent implements OnInit {
       this.toastr.info('Filter Applied!');
     }
     console.log(this.activeFilters);
-    
+
 
     if (this.activeFilters.includes('AssignedToMe')) {
       this.filteredData = this.filteredData.filter(t => t.assigneeId == this.tokenService.tokenUserId());
@@ -247,7 +249,7 @@ export class ListComponent implements OnInit {
         this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
         this.filteredData = this.filteredData.filter(t => {
           const taskDueDate = new Date(t.dueDate);
-          
+
           return (taskDueDate >= this.dueDateFrom && taskDueDate <= this.dueDateTo);
         });
       }
@@ -262,7 +264,7 @@ export class ListComponent implements OnInit {
     if (this.activeFilters.includes('Reporter') && this.selectedReporters.length != 0) {
       this.filteredData = this.filteredData.filter(task => this.selectedReporters.includes(task.reporterId));
     }
-    
+
 
     if (this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0) {
       this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
@@ -286,7 +288,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  selectAssignee(userId: string){
+  selectAssignee(userId: string) {
     const index = this.selectedAssignees.indexOf(userId);
     if (index === -1) {
       this.selectedAssignees.push(userId);
@@ -296,7 +298,7 @@ export class ListComponent implements OnInit {
     this.applyFilter('AssignedTo');
   }
 
-  selectReporter(userId: string){
+  selectReporter(userId: string) {
     const index = this.selectedReporters.indexOf(userId);
     if (index === -1) {
       this.selectedReporters.push(userId);
@@ -317,7 +319,7 @@ export class ListComponent implements OnInit {
       this.selectedPriorities.push(priority);
     }
     this.applyFilter('Priorities');
-    
+
   }
 
 
@@ -355,11 +357,11 @@ export class ListComponent implements OnInit {
 
   }
 
-  clearAssignees(){
+  clearAssignees() {
     this.selectedAssignees = [];
   }
 
-  clearReporters(){
+  clearReporters() {
     this.selectedReporters = [];
   }
 
@@ -398,5 +400,15 @@ export class ListComponent implements OnInit {
   someMethod(): void {
     const translatedText = this.translocoService.translate('your_translation_key');
     console.log(translatedText);
+  }
+
+  getUnplannedTasks(){
+    this.taskService.getUnplannedTask(this.projectId).subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.unPlannedTasks = res.data;
+        console.log(this.unPlannedTasks);
+        alert("Look at the console!");
+      }
+    })
   }
 }
