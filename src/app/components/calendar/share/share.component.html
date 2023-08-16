@@ -2,13 +2,13 @@
     <h2>Share in Slack</h2>
 
     <div class="input-group">
+        <input type="text" id="name" [(ngModel)]="name" placeholder="">
         <label for="name">Names or teams*</label>
-        <input type="text" id="name" [(ngModel)]="name" placeholder="Enter name...">
     </div>
 
     <div class="input-group">
+        <textarea id="message" [(ngModel)]="message" placeholder=""></textarea>
         <label for="message">Message (optional)</label>
-        <textarea id="message" [(ngModel)]="message" placeholder="Enter message..."></textarea>
     </div>
 
     <button (click)="paylas()">Share</button>
