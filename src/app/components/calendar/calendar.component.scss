@@ -13,25 +13,25 @@
 }
 
 .priority-images {
+  display: flex;
+  align-items: center;
+  left: 10px;
+  
+  .img_div {
     display: flex;
+    justify-content: center;
     align-items: center;
-    left: 10px;
-    
-    .img_div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%; //fit-content yapılabilir.
-      img {
-        width: 30px;
-        height: 30px;
-        // margin-right: 10px;
-        transition: transform 0.2s;
-        object-fit: cover;
-      }
+    width: 100%;
+    height: 100%; //fit-content yapılabilir.
+    img {
+      width: 30px;
+      height: 30px;
+      // margin-right: 10px;
+      transition: transform 0.2s;
+      object-fit: cover;
     }
   }
+}
 h3.project-heading {
     margin: 0;
     /* Diğer stil özellikleri */
@@ -343,7 +343,7 @@ button {
 /* ... (Existing styles) ... */
 
 .calendar-days div.is-today {
-    background-color: #71ad83;
+    background-color: #71ad83e2;
     /* Bugünün arka plan rengi */
     color: #ffffff;
     /* Bugünün yazı rengi (beyaz) */

@@ -1,26 +1,69 @@
 .paylas-container {
-    width: 300px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 320px;
+    padding: 25px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6ea3d825, #f372b058);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    color: #333;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+        font-weight: 600; // Başlık font kalınlığını artırıyoruz
+        border-bottom: 3px solid #000000;
+    }
 }
 
 .input-group {
-    margin-bottom: 10px;
+    position: relative;
+    margin-bottom: 25px;
+
+    label {
+        position: absolute;
+        top: 15px;
+        left: 10px;
+        transition: all 0.3s;
+        pointer-events: none;
+        color: #a465bb; // Etiket rengi
+    }
+
+    input:focus + label, textarea:focus + label, input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label {
+        transform: translateY(-40px) scale(0.9);
+        color: #2e0534; // Focused label color
+    }
 }
 
 input, textarea {
     width: 100%;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+    padding: 10px 12px; // padding artırıldı
+    border: 1.5px solid #ddd; // Border kalınlığı artırıldı
+    border-radius: 5px; // Köşeleri biraz daha yuvarlak
+    transition: all 0.3s;
+    &:focus {
+        outline: none;
+        border-color: #a465bb; 
+    }
 }
 
 button {
-    background-color: #a42b2b9c;
+    width: 100%; // Tam genişlikte buton
+    background-color: #6424659c;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
+    font-weight: 600; // Buton font kalınlığını artırıyoruz
+    letter-spacing: 1px; // Harfleri biraz ayırarak daha estetik bir görünüm elde ediyoruz.
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        background-color: #a6414199;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); // Butona hover edildiğinde gölge ekliyoruz
+    }
+    &:active {
+        background-color: #5ea8d566;
+        transform: translateY(2px);
+    }
 }
