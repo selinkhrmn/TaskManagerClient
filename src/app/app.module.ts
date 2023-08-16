@@ -65,6 +65,8 @@ import { UserPipe } from 'src/pipes/user.pipe';
 import { AddUsersToProjectComponent } from './components/admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { NbLayoutModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
 import { ResizableModule } from 'angular-resizable-element';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 import { ToastrModule } from 'ngx-toastr';
 import { TransferColumnTaskComponent } from './components/transfer-column-task/transfer-column-task.component';
@@ -152,6 +154,8 @@ import { ShareComponent } from './components/calendar/share/share.component';
     NbThemeModule,
     ResizableModule,
     BrowserAnimationsModule, // required animations module
+    MatPaginatorModule,
+    MatTableModule,
     ToastrModule.forRoot(
       {positionClass: 'toast-bottom-right',}
     ),

@@ -85,6 +85,7 @@ export class AdminTasksComponent implements OnInit {
     // this.dataSource.sort = this.sort;
   }
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -104,19 +105,23 @@ export class AdminTasksComponent implements OnInit {
       }
     });
 
-
   }
 
-  openTaskDialog(id: number) {
-    this.taskService.getTaskById(id).subscribe((res) => {
-      this.taskArray = res.data;
+  // openTaskDialog(id: number) {
+  //   this.taskService.getTaskById(id).subscribe((res) => {
+  //     this.taskArray = res.data;
 
+openTaskDialog(id : number) {
+ this.taskService.getTaskById(id).subscribe((res) => {
+  this.taskArray = res.data;
+  
+  
+  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray}, width : '60%'});
+  dialogS.afterClosed().subscribe((res) => {
+    window.location.reload();
+  })
+ })
 
-      const dialogS = this.dialog.open(TaskComponent, { data: { task: this.taskArray }, width: '60%' });
-      dialogS.afterClosed().subscribe((res) => {
-        window.location.reload();
-      })
-    })
 
 
   }
