@@ -28,9 +28,16 @@
       <div class="projects">
         <label>{{ 'Users' | transloco }}</label>
         <div class="projects_container">
-          <mat-radio-button *ngFor="let user of users" [value]="user.id">{{ user.name }}</mat-radio-button>
+          <mat-checkbox
+            *ngFor="let user of users"
+            [(ngModel)]="user.selected"
+            [value]="user.id"
+          >
+            {{ user.name }}
+          </mat-checkbox>
         </div>
-        <button (click)="saveProjectUsers()">Save</button> <!-- Add this button -->
+        <button (click)="saveProjectUsers()">Save</button>
+        
       </div>
       
     </div>

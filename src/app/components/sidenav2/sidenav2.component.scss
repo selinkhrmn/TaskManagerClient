@@ -91,23 +91,3 @@
   }
 }
 
-.container .toggle {
-  position: absolute;
-  top: 50%; 
-  right: -25%;
-  transform: translateY(-50%);
-  height: 25px;
-  width: 25px;
-  background: var(--primary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: var(--sidenav-color);
-  font-size: 22px;
-  
-
-}
-.container{
-  position: relative;
-}
