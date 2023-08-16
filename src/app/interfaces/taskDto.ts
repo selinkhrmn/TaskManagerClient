@@ -1,11 +1,11 @@
 import { User } from "./user";
 
-export class taskDto {
+export class TaskDto {
     id: number;
     name: string;
     columnId: number;
     priority: number;
-    assignee : User;
+    //assignee : User;
 }
 
 export class TaskUserDto {

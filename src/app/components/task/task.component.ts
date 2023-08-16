@@ -2,7 +2,7 @@ import { DIALOG_DATA, Dialog } from '@angular/cdk/dialog';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
-import { taskDto } from 'src/app/interfaces/taskDto';
+import { TaskDto } from 'src/app/interfaces/taskDto';
 import { TaskService } from 'src/app/services/task.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -82,11 +82,12 @@ export class TaskComponent implements OnInit {
       if (res.isSuccessful == true) {
         this.userList = res.data;
       }
-    })
+    });
+    
   }
 
   getTaskComments(){
-    this.commentService.GetTaskComments( this.data.task.id).subscribe((res) => {
+    this.commentService.GetTaskComments(this.taskId).subscribe((res) => {
       if(res.isSuccessful == true){
         this.comments = res.data;
         console.log(res.data);
@@ -169,14 +170,18 @@ export class TaskComponent implements OnInit {
 
   };
 
+  editOpen(id: number){
+    return true;
+  }
+
 
   submitComment() {
     if (this.createComment.trim() !== '') {
-      this.commentReq.comment = this.createComment
+      this.commentReq.comment = this.createComment;
       this.commentService.CreateComment(this.commentReq).subscribe((res) => {
-        if(res.isSuccessful == true){         
-          this.commentReq.comment = '';
-          this.getTaskComments();
+        if(res.isSuccessful == true){  
+          this.getTaskComments();       
+          this.createComment = '';
         }
       })
       

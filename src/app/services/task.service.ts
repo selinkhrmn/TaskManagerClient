@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../interfaces/task';
 import { ResponseModel } from '../interfaces/responseModel';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from '../interfaces';
@@ -9,6 +9,7 @@ import { TokenService } from './token.service';
 import { ProjectDto } from '../interfaces/project';
 import { ListTask } from '../interfaces/listTask';
 import { UserDto } from '../interfaces/user';
+import { TaskDto } from '../interfaces/taskDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class TaskService {
 
   private task$ = new BehaviorSubject<any>({});
   selectedTask$ = this.task$.asObservable();
-  
+
   selectedFilter: { name: string; fromDate: Date; toDate: Date } | null = null;
 
   constructor(private http: HttpClient,
@@ -34,7 +35,7 @@ export class TaskService {
     debugger
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
   }
- 
+
 
   updateTask(task: Partial<Task>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task, this.httpOptions);
@@ -53,27 +54,33 @@ export class TaskService {
   }
 
   getTaskById(id: number) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, {id: id}, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, { id: id }, this.httpOptions);
   }
 
-  GetAllTaskForUser(id : Partial<UserDto>) {
+  GetAllTaskForUser(id: Partial<UserDto>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
   }
 
- setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
-  console.log("Setting filter:", filter);
-  this.selectedFilter = filter;
-}
-
+  setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
+    console.log("Setting filter:", filter);
+    this.selectedFilter = filter;
+  }
 
   getSelectedFilter() {
     return this.selectedFilter;
   }
 
-  // CreateTaskForColumn(task: Partial<Task>) {
-  // debugger
-  //   return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTaskForColumn`,task, this.httpOptions);
-  // }
+  getUnplannedTask(projectId: number){
+    const url = `${this.baseUrl}/UnplannedTask`;
+    const params = new HttpParams().set('id', projectId.toString());
+    return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
+  }
+
+  getUnassignedTask(projectId: number){
+    const url = `${this.baseUrl}/UnassignedTask`;
+    const params = new HttpParams().set('id', projectId.toString());
+    return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
+  }
 
 
 }

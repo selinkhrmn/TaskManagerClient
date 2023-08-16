@@ -7,7 +7,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Project } from 'src/app/interfaces';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { Task } from 'src/app/interfaces/task';
-import { taskDto } from 'src/app/interfaces/taskDto';
+import { TaskDto } from 'src/app/interfaces/taskDto';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TranslocoService} from '@ngneat/transloco';
 import { ListTask } from 'src/app/interfaces/listTask';

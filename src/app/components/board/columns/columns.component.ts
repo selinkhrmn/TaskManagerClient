@@ -18,7 +18,7 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { Task } from 'src/app/interfaces/task';
-import { taskDto } from 'src/app/interfaces/taskDto';
+import { TaskDto } from 'src/app/interfaces/taskDto';
 import { ColumnService } from 'src/app/services/column.service';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { TaskService } from 'src/app/services/task.service';
@@ -45,13 +45,13 @@ export class ColumnsComponent {
   columns: ColumnTask[] = [];
   columnGet: ColumnTask;
 
-  allTasks: taskDto[] = [];
+  allTasks: TaskDto[] = [];
 
-  todo: taskDto[] = [];
+  todo: TaskDto[] = [];
 
-  done: taskDto[] = [];
+  done: TaskDto[] = [];
 
-  InProgress: taskDto[] = [];
+  InProgress: TaskDto[] = [];
 
   currentProjectId: number;
   columnName: string;
@@ -59,7 +59,7 @@ export class ColumnsComponent {
   currentProject: ProjectDto;
   taskName: string;
   defaultEndDate = new Date(1970, 1, 1);
-  userId: string;
+
   @Output() currentColumnId: number;
 
   showFiller = false;
@@ -77,7 +77,6 @@ export class ColumnsComponent {
   }
 
   ngOnInit(): void {
-    this.tokenUserId();
     this.getColumnId(this.currentColumnId);
     this.getProjectLocal();
     this.currentProject = this.projectService.getProjectLocal();
@@ -95,7 +94,7 @@ export class ColumnsComponent {
   }
 
 
-  drop(event: CdkDragDrop<taskDto[]>, column: ColumnTask) {
+  drop(event: CdkDragDrop<TaskDto[]>, column: ColumnTask) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -183,21 +182,19 @@ export class ColumnsComponent {
     }
   }
 
-  tokenUserId() {
-    this.userId = this.tokenService.tokenUserId();
-  }
+
 
   CreateTask() {
     this.taskObj.columnId = this.currentColumnId
     this.taskObj.projectId = this.currentProjectId
-    this.taskObj.assigneeId = this.userId
-    this.taskObj.reporterId = this.userId
+    this.taskObj.assigneeId = "unassigned";
+    this.taskObj.reporterId = this.tokenService.tokenUserId();
     this.taskObj.priority = 3
-    this.taskObj.endDate = this.defaultEndDate
+    //this.taskObj.endDate = this.defaultEndDate
 
     this.taskService.createTask(this.taskObj).subscribe((res) => {
       if (res.isSuccessful) {
-        this.ngOnInit()
+        this.ngOnInit();
       }
     });
   }
