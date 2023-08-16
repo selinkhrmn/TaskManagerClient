@@ -33,7 +33,7 @@ interface DayObject {
   isSearchedDay: boolean;
   isSearchedDayValid?: boolean;
   description?: string;
-
+  placeholder?: boolean; // Bu özelliği ekleyin
   projectNames?: string[]; // Birden fazla proje adını saklamak için bir dizi
   showAllTasks?: boolean; // Tüm görevleri göstermek için
 
@@ -48,7 +48,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('filterMenu', { static: true }) filterMenu: MatMenuTrigger;
   currentMonth: number;
   columns: string[] = [
-    'name', 
+    'name',
   ];
   currentYear: number;
   fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
@@ -62,10 +62,7 @@ export class CalendarComponent implements OnInit {
   selectedAssignees: string[] = [];
   reporters: string[] = [];
   assignees: string[] = [];
-  value = 'Clear me';
-  projectColumns: ColumnDto[] = [];
-  selectedReporters: string[] = [];
-  selectedPriorities: number[] = [];
+ 
   priorities: string[] = [];
   projectUsers: ProjectUserDto[] = [];
   userList: UserDto[] = [];
@@ -86,104 +83,56 @@ export class CalendarComponent implements OnInit {
     private translocoService: TranslocoService,
     private http: HttpClient,
     private dialog: MatDialog,
-    private toastr: ToastrService,
-    private cdRef: ChangeDetectorRef,
+   
+
     private projectService: ProjectService,
     private taskService: TaskService,
-    private columnService: ColumnService,
+ 
     public priorityService: PriorityService,
     public userService: UserService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    let id: number = this.projectService.getProjectLocal().id;
     const today = new Date();
     this.currentMonth = today.getMonth();
     this.currentYear = today.getFullYear();
     this.generateDays();
-    this.taskService.getAllProjectTask({ "id": id }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        console.log(res.data);
-        this.listData = res.data;
-        this.filteredData = res.data;
-        this.applySummaryFilters();
-        this.CalendarFilters();
-        this.getUserIds();
-
-      }
-    });
-
-    this.userService.GetAllProjectUsers({ "id": id }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.projectUsers = res.data;
-
-      }
-    })
-
-    this.columnService.GetAllProjectColumns({ "id": id }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.projectColumns = res.data;
-      }
-    })
-
-    this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-        console.log(this.userList);
-
-      }
-    })
-    this.priorities = this.priorityService.getOptions();
 
   }
-  applySummaryFilters() {
-    const selectedFilter = this.taskService.getSelectedFilter();
-    if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
-      this.updatedFromDate = new Date(selectedFilter.fromDate);
-      this.updatedToDate = new Date(selectedFilter.toDate);
-      console.log(this.updatedFromDate);
-
-      this.applyFilter('UpdatedDate');
-    }
-    if (selectedFilter && selectedFilter.name === 'CreatedDate') {
-      this.createdFromDate = new Date(selectedFilter.fromDate);
-      this.createdToDate = new Date(selectedFilter.toDate);
-      this.applyFilter('CreatedDate');
-    }
-
-  }
-  CalendarFilters() {
-    const selectedFilter = this.taskService.getSelectedFilter();
-    if (selectedFilter && selectedFilter.name === 'DueDate') {
-      this.dueDateFrom = new Date(selectedFilter.fromDate);
-      this.dueDateTo = new Date(selectedFilter.toDate);
-      this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
-      console.log(this.dueDateFrom);
-
-      this.applyFilter('DueDate');
-    }
-}
-
 
   async generateDays(): Promise<void> {
     const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
     const lastDate = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
     let id: number = this.projectService.getProjectLocal().id;
+
+    this.days = [];
+
+    // Ayın başlangıcındaki boşluklar için placeholder'lar ekleyin
+    for (let i = 0; i < (firstDayOfMonth - 1); i++) {
+      this.days.push({ 
+        placeholder: true,
+        day: 0, 
+        isToday: false, 
+        showDescription: false, 
+        isSearchedDay: false, 
+        isSearchedDayValid: false, 
+        projectNames: [] 
+      });
+      
+    }
+
     this.taskService.getAllProjectTask({ "id": id })
-      .subscribe
-      (response => {
+      .subscribe(response => {
         if (response && response.data) {
           const tasksForProjectData = response.data;
 
-          this.days = [];
           for (let dayNumber = 1; dayNumber <= lastDate; dayNumber++) {
             const isToday = this.today.getDate() === dayNumber && this.today.getMonth() === this.currentMonth && this.today.getFullYear() === this.currentYear;
             const isSearchedDay = dayNumber === this.searchedDay && this.searchedDay !== -1;
             const isSearchedDayValid = isSearchedDay && this.currentMonth === this.searchedMonth && this.currentYear === this.searchedYear;
 
             const tasksForTheDay = tasksForProjectData.filter((task: any) => {
-
               const taskDate = new Date(task.dueDate);
               return taskDate.getDate() === dayNumber &&
                 taskDate.getMonth() === this.currentMonth &&
@@ -191,10 +140,10 @@ export class CalendarComponent implements OnInit {
             });
             const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
             const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
-
             const taskIdForTheDay = tasksForTheDay.length > 0 ? tasksForTheDay[0].id : undefined;
+
             this.days.push({
-              taskId: taskIdForTheDay,// Burada ekledik
+              taskId: taskIdForTheDay,
               day: dayNumber,
               isToday: isToday,
               showDescription: false,
@@ -203,12 +152,30 @@ export class CalendarComponent implements OnInit {
               projectNames: projectNamesForTheDay
             });
           }
+
+          // Ayın sonuna kadar kalan boşlukları doldurun
+          const daysInWeek = 7;
+          const lastDayOfMonth = new Date(this.currentYear, this.currentMonth, lastDate).getDay();
+          for (let i = lastDayOfMonth; i < daysInWeek; i++) {
+            this.days.push({ 
+              placeholder: true,
+              day: 0, 
+              isToday: false, 
+              showDescription: false, 
+              isSearchedDay: false, 
+              isSearchedDayValid: false, 
+              projectNames: [] 
+            });
+            
+          }
+
         }
       },
         error => {
           console.error('Görevleri alırken hata:', error);
         });
   }
+
   openTaskDialog(tId: number) {
     this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
@@ -222,13 +189,13 @@ export class CalendarComponent implements OnInit {
   }
   openShareDialog(shareButton: HTMLElement) {
     const rect = shareButton.getBoundingClientRect();
-  
+
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.position = { 
+    dialogConfig.position = {
       top: `${rect.top - 50}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
       left: `${rect.left}px`
     };
-  
+
     this.dialog.open(ShareComponent, dialogConfig);
   }
   openDialog(): void {
@@ -245,7 +212,7 @@ export class CalendarComponent implements OnInit {
     // Seçilen gün için kutucuğu gösterin
     dayObj.showAllTasks = true;
   }
- 
+
   prevMonth(): void {
     this.currentMonth--;
     if (this.currentMonth < 0) {
@@ -331,14 +298,6 @@ export class CalendarComponent implements OnInit {
     console.log('Kaydedilen açıklama:', this.days[this.searchedDay].description);
   }
 
-  addTask(): void {
-    console.log('Yapılacaklar butonuna tıklandı');
-  }
-
-  clearDescription(): void {
-    this.days[this.searchedDay].description = '';
-  }
-
   getTodayText(dayObj: DayObject): string {
     return dayObj.isToday ? "Bugün" : "";
   }
@@ -366,233 +325,7 @@ export class CalendarComponent implements OnInit {
 
     this.router.navigate(['/home/list']);
   }
-  yourButtonClickFunction() {
-    console.log('Task Name butonuna tıklandı!');
-    // Buraya tıklanınca yapılacak işlemleri ekleyebilirsiniz.
-  }
-  clearFilter() {
-    this.selectedColumns = [];
-    this.selectedPriorities = [];
-    this.activeFilters = [];
-    this.selectedAssignees = [];
-    this.selectedReporters = [];
-    //dates;
-    this.filteredData = this.listData;
-    notie.alert({ type: 'error', text: 'Filter(s) Cleared!' })
 
-  }
-
-  clearAssignees() {
-    this.selectedAssignees = [];
-  }
-
-  clearReporters() {
-    this.selectedReporters = [];
-  }
-
-
-  applyFilter(filter: string) {
-
-    this.filteredData = this.listData;
-    //this.getUserIds();
-
-    if (this.activeFilters.includes(filter)) {
-      if (filter == 'AssignedToMe' || filter == 'DueDateThisWeek' || filter == 'CompletedTasks') {
-        this.activeFilters = this.activeFilters.filter(f => f !== filter);
-      }
-    }
-    else {
-      this.activeFilters.push(filter);
-      this.toastr.info('Filter Applied!');
-    }
-    console.log(this.activeFilters);
-
-
-    if (this.activeFilters.includes('AssignedToMe')) {
-      this.filteredData = this.filteredData.filter(t => t.assigneeId == this.tokenService.tokenUserId());
-    }
-
-    if (this.activeFilters.includes('DueDateThisWeek')) {
-      const currentDate = new Date();
-      const startOfWeek = new Date(currentDate);
-      startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
-      const endOfWeek = new Date(currentDate);
-      endOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 6);
-
-      this.filteredData = this.filteredData.filter(t => {
-        const dueDate = new Date(t.dueDate);
-        return dueDate >= startOfWeek && dueDate <= endOfWeek
-      });
-
-    }
-    // else if (filter === 'CompletedTasks') {
-    // }
-    if (this.activeFilters.includes('BetweenDates')) {
-      const fromDate = new Date(this.fromDate);
-      if (this.fromDate && this.toDate) {
-        const toDate = new Date(this.toDate);
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreateDate = new Date(t.createdDate);
-          const taskUpdatedDate = new Date(t.updatedDate);
-          const taskDueDate = new Date(t.dueDate);
-          return ((taskCreateDate >= fromDate && taskCreateDate <= toDate) ||
-            (taskUpdatedDate >= fromDate && taskUpdatedDate <= toDate) ||
-            (taskDueDate >= fromDate && taskDueDate <= toDate));
-        });
-      }
-      else if (this.fromDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreateDate = new Date(t.createdDate);
-          const taskUpdatedDate = new Date(t.updatedDate);
-          const taskDueDate = new Date(t.dueDate);
-          return ((taskCreateDate >= fromDate) ||
-            (taskUpdatedDate >= fromDate) ||
-            (taskDueDate >= fromDate));
-        });
-      }
-    }
-
-    if (this.activeFilters.includes('AssignedTo') && this.selectedAssignees.length != 0) {
-      this.filteredData = this.filteredData.filter(task => this.selectedAssignees.includes(task.assigneeId));
-    }
-
-    if (this.activeFilters.includes('Columns') && this.selectedColumns.length != 0) {
-      this.filteredData = this.filteredData.filter(t => this.selectedColumns.includes(t.columnId));
-    }
-
-    if (this.activeFilters.includes('UpdatedDate')) {
-      if (this.updatedFromDate && this.updatedToDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskUpdatedDate = new Date(t.updatedDate);
-          return (taskUpdatedDate >= this.updatedFromDate && taskUpdatedDate <= this.updatedToDate);
-        });
-      }
-      else if (this.updatedFromDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskUpdatedDate = new Date(t.updatedDate);
-          return (taskUpdatedDate >= this.updatedFromDate);
-        });
-      }
-    }
-
-
-    if (this.activeFilters.includes('CreatedDate')) {
-      if (this.createdFromDate && this.createdToDate) {
-        this.createdToDate.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreatedDate = new Date(t.createdDate);
-          return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
-        });
-      }
-      else if (this.createdFromDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreatedDate = new Date(t.createdDate);
-          return (taskCreatedDate >= this.createdFromDate);
-        });
-      }
-    }
-
-    if (this.activeFilters.includes('DueDate')) {
-      if (this.dueDateFrom && this.dueDateTo) {
-        this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
-        this.filteredData = this.filteredData.filter(t => {
-          const taskDueDate = new Date(t.dueDate);
-
-          return (taskDueDate >= this.dueDateFrom && taskDueDate <= this.dueDateTo);
-        });
-      }
-      else if (this.dueDateFrom) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskDueDate = new Date(t.dueDate);
-          return (taskDueDate >= this.dueDateFrom);
-        });
-      }
-    }
-
-    if (this.activeFilters.includes('Reporter') && this.selectedReporters.length != 0) {
-      this.filteredData = this.filteredData.filter(task => this.selectedReporters.includes(task.reporterId));
-    }
-
-
-    if (this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0) {
-      this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
-    }
-  }
-
-  cancelPriorities() {
-    if (this.selectedPriorities.length != 0) {
-      this.selectedPriorities = [];
-    }
-    this.applyFilter('Priorities');
-  }
-
-  cancelCreateDates() {
-    //this.createdFromDate = undefined
-    // this.createdToDate = undefined;
-  }
-  selectAssignee(userId: string) {
-    const index = this.selectedAssignees.indexOf(userId);
-    if (index === -1) {
-      this.selectedAssignees.push(userId);
-    } else {
-      this.selectedAssignees.splice(index, 1);
-    }
-    this.applyFilter('AssignedTo');
-  }
-
-  selectReporter(userId: string) {
-    const index = this.selectedReporters.indexOf(userId);
-    if (index === -1) {
-      this.selectedReporters.push(userId);
-    } else {
-      this.selectedReporters.splice(index, 1);
-    }
-    this.applyFilter('Reporter');
-  }
-
-  handlePriorityClick(priority: number) {
-    if (this.selectedPriorities.includes(priority)) {
-      this.selectedPriorities = this.selectedPriorities.filter(p => p !== priority);
-    }
-    else {
-      this.selectedPriorities.push(priority);
-    }
-    this.applyFilter('Priorities');
-
-  }
-
-  handleUsernameClick(): void {
-    console.log('User name clicked!');
-  }
-  handleColumnSelect(columnId: number) {
-    if (this.selectedColumns.includes(columnId)) {
-      this.selectedColumns = this.selectedColumns.filter(id => id !== columnId);
-    }
-    else {
-      this.selectedColumns.push(columnId);
-    }
-    this.applyFilter('Columns');
-  }
-  getUserIds(): void {
-    const getAssignees = new Set<string>();
-    const getReporters = new Set<string>();
-
-    this.listData.forEach(task => {
-      if (!getAssignees.has(task.assigneeId)) {
-        getAssignees.add(task.assigneeId);
-        this.assignees.push(task.assigneeId);
-      }
-
-      if (!getReporters.has(task.reporterId)) {
-        getReporters.add(task.reporterId);
-        this.reporters.push(task.reporterId);
-      }
-    });
-  }
-  stopPropagation(event: { stopPropagation: () => void; }) {
-    event.stopPropagation();
-  
-  }
   loadData(): void {
     this.http.get<ListTask[]>('YOUR_BACKEND_URL_HERE').subscribe(
       (response: ListTask[]) => {
