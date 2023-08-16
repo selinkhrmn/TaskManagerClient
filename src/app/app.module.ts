@@ -71,6 +71,8 @@ import { TransferColumnTaskComponent } from './components/transfer-column-task/t
 import { TimePipe } from 'src/pipes/time.pipe';
 import { ShareComponent } from './components/calendar/share/share.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -173,3 +175,4 @@ import { ShareComponent } from './components/calendar/share/share.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -10,8 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-add-people-to-project',
   templateUrl: './add-people-to-project.component.html',
-  styleUrls: ['./add-people-to-project.component.scss'],
-  
+  styleUrls: ['./add-people-to-project.component.scss'], 
 })
 export class AddPeopleToProjectComponent {
   users: UserDto[] = [];
@@ -35,6 +34,13 @@ export class AddPeopleToProjectComponent {
       }
     });
   }
-
+  saveProjectUsers() {
+    const selectedUserIds = this.users
+      .filter((user) => user.selected)
+      .map((user) => user.id);
+    console.log('Selected User IDs:', selectedUserIds);
+  }
+  
 }
+export class ButtonOverviewExample {}
 

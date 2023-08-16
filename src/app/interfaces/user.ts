@@ -21,6 +21,7 @@ export interface User1 {
 }
 
 export interface UserDto{
+    selected: unknown;
     id: string;
     name: string;
     surname: string;

@@ -11,7 +11,7 @@
   margin-top: 30px;
 
   label {
-    font-size: 26px;
+    font-size: 30px;
   }
 
   .icon_holder {
@@ -30,7 +30,7 @@
       border-radius: 50%;
     }
     &:hover {
-      background-color: #f6f8fa;
+      background-color: #57bcff;
     }
   }
 }
@@ -50,12 +50,12 @@
     margin-top: 10px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
 
     &:hover {
       // border: 1px solid gray;
       // color: white;
-      background-color: #D8D9D7;
+      background-color: #57bcff;
     }
   }
 }
@@ -89,4 +89,25 @@
     margin-top: 5px; /* Adjust top margin for spacing */
     font-size: 14px; /* Adjust font size for smaller screens */
   }
+}
+
+.container .toggle {
+  position: absolute;
+  top: 50%; 
+  right: -25%;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--sidenav-color);
+  font-size: 22px;
+  
+
+}
+.container{
+  position: relative;
 }

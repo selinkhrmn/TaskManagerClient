@@ -30,8 +30,9 @@
         <div class="projects_container">
           <mat-radio-button *ngFor="let user of users" [value]="user.id">{{ user.name }}</mat-radio-button>
         </div>
+        <button (click)="saveProjectUsers()">Save</button> <!-- Add this button -->
       </div>
-
+      
     </div>
   </div>
 </div>
