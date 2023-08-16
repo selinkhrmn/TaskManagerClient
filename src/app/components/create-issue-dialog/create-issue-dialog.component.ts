@@ -19,6 +19,8 @@ import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { ColumnDto } from 'src/app/interfaces/columnDto';
 import { FileService } from 'src/app/services/file.service';
 import { FileData } from 'src/app/interfaces/FileData';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -31,7 +33,7 @@ interface DialogData {
   styleUrls: ['./create-issue-dialog.component.scss']
 })
 export class CreateIssueDialogComponent {
-
+  baseUrl = `${environment.baseUrl}/business/File`;
   priorities: string[]; 
   selectedIcon: string;
 
@@ -57,12 +59,21 @@ export class CreateIssueDialogComponent {
   };
   // v:File;
 
+  working = false;
+  uploadFile: File | null ;
+  uploadFileLabel: string | undefined = 'Choose an image to upload';
+  uploadProgress: number;
+  uploadUrl: string;
+  formData = new FormData();
+  images:any[]=[];
+  files : FileList;
+
   task : Partial<Task> = {
     name: "",
     projectId: 0,
     columnId: 1,
     priority : 3,
-    endDate: new Date(),
+    endDate: new Date()
     // files: this.v;
   }
 
@@ -91,15 +102,14 @@ export class CreateIssueDialogComponent {
     public translocoService: TranslocoService,
     public priorityService: PriorityService,
     public userService: UserService,
-    private fileService: FileService
+    private fileService: FileService,
+    private http : HttpClient
 
   ) {
     this.getAllProjects();
     this.getCurrentProject();
     this.priorities = this.priorityService.getOptions();
   }
-
-
 
   ngOnInit() {
     // this.projectService.selectedProject$?.subscribe((value) => {
@@ -109,15 +119,11 @@ export class CreateIssueDialogComponent {
     // this.project = this.projectService?.getProjectLocal();
   }
 
-
- 
-
   onIconSelectionChange() {
     const priorityNumber = this.priorityService.getIconPriority(this.selectedIcon);
     this.task.priority = priorityNumber;
 
   }
-
 
   onChangeProject(event: any) {
     this.columns = [];
@@ -149,8 +155,9 @@ export class CreateIssueDialogComponent {
   }
 
   addTask(){
-    if(this.task.name != null && this.task.projectId != null && this.task.columnId != null && this.task.priority != null) {
-      debugger;
+    // if(this.task.name != null && this.task.projectId != null && this.task.columnId != null && this.task.priority != null) {
+      if(this.task.name != null) {
+
       this.closeDialog();
     }
     else{
@@ -161,11 +168,16 @@ export class CreateIssueDialogComponent {
   }
 
   closeDialog() {
-      this.dialogRef.close({
-        isAdded: true,
-        task: this.task
+    this.images.forEach(f=>{
+      this.formData.append('file',f); 
       });
     
+      this.dialogRef.close({
+        isAdded: true,
+        task: this.task,
+        file : this.formData
+      });
+   
   }
 
   public getCurrentProject() {
@@ -175,8 +187,7 @@ export class CreateIssueDialogComponent {
     this.currentProject = this.projectService.getCurrentProject();
   }
 
-
-  upload(event: Event){
+  uploadEvent(event: Event){
     this.fileService.uploadFile(event);
     this.Files = this.fileService.selectedFiles;
   }
@@ -186,4 +197,82 @@ export class CreateIssueDialogComponent {
     console.log('Selected Files:', this.Files);
   }
 
+  handleFileInput(e:any) {
+    debugger
+    
+      this.uploadFile = e.files.item(0);
+      this.uploadFileLabel = this.uploadFile?.name;
+      let x:any[]=[];
+    for(let i = this.images.length; i < e.files.length; i++){
+    x.push(e.files[i]);
+    }
+    if(x.length>0){
+      x.forEach(f=> {
+        this.images.push(f);
+      });
+    }
+    console.log(this.uploadFile);
+
+   
+
+  //   this.files = files;
+  // this.uploadFileLabel = ''; 
+
+  // for (let i = 0; i < files.length; i++) {
+  //   const file = files.item(i);
+  //   this.uploadFileLabel += file?.name;
+  //   this.uploadFileLabel += "-";
+    
+  // }
+    
+  }
+
+//   upload() {
+//     debugger
+//     // if (!this.task.name) {
+//     //   alert('Please write a task name');
+//     //   return;
+//     // }
+
+//     if(!this.uploadFile) {
+//       // alert("file boş");
+//       return;
+//     }
+
+//     const formData = new FormData();
+//     this.formData = formData;
+//     formData.append(this.uploadFile.name, this.uploadFile, this.task.id?.toString());
+
+    
+
+//     this.uploadUrl = '';
+//     this.uploadProgress = 0;
+//     this.working = true;
+
+//   // this.http.post(`${this.baseUrl}/UploadFile`, formData, {reportProgress : true}).subscribe((event : any) => {
+//   //   if (event.type === HttpEventType.UploadProgress) {
+//   //     this.uploadProgress = Math.round((100 * event.loaded) / event.total);
+//   //   } else if (event.type === HttpEventType.Response) {
+//   //     this.uploadUrl = event.body.url;
+//   //   }
+//   // }, (error: any) => {
+//   //   console.error(error);
+//   // }).add(() => {
+//   //   this.working = false;
+//   // });;
+
+//   this.fileService.saveFile(formData, this.task.id?.toString()).subscribe((event : any) => {
+//     if (event.type === HttpEventType.UploadProgress) {
+//       this.uploadProgress = Math.round((100 * event.loaded) / event.total);
+//     } else if (event.type === HttpEventType.Response) {
+//       this.uploadUrl = event.body.url;
+//     }
+//   }, (error: any) => {
+//     console.error(error);
+//   }).add(() => {
+//     this.working = false;
+//   });;
+
+
+// }
 }

@@ -8,6 +8,7 @@ import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ColumnsComponent } from '../board/columns/columns.component';
 import { TranslocoService} from '@ngneat/transloco';
+import { FileService } from 'src/app/services/file.service';
 
 
 
@@ -20,6 +21,8 @@ import { TranslocoService} from '@ngneat/transloco';
 export class NavbarComponent {
 
   @ViewChild(MatTable) table: MatTable<Task>;
+  taskData : any;
+  
   
     constructor(
       public tokenService: TokenService,
@@ -29,7 +32,8 @@ export class NavbarComponent {
       private router: Router,
       public columnComp: ColumnsComponent,
       public authService: AuthService,
-      public translocoService: TranslocoService
+      public translocoService: TranslocoService,
+      private fileService: FileService
 
 
     ) {}
@@ -49,19 +53,44 @@ export class NavbarComponent {
     }
 
     openCreateIssueDialog() {
-      const dialog = this.dialog.open(CreateIssueDialogComponent, {data : {table : this.table},width:'60%'});
+
+      const dialog = this.dialog.open(CreateIssueDialogComponent, { data: { table: this.table }, width: '60%' });
+  
       dialog.afterClosed().subscribe((response) => {
+  
+        debugger;
         console.log(response);
-        
-        if(response.isAdded) {
-          this.taskService.createTask(response.task).subscribe((res)=>{
-            
-              // window.location.reload();
-          })
+  
+        if (response.isAdded) {
+          
+  
+            this.taskService.createTask(response.task).subscribe((res) => {
+              //window.location.reload();
+              debugger;
+              if (res.isSuccessful == true) {
+                this.taskData = res.data;
+                // this.formData = new FormData();
+                //  this.formData.append('file', response.file);
+      
+                this.fileService.saveFile(response.file, this.taskData.id.toString()).subscribe((res) => {
+                  
+                  //this.formData.append('file', e.target.files[0]);
+      
+                });
+              }
+      
+      
+            });
+          
         }
+  
+  
+       
+  
+  
       });
-      
-      
+  
+  
     }
 
     changeLanguage(language: 'tr' | 'en') {

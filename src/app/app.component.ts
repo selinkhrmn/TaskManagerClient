@@ -1,20 +1,16 @@
+import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { TranslocoService} from '@ngneat/transloco';
-
+import { environment } from 'src/environments/environment';
+import { FileService } from './services/file.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'TaskManagerClient';
+
+  constructor(private http: HttpClient, private fileService : FileService) {}
+
   
-  constructor(public translocoService : TranslocoService) {
-
-  }
-
-  public update() {
-    this.translocoService.setActiveLang('tr');
-  }
 }

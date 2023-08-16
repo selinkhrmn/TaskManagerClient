@@ -3,7 +3,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 @import '@angular/material/theming';
-@import '../node_modules/font-awesome/css/font-awesome.css';
+// @import '../node_modules/font-awesome/css/font-awesome.css'; // hata veriyordu yorum satırına aldım
 @import 'ngx-toastr/toastr';
 // Plus imports for other components in your app.
 

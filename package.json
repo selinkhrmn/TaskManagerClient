@@ -52,6 +52,7 @@
     "@angular/compiler-cli": "^15.2.0",
     "@types/d3": "^7.4.0",
     "@types/jasmine": "~4.3.0",
+    "@types/jquery": "^3.5.16",
     "@types/notie": "^4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",

@@ -1,6 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FileData } from '../interfaces/FileData';
+import { environment } from 'src/environments/environment';
+import { TokenService } from './token.service';
+import { Token } from '@angular/compiler';
+import { ResponseModel } from '../interfaces/responseModel';
+
 
 
 
@@ -11,6 +16,9 @@ import { FileData } from '../interfaces/FileData';
 
 
 export class FileService {
+   
+
+
 selectedFiles: FileData[] = [];
 fileIcons: { [extension: string]: string } = {
   jpg: '../../../assets/hosgeldiniz.png',
@@ -19,7 +27,17 @@ fileIcons: { [extension: string]: string } = {
   docx: 'path-to-docx-icon',
   pdf: 'path-to-pdf-icon',
 };
-  constructor(private http:HttpClient) { }
+
+task : any;
+baseUrl = `${environment.baseUrl}/business/File`;
+token = localStorage.getItem('token'); 
+httpOptionsFormData = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${this.token}`,
+  })
+}
+ constructor(private http:HttpClient,
+    private tokenService : TokenService) {} 
 
 
 
@@ -47,4 +65,44 @@ fileIcons: { [extension: string]: string } = {
     const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
     return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   }
+
+  saveFile(files: any, taskId: string) {
+    
+
+     const url = `${this.baseUrl}/UploadWithout`;
+    // const params = new HttpParams().set('taskId', taskId.toString());
+    // return this.http.post(url, { params: params });
+
+    const params = new HttpParams().set('taskId', taskId);
+  const httpOptionsFormData = {
+    headers: new HttpHeaders({
+      'Accept': 'application/json'
+    }),
+    params: params
+  };
+
+   return this.http.post(url, files, httpOptionsFormData);
+
+    // return this.http.post(`${this.baseUrl}/UploadWithout?taskId=${taskIdString}`, files, this.httpOptionsFormData);
+  }
 }
+
+// saveFile(files: File[], taskId: string): Observable<any> {
+//   const url = `${this.baseUrl}/UploadWithout`;
+  
+//   const formData = new FormData();
+//   for (const file of files) {
+//     formData.append('files', file, file.name);
+//   }
+
+//   const params = new HttpParams().set('taskId', taskId);
+//   const httpOptionsFormData = {
+//     headers: new HttpHeaders({
+//       'Accept': 'application/json'
+//     }),
+//     params: params
+//   };
+
+//   return this.http.post(url, formData, httpOptionsFormData);
+// }
+
