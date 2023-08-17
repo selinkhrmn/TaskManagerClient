@@ -72,6 +72,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { TransferColumnTaskComponent } from './components/transfer-column-task/transfer-column-task.component';
 import { TimePipe } from 'src/pipes/time.pipe';
 import { ShareComponent } from './components/calendar/share/share.component';
+import { ChartEvent } from 'chart.js';
+
 
 
 
@@ -118,13 +120,13 @@ import { ShareComponent } from './components/calendar/share/share.component';
     AddUsersToProjectComponent,
     TransferColumnTaskComponent,
     TimePipe,
-    ShareComponent
+    ShareComponent,
+    AdminUsersComponent,
+    TaskSettingPageComponent
     
 
   ],
   imports: [
-    AdminUsersComponent,
-    TaskSettingPageComponent,
     AllFormsModule,
     MaterialModule,
     CdkModule,

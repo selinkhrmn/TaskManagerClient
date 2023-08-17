@@ -11,6 +11,10 @@ export class UserPipe implements PipeTransform {
     if (!filter || !userlist || userlist.length === 0) {
       return '';
     }
+
+    if(filter == "unassigned"){
+      return filter;
+    }
     
     const user = userlist.find(t => t.id === filter);
     

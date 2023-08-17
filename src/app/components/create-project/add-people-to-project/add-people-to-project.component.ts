@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
 import { UserDto } from 'src/app/interfaces/user';
@@ -14,7 +14,7 @@ import { ProjectService } from 'src/app/services';
   templateUrl: './add-people-to-project.component.html',
   styleUrls: ['./add-people-to-project.component.scss'], 
 })
-export class AddPeopleToProjectComponent {
+export class AddPeopleToProjectComponent implements OnInit{
   users: UserDto[] = [];
   newProjectName: any;
   addedList : ProjectUserList;
@@ -33,7 +33,8 @@ export class AddPeopleToProjectComponent {
     this.userService.getAllUsers().subscribe(resp=>{
       if(resp.isSuccessful){
         this.users=resp.data
-
+        console.log(this.users);
+        
       }else{
         //alert error
       }
@@ -61,4 +62,5 @@ export class AddPeopleToProjectComponent {
   
 }
 export class ButtonOverviewExample {}
+
 

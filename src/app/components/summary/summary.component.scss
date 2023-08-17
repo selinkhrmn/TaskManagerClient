@@ -157,3 +157,19 @@ $atanmisRenk: green; // Atanmış durumu için renk
 .custom-button.btn-secondary {
   background-color: gray;
 }
+
+.scroll {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.click-user{
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.click-user:hover {
+  background-color: red;
+}
+
+

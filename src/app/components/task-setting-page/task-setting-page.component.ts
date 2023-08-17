@@ -17,9 +17,7 @@ import { ListTask } from 'src/app/interfaces/listTask';
 @Component({
   selector: 'app-task-setting-page',
   templateUrl: './task-setting-page.component.html',
-  styleUrls: ['./task-setting-page.component.scss'],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule]
+  styleUrls: ['./task-setting-page.component.scss']
 })
 
 
