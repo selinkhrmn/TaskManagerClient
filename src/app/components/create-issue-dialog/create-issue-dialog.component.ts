@@ -21,6 +21,7 @@ import { FileService } from 'src/app/services/file.service';
 import { FileData } from 'src/app/interfaces/FileData';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
+import { UserDto } from 'src/app/interfaces/user';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -44,7 +45,7 @@ export class CreateIssueDialogComponent {
 
   reporter: ProjectUserDto[] = [];
   assignees: ProjectUserDto[] = [];
- 
+  userList: UserDto[] = [];
 
   
   descriptionText: string = '';
@@ -117,6 +118,11 @@ export class CreateIssueDialogComponent {
     // });
 
     // this.project = this.projectService?.getProjectLocal();
+    this.userService.getAllUsers().subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.userList = res.data;
+      }
+    })
   }
 
   onIconSelectionChange() {
@@ -130,13 +136,14 @@ export class CreateIssueDialogComponent {
     let pro : Partial<ProjectDto> ={
     }
     pro.id = event;
+    let projectId: number = event;
     this.columnService.GetAllProjectColumns({ "id": pro.id }).subscribe((response) => {
       if (response.data != null) {
         this.columns = response.data;
       }
     });
 
-    this.userService.GetAllProjectUsers({"id": pro.id}).subscribe((response) => {
+    this.userService.GetAllProjectUsers(projectId).subscribe((response) => {
       if (response.isSuccessful == true) {
         this.assignees = response.data;
         this.reporter = response.data;
@@ -198,7 +205,7 @@ export class CreateIssueDialogComponent {
   }
 
   handleFileInput(e:any) {
-    debugger
+    
     
       this.uploadFile = e.files.item(0);
       this.uploadFileLabel = this.uploadFile?.name;

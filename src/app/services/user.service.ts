@@ -34,8 +34,8 @@ export class UserService {
     return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`, this.httpOptions);
   }
 
-  GetAllProjectUsers(id: Partial<ProjectDto>) {
-    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, id, this.httpOptions);
+  GetAllProjectUsers(id: number) {
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, {id: id}, this.httpOptions);
   }
 
   AddUserToProject(projectUser: Partial<ProjectUserList>) {
@@ -64,7 +64,6 @@ export class UserService {
   }
 
   ForgotPassword(email : string) :Observable<any>{
-    debugger
     const payload = { email };
     const url = `${this.baseUrlIdentity}/ForgotPassword`; // Replace with the appropriate endpoint URL
 

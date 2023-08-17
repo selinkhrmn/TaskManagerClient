@@ -20,7 +20,9 @@ export class TaskService {
   private task$ = new BehaviorSubject<any>({});
   selectedTask$ = this.task$.asObservable();
 
-  selectedFilter: { name: string; fromDate: Date; toDate: Date } | null = null;
+ // selectedFilter: { name: string; fromDate: Date; toDate: Date } | null = null;
+ selectedFilter: any | null = null;
+  summaryFilter: string | null = null;
 
   constructor(private http: HttpClient,
     public tokenService: TokenService) {
@@ -32,7 +34,6 @@ export class TaskService {
   };
 
   createTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
-    debugger
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
   }
 
@@ -61,13 +62,26 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
   }
 
-  setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
+  // setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
+  //   console.log("Setting filter:", filter);
+  //   this.selectedFilter = filter;
+  // }
+
+  
+  setSelectedFilter(filter: any) {
     console.log("Setting filter:", filter);
     this.selectedFilter = filter;
   }
 
+
   getSelectedFilter() {
     return this.selectedFilter;
+  }
+
+
+
+  getSummaryFilter(){
+    return this.summaryFilter;
   }
 
   getUnplannedTask(projectId: number){

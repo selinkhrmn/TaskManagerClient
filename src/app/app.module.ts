@@ -120,13 +120,13 @@ import { ChartEvent } from 'chart.js';
     AddUsersToProjectComponent,
     TransferColumnTaskComponent,
     TimePipe,
-    ShareComponent
+    ShareComponent,
+    AdminUsersComponent,
+    TaskSettingPageComponent
     
 
   ],
   imports: [
-    AdminUsersComponent,
-    TaskSettingPageComponent,
     AllFormsModule,
     MaterialModule,
     CdkModule,

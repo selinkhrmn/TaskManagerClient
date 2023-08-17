@@ -22,7 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './admin-tasks.component.html',
   styleUrls: ['./admin-tasks.component.scss']
 })
-export class AdminTasksComponent implements OnInit {
+export class AdminTasksComponent {
   @ViewChild(MatTable) table: MatTable<Task>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,15 +54,13 @@ export class AdminTasksComponent implements OnInit {
 
   id: any;
 
-  ngOnInit(): void { }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.fetchTasks()
   }
 
 
-  fetchTasks(){
+  fetchTasks() {
     this.taskService.GetAllTaskForUser({ "id": this.tokenService.getTokenId() }).subscribe((response) => {
       if (response.isSuccessful) {
         this.taskArray = response.data;
@@ -70,15 +68,15 @@ export class AdminTasksComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }
 
-       this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-      }
-      this.priorities = this.priorityService.getOptions();
-    })
+      this.userService.getAllUsers().subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.userList = res.data;
+        }
+        this.priorities = this.priorityService.getOptions();
+      })
     });
 
-   
+
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
   }
@@ -109,16 +107,16 @@ export class AdminTasksComponent implements OnInit {
   //   this.taskService.getTaskById(id).subscribe((res) => {
   //     this.taskArray = res.data;
 
-openTaskDialog(id : number) {
- this.taskService.getTaskById(id).subscribe((res) => {
-  this.taskArray = res.data;
-  
-  
-  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray}, width : '60%'});
-  dialogS.afterClosed().subscribe((res) => {
-    window.location.reload();
-  })
- })
+  openTaskDialog(id: number) {
+    this.taskService.getTaskById(id).subscribe((res) => {
+      this.taskArray = res.data;
+
+
+      const dialogS = this.dialog.open(TaskComponent, { data: { task: this.taskArray }, width: '60%' });
+      dialogS.afterClosed().subscribe((res) => {
+        window.location.reload();
+      })
+    })
 
 
 

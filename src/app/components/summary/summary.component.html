@@ -31,7 +31,7 @@
                 </div>
                 <div class="col">
                     <div class="button-container">
-                        <button type="button" class="btn btn-primary" (click)="toggleFilter('UpdatedDate')">
+                        <button type="button" class="btn btn-primary" (click)="summaryFilter('UpdatedDate')">
                             <div class="p-4 d-flex align-items-center">
                                 <img src="../../assets/güncellenme.png" alt="" class="me-2">
                                 <div>
@@ -45,7 +45,7 @@
 
                 <div class="col">
                     <div class="button-container">
-                        <button type="button" class="btn btn-primary" (click)="toggleFilter('CreatedDate')">
+                        <button type="button" class="btn btn-primary" (click)="summaryFilter('CreatedDate')">
                             <div class="p-4 d-flex align-items-center">
                                 <img src="../../assets/olustur.png" alt="" class="me-2" >
                                 <div>
@@ -111,69 +111,51 @@
             <div class="row">
                 <div class="col-6">
                     <div class="p-4 rounded" style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım İş Yükü</h5>
+                       <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım İş Yükü</h5>
                         <br>
-                        <h6 style="text-align: left; margin-top: 0;">
+                        <!-- <h6 style="text-align: left; margin-top: 0;">
                             İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
                             <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
-                        </h6>
-                        <table class="table">
+                        </h6> -->
+                        <div class="scroll">
+                            <table class="table">
                             <thead>
-                                <tr>
-                                    <th scope="col">Atanan Kişi</th>
-                                    <th scope="col">İş Dağılımı</th>
-                                    <th scope="col">Sayı</th>
-                                </tr>
+                              <tr>
+                                <th scope="col">Atanan Kişi</th>
+                                <th scope="col">İş Dağılımı</th>
+                                <th scope="col">Task Sayısı</th>
+                              </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" style="text-align: left;">Atanmamış</th>
+                                <tr (click)="summaryFilter('selectAssignee','unassigned')" class="click-user">
+                                    <td>Atanmamış</td>
+                                    <!-- <th scope="row" style="text-align: left;">Atanmamış</th> -->
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar" style="width: 0%">0%</div>
+                                            <div class="progress-bar" [style.width.%]="(userTasks['unassigned'] / totalTasks) * 100">
+                                                {{ ((userTasks['unassigned'] || 0) / totalTasks) * 100 | number: '1.0-0' }}%
+                                            </div>
                                         </div>
                                     </td>
-                                    <td id="progress-value">0</td>
+                                    <td>{{ userTasks['unassigned'] || 0 }}</td>
                                 </tr>
-                                <tr id="atanan-kisiler">
-                                    <td colspan="3"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
+                                <tr *ngFor="let user of users" (click)="summaryFilter('selectAssignee', user.id)" class="click-user">
+                                    <td>{{ user.id | user:userList}}</td>
                                     <td>
-                                        <button><img src="../../assets/takım.ekle.png" alt="" style="width: 25px;"></button>
-                                        <button style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Takım arkadaşı davet edin.</button>
+                                        <div class="progress">
+                                            <div class="progress-bar" [style.width.%]="(userTasks[user.id] / totalTasks) * 100">
+                                                {{ ((userTasks[user.id] || 0) / totalTasks) * 100 | number: '1.0-0' }}%
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td></td>
+                                    <td>{{ userTasks[user.id] || 0 }}</td>
                                 </tr>
                             </tbody>
-                        </table>
-                        <script>
-                            // Örnek atanmış kişiler dizisi
-                            var atanmisKisiler = ["Kişi 1", "Kişi 2", "Kişi 3"];
-
-                            // Atanan kişilerin listesini oluşturan fonksiyon
-                            function createAtananKisilerList() {
-                                var atanmisKisilerRow = document.getElementById("atanan-kisiler");
-                                atanmisKisilerRow.innerHTML = ""; // Önceki içeriği temizle
-
-                                if (atanmisKisiler.length > 0) {
-                                    var td = document.createElement("td");
-                                    td.colSpan = "3";
-                                    for (var i = 0; i < atanmisKisiler.length; i++) {
-                                        var p = document.createElement("p");
-                                        p.textContent = atanmisKisiler[i];
-                                        td.appendChild(p);
-                                    }
-                                    atanmisKisilerRow.appendChild(td);
-                                }
-                            }
-
-                            // Atanan kişiler listesini oluştur.
-                            // Örneğin atanmisKisiler dizisini gerçek verilere veya veritabanından gelen değerlere göre güncelleyebilirsiniz.
-                            // Ardından, createAtananKisilerList fonksiyonunu çağırarak atanan kişilerin listesini oluşturabilirsiniz.
-                            createAtananKisilerList();
-                        </script>
+                            </table>
+                                <button (click)="addUserDialog()" style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">
+                                    <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni birini ekleyin.</button>
+                           
+                        </div>   
                     </div>
                 </div>
 
@@ -220,6 +202,7 @@
                                     </td>
                                     <td></td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </div>
