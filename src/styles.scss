@@ -39,7 +39,8 @@ $TaskManagerClient-theme: mat.define-light-theme((
 $TaskManagerClient-typography: mat-typography-config($font-family: "'Kanit', sans-serif");
 @include angular-material-typography($TaskManagerClient-typography);
 @include angular-material-typography($TaskManagerClient-typography);
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&family=Roboto+Mono:wght@200&display=swap');
 /* You can add global styles to this file, and also import other style files */
 
 

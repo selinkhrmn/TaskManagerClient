@@ -6,8 +6,8 @@
 
   <div class="example-column" *ngFor="let column of columns">
     <div class="update_column">
-      <div class="column_name">
-        <h2>{{ column.name }}</h2>
+      <div class="column_name ">
+        <h2 class="text-wrap">{{ column.name }}</h2>
       </div>
 
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
