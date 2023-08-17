@@ -55,7 +55,6 @@ export class AdminProjectsComponent {
   }
 
  getProjectDate(createdDate: Date){
-  debugger
   const millisecondsPerDay = 24 * 60 * 60 * 1000; 
   const timeDifference = new Date().valueOf() - new Date(createdDate).valueOf();
   return Math.abs(Math.floor(timeDifference / millisecondsPerDay));

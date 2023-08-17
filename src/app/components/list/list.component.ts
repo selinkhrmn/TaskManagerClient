@@ -86,7 +86,7 @@ export class ListComponent implements OnInit {
       }
     });
 
-    this.userService.GetAllProjectUsers({ "id": this.projectId }).subscribe((res) => {
+    this.userService.GetAllProjectUsers(this.projectId).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectUsers = res.data;
 
@@ -125,6 +125,9 @@ export class ListComponent implements OnInit {
       this.createdFromDate = new Date(selectedFilter.fromDate);
       this.createdToDate = new Date(selectedFilter.toDate);
       this.applyFilter('CreatedDate');
+    }
+    if(selectedFilter && selectedFilter.name == 'selectAssignee'){
+      this.selectAssignee(selectedFilter.id);
     }
 
   }

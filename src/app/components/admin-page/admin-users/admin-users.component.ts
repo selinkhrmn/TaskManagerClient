@@ -19,8 +19,6 @@ import { PriorityService } from 'src/app/services/priority.service';
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.scss'],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule]
 })
 export class AdminUsersComponent {
   @ViewChild(MatSort) sort: MatSort;

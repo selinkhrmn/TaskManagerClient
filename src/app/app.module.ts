@@ -118,13 +118,13 @@ import { ShareComponent } from './components/calendar/share/share.component';
     AddUsersToProjectComponent,
     TransferColumnTaskComponent,
     TimePipe,
-    ShareComponent
+    ShareComponent,
+    AdminUsersComponent,
+    TaskSettingPageComponent
     
 
   ],
   imports: [
-    AdminUsersComponent,
-    TaskSettingPageComponent,
     AllFormsModule,
     MaterialModule,
     CdkModule,

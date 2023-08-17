@@ -63,7 +63,7 @@ mail: any;
   }
 
   GetAllProjectUsers() {
-    this.userService.GetAllProjectUsers({ 'id': this.currentProjectId }).subscribe((res) => {
+    this.userService.GetAllProjectUsers(this.currentProjectId).subscribe((res) => {
       this.users = res.data
     })
   }
