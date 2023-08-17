@@ -87,7 +87,7 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   background: #D8D9D7;
-  min-width: 270px;
+  width: fit-content;
 
   .addTask.sticky-add-task { //Mantığı çözülmeli
     position: sticky;
@@ -100,17 +100,19 @@
 
   .update_column {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     overflow: auto;
+    width: fit-content;
     .column_name {
       width: 100%;
       height: 100%;
+      
 
       h2 {
-        width: 100%;
+        width: fit-content;
         height: 100%;
-        max-width: 200px;
+        padding : 5px;
         border-radius: 5px;
         background-color: #324028;
         text-align: center;

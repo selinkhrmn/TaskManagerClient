@@ -198,7 +198,7 @@ export class CreateIssueDialogComponent {
   }
 
   handleFileInput(e:any) {
-    debugger
+    
     
       this.uploadFile = e.files.item(0);
       this.uploadFileLabel = this.uploadFile?.name;
