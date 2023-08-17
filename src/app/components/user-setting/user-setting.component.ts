@@ -13,15 +13,15 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-user-setting',
   templateUrl: './user-setting.component.html',
   styleUrls: ['./user-setting.component.scss'],
-  
+
 })
 export class UserSettingComponent {
 
@@ -33,9 +33,9 @@ export class UserSettingComponent {
 
   currentProjectId: number;
 
-mail: any;
+  mail: any;
 
- 
+
   constructor(
     public translocoService: TranslocoService,
     public dialog: MatDialog,
@@ -67,9 +67,8 @@ mail: any;
       this.users = res.data
     })
   }
-deleteUser(id : any)
-   {
-    
+  deleteUser(id: any) {
+
     // this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
     //     console.log('User deleted successfully');
     //     this.ngOnInit();
