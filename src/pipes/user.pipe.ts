@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserPipe implements PipeTransform {
   transform(filter: string, userlist: UserDto[]): string {
+    
     if (!filter || !userlist || userlist.length === 0) {
       return '';
     }

@@ -185,6 +185,7 @@ export class CreateIssueDialogComponent {
         file : this.formData
       });
    
+      
   }
 
   public getCurrentProject() {

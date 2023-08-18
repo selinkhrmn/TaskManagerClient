@@ -45,7 +45,6 @@ export class ProjectService {
   }
 
   getProject(id : Partial<Project>){
-    debugger
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/GetProject`, id, this.httpOptions);
   }
 
@@ -57,7 +56,6 @@ export class ProjectService {
   }
 
   getCurrentProject() { 
-    console.log(this.project);
     return this.project;
   }
 

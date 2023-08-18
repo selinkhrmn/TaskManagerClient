@@ -8,9 +8,13 @@ import { Project } from 'src/app/interfaces';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { Task } from 'src/app/interfaces/task';
 import { TaskDto } from 'src/app/interfaces/taskDto';
-import { ProjectService, TaskService } from 'src/app/services';
+import { ColumnService, ProjectService, TaskService } from 'src/app/services';
 import { TranslocoService} from '@ngneat/transloco';
 import { ListTask } from 'src/app/interfaces/listTask';
+import { ColumnDto } from 'src/app/interfaces/columnDto';
+import { UserDto } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
+
 
 
 
@@ -25,9 +29,11 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
   currentProject : ProjectDto;
   projectName: string;
 
-  displayedColumns: string[] = ['id', 'projectName', 'name', 'status'];
-  dataSource: MatTableDataSource<Task>;
-  tasks : Task[] = [];
+  displayedColumns: string[] = ['name','projectName', 'columnId', 'reporter', 'status'];
+  dataSource: MatTableDataSource<any>;
+  tasks : ListTask[] = [];
+  columnList : ColumnDto[] = [];
+  userList : UserDto[] = [];
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,33 +43,44 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
   constructor(
     private taskService : TaskService,
     private projectService : ProjectService,
-    public translocoService : TranslocoService
+    public translocoService : TranslocoService,
+    private userService : UserService,
+    private columnService : ColumnService
   ) {
     
     
   }
 
   ngOnInit() : void{
-    this.currentProject = this.projectService.getCurrentProject();
+    this.currentProject = this.projectService.getProjectLocal();
    
     this.taskService.getAllProjectTask({"id" : this.currentProject.id}).subscribe((res)=>
     {
       if( res.data != null) {
-             //this.tasks = res.data; 
+             this.tasks = res.data; 
+             
+             
       }
 
-   
-   
-      this.dataSource = new MatTableDataSource<Task>(this.tasks);
-     
-
-      
-      
-      
+      this.dataSource = new MatTableDataSource<any>(this.tasks);
+ 
     });
+    
     this.projectName = this.currentProject.name;
     
-    
+    this.columnService.GetAllProjectColumns({"id" : this.currentProject.id}).subscribe(data => {
+      if(data.isSuccessful) {
+        this.columnList = data.data;
+      }
+      
+    });
+
+    this.userService.getAllUsers().subscribe(data => {
+      if(data.isSuccessful) { 
+        this.userList = data.data;
+      }
+
+    })
 
   }
 
@@ -73,8 +90,11 @@ export class TaskSettingPageComponent implements AfterViewInit, OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const value = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = value.trim().toLowerCase();
+
+    const columnNAME = value.trim().toLowerCase();
+    
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
