@@ -13,7 +13,7 @@ ngOnInit() : void {
 }
 
 
-addPerson() {
+addPerson(): void {
   console.log(this.personSelection.value);
 }
 }

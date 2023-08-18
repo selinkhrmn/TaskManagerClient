@@ -80,6 +80,7 @@ import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -174,7 +175,7 @@ import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
     }),
     MatRadioModule,
     TranslocoRootModule,
-    MatDialogModule,
+    MatDialogModule
     
   ],
 
