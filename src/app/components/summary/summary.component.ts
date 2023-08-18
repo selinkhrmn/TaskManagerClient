@@ -22,10 +22,10 @@ import { TaskComponent } from '../task/task.component';
 })
 export class SummaryComponent implements AfterViewInit, OnInit {
   UserName: string = '';
-  Ogesayisitam: string = '';
-  Ogesayisiguncelleme: string = '';
-  Ogesayisiolus: string = '';
-  Ogesayisitamt: string = '';
+  updatedTaskLength: number = 0;
+  createdTaskLength: number = 0;
+  completedSevenDay: number = 0;
+  completedAllLength: number = 0;
   unplannedTasks: TaskDto[] = [];
   unassignedTasks: TaskDto[] = [];
   tasks: ListTask[] = [];
@@ -34,11 +34,13 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   totalTasks: number = 0;
   userList: UserDto[] = [];
   lastActivities: ListTask[] = [];
+  today: Date = new Date();
+  fromDate: Date = new Date();
 
   constructor(
     public tokenService: TokenService,
     public projectService: ProjectService,
-    private taskService: TaskService,
+    public taskService: TaskService,
     public translocoService: TranslocoService,
     private router: Router,
     private userService: UserService,
@@ -46,7 +48,6 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     public priorityService: PriorityService) {
 
   }
-
 
   ngOnInit(): void {
     let projectId = this.projectService.getProjectLocal().id;
@@ -56,6 +57,11 @@ export class SummaryComponent implements AfterViewInit, OnInit {
         this.totalTasks = this.tasks.length;
         this.unplannedTasks = this.tasks.filter(t => t.dueDate == new Date(1/1/1));
         this.unassignedTasks = this.tasks.filter(t => t.assigneeId == "unassigned");
+        this.updatedTaskLength =  this.taskService.filterUpdatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() -7)), this.today).length;
+        this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() -7)), this.today).length;
+        this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() -7)), this.today).length;
+        this.completedAllLength = this.tasks.filter(t => t.isDone == true).length;
+
         this.filterLastActivities();
         this.userService.GetAllProjectUsers(projectId).subscribe((res) => {
           if (res.isSuccessful == true) {

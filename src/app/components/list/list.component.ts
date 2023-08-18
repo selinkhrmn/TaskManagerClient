@@ -198,14 +198,16 @@ export class ListComponent implements OnInit {
     }
 
     if (filter === 'LastSevendDaysCompletedTasks') {
-      this.filteredData = this.filteredData.filter(t => t.isDone == true);
-      if (this.isDoneFromDate && this.isDoneToDate) {
-        this.isDoneToDate.setHours(23, 59, 59, 999); 
-        this.filteredData = this.filteredData.filter(t => {
-          const taskUpdatedDate = new Date(t.updatedDate);
-          return (taskUpdatedDate >= this.isDoneFromDate && taskUpdatedDate <= this.isDoneToDate);
-        });
-      }
+      //this.filteredData = this.filteredData.filter(t => t.isDone == true);
+      // if (this.isDoneFromDate && this.isDoneToDate) {
+      //   this.isDoneToDate.setHours(23, 59, 59, 999); 
+      //   this.filteredData = this.filteredData.filter(t => {
+      //     const taskUpdatedDate = new Date(t.updatedDate);
+      //     return (taskUpdatedDate >= this.isDoneFromDate && taskUpdatedDate <= this.isDoneToDate && t.isDone == true);
+      //   });
+      // }
+      this.filteredData = this.taskService.filterDoneSevenDay(this.filteredData, this.isDoneFromDate, this.isDoneToDate);
+      
     }
 
     if (this.activeFilters.includes('BetweenDates')) {
@@ -242,35 +244,37 @@ export class ListComponent implements OnInit {
     }
 
     if (this.activeFilters.includes('UpdatedDate')) {
-      if (this.updatedFromDate && this.updatedToDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskUpdatedDate = new Date(t.updatedDate);
-          return (taskUpdatedDate >= this.updatedFromDate && taskUpdatedDate <= this.updatedToDate);
-        });
-      }
-      else if (this.updatedFromDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskUpdatedDate = new Date(t.updatedDate);
-          return (taskUpdatedDate >= this.updatedFromDate);
-        });
-      }
+      // if (this.updatedFromDate && this.updatedToDate) {
+      //   this.filteredData = this.filteredData.filter(t => {
+      //     const taskUpdatedDate = new Date(t.updatedDate);
+      //     return (taskUpdatedDate >= this.updatedFromDate && taskUpdatedDate <= this.updatedToDate);
+      //   });
+      // }
+      // else if (this.updatedFromDate) {
+      //   this.filteredData = this.filteredData.filter(t => {
+      //     const taskUpdatedDate = new Date(t.updatedDate);
+      //     return (taskUpdatedDate >= this.updatedFromDate);
+      //   });
+      // }
+      this.filteredData = this.taskService.filterUpdatedDate(this.filteredData, this.updatedFromDate, this.updatedToDate);
     }
 
 
     if (this.activeFilters.includes('CreatedDate')) {
-      if (this.createdFromDate && this.createdToDate) {
-        this.createdToDate.setHours(23, 59, 59, 999); 
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreatedDate = new Date(t.createdDate);
-          return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
-        });
-      }
-      else if (this.createdFromDate) {
-        this.filteredData = this.filteredData.filter(t => {
-          const taskCreatedDate = new Date(t.createdDate);
-          return (taskCreatedDate >= this.createdFromDate);
-        });
-      }
+      // if (this.createdFromDate && this.createdToDate) {
+      //   this.createdToDate.setHours(23, 59, 59, 999); 
+      //   this.filteredData = this.filteredData.filter(t => {
+      //     const taskCreatedDate = new Date(t.createdDate);
+      //     return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
+      //   });
+      // }
+      // else if (this.createdFromDate) {
+      //   this.filteredData = this.filteredData.filter(t => {
+      //     const taskCreatedDate = new Date(t.createdDate);
+      //     return (taskCreatedDate >= this.createdFromDate);
+      //   });
+      // }
+      this.filteredData = this.taskService.filterCreatedDate(this.filteredData, this.createdFromDate, this.createdToDate);
     }
 
     if (this.activeFilters.includes('DueDate')) {
@@ -432,12 +436,12 @@ export class ListComponent implements OnInit {
   }
 
   getUnplannedTasks(){
-    this.taskService.getUnplannedTask(this.projectId).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.unPlannedTasks = res.data;
-        console.log(this.unPlannedTasks);
-        alert("Look at the console!");
-      }
-    })
+    // this.taskService.getUnplannedTask(this.projectId).subscribe((res) => {
+    //   if (res.isSuccessful == true) {
+    //     this.unPlannedTasks = res.data;
+    //     console.log(this.unPlannedTasks);
+    //     alert("Look at the console!");
+    //   }
+    // })
   }
 }

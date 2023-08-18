@@ -10,7 +10,6 @@ export class CalculateDatePipe implements PipeTransform {
     const today = new Date();
     
     const emptyDate = new Date('0001-01-01').setHours(0,0,0);
-    debugger;
     if(new Date(value).getTime() < new Date(1/1/2020).getTime()){
       return "Unplanned!";
     }
