@@ -1,7 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { select, scaleBand, scaleLinear, axisBottom, axisLeft, scaleOrdinal, format } from 'd3';
-import { Project } from 'src/app/interfaces';
-import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -13,6 +11,8 @@ import { ListTask } from 'src/app/interfaces/listTask';
 import { UserDto } from 'src/app/interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
+import { PriorityService } from 'src/app/services/priority.service';
+import { TaskComponent } from '../task/task.component';
 
 
 @Component({
@@ -33,6 +33,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   userTasks: { [userId: string]: number } = {};
   totalTasks: number = 0;
   userList: UserDto[] = [];
+  lastActivities: ListTask[] = [];
 
   constructor(
     public tokenService: TokenService,
@@ -41,7 +42,8 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     public translocoService: TranslocoService,
     private router: Router,
     private userService: UserService,
-    private dialog: MatDialog,) {
+    private dialog: MatDialog,
+    public priorityService: PriorityService) {
 
   }
 
@@ -52,7 +54,9 @@ export class SummaryComponent implements AfterViewInit, OnInit {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
         this.totalTasks = this.tasks.length;
-        //this.unplannedTasks = 
+        this.unplannedTasks = this.tasks.filter(t => t.dueDate == new Date(1/1/1));
+        this.unassignedTasks = this.tasks.filter(t => t.assigneeId == "unassigned");
+        this.filterLastActivities();
         this.userService.GetAllProjectUsers(projectId).subscribe((res) => {
           if (res.isSuccessful == true) {
             this.users = res.data;
@@ -92,9 +96,26 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     });
   }
 
-  getUserForFilter(userId : string){
-    console.log(userId);
+  filterLastActivities() {
+    const currentDate = new Date();
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(currentDate.getDate() - 14);
+    let tokenId = this.tokenService.tokenUserId();
+    this.lastActivities = this.tasks.filter(task =>
+       (task.assigneeId === tokenId || task.reporterId === tokenId || task.createdByUser == tokenId) &&
+       (new Date(task.createdDate) >= twoWeeksAgo || new Date (task.updatedDate) >= twoWeeksAgo)
+    );
   }
+
+  openTaskDialog(id: number){
+
+    let selectedTask = this.tasks.find(t => t.id == id);
+    const dialog = this.dialog.open(TaskComponent, { autoFocus: false, data: { task: selectedTask }, height: '90%', width: '90%', panelClass: 'dialog' });
+    dialog.afterClosed().subscribe((res) => {
+      this.ngOnInit();
+    })
+  }
+
 
 
   addUserDialog(): void {
@@ -197,6 +218,17 @@ summaryFilter(filter: string, id?: string) {
       id: id
     }
     this.taskService.setSelectedFilter(user);
+  }
+  else if(filter == 'LastSevendDaysCompletedTasks'){
+    const selectedFilter = {
+      name: 'LastSevendDaysCompletedTasks',
+      fromDate: sevenDaysAgo,
+      toDate: today
+    };
+    this.taskService.setSelectedFilter(selectedFilter);
+  }
+  else if(filter == 'CompletedTasks'){
+    this.taskService.setSelectedFilter(filter);
   }
 
    this.router.navigate(['/home/list']);

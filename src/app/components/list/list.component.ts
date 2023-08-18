@@ -36,11 +36,11 @@ export class ListComponent implements OnInit {
   userList: UserDto[] = [];
   columns: string[] = [
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
-    'ListTask.Priority', 'UpdateDate', 'CreateDate',
+    'ListTask.Priority', 'UpdateDate', 'CreateDate', 'isDone'
   ];
   projectId: number ;
-  fromDate: Date; updatedFromDate: Date; createdFromDate: Date;
-  toDate: Date; updatedToDate: Date; createdToDate: Date;
+  fromDate: Date; updatedFromDate: Date; createdFromDate: Date; isDoneFromDate: Date;
+  toDate: Date; updatedToDate: Date; createdToDate: Date; isDoneToDate: Date;
   dueDateFrom: Date; dueDateTo: Date;
   priorities: string[] = [];
   activeFilters: string[] = [];
@@ -113,6 +113,7 @@ export class ListComponent implements OnInit {
   }
 
   applySummaryFilters() {
+    debugger;
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
       this.updatedFromDate = new Date(selectedFilter.fromDate);
@@ -121,14 +122,26 @@ export class ListComponent implements OnInit {
 
       this.applyFilter('UpdatedDate');
     }
-    if (selectedFilter && selectedFilter.name === 'CreatedDate') {
+
+    else if (selectedFilter && selectedFilter.name === 'CreatedDate') {
       this.createdFromDate = new Date(selectedFilter.fromDate);
       this.createdToDate = new Date(selectedFilter.toDate);
       this.applyFilter('CreatedDate');
     }
-    if(selectedFilter && selectedFilter.name == 'selectAssignee'){
+
+    else if(selectedFilter && selectedFilter.name == 'selectAssignee'){
       this.selectAssignee(selectedFilter.id);
     }
+
+    else if(selectedFilter && selectedFilter.name == 'LastSevendDaysCompletedTasks' ){
+      this.isDoneFromDate = new Date(selectedFilter.fromDate);
+      this.isDoneToDate = new Date(selectedFilter.toDate);
+      this.applyFilter('LastSevendDaysCompletedTasks');
+    }
+    else if(selectedFilter && selectedFilter == 'CompletedTasks' ){
+      this.applyFilter('CompletedTasks');
+    }
+
 
   }
   CalendarFilters() {
@@ -136,7 +149,7 @@ export class ListComponent implements OnInit {
     if (selectedFilter && selectedFilter.name === 'DueDate') {
       this.dueDateFrom = new Date(selectedFilter.fromDate);
       this.dueDateTo = new Date(selectedFilter.toDate);
-      this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
+      this.dueDateTo.setHours(23, 59, 59, 999); 
       console.log(this.dueDateFrom);
 
       this.applyFilter('DueDate');
@@ -160,7 +173,6 @@ export class ListComponent implements OnInit {
       this.activeFilters.push(filter);
       this.toastr.info('Filter Applied!');
     }
-    console.log(this.activeFilters);
 
 
     if (this.activeFilters.includes('AssignedToMe')) {
@@ -180,8 +192,22 @@ export class ListComponent implements OnInit {
       });
 
     }
-    // else if (filter === 'CompletedTasks') {
-    // }
+
+    if (filter === 'CompletedTasks') {
+      this.filteredData = this.filteredData.filter(t => t.isDone == true);
+    }
+
+    if (filter === 'LastSevendDaysCompletedTasks') {
+      this.filteredData = this.filteredData.filter(t => t.isDone == true);
+      if (this.isDoneFromDate && this.isDoneToDate) {
+        this.isDoneToDate.setHours(23, 59, 59, 999); 
+        this.filteredData = this.filteredData.filter(t => {
+          const taskUpdatedDate = new Date(t.updatedDate);
+          return (taskUpdatedDate >= this.isDoneFromDate && taskUpdatedDate <= this.isDoneToDate);
+        });
+      }
+    }
+
     if (this.activeFilters.includes('BetweenDates')) {
       const fromDate = new Date(this.fromDate);
       if (this.fromDate && this.toDate) {
@@ -233,7 +259,7 @@ export class ListComponent implements OnInit {
 
     if (this.activeFilters.includes('CreatedDate')) {
       if (this.createdFromDate && this.createdToDate) {
-        this.createdToDate.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
+        this.createdToDate.setHours(23, 59, 59, 999); 
         this.filteredData = this.filteredData.filter(t => {
           const taskCreatedDate = new Date(t.createdDate);
           return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
@@ -249,7 +275,7 @@ export class ListComponent implements OnInit {
 
     if (this.activeFilters.includes('DueDate')) {
       if (this.dueDateFrom && this.dueDateTo) {
-        this.dueDateTo.setHours(23, 59, 59, 999);  // Bu satırı ekleyin.
+        this.dueDateTo.setHours(23, 59, 59, 999); 
         this.filteredData = this.filteredData.filter(t => {
           const taskDueDate = new Date(t.dueDate);
 

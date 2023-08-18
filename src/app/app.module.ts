@@ -73,6 +73,7 @@ import { TransferColumnTaskComponent } from './components/transfer-column-task/t
 import { TimePipe } from 'src/pipes/time.pipe';
 import { ShareComponent } from './components/calendar/share/share.component';
 import { ChartEvent } from 'chart.js';
+import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
 
 
 
@@ -122,9 +123,9 @@ import { ChartEvent } from 'chart.js';
     TimePipe,
     ShareComponent,
     AdminUsersComponent,
-    TaskSettingPageComponent
+    TaskSettingPageComponent,
     
-
+    CalculateDatePipe
   ],
   imports: [
     AllFormsModule,
