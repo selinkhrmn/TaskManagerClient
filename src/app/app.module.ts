@@ -74,6 +74,8 @@ import { TimePipe } from 'src/pipes/time.pipe';
 import { ShareComponent } from './components/calendar/share/share.component';
 import { ChartEvent } from 'chart.js';
 import { ColumnPipe } from 'src/pipes/column.pipe';
+import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
+
 
 
 
@@ -124,7 +126,8 @@ import { ColumnPipe } from 'src/pipes/column.pipe';
     ShareComponent,
     AdminUsersComponent,
     TaskSettingPageComponent,
-    ColumnPipe
+    ColumnPipe,
+    CalculateDatePipe
 
   ],
   imports: [

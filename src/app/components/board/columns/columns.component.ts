@@ -136,7 +136,7 @@ export class ColumnsComponent {
   openEditDialog(columnName: string, currentColumnId: number) {
     const dialogRef = this.dialog.open(EditColumnComponent, { data: { data: columnName, currentColumnId: currentColumnId } });
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit()
+      this.ngOnInit();
     });
   }
 
