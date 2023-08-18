@@ -1,0 +1,88 @@
+<div class="wrapper" #wrapper>
+    <div class="left_side">
+        <div class="navbar">
+            <input value="{{ projectName }}" spellcheck="false" />
+        </div>
+        <div class="description">
+            <input type="file" #fileInput multiple style="display:none" (change)="upload($event)" />
+            <br>
+            <div class="button-container">
+                <button mat-button (click)="fileInput.click()">
+                    <mat-icon>attach_file</mat-icon>Attach
+                </button>
+                <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
+                    Add Subtopic <mat-icon>add_circle</mat-icon>
+                </button>
+
+                <br>
+            </div>
+            <br>
+            <div class="attachments" *ngIf="fileUploaded">
+                <h2>Attachments</h2>
+                <ul>
+                    <li *ngFor="let fileData of Files">
+                        <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon" />
+                        {{fileData.file.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="top-side">
+                <h2>{{"description" |transloco}}</h2>
+                <input placeholder="Add a description..." />
+            </div>
+            <br>
+
+        </div>
+        <br>
+        <br>
+
+
+    </div>
+
+    <div class="right_side">
+        <div class="close_icon">
+            <mat-icon class="icon" (click)="closeDialog()">close</mat-icon>
+        </div>
+        <div class="container">
+            <div class="top_side_details">
+                <h2>Details</h2>
+            </div>
+
+            <div class="body">
+                <div class="column">
+                    <div class="assignee card1">
+                        <div class="inside_card">
+                            <div class="label_container">
+                                <label>{{"assignee" | transloco}}</label>
+                            </div>
+                            <div class="right_side_card assigned_person"></div>
+                        </div>
+                    </div>
+
+                    <div class="priority card1">
+                        <div class="inside_card" F>
+                            <div class="label_container">
+                                <label>Reporting</label>
+                            </div>
+                            <div class="right_side_card priority-value">
+                                {{ tokenService.tokenFullName() }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="started_date card1">
+                        <div class="inside_card">
+                            <div class="label_container">
+                                <label>{{ "startedDate" | transloco }}</label>
+                            </div>
+                            <div class="right_side_card dateTime">
+                                {{ project.createdDate | date }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { ProjectComponent } from '../../project/project.component';
 @Component({
   selector: 'app-admin-projects',
   templateUrl: './admin-projects.component.html',
@@ -63,6 +64,15 @@ export class AdminProjectsComponent {
   getProject(id : Partial<Project>) {
     this.projectService.getProject(id).subscribe((res) => {
       console.log(res);
+    })
+  }
+
+  openProjectDialog(id: number){
+    this.projectService.getProject({id}).subscribe((res)=>{
+      const dialogS = this.dialog.open(ProjectComponent, {data: {project:res.data},width : '60%'});
+      dialogS.afterClosed().subscribe(()=> {
+        window.location.reload();
+      })
     })
   }
 }

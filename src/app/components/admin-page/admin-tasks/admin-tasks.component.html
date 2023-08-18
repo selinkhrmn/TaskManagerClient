@@ -22,8 +22,8 @@
   <table mat-table [dataSource]="dataSource" matPaginator>
 
     <ng-container matColumnDef="projectId">
-      <th mat-header-cell *matHeaderCellDef> Project Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+      <th mat-header-cell *matHeaderCellDef> Project Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.projectId | project:projectList}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">

@@ -35,7 +35,7 @@ export class AdminUsersComponent {
     public priorityService: PriorityService
   ) { }
 
-  displayedColumns: string[] = ['id', 'name', 'surname', 'username', 'email'];
+  displayedColumns: string[] = ['name', 'surname', 'username', 'email'];
   dataSource = new MatTableDataSource<UserDto>(this.users);
 
 
