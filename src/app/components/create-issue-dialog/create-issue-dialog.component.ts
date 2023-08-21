@@ -12,7 +12,7 @@ import { Column } from 'src/app/interfaces/column';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { IPriority } from 'src/app/interfaces/IPriority';
 import { MatSnackBar} from '@angular/material/snack-bar';
-import { TranslocoService} from '@ngneat/transloco';
+import { TranslocoService, setValue} from '@ngneat/transloco';
 import { PriorityService } from 'src/app/services/priority.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
@@ -22,6 +22,9 @@ import { FileData } from 'src/app/interfaces/FileData';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { UserDto } from 'src/app/interfaces/user';
+import swal from 'sweetalert2';
+import { TokenService } from 'src/app/services/token.service';
+import { formatDate } from '@angular/common';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -40,8 +43,9 @@ export class CreateIssueDialogComponent {
 
   projects: Project[] = [];
   columns: ColumnDto[] = [];
-  currentDate = new FormControl(new Date());
+  currentDate : Date | undefined = undefined;
   currentProject: ProjectDto;
+  currentTime = new Date();
 
   reporter: ProjectUserDto[] = [];
   assignees: ProjectUserDto[] = [];
@@ -69,13 +73,16 @@ export class CreateIssueDialogComponent {
   images:any[]=[];
   files : FileList;
 
+  
+
   task : Partial<Task> = {
     name: "",
-    projectId: 0,
+    projectId: this.projectService.getProjectLocal().id,
     columnId: 1,
     priority : 3,
-    endDate: new Date()
-    // files: this.v;
+    endDate: this.currentDate,
+    assigneeId : this.tokenService.getTokenId(),
+    reporterId : this.tokenService.getTokenId()
   }
 
   config: AngularEditorConfig = {
@@ -90,8 +97,7 @@ export class CreateIssueDialogComponent {
 
   };
 
-
-
+ 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
@@ -104,12 +110,15 @@ export class CreateIssueDialogComponent {
     public priorityService: PriorityService,
     public userService: UserService,
     private fileService: FileService,
-    private http : HttpClient
+    private http : HttpClient,
+    private tokenService : TokenService
 
   ) {
+   
     this.getAllProjects();
     this.getCurrentProject();
     this.priorities = this.priorityService.getOptions();
+
   }
 
   ngOnInit() {
@@ -118,6 +127,11 @@ export class CreateIssueDialogComponent {
     // });
 
     // this.project = this.projectService?.getProjectLocal();
+   
+    this.columnService.GetAllProjectColumns({"id" : this.projectService.getProjectLocal().id}).subscribe((res)=> {
+      this.task.columnId = res.data[0].id;
+    });
+    
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
         this.userList = res.data;
@@ -140,6 +154,7 @@ export class CreateIssueDialogComponent {
     this.columnService.GetAllProjectColumns({ "id": pro.id }).subscribe((response) => {
       if (response.data != null) {
         this.columns = response.data;
+        this.task.columnId = response.data[0].id;
       }
     });
 
@@ -166,16 +181,16 @@ export class CreateIssueDialogComponent {
       if(this.task.name != null) {
 
       this.closeDialog();
+     
     }
-    else{
-      alert("Input areas");
-      return ;
-    }
+    
 
   }
 
   closeDialog() {
-    this.images.forEach(f=>{
+   
+      
+      this.images.forEach(f=>{
       this.formData.append('file',f); 
       });
     
@@ -184,6 +199,8 @@ export class CreateIssueDialogComponent {
         task: this.task,
         file : this.formData
       });
+    
+    
    
       
   }

@@ -58,8 +58,7 @@ export class NavbarComponent {
   
       dialog.afterClosed().subscribe((response) => {
   
-        debugger;
-        console.log(response);
+        
   
         if (response.isAdded) {
           

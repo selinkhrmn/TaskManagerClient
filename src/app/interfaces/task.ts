@@ -7,7 +7,7 @@ export interface Task extends Base {
     columnId : number;
     priority : number;
     userUpdatedDate : Date;
-    endDate : Date;
+    endDate : Date | undefined;
     assigneeId: string;
     reporterId : string;
     files : File;

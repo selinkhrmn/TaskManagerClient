@@ -44,7 +44,7 @@ export class CreateProjectComponent implements OnInit {
     
     this.projectService.createProject({name: this.projectName}).subscribe((res) => {
       this.selectedProject(res.data);
-      this.ngOnInit()
+      // this.ngOnInit()
     });
     this.toastr.success('Project Created!')
     localStorage.setItem('newProject', this.projectName);
@@ -52,7 +52,12 @@ export class CreateProjectComponent implements OnInit {
 
 
   closeDialog() {
-    const dialogRef = this.dialog.closeAll()
+    this.dialog.afterOpened.subscribe((result)=>{
+      if(result.afterClosed){
+        this.createProject();
+      }
+    })
+    // const dialogRef = this.dialog.closeAll()
   }
 
   selectedProject(project: any) {

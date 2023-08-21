@@ -84,6 +84,8 @@ export class ColumnsComponent {
       this.columnService.GetProjectColumnsTasks({ "id": this.currentProject.id }).subscribe((response) => {
         if (response.data != null) {
           this.columns = response.data;
+          console.log(this.columns);
+          
         }
       });
     }
@@ -130,6 +132,7 @@ export class ColumnsComponent {
 
 
   getColumnId(columnId: number) {
+   
     this.currentColumnId = columnId;
   }
 
@@ -167,6 +170,7 @@ export class ColumnsComponent {
   }
 
   createColumn() {
+    
     this.getProjectLocal();
     this.columnService.CreateColumn({ 'projectId': this.currentProjectId, 'name': this.columnName }).subscribe((res) => {
       this.ngOnInit()

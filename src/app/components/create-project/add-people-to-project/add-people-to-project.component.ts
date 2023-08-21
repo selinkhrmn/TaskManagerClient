@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserList } from 'src/app/interfaces/projectUserDto';
 import { ProjectService } from 'src/app/services';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -22,7 +23,8 @@ export class AddPeopleToProjectComponent implements OnInit{
 
   constructor(public translocoService: TranslocoService,
     private userService : UserService,
-    private projectService : ProjectService) { }
+    private projectService : ProjectService,
+    private dialog : MatDialog) { }
   ngOnInit() 
   {
     this.getAllUsers();
@@ -58,6 +60,9 @@ export class AddPeopleToProjectComponent implements OnInit{
       console.log(res.data);
       
     })
+
+    this.dialog.closeAll();
+    
   }
   
 }
