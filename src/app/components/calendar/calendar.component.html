@@ -77,7 +77,8 @@
             <ng-container *ngIf="!dayObj.placeholder">
 
                 <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
-                <span *ngIf="dayObj.isToday">{{ getTodayText(dayObj) }}</span>
+                <span *ngIf="isToday(dayObj.day)" [style.font-weight]="getTodayText(dayObj) ? 'bold' : 'normal'">{{ getTodayText(dayObj) }}</span>
+
 
                 <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
                 <span *ngIf="!dayObj.isToday">{{ dayObj.day }}</span>

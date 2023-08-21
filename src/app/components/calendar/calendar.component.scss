@@ -355,10 +355,8 @@ button {
 /* ... (Existing styles) ... */
 
 .calendar-days div.is-today {
-    background-color: #71ad83e2;
-    /* Bugünün arka plan rengi */
-    color: #ffffff;
-    /* Bugünün yazı rengi (beyaz) */
+    background: radial-gradient(circle at center, #12981557, #268c126c, #0e9a1e97);
+    color: #ffffff; 
 }
 
 
