@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 export class AppComponent {
 
   constructor(private http: HttpClient, private fileService : FileService) {
-    swal.fire("good job", "","success");
+    // swal.fire("good job", "","success");
   }
   
 

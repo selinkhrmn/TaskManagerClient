@@ -40,6 +40,7 @@ export class TaskComponent implements OnInit {
   taskProjectId: number = this.data.task.projectId
   task: Task = Object.assign({}, this.data.task);
   taskDueDate = new FormControl(this.task.endDate);
+  taskC = new FormControl(this.task.createdDate);
   editorContent: string;
   descriptionText: string = '';
   Files: FileData[];

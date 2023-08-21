@@ -77,6 +77,8 @@ import { ColumnPipe } from 'src/pipes/column.pipe';
 import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
 import { ProjectPipe } from 'src/pipes/project.pipe';
 import { ProjectComponent } from './components/project/project.component';
+import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialog.component';
+
 
 
 
@@ -131,7 +133,8 @@ import { ProjectComponent } from './components/project/project.component';
     ColumnPipe,
     CalculateDatePipe,
     ProjectPipe,
-    ProjectComponent
+    ProjectComponent,
+    PlanDialogComponent
 
 
   ],
@@ -188,7 +191,8 @@ import { ProjectComponent } from './components/project/project.component';
       provide: MatDialogRef,
       useValue: {}
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
 
