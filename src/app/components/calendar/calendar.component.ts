@@ -23,6 +23,7 @@ import { HttpClient } from '@angular/common/http';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { ShareComponent } from './share/share.component';
+import { PlanDialogComponent } from './plandialog/plan-dialog.component';
 
 
 interface DayObject {
@@ -62,7 +63,8 @@ export class CalendarComponent implements OnInit {
   selectedAssignees: string[] = [];
   reporters: string[] = [];
   assignees: string[] = [];
- 
+  showPlanDialog = false;
+  showSmallCalendar = false;
   priorities: string[] = [];
   projectUsers: ProjectUserDto[] = [];
   userList: UserDto[] = [];
@@ -71,6 +73,8 @@ export class CalendarComponent implements OnInit {
   searchedMonth: number = -1; // Add this property to store the searched month
   searchedYear: number = -1; // Add this property to store the searched year
   searchDate: string = ''; // Add this property to store the search input
+  isDialogOpen: boolean = false;
+
 
   today: Date = new Date();
   selectedDate: Date = new Date();
@@ -343,4 +347,17 @@ export class CalendarComponent implements OnInit {
       item.name.toLowerCase().includes(searchText.toLowerCase())
     );
   }
+
+
+
+  
+  openPlanDialog(): void {
+    this.isDialogOpen = true;
+}
+
+closePlanDialog(): void {
+    this.isDialogOpen = false;
+}
+
+
 }

@@ -1,104 +1,89 @@
+<!-- Takvim Bölümü -->
+
 <div class="calendar">
-    <div class="calendar-header">
-        <div class="user-info">
-
-            <span class="user-name"> {{tokenService.tokenNameSurname()}}</span>
-
-        </div>
-        <div class="search-bar">
-            <input type="text" [(ngModel)]="searchDate" (change)="searchDay()" placeholder="Tarih Ara....     Örn:11.01.2021">
-            <button (click)="searchDay()" class="search-button">
-                <i class="material-icons">search</i>
-            </button>
-
-        </div>
-        <div class="user-info">
-            <button (click)="openDialog()" class="add-person-button">
-                <i class="material-icons">person_add</i>Kişi ekle
-              </button>
-
-        </div>
-
-
-        <div class="center-content">
-
-
-
-            <button (click)="prevMonth()">
-                <i class="material-icons icon-left">keyboard_arrow_left</i>Önceki Ay
-            </button>
-            <div class="current-date">{{ months[currentMonth] }} {{ currentYear }}</div>
-            <button (click)="nextMonth()">
-                Sonraki Ay<i class="material-icons icon-right">keyboard_arrow_right</i>
-            </button>
-        </div>
-        <div class="right-controls">
-            <button (click)="goToToday()" data-toggle="tooltip" data-placement="bottom"
-                title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
-                <i class="material-icons">today</i>Bugün
-            </button>
-            <button #shareButton (click)="openShareDialog(shareButton)">
-                <i class="material-icons">share</i>Paylaş
-             </button>
-             
-             
-            <button>
-                <i class="material-icons">event</i>Planlanmamış
-            </button>
-            <!-- <button [matMenuTriggerFor]="filterMenu">
-                <i class="material-icons">filter_list</i>{{ "filter" | transloco }}
-                <span *ngIf="activeFilters.length != 0">
-                    &nbsp;{{ activeFilters.length }} applied</span>
-            </button> -->
-            <button>
-                <i class="material-icons">more_horiz</i>Daha fazlası
-            </button>
-        </div>
-    </div>
-
-    <div class="weekdays">
-        <div>Pzt</div>
-        <div>Sal</div>
-        <div>Çar</div>
-        <div>Per</div>
-        <div>Cum</div>
-        <div>Cmt</div>
-        <div>Pzr</div>
-    </div>
-
-    <div class="calendar-days">
-        <div *ngFor="let dayObj of days" 
-        [class.is-today]="isToday(dayObj.day)"
-        [class.is-searched]="dayObj.isSearchedDayValid"
-        [class.placeholder]="dayObj.placeholder" 
-        (click)="!dayObj.placeholder && toggleDescription(dayObj)">
-             
-            <!-- Eğer placeholder bir gün değilse gün bilgisini ve görevleri göster -->
-            <ng-container *ngIf="!dayObj.placeholder">
-
-                <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
-                <span *ngIf="isToday(dayObj.day)" [style.font-weight]="getTodayText(dayObj) ? 'bold' : 'normal'">{{ getTodayText(dayObj) }}</span>
-
-
-                <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
-                <span *ngIf="!dayObj.isToday">{{ dayObj.day }}</span>
-
-                <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
-                    <mat-icon class="icon">check_circle</mat-icon>
-
-                    <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)"
-                        class="task-name-button">
-                        Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+    <div class="row">
+        <div [class.col-9]="isDialogOpen" [class.col-12]="!isDialogOpen" class="calendar-wrapper">
+            <div class="calendar-header">
+                <div class="user-info">
+                    <span class="user-name"> {{tokenService.tokenNameSurname()}}</span>
+                </div>
+                <div class="search-bar">
+                    <input type="text" [(ngModel)]="searchDate" (change)="searchDay()"
+                        placeholder="Tarih Ara.... Örn:11.01.2021">
+                    <button (click)="searchDay()" class="search-button">
+                        <i class="material-icons">search</i>
                     </button>
+                </div>
+                <div class="user-info">
+                    <button (click)="openDialog()" class="add-person-button">
+                        <i class="material-icons">person_add</i>Kişi ekle
+                    </button>
+                </div>
+                <div class="center-content">
+                    <button (click)="prevMonth()">
+                        <i class="material-icons icon-left">keyboard_arrow_left</i>Önceki Ay
+                    </button>
+                    <div class="current-date">{{ months[currentMonth] }} {{ currentYear }}</div>
+                    <button (click)="nextMonth()">
+                        Sonraki Ay<i class="material-icons icon-right">keyboard_arrow_right</i>
+                    </button>
+                </div>
+                <div class="right-controls">
+                    <button (click)="goToToday()" data-toggle="tooltip" data-placement="bottom"
+                        title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
+                        <i class="material-icons">today</i>Bugün
+                    </button>
+                    <button #shareButton (click)="openShareDialog(shareButton)">
+                        <i class="material-icons">share</i>Paylaş
+                    </button>
+                    <button (click)="openPlanDialog()">
+                        <i class="material-icons">event</i>Planlanmamış
+                    </button>
+                </div>
+            </div>
+            <div class="weekdays">
+                <div *ngFor="let day of ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Pzr']">{{ day }}</div>
+            </div>
+            <div class="calendar-days">
+                <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
+                    [class.is-searched]="dayObj.isSearchedDayValid" [class.placeholder]="dayObj.placeholder"
+                    (click)="!dayObj.placeholder && toggleDescription(dayObj)">
 
-                    <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1" class="icon-more-tasks-icon"
-                        (click)="toggleFilter('DueDate', dayObj.day)">
-                        more_horiz
-                    </mat-icon>
-                </h3>
+                    <!-- Eğer placeholder bir gün değilse gün bilgisini ve görevleri göster -->
+                    <ng-container *ngIf="!dayObj.placeholder">
 
-            </ng-container>
+                        <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
+                        <span *ngIf="isToday(dayObj.day)"
+                            [style.font-weight]="getTodayText(dayObj) ? 'bold' : 'normal'">{{ getTodayText(dayObj)
+                            }}</span>
+
+
+                        <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
+                        <span *ngIf="!dayObj.isToday">{{ dayObj.day }}</span>
+
+                        <h3 class="project-heading" *ngIf="dayObj.projectNames && dayObj.projectNames.length > 0">
+                            <mat-icon class="icon">check_circle</mat-icon>
+
+                            <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)"
+                                class="task-name-button">
+                                Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+                            </button>
+
+                            <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1"
+                                class="icon-more-tasks-icon" (click)="toggleFilter('DueDate', dayObj.day)">
+                                more_horiz
+                            </mat-icon>
+                        </h3>
+
+                    </ng-container>
+
+                </div>
+            </div>
 
         </div>
+        <div [class]="isDialogOpen ? 'col-3' : 'd-none'" class="plan-dialog-wrapper">
+            <app-plan-dialog (closeEvent)="closePlanDialog()"></app-plan-dialog>
+        </div>
     </div>
+
 </div>

@@ -1,0 +1,20 @@
+.plan-dialog .col-9 {
+    width: calc(100% - 30px);
+    transition: width 0.3s ease-in-out;
+}
+
+.plan-dialog .col-3 {
+    width: 30px;
+    transition: width 0.3s ease-in-out;
+}
+
+.app-plan-dialog {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.col-3:not(.show) .app-plan-dialog {
+    display: none;
+}
