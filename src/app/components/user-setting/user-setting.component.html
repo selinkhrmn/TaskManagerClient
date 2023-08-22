@@ -24,17 +24,17 @@
 
 <table class="example-table">
   <tr>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>E-mail</th>
-    <th>Roles</th>
+    <!-- <th>Name</th> -->
+    <th>Name Surname</th>
+    <!-- <th>E-mail</th>
+    <th>Roles</th> -->
   </tr>
   <tr *ngFor="let user of users">
-    <td>{{user.username}}</td>
-    <td>{{user.id}}</td>
-    <td>{{user.email}}</td>
-    <td>{{user.role}}</td>
-    <td><button mat-icon-button class="delete-button" aria-label="Delete" (click)="deleteUser(user.id)">
+    <!-- <td>{{user.username}}</td> -->
+    <td>{{user.id | user:userList}}</td>
+    <!-- <td>{{user.email}}</td>
+    <td>{{user.role}}</td> -->
+    <td><button mat-icon-button class="delete-button" aria-label="Delete" (click)="deleteUser(user)">
         <mat-icon>delete</mat-icon>
       </button></td>
   </tr>

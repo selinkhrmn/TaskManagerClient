@@ -29,8 +29,9 @@ export class UserSettingComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   roleFormControl = new FormControl('');
 
-  users: any[] = [];
-
+  users: ProjectUserDto[] = [];
+  selectedUser: Partial<UserDto>[] = [];
+  userList: UserDto[] = [];
   currentProjectId: number;
 
   mail: any;
@@ -53,13 +54,20 @@ export class UserSettingComponent {
 
   ngOnInit() {
     this.getProjectId()
-    this.GetAllProjectUsers()
+    this.GetAllProjectUsers();
+    this.getUserList();
   }
 
   getProjectId() {
     const project = this.projectService.getProjectLocal();
     this.currentProjectId = project.id
+  }
 
+  getUserList(){
+    this.userService.getAllUsers().subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.userList = res.data;
+      }})
   }
 
   GetAllProjectUsers() {
@@ -67,16 +75,17 @@ export class UserSettingComponent {
       this.users = res.data
     })
   }
-  deleteUser(id: any) {
-
-    // this.userService.DeleteUserFromProject(id, this.currentProjectId).subscribe((response: any) => {
-    //     console.log('User deleted successfully');
-    //     this.ngOnInit();
-    //   },
-    //   (error: any) => {
-    //     console.error('Error deleting user:', error);
-    //   }
-    // );
+  deleteUser(user: any) {
+    this.selectedUser.push({id: user.id});
+    this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: this.selectedUser} ).subscribe((response: any) => {
+        console.log('User deleted successfully');
+        this.selectedUser =  [];
+        this.GetAllProjectUsers();
+      },
+      (error: any) => {
+        console.error('Error deleting user:', error);
+      }
+    );
   }
 
   openManageRoles(): void {
