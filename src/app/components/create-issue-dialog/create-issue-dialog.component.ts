@@ -72,16 +72,16 @@ export class CreateIssueDialogComponent {
   formData = new FormData();
   images:any[]=[];
   files : FileList;
-
+  projectIdFromLocal : number; 
   
 
   task : Partial<Task> = {
     name: "",
     projectId: this.projectService.getProjectLocal().id,
-    columnId: 1,
+    columnId: 0,
     priority : 3,
     endDate: this.currentDate,
-    assigneeId : this.tokenService.getTokenId(),
+    assigneeId : "unassigned",
     reporterId : this.tokenService.getTokenId()
   }
 
@@ -118,25 +118,33 @@ export class CreateIssueDialogComponent {
     this.getAllProjects();
     this.getCurrentProject();
     this.priorities = this.priorityService.getOptions();
+    this.projectIdFromLocal = this.projectService.getProjectLocal().id;
+    this.columnService.GetAllProjectColumns({"id" : this.projectIdFromLocal}).subscribe((res)=> {
+       this.task.columnId = res.data[0].id;
+       this.columns = res.data;
+    });
+
+    this.userService.GetAllProjectUsers(this.projectIdFromLocal).subscribe((response) => {
+      
+        this.assignees = response.data;
+        this.reporter = response.data;
+        
+    });
+    
 
   }
 
   ngOnInit() {
-    // this.projectService.selectedProject$?.subscribe((value) => {
-    //   this.currentProject = value;
-    // });
-
-    // this.project = this.projectService?.getProjectLocal();
-   
-    this.columnService.GetAllProjectColumns({"id" : this.projectService.getProjectLocal().id}).subscribe((res)=> {
-      this.task.columnId = res.data[0].id;
-    });
-    
+  
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
         this.userList = res.data;
+        
       }
+      
     })
+
+    
   }
 
   onIconSelectionChange() {
@@ -155,6 +163,7 @@ export class CreateIssueDialogComponent {
       if (response.data != null) {
         this.columns = response.data;
         this.task.columnId = response.data[0].id;
+      
       }
     });
 
@@ -166,11 +175,12 @@ export class CreateIssueDialogComponent {
     });
   }
 
+
   public getAllProjects() {
     this.projectService.getAllProjects().subscribe((response) => {
       if (response.data != null) {
         this.projects = response.data;
-        this.ngOnInit();
+        
 
       }
     });

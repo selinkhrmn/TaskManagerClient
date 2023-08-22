@@ -24,7 +24,7 @@
   <div class="row">
     <mat-form-field>
       <mat-label>{{ "taskName" | transloco }}</mat-label>
-      <input matInput type="text" [(ngModel)]="task.name" ngDefaultControl />
+      <input matInput type="text" [(ngModel)]="task.name" ngDefaultControl required/>
     </mat-form-field>
   </div>
 
@@ -96,7 +96,7 @@
     <mat-form-field class="col-6">
       <mat-label>{{'reporter' | transloco}}</mat-label>
       <mat-select [(ngModel)]="task.reporterId" ngDefaultControl>
-        <mat-option *ngFor="let user of reporter" [value]="user.id">{{ user.id |user:userList }}</mat-option>
+        <mat-option *ngFor="let user of reporter" [value]="user.id" >{{ user.id |user:userList }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -126,7 +126,7 @@
 
 <div mat-dialog-actions class="button">
   <button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>
-  <button mat-flat-button color="primary" ngbTooltip="Upload" (click)="addTask()" [disabled]="!task.name && !task.reporterId && !task.assigneeId && !task.projectId">
+  <button mat-flat-button color="primary" ngbTooltip="Upload" (click)="addTask()" [disabled]="!task.name">
     {{ "create" | transloco }}
   </button>
 </div>

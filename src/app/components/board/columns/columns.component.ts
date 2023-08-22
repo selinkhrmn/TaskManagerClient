@@ -97,6 +97,7 @@ export class ColumnsComponent {
 
 
   drop(event: CdkDragDrop<TaskDto[]>, column: ColumnTask) {
+    debugger
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
