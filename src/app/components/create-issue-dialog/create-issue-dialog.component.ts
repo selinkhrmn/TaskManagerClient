@@ -22,9 +22,9 @@ import { FileData } from 'src/app/interfaces/FileData';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { UserDto } from 'src/app/interfaces/user';
-import swal from 'sweetalert2';
 import { TokenService } from 'src/app/services/token.service';
 import { formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
 interface DialogData {
   table: MatTable<Task>;
@@ -191,6 +191,7 @@ export class CreateIssueDialogComponent {
       if(this.task.name != null) {
 
       this.closeDialog();
+      this.alertBox();
      
     }
     
@@ -310,4 +311,23 @@ export class CreateIssueDialogComponent {
 
 
 // }
+
+alertBox() {
+  Swal.fire({
+    title:'Are you sure want to Save?',
+    text: 'Your will not to be able recover this file!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes Keep it',
+    cancelButtonText: 'No Delete it'
+  }).then((result)=>{
+    if(result.value){
+      Swal.fire("Saved","Your file has been save")
+    }
+    else if (result.dismiss === Swal.DismissReason.cancel){
+      Swal.fire('Cancelled','Your imaginary file is deleted :(')
+    }
+})
+} 
+
 }
