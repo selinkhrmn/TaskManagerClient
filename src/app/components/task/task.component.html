@@ -126,6 +126,7 @@
         <h2>Details</h2>
       </div>
 
+
       <div class="body">
         <div class="column">
           <!-- <div class="assignee card1">
@@ -136,7 +137,14 @@
               <div class="right_side_card assigned_person"></div>
             </div>
           </div> -->
-
+          <div class="assignee card1">
+            <div class="inside_card">
+                <mat-checkbox class="checkbox" [(ngModel)] = "isDone" (click)="controlIsDone($event)">
+                  Is Done?
+                </mat-checkbox>
+              
+            </div>
+          </div>
           <div class="assignee card1">
             <div class="inside_card">
                 <div class="label_container">

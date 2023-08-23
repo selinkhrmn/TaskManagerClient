@@ -44,10 +44,10 @@
     "surname" : "Surname",
     "new password": "New Password",
     "confirm password": "Confirm Password",
+    "label" : "Label",
     "navigation": {
         "yourWork": "Your Work"
     },
-    "startedDate": "Started Date",
     "tabs": {
         "summary": "Summary",
         "board": "Board",

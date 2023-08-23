@@ -17,7 +17,7 @@ import { UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
-
+import Swal from 'sweetalert2';
 
 interface DialogData {
   task: Task;
@@ -30,12 +30,20 @@ interface DialogData {
 })
 
 
+
+
 export class TaskComponent implements OnInit {
+
+  
+
+
 
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   taskName: string = this.data.task.name;
   taskId: number = this.data.task.id;
-  taskProjectId: number = this.data.task.projectId
+  taskProjectId: number = this.data.task.projectId;
+  isDone : boolean = false;
+  isWorking : boolean = false;
   taskChange: Task = Object.assign({}, this.data.task);
   taskDueDate = new FormControl(this.taskChange.endDate);
   taskC = new FormControl(this.taskChange.createdDate);
@@ -93,14 +101,20 @@ export class TaskComponent implements OnInit {
     })
     this.priorities = this.priorityService.getOptions();
     this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
-  }
 
-  closeDropdown(){
-    console.log("s");
+    if(this.taskChange.label == 2) {
+       
+       this.isDone = true;
+    }
+    else {
+      this.alertBox();
+    }
+ 
     
+  
+  
   }
 
-  
 
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
@@ -125,11 +139,41 @@ export class TaskComponent implements OnInit {
 
   upload(event: Event) {
     this.fileUploaded = true;
-    debugger;
+    
     this.fileService.uploadFile(event);
 
     this.Files = this.fileService.selectedFiles;
+   
   }
+
+  async alertBox() {
+    const { value: accept } = await Swal.fire({
+      title: 'Are you working on this task?',
+      inputPlaceholder: 'Yes, sir.',
+      input: 'checkbox',
+      inputValue: 1,
+      confirmButtonText:
+        'Continue <i class="fa fa-arrow-right"></i>',
+      
+    })
+    
+    if (accept) {
+      this.data.task.label = 1;
+    }
+    else {
+      this.data.task.label = 0;
+    }
+
+    console.log(this.data.task.label);
+    
+  } 
+
+  controlIsDone(e : any) {
+    this.isDone = true;
+    this.taskChange.label = 2;
+    console.log(this.taskChange);
+  }
+
 
   getUserProfileImage(x: any){
     return "../../assets/user (1).png"
@@ -146,8 +190,11 @@ export class TaskComponent implements OnInit {
     if (this.data.task != this.taskChange) {
       this.taskService.updateTask(this.taskChange).subscribe((res) => {
         console.log(res.data);
+        // console.log(this.data.task.label);
+        
       })
     }
+    
 
   }
 

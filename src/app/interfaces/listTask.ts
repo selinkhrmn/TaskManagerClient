@@ -12,6 +12,7 @@ export interface ListTask {
     createdDate:Date;
     isDone: boolean;
     createdByUser: string;
+    label: number;
     
     
   }

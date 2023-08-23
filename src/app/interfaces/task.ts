@@ -10,6 +10,7 @@ export interface Task extends Base {
     endDate : Date | undefined;
     assigneeId: string;
     reporterId : string;
+    label : number;
     files : File;
 
 }
