@@ -114,7 +114,7 @@
                                 <tbody class="click-user">
                                     <tr *ngFor="let task of lastActivities" (click)="openTaskDialog(task.id)">
                                         <td><a>{{ task.name }}</a></td>
-                                        <td><img [src]="priorityService.getIcon(task.priority)" alt="Priority Icon" class="priority-icon" /></td>
+                                        <td><img [src]="priorityService.getIcon(task.priority, 'icon')" alt="Priority Icon" class="priority-icon" /></td>
                                         <td>{{ task.dueDate | calculateDate }}</td>
                                     </tr>
                                 </tbody>

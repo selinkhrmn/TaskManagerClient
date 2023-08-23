@@ -1,16 +1,13 @@
-import { DIALOG_DATA, Dialog } from '@angular/cdk/dialog';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 import { TaskDto } from 'src/app/interfaces/taskDto';
 import { TaskService } from 'src/app/services/task.service';
 import { TranslocoService } from '@ngneat/transloco';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ProjectService } from 'src/app/services';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
 import { FileService } from 'src/app/services/file.service';
 import { FileData } from 'src/app/interfaces/FileData';
@@ -18,13 +15,13 @@ import { CommentService } from 'src/app/services/comment.service';
 import { CommentRequest, Comment } from 'src/app/interfaces/comment';
 import { UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { PriorityService } from 'src/app/services/priority.service';
+import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 
 
 interface DialogData {
   task: Task;
 }
-
-
 
 @Component({
   selector: 'app-task',
@@ -34,13 +31,14 @@ interface DialogData {
 
 
 export class TaskComponent implements OnInit {
+
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   taskName: string = this.data.task.name;
   taskId: number = this.data.task.id;
   taskProjectId: number = this.data.task.projectId
-  task: Task = Object.assign({}, this.data.task);
-  taskDueDate = new FormControl(this.task.endDate);
-  taskC = new FormControl(this.task.createdDate);
+  taskChange: Task = Object.assign({}, this.data.task);
+  taskDueDate = new FormControl(this.taskChange.endDate);
+  taskC = new FormControl(this.taskChange.createdDate);
   editorContent: string;
   descriptionText: string = '';
   Files: FileData[];
@@ -61,6 +59,10 @@ export class TaskComponent implements OnInit {
   comments: Comment[] = [];
   userList: UserDto[] = [];
   createComment: string;
+  priorities: string[] = [];
+  users: ProjectUserDto[] = [];
+  public sortableElement: any
+  public selectedUser: string = this.data.task.reporterId;
 
   constructor(
     private taskService: TaskService,
@@ -68,10 +70,8 @@ export class TaskComponent implements OnInit {
     public translocoService: TranslocoService,
     public projectService: ProjectService,
     private dialogRef: MatDialogRef<TaskComponent>,
-    private fb: FormBuilder,
-    private router: Router,
     public tokenService: TokenService,
-    private location: Location,
+    public priorityService: PriorityService,
     private fileService: FileService,
     private commentService: CommentService,
     private userService: UserService
@@ -84,28 +84,23 @@ export class TaskComponent implements OnInit {
         this.userList = res.data;
       }
     });
+
+    this.userService.GetAllProjectUsers(this.projectService.getProjectLocal().id).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.users = res.data
+        this.users.unshift({ id: 'unassigned', profileImageUrl: '../../assets/user.png'});
+      }
+    })
+    this.priorities = this.priorityService.getOptions();
+    this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
+  }
+
+  closeDropdown(){
+    console.log("s");
     
   }
 
-  getTaskComments(){
-    this.commentService.GetTaskComments(this.taskId).subscribe((res) => {
-      if(res.isSuccessful == true){
-        this.comments = res.data;
-        console.log(res.data);
-        
-      }
-    })
-  }
-
-
-  checkIfCommentAdded() {
-    if(this.commentReq.comment != null) {
-      this.commentWantsToGetCreated = true;
-    }
-    else {
-      this.commentWantsToGetCreated = false;
-    }
-  }
+  
 
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
@@ -117,7 +112,16 @@ export class TaskComponent implements OnInit {
     console.log('Content changed:', $event);
   }
 
+  selectUser(userId: string){
+    this.taskChange.assigneeId = userId;
+    
+  }
 
+  setSortableElement(event: any) {
+    this.sortableElement = event;
+    console.log(this.sortableElement);
+    
+  }
 
   upload(event: Event) {
     this.fileUploaded = true;
@@ -127,20 +131,11 @@ export class TaskComponent implements OnInit {
     this.Files = this.fileService.selectedFiles;
   }
 
-  // onFileSelect(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement?.files) {
-  //     this.selectedFiles = Array.from(inputElement.files).map((file) => ({
-  //       file,
-  //       iconUrl: this.getFileIconUrl(file),
-  //     }));
-  //   }
-  // }
+  getUserProfileImage(x: any){
+    return "../../assets/user (1).png"
+  }
 
-  // getFileIconUrl(file: File): string {
-  //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-  //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
-  // }
+  
 
   onSave() {
     console.log('Description:', this.descriptionText);
@@ -148,33 +143,38 @@ export class TaskComponent implements OnInit {
   }
 
   updateTask() {
-    if (this.data.task != this.task) {
-      this.taskService.updateTask(this.task).subscribe((res) => {
+    if (this.data.task != this.taskChange) {
+      this.taskService.updateTask(this.taskChange).subscribe((res) => {
         console.log(res.data);
       })
     }
 
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: false,
-    height: '12rem',
-    minHeight: '5rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: "'Kanit', sans-serif"
-
-  };
+ 
 
   editOpen(id: number){
     return true;
   }
 
+  getTaskComments(){
+    this.commentService.GetTaskComments(this.taskId).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.comments = res.data;
+        console.log(res.data);
+    
+      }
+    })
+  }
+
+  checkIfCommentAdded() {
+    if(this.commentReq.comment != null) {
+      this.commentWantsToGetCreated = true;
+    }
+    else {
+      this.commentWantsToGetCreated = false;
+    }
+  }
 
   submitComment() {
     if (this.createComment.trim() !== '') {
@@ -208,4 +208,35 @@ export class TaskComponent implements OnInit {
     })
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  // config: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: false,
+  //   height: '12rem',
+  //   minHeight: '5rem',
+  //   placeholder: 'Enter text here...',
+  //   translate: 'no',
+  //   defaultParagraphSeparator: 'p',
+  //   defaultFontName: "'Kanit', sans-serif"
+
+  // };
+
+  // onFileSelect(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement?.files) {
+  //     this.selectedFiles = Array.from(inputElement.files).map((file) => ({
+  //       file,
+  //       iconUrl: this.getFileIconUrl(file),
+  //     }));
+  //   }
+  // }
+
+  // getFileIconUrl(file: File): string {
+  //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
+  //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
+  // }
+
 }
+

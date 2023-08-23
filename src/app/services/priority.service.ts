@@ -15,6 +15,7 @@ export class PriorityService {
     '../../assets/highest.png': { priority: 5, name: 'Difficult' },
   };
 
+
   getIconPriority(iconAddress: string): number {
     return this.priorityIconMapping[iconAddress].priority || 0;
   }
@@ -28,14 +29,21 @@ export class PriorityService {
     return options;
   }
 
-  getIcon(priority: number): string | undefined {
+  getIcon(priority: number, what: string): string | undefined {
     for (const iconAddress in this.priorityIconMapping) {
       if (this.priorityIconMapping.hasOwnProperty(iconAddress)) {
         if (this.priorityIconMapping[iconAddress].priority === priority) {
-          return iconAddress;
+          if(what == 'name'){
+            return this.priorityIconMapping[iconAddress].name;
+          }
+          else if(what == 'icon'){
+            return iconAddress;
+          }
         }
       }
     }
     return undefined; 
   }
+
+  
 }
