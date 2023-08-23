@@ -1,11 +1,51 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
 .plan-dialog .col-9 {
     width: calc(100% - 30px);
     transition: width 0.3s ease-in-out;
 }
+h3 {
+    text-align: center;
+}
+
+.dialog-content ul li {
+    position: relative;
+    list-style-type: none;
+}
+
+.dialog-content ul li:before {
+    content: "";
+    position: absolute;
+    left: -20px;  // Adjust based on your design
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #333;  // Change this to your desired color
+}
+
 
 .plan-dialog .col-3 {
     width: 30px;
     transition: width 0.3s ease-in-out;
+}
+.dialog-content ul li {
+    margin-bottom: 15px;  // Adjust the value based on your desired spacing
+}
+.task-name-button{
+    background: #60576180;
+ 
+}
+.task-name-button h2 {
+    font-size: 16px;  // Adjust this value to your desired size
+    margin: 0;  // This ensures there are no default margins
+
 }
 
 .app-plan-dialog {
@@ -17,4 +57,35 @@
 
 .col-3:not(.show) .app-plan-dialog {
     display: none;
+}
+.dialog-content {
+    max-height: 540px;  /* Örnek olarak 300px verilmiştir. İhtiyacınıza göre bu değeri değiştirebilirsiniz. */
+    overflow-y: auto;  /* Yatayda kaydırma çubuğu otomatik olarak görünecek */
+    background: #2d6a8e3c;
+}
+
+.close-icon {
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    border-radius: 20%;
+    font-weight: bold;
+    background: #a90e0e65;
+}
+
+.dialog-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #7590c527;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
 }

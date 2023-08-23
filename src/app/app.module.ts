@@ -171,6 +171,7 @@ import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialo
     ResizableModule,
     BrowserAnimationsModule, // required animations module
     MatPaginatorModule,
+    FormsModule,
     MatTableModule,
     ToastrModule.forRoot(
       {positionClass: 'toast-bottom-right',}
