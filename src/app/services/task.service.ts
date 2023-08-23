@@ -84,11 +84,11 @@ export class TaskService {
     return this.summaryFilter;
   }
 
-  // getUnplannedTask(projectId: number){
-  //   const url = `${this.baseUrl}/UnplannedTask`;
-  //   const params = new HttpParams().set('id', projectId.toString());
-  //   return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
-  // }
+  getUnplannedTask(projectId: number){
+    const url = `${this.baseUrl}/UnplannedTask`;
+    const params = new HttpParams().set('id', projectId.toString());
+    return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
+  }
 
   // getUnassignedTask(projectId: number){
   //   const url = `${this.baseUrl}/UnassignedTask`;

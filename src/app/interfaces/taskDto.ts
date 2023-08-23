@@ -5,6 +5,7 @@ export class TaskDto {
     name: string;
     columnId: number;
     priority: number;
+
     //assignee : User;
 }
 

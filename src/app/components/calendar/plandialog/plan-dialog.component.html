@@ -1,7 +1,13 @@
-<button (click)="closeDialog()">
-    <i class="material-icons">close</i>
-</button>
-
-dc
-<br>
-ccdsc
+<div mat-dialog-content>
+    <h2>Planlanmamış</h2>
+    <ul>
+        <ng-container *ngFor="let task of tasks">
+            <!-- <li *ngIf="task.dueDate === '0001-01-01'"> -->
+                {{ task.name }} <!-- Varsayılan olarak görevin adı olduğunu düşünüyorum, bu kısmı gerektiği gibi değiştirebilirsiniz. -->
+            <!-- </li> -->
+        </ng-container>
+    </ul>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Close</button>
+</div>
