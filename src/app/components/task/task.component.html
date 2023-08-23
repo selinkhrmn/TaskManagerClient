@@ -128,20 +128,61 @@
 
       <div class="body">
         <div class="column">
-          <div class="assignee card1">
+          <!-- <div class="assignee card1">
             <div class="inside_card">
               <div class="label_container">
                 <label>{{ "assignee" | transloco }}</label>
               </div>
               <div class="right_side_card assigned_person"></div>
             </div>
-          </div>
+          </div> -->
+
+          <div class="assignee card1">
+            <div class="inside_card">
+                <div class="label_container">
+                    <label>{{ "assignee" | transloco }}</label>
+                </div>
+                <div class="right_side_card assigned_person">
+                    <div class="container-dropdown">
+                        <input style="display:none;" id="userDropdownInput" type="checkbox" />
+                        <div class="dropdown">
+                            <label class="dropbtn" for="userDropdownInput">
+                                <div class="user-profile">
+                                    <div class="user-image">
+                                        <img [src]="getUserProfileImage(taskChange.assigneeId)" alt="User Profile">
+                                    </div>
+                                    <span class="user-name">{{ taskChange.assigneeId | user:userList }}</span>
+                                </div>
+                            </label>
+                            <div class="dropdown-content">
+                                <!-- Inside the dropdown-content -->
+                                <p *ngFor="let user of users" (click)="selectUser(user.id)" for="userDropdownInput">
+                                    <label for="userDropdownInput">
+                                        <div class="user-profile">
+                                            <div class="user-image">
+                                                <img [src]="getUserProfileImage(user.id)" alt="User Profile">
+                                            </div>
+                                            <span class="user-name">{{ user.id | user:userList }}</span>
+                                        </div>
+                                    </label>
+                                </p>
+                            </div>
+                            <label for="userDropdownInput" class="overlay"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
 
           <div class="reporter card1">
             <div class="inside_card">
               <div class="label_container">
                 <label>{{ "reporter" | transloco }}</label>
               </div>
+              {{ taskChange.reporterId | user:userList}}
               <div class="right_side_card reported_person"></div>
             </div>
           </div>
@@ -152,10 +193,30 @@
                 <label>{{ "priority" | transloco }}</label>
               </div>
               <div class="right_side_card priority-value">
-                {{ task.priority }}
+                <div class="container-dropdown">
+                  <input style="display:none;" id="priorityDropdownInput" type="checkbox" />
+                  <div class="dropdown">
+                    <label class="dropbtn" for="priorityDropdownInput">
+                      <img class="priority-icon" [src]="sortableElement" alt="Icon" />
+                      &nbsp;{{priorityService.getIconName(sortableElement)}}
+                    </label>
+
+                    <div class="dropdown-content">
+                      <p *ngFor="let priority of priorities" (click)="setSortableElement(priority)"
+                        for="priorityDropdownInput">
+                        <img class="priority-icon" [src]="priority" alt="Icon" />
+                        {{ priorityService.getIconName(priority) }}
+                      </p>
+                    </div>
+
+
+                    <!-- <label for="priorityDropdownInput" class="overlay"></label> -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
 
           <!-- Reporting -->
           <div class="priority card1">

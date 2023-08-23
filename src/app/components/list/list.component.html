@@ -327,7 +327,8 @@
           <mat-icon>priority_high</mat-icon> {{ "priority" | transloco }}
         </th>
         <td mat-cell *matCellDef="let ListTask">
-          <img [src]="priorityService.getIcon(ListTask.priority)" alt="Priority Icon" class="priority-icon" />
+          <img [src]="priorityService.getIcon(ListTask.priority, 'icon')" alt="Priority Icon" class="priority-icon" />
+          {{ priorityService.getIcon(ListTask.priority, 'name') }}
         </td>
       </ng-container>
 
