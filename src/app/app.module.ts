@@ -78,6 +78,8 @@ import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
 import { ProjectPipe } from 'src/pipes/project.pipe';
 import { ProjectComponent } from './components/project/project.component';
 import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialog.component';
+import { UnplannedComponentComponent } from './components/list/unplanned/unplanned.component';
+
 
 
 
@@ -134,7 +136,8 @@ import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialo
     CalculateDatePipe,
     ProjectPipe,
     ProjectComponent,
-    PlanDialogComponent
+    PlanDialogComponent,
+    UnplannedComponentComponent
 
 
   ],

@@ -1,0 +1,22 @@
+<div class="dialog-wrapper">
+    <button mat-button (click)="closeDialog()" class="close-button">
+        <span class="close-icon">X</span>
+    </button>
+    <br>
+    <h3><strong>Planlanmamış Tasklar</strong></h3>
+
+    <div class="dialog-content">
+
+        <ul class="task-list">
+            <input type="text" [(ngModel)]="searchTerm" (keyup)="filterTasks()" placeholder="Task ara...">
+            <br>
+            <ng-container *ngFor="let task of filteredTasks">
+                <li>
+                    <button mat-button (click)="openTaskDialog(task.id)" class="task-name-button">
+                        <h2>{{ task.name }}</h2>
+                    </button>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
