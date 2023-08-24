@@ -27,7 +27,7 @@ h3 {
     transform: translateY(-50%);
     width: 5px;
     height: 5px;
-    background-color: #333;  // Change this to your desired color
+    background-color: #630a0a1e;  // Change this to your desired color
 }
 
 
@@ -61,7 +61,7 @@ h3 {
 .dialog-content {
     max-height: 540px;  /* Örnek olarak 300px verilmiştir. İhtiyacınıza göre bu değeri değiştirebilirsiniz. */
     overflow-y: auto;  /* Yatayda kaydırma çubuğu otomatik olarak görünecek */
-    background: #2d6a8e3c;
+    background: #c7ced23c;
 }
 
 .close-icon {
@@ -70,14 +70,18 @@ h3 {
     padding: 5px 10px;
     border-radius: 20%;
     font-weight: bold;
-    background: #a90e0e65;
+    background: #d710104f;
 }
 
 .dialog-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    background: #7590c527;
+    background: #c4c7cd27;
+    border: 2px solid rgba(7, 7, 38, 0.208); /* Örnek olarak kenar çizgisini mavi yapalım */
+    padding: 20px; /* İsteğe bağlı olarak içeriği biraz kenarlardan uzaklaştırabilirsiniz */
+    border-radius: 10px; /* Kenarların yuvarlatılması */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hafif bir gölge efekti eklenebilir */
 }
 
 .close-button {
