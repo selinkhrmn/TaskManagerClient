@@ -82,15 +82,16 @@
   overflow-y: auto;
   white-space: nowrap;
   display: inline-block;
-  text-wrap : wrap;
+  white-space: normal; /* or other value depending on your needs */
+  overflow-wrap: break-word; /* or overflow-wrap: normal; */
   
 }
 
 .example-column {
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  background: #D8D9D7;
+  border: 1px solid #05362d;
+  background: #88b1a830;
   word-wrap: break-word;
   // max-width: 250px;
 
@@ -98,7 +99,7 @@
   .addTask.sticky-add-task {
     //Mantığı çözülmeli
     position: sticky;
-    background-color: #D8D9D7;
+    background-color: #88b1a8d5;
     width: 100%;
     bottom: 0;
     z-index: 1;
@@ -143,7 +144,7 @@
         gap: 5px;
 
         input {
-          border: 1px solid gray;
+          border: 1px solid rgb(7, 71, 61);
         }
       }
     }
@@ -177,8 +178,8 @@
 
 .example-box {
   padding: 20px 10px;
-  border-bottom: 1px solid #ccc;
-  color: #0d0d0d;
+  border-bottom: 1px solid #07472471;
+  color: #942626;
   display: flex;
   flex-direction: row;
   align-items: center;
