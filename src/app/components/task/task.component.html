@@ -1,7 +1,7 @@
 <div class="wrapper" #wrapper>
   <div class="left_side">
     <div class="navbar">
-      <input value="{{ taskName }}" spellcheck="false" />
+      <input [(ngModel)]="taskChange.name" spellcheck="false" (blur)="updateTask()" />
     </div>
 
     <div class="description">

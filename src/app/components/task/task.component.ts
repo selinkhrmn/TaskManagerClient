@@ -45,7 +45,7 @@ export class TaskComponent implements OnInit {
   taskProjectId: number = this.data.task.projectId;
   isDone : boolean = false;
   isWorking : boolean = false;
-  taskChange: Task = Object.assign({}, this.data.task);
+  taskChange: Task = JSON.parse(JSON.stringify(this.data.task));
   taskDueDate = new FormControl(this.taskChange.endDate);
   taskC = new FormControl(this.taskChange.createdDate);
   editorContent: string;
@@ -176,24 +176,24 @@ export class TaskComponent implements OnInit {
   }
 
   async alertBox() {
-    const { value: accept } = await Swal.fire({
-      title: 'Are you working on this task?',
-      inputPlaceholder: 'Yes, sir.',
-      input: 'checkbox',
-      inputValue: 1,
-      confirmButtonText:
-        'Continue <i class="fa fa-arrow-right"></i>',
+    // const { value: accept } = await Swal.fire({
+    //   title: 'Are you working on this task?',
+    //   inputPlaceholder: 'Yes, sir.',
+    //   input: 'checkbox',
+    //   inputValue: 1,
+    //   confirmButtonText:
+    //     'Continue <i class="fa fa-arrow-right"></i>',
       
-    })
+    // })
     
-    if (accept) {
-      this.data.task.label = 1;
-    }
-    else {
-      this.data.task.label = 0;
-    }
+    // if (accept) {
+    //   this.data.task.label = 1;
+    // }
+    // else {
+    //   this.data.task.label = 0;
+    // }
 
-    console.log(this.data.task.label);
+    // console.log(this.data.task.label);
     
   } 
 
@@ -215,13 +215,17 @@ export class TaskComponent implements OnInit {
     console.log('Selected Files:', this.Files);
   }
 
-  updateTask() {
-    if (this.data.task != this.taskChange) {
-      this.taskService.updateTask(this.taskChange).subscribe((res) => {
-        console.log(res.data);
-        // console.log(this.data.task.label);
-        
-      })
+  updateTask() {    
+    if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)){
+      console.log("different");
+      this.taskService.updateTask(this.taskChange).subscribe((res) =>{
+        if(res.isSuccessful == true){
+          alert("YES!")
+        }
+      } )
+    } else {
+      console.log("same");
+      
     }
     
 
@@ -316,5 +320,9 @@ export class TaskComponent implements OnInit {
   //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   // }
 
+}
+
+function isEqual(task: Task, taskChange: Task) {
+  throw new Error('Function not implemented.');
 }
 

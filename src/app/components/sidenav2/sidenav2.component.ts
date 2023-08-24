@@ -29,6 +29,9 @@ export class Sidenav2Component implements OnInit{
     this.projectService.getAllProjects().subscribe((response) => {
       if(response.data != null){
         this.projects = response.data;
+        if(this.projectService.getProjectLocal() == null && this.projects.length > 0){
+          this.projectService.setCurrentProject(this.projects[0]);
+        }
       }
       
     });

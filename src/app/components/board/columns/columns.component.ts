@@ -81,10 +81,9 @@ export class ColumnsComponent {
 
   ngOnInit(): void {
     this.getColumnId(this.currentColumnId);
-    this.getProjectLocal();
-    this.currentProject = this.projectService.getProjectLocal();
-    if (this.currentProject != null) {
-      this.columnService.GetProjectColumnsTasks({ "id": this.currentProject.id }).subscribe((response) => {
+    if (this.projectService.getProjectLocal()!= null) {
+      this.currentProject = this.projectService.getProjectLocal();
+      this.columnService.GetProjectColumnsTasks({ "id": this.projectService.getProjectLocal().id }).subscribe((response) => {
         if (response.data != null) {
           this.columns = response.data;
           console.log(this.columns);
@@ -100,7 +99,6 @@ export class ColumnsComponent {
 
 
   drop(event: CdkDragDrop<TaskDto[]>, column: ColumnTask) {
-    debugger
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -168,15 +166,10 @@ export class ColumnsComponent {
   //   })
   // }
 
-  getProjectLocal() {
-    const currentProjectId = this.projectService.getProjectLocal();
-    return this.currentProjectId = currentProjectId.id;
-  }
+  
 
   createColumn() {
-    
-    this.getProjectLocal();
-    this.columnService.CreateColumn({ 'projectId': this.currentProjectId, 'name': this.columnName }).subscribe((res) => {
+    this.columnService.CreateColumn({ 'projectId': this.projectService.getProjectLocal().id, 'name': this.columnName }).subscribe((res) => {
       this.ngOnInit()
     })
   }
