@@ -32,6 +32,9 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { TranslocoService } from '@ngneat/transloco';
 import { TokenService } from 'src/app/services/token.service';
 import { TransferColumnTaskComponent } from '../../transfer-column-task/transfer-column-task.component';
+import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -185,6 +188,7 @@ export class ColumnsComponent {
     else{
       return false;
     }
+  
   }
 
 
@@ -210,33 +214,53 @@ export class ColumnsComponent {
         id: columnId,
         name: columnName
       }
-
+  
       let selectedColumn = this.columns.find(c => c.id == columnId);
       if (selectedColumn?.tasks.length == 0) {
-        this.columnService.DeleteColumn(column.id).subscribe((res) => {
-          if (res.isSuccessful) {
-            this.ngOnInit();
+        // Show SweetAlert before directly deleting the column
+        Swal.fire({
+          icon: 'warning',
+          title: 'Delete Column',
+          text: 'Are you sure you want to delete this column?',
+          showCancelButton: true,
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.columnService.DeleteColumn(column.id).subscribe((res) => {
+              if (res.isSuccessful) {
+                this.ngOnInit();
+              }
+            });
           }
-        })
-      }
-      else {
+        });
+      } else {
         const dialogRef = this.dialog.open(TransferColumnTaskComponent, { data: { column: column }, width: '540px' });
         dialogRef.afterClosed().subscribe(result => {
           this.columnService.TransferColumnTasks(result.transfer).subscribe((res) => {
             if (res.isSuccessful) {
-              this.columnService.DeleteColumn(column.id).subscribe((res) => {
-                if (res.isSuccessful) {
-                  this.ngOnInit();
+              // Show SweetAlert before deleting the column after transferring tasks
+              Swal.fire({
+                icon: 'warning',
+                title: 'Delete Column',
+                text: 'Are you sure you want to delete this column?',
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.columnService.DeleteColumn(column.id).subscribe((res) => {
+                    if (res.isSuccessful) {
+                      this.ngOnInit();
+                    }
+                  });
                 }
-                else {
-                  alert("silinemedi.")
-                }
-              })
+              });
             }
-          })
+          });
         });
       }
     }
-
   }
+
 }
