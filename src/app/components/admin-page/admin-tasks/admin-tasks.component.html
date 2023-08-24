@@ -21,6 +21,8 @@
 <div class="mat-elevation-z8 ">
   <table mat-table [dataSource]="dataSource" matPaginator>
 
+    <!-- projectId - name -assignee - priority - label -->
+
     <ng-container matColumnDef="projectId">
       <th mat-header-cell *matHeaderCellDef> Project Name </th>
       <td mat-cell *matCellDef="let element"> {{element.projectId | project:projectList}} </td>
@@ -41,6 +43,13 @@
       <td mat-cell *matCellDef="let task">
         <img [src]="priorityService.getIcon(task.priority, 'icon')" alt="Priority Icon" class="priority-icon" />
         {{ priorityService.getIcon(task.priority, 'name') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="label">
+      <th mat-header-cell *matHeaderCellDef> Label </th>
+      <td mat-cell *matCellDef="let task">
+        {{ task.label | label: taskArray}}
       </td>
     </ng-container>
 

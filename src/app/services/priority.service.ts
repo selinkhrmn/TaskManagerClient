@@ -8,11 +8,11 @@ export class PriorityService {
   constructor() { }
 
   private priorityIconMapping: { [iconAddress: string]: { priority: number; name: string } } = {
-    '../../assets/lowest.png': { priority: 1, name: 'Easy' },
-    '../../assets/low.png': { priority: 2, name: 'Medium' },
-    '../../assets/medium.png': { priority: 3, name: 'Normal' },
-    '../../assets/high.png': { priority: 4, name: 'Hard' },
-    '../../assets/highest.png': { priority: 5, name: 'Difficult' },
+    '../../assets/lowest.png': { priority: 1, name: 'Lowest' },
+    '../../assets/low.png': { priority: 2, name: 'Low' },
+    '../../assets/medium.png': { priority: 3, name: 'Medium' },
+    '../../assets/high.png': { priority: 4, name: 'High' },
+    '../../assets/highest.png': { priority: 5, name: 'Highest' },
   };
 
 

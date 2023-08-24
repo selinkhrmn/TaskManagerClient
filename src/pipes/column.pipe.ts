@@ -18,6 +18,7 @@ export class ColumnPipe implements PipeTransform {
     }
     
     return column.name;
+    
   }
 
 }

@@ -15,4 +15,5 @@ export class TaskUserDto {
     projectId : number;
     priority : number;
     assigneeId : string;
+    label : number;
 }

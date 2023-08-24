@@ -79,7 +79,7 @@ import { ProjectPipe } from 'src/pipes/project.pipe';
 import { ProjectComponent } from './components/project/project.component';
 import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialog.component';
 import { UnplannedComponentComponent } from './components/list/unplanned/unplanned.component';
-
+import { LabelPipe } from 'src/pipes/label.pipe';
 
 
 
@@ -126,6 +126,7 @@ import { UnplannedComponentComponent } from './components/list/unplanned/unplann
     AdminProjectsComponent,
     AdminTasksComponent,
     UserPipe,
+    LabelPipe,
     AddUsersToProjectComponent,
     TransferColumnTaskComponent,
     TimePipe,
@@ -137,7 +138,8 @@ import { UnplannedComponentComponent } from './components/list/unplanned/unplann
     ProjectPipe,
     ProjectComponent,
     PlanDialogComponent,
-    UnplannedComponentComponent
+    UnplannedComponentComponent,
+    LabelPipe
 
 
   ],

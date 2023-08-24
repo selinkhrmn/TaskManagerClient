@@ -16,6 +16,7 @@ import { TaskUserDto } from 'src/app/interfaces/taskDto';
 import { TaskComponent } from '../../task/task.component';
 import { PriorityService } from 'src/app/services/priority.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { LabelPipe } from 'src/pipes/label.pipe';
 
 @Component({
   selector: 'app-admin-tasks',
@@ -49,7 +50,7 @@ projectList: ProjectDto[] = [];
     public priorityService: PriorityService
   ) { }
 
-  displayedColumns: string[] = ['projectId', 'name', 'assignee', 'priority'];
+  displayedColumns: string[] = ['projectId', 'name', 'assignee', 'priority', 'label'];
   dataSource = new MatTableDataSource<TaskUserDto>(this.task);
 
   id: any;
