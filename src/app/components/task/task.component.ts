@@ -18,6 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import Swal from 'sweetalert2';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 interface DialogData {
   task: Task;
@@ -69,6 +70,8 @@ export class TaskComponent implements OnInit {
   createComment: string;
   priorities: string[] = [];
   users: ProjectUserDto[] = [];
+  selectedDate: Date;
+
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
 
@@ -115,6 +118,28 @@ export class TaskComponent implements OnInit {
   
   }
 
+  onDateInputStarted(event: any) {
+    console.log('Date input:', event.target.value);
+
+  }
+
+  onDateChangeStarted(event: any) {
+    console.log('Date input:', event.target.value);
+    this.taskChange.userUpdatedDate = event.value
+    console.log(this.taskDueDate);
+    
+  }
+
+
+  onDateInput(event: any) {
+    console.log('Date input:', event.target.value);
+  }
+
+  onDateChange(event: any) {
+    console.log('Date change:', event.value);
+    this.taskChange.endDate = event.value
+    console.log(this.taskDueDate);
+  }
 
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
@@ -126,14 +151,18 @@ export class TaskComponent implements OnInit {
     console.log('Content changed:', $event);
   }
 
-  selectUser(userId: string){
+  selectUserForAssignee(userId: string){
     this.taskChange.assigneeId = userId;
+    
+  }
+  selectUserForReporter(userId: string){
+    this.taskChange.reporterId = userId;
     
   }
 
   setSortableElement(event: any) {
     this.sortableElement = event;
-    console.log(this.sortableElement);
+        console.log(this.sortableElement);
     
   }
 
@@ -197,6 +226,8 @@ export class TaskComponent implements OnInit {
     
 
   }
+
+  
 
  
 
