@@ -1,3 +1,5 @@
+
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ListTask } from 'src/app/interfaces/listTask';
@@ -5,17 +7,16 @@ import { TaskDto } from 'src/app/interfaces/taskDto';
 import { ProjectService, TaskService } from 'src/app/services';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskComponent } from '../../task/task.component';
-
 @Component({
-    selector: 'app-plan-dialog',
-    templateUrl: './plan-dialog.component.html',
-    styleUrls: ['./plan-dialog.component.scss']
+  selector: 'app-unplanned',
+  templateUrl: './unplanned.component.html',
+  styleUrls: ['./unplanned.component.scss']
 })
-export class PlanDialogComponent implements OnInit {
+export class UnplannedComponentComponent implements OnInit {
     @Output() closeEvent = new EventEmitter<void>();
     tasks: ListTask[] = [];
     constructor(
-        private dialogRef: MatDialogRef<PlanDialogComponent>,
+        private dialogRef: MatDialogRef<UnplannedComponentComponent>,
         private dialog: MatDialog,   // MatDialog enjekte edildi
         private taskService: TaskService,
         private projectService: ProjectService
@@ -51,8 +52,9 @@ export class PlanDialogComponent implements OnInit {
         });
     }
     closeDialog(): void {
-        this.closeEvent.emit();  // Çarpı butonuna tıklanınca olayı yayınlayarak ana bileşende kapatma fonksiyonunu tetikleyeceğiz.
+        this.dialogRef.close();  // Dialog penceresini doğrudan kapat
     }
+    
     filterTasks(): void {
         if (!this.searchTerm) {
             this.filteredTasks = this.tasks;  // Eğer arama çubuğu boşsa tüm task'ları göster

@@ -14,7 +14,6 @@
     "dueDate" : "Bitiş Tarihi",
     "priority" : "Öncelik",
     "updateDate" : "Yenilenme Tarihi",
-    "startedDate" : "Başlama Tarihi",
     "createdDate" : "Oluşturula Tarihi",
     "addPeople" : "Kişi ekle",
     "share": "Paylaş",
@@ -44,6 +43,7 @@
     "surname" : "Soyad",
     "new password": "Yeni Şifre",
     "confirm password": "Şifreyi Tekrar Gir",
+    "label" : "Etiket",
     "navigation": {
         "yourWork": "İşlerin"
     },

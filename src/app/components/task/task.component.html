@@ -126,6 +126,7 @@
         <h2>Details</h2>
       </div>
 
+
       <div class="body">
         <div class="column">
           <!-- <div class="assignee card1">
@@ -136,7 +137,14 @@
               <div class="right_side_card assigned_person"></div>
             </div>
           </div> -->
-
+          <div class="assignee card1">
+            <div class="inside_card">
+                <mat-checkbox class="checkbox" [(ngModel)] = "isDone" (click)="controlIsDone($event)">
+                  Is Done?
+                </mat-checkbox>
+              
+            </div>
+          </div>
           <div class="assignee card1">
             <div class="inside_card">
                 <div class="label_container">
@@ -156,7 +164,7 @@
                             </label>
                             <div class="dropdown-content">
                                 <!-- Inside the dropdown-content -->
-                                <p *ngFor="let user of users" (click)="selectUser(user.id)" for="userDropdownInput">
+                                <p *ngFor="let user of users" (click)="selectUserForAssignee(user.id)" for="userDropdownInput">
                                     <label for="userDropdownInput">
                                         <div class="user-profile">
                                             <div class="user-image">
@@ -182,8 +190,36 @@
               <div class="label_container">
                 <label>{{ "reporter" | transloco }}</label>
               </div>
-              {{ taskChange.reporterId | user:userList}}
-              <div class="right_side_card reported_person"></div>
+              <!-- {{ taskChange.reporterId | user:userList}} -->
+              <div class="right_side_card reported_person">
+                <div class="container-dropdown">
+                  <input style="display:none;" id="userDropdownInput2" type="checkbox" />
+                  <div class="dropdown">
+                      <label class="dropbtn" for="userDropdownInput2">
+                          <div class="user-profile">
+                              <div class="user-image">
+                                  <img [src]="getUserProfileImage(taskChange.reporterId)" alt="User Profile">
+                              </div>
+                              <span class="user-name">{{ taskChange.reporterId | user:userList }}</span>
+                          </div>
+                      </label>
+                      <div class="dropdown-content">
+                          <!-- Inside the dropdown-content -->
+                          <p *ngFor="let user of users" (click)="selectUserForReporter(user.id)" for="userDropdownInput2">
+                              <label for="userDropdownInput2">
+                                  <div class="user-profile">
+                                      <div class="user-image">
+                                          <img [src]="getUserProfileImage(user.id)" alt="User Profile">
+                                      </div>
+                                      <span class="user-name">{{ user.id | user:userList }}</span>
+                                  </div>
+                              </label>
+                          </p>
+                      </div>
+                      <label for="userDropdownInput2" class="overlay"></label>
+                  </div>
+              </div>
+              </div>
             </div>
           </div>
 
@@ -196,18 +232,28 @@
                 <div class="container-dropdown">
                   <input style="display:none;" id="priorityDropdownInput" type="checkbox" />
                   <div class="dropdown">
-                    <label class="dropbtn" for="priorityDropdownInput">
+                    
+
+                    <button mat-button [matMenuTriggerFor]="menuPriority">
+                      <label class="dropbtn" for="priorityDropdownInput">
                       <img class="priority-icon" [src]="sortableElement" alt="Icon" />
                       &nbsp;{{priorityService.getIconName(sortableElement)}}
                     </label>
+                    </button>
+                    <mat-menu #menuPriority="matMenu" >
+                      <button mat-menu-item  *ngFor="let priority of priorities" (click)="setSortableElement(priority)">
+                        <img class="priority-icon" [src]="priority" alt="Icon" />
+                        {{ priorityService.getIconName(priority) }}
+                      </button>
+                    </mat-menu>
 
-                    <div class="dropdown-content">
+                    <!-- <div class="dropdown-content">
                       <p *ngFor="let priority of priorities" (click)="setSortableElement(priority)"
                         for="priorityDropdownInput">
                         <img class="priority-icon" [src]="priority" alt="Icon" />
                         {{ priorityService.getIconName(priority) }}
                       </p>
-                    </div>
+                    </div> -->
 
 
                     <!-- <label for="priorityDropdownInput" class="overlay"></label> -->
@@ -236,7 +282,9 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskC" />
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskC" 
+                  (dateInput)="onDateInputStarted($event)" (dateChange)="onDateChangeStarted($event)"
+                  />
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -251,10 +299,13 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" />
+                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" 
+                  (dateInput)="onDateInput($event)" (dateChange)="onDateChange($event)"
+                  />
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
+
               </div>
             </div>
           </div>

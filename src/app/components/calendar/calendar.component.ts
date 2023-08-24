@@ -196,8 +196,8 @@ export class CalendarComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.position = {
-      top: `${rect.top - 50}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
-      left: `${rect.left}px`
+      top: `${rect.top -30}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
+      left: `${rect.left-100}px`
     };
 
     this.dialog.open(ShareComponent, dialogConfig);

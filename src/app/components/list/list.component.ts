@@ -20,6 +20,8 @@ import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-use
 import { MatDialog } from '@angular/material/dialog';
 import { UserPipe } from 'src/pipes/user.pipe';
 import { TaskDto } from 'src/app/interfaces/taskDto';
+import { UnplannedComponentComponent } from './unplanned/unplanned.component';
+
 
 @Component({
   selector: 'app-list',
@@ -92,7 +94,7 @@ export class ListComponent implements OnInit {
 
       }
     })
-
+  
     this.columnService.GetAllProjectColumns({ "id": this.projectId }).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.projectColumns = res.data;
@@ -435,13 +437,13 @@ export class ListComponent implements OnInit {
     console.log(translatedText);
   }
 
-  getUnplannedTasks(){
-    // this.taskService.getUnplannedTask(this.projectId).subscribe((res) => {
-    //   if (res.isSuccessful == true) {
-    //     this.unPlannedTasks = res.data;
-    //     console.log(this.unPlannedTasks);
-    //     alert("Look at the console!");
-    //   }
-    // })
-  }
+  getUnplannedTasks() {
+    const dialogRef = this.dialog.open(UnplannedComponentComponent, {
+      width: '400px', // İsteğe bağlı: Dialogun genişliği
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog kapatıldı:', result);
+    });
+}
+
 }
