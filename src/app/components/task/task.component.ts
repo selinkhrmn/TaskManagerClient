@@ -47,6 +47,7 @@ export class TaskComponent implements OnInit {
   isWorking : boolean = false;
   taskChange: Task = JSON.parse(JSON.stringify(this.data.task));
   taskDueDate = new FormControl(this.taskChange.endDate);
+  taskUpdatedDate = new FormControl(this.taskChange.updatedDate)
   taskC = new FormControl(this.taskChange.createdDate);
   editorContent: string;
   descriptionText: string = '';
@@ -54,6 +55,7 @@ export class TaskComponent implements OnInit {
   fileUploaded: boolean = false;
   addSubtopicClicked = false;
   commentWantsToGetCreated: boolean;
+  commentWantsToBeEdited: boolean;
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
@@ -71,7 +73,8 @@ export class TaskComponent implements OnInit {
   priorities: string[] = [];
   users: ProjectUserDto[] = [];
   selectedDate: Date;
-
+  InfinityDate: Date = new Date(1, 0, 1);
+  isInputDisabled: boolean = false;
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
 
@@ -112,38 +115,18 @@ export class TaskComponent implements OnInit {
     else {
       this.alertBox();
     }
- 
+    this.commentWantsToBeEdited= false;
     
   
   
   }
-
-  onDateInputStarted(event: any) {
-    console.log('Date input:', event.target.value);
-
-  }
-
-  onDateChangeStarted(event: any) {
-    console.log('Date input:', event.target.value);
-    this.taskChange.userUpdatedDate = event.value
-    console.log(this.taskDueDate);
-    
-  }
-
-
-  onDateInput(event: any) {
-    console.log('Date input:', event.target.value);
-  }
-
-  onDateChange(event: any) {
-    console.log('Date change:', event.value);
-    this.taskChange.endDate = event.value
-    console.log(this.taskDueDate);
-  }
-
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
     this.createComment= ''
+  }
+
+  closeEditAndDeleteButtons() {
+    this.commentWantsToBeEdited= true;
   }
 
 
@@ -161,9 +144,10 @@ export class TaskComponent implements OnInit {
   }
 
   setSortableElement(event: any) {
-    this.sortableElement = event;
-        console.log(this.sortableElement);
     
+    this.sortableElement = event;
+    this.taskChange.priority = this.priorityService.getIconPriority(event);
+
   }
 
   upload(event: Event) {
@@ -220,7 +204,7 @@ export class TaskComponent implements OnInit {
       console.log("different");
       this.taskService.updateTask(this.taskChange).subscribe((res) =>{
         if(res.isSuccessful == true){
-          alert("YES!")
+          // alert("YES!")
         }
       } )
     } else {
@@ -275,7 +259,7 @@ export class TaskComponent implements OnInit {
     console.log(comment);
     this.commentReq.id = id;
     this.commentReq.comment = comment; //alınan yeni input
-    this.commentService.UpdateComment(this.commentReq).subscribe((res) => {
+    this.commentService.UpdateComment({'id': this.commentReq.id, 'comment': this.commentReq.comment}).subscribe((res) => { //değiştirdim 24.08.2023
       if(res.isSuccessful){
         this.getTaskComments();
       }
@@ -291,7 +275,9 @@ export class TaskComponent implements OnInit {
   }
 
   closeDialog() {
+    debugger
     this.dialogRef.close();
+    this.updateTask();
   }
   // config: AngularEditorConfig = {
   //   editable: true,

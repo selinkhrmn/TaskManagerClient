@@ -1,7 +1,7 @@
 <div class="wrapper" #wrapper>
   <div class="left_side">
     <div class="navbar">
-      <input [(ngModel)]="taskChange.name" spellcheck="false" (blur)="updateTask()" />
+      <input [(ngModel)]="taskChange.name" spellcheck="false" />
     </div>
 
     <div class="description">
@@ -102,15 +102,26 @@
             <label>{{ comment.comment }}</label>
           </div>
 
-          <div class="edit_delete_buttons">
+          <div class="edit_delete_buttons" *ngIf="!commentWantsToBeEdited">
             <div class="placeholder2"></div>
-            <button mat-button (click)="editComment(comment.id, comment.comment)">
+            <button mat-button (click)="editComment(comment.id, comment.comment);closeEditAndDeleteButtons()">
               Edit
             </button>
             <button mat-button (click)="deleteComment(comment.id)">
               Delete
             </button>
           </div>
+
+          <div class="save_cancel_buttons" *ngIf="commentWantsToBeEdited">
+            {{comment.comment}}
+            <button mat-button>
+              Save
+            </button>
+            <button mat-button>
+              Cancel
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
@@ -241,7 +252,7 @@
                     </label>
                     </button>
                     <mat-menu #menuPriority="matMenu" >
-                      <button mat-menu-item  *ngFor="let priority of priorities" (click)="setSortableElement(priority)">
+                      <button mat-menu-item  *ngFor="let priority of priorities" (click)="setSortableElement(priority)" >
                         <img class="priority-icon" [src]="priority" alt="Icon" />
                         {{ priorityService.getIconName(priority) }}
                       </button>
@@ -281,13 +292,15 @@
                 <label>{{ "startedDate" | transloco }}</label>
               </div>
               <div class="right_side_card dateTime">
-                <mat-form-field>
+                <mat-form-field *ngIf="isInputDisabled">
                   <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="taskC" 
-                  (dateInput)="onDateInputStarted($event)" (dateChange)="onDateChangeStarted($event)"
+            
                   />
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
+                <label>{{taskC.value | date}}</label>
+
               </div>
             </div>
           </div>
@@ -300,7 +313,7 @@
               <div class="right_side_card dateTime">
                 <mat-form-field>
                   <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" 
-                  (dateInput)="onDateInput($event)" (dateChange)="onDateChange($event)"
+         
                   />
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
@@ -309,6 +322,26 @@
               </div>
             </div>
           </div>
+
+          <div class="updated_date card1">
+            <div class="inside_card">
+              <div class="label_container">
+                <label>{{ "updatedDate" | transloco }}</label>
+              </div>
+              <div class="right_side_card dateTime">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker2" placeholder="Choose a date" [formControl]="taskUpdatedDate" 
+            
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+
+              </div>
+            </div>
+          </div>
+
+
         </div>
         <br />
       </div>
