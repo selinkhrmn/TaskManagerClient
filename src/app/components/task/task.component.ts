@@ -215,6 +215,13 @@ export class TaskComponent implements OnInit {
 
   }
 
+  deleteTask() {
+    debugger
+    this.taskService.deleteTask(this.taskId).subscribe((res)=> {
+      this.closeDialog()
+    })
+    
+  }
   
 
  
