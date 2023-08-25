@@ -51,7 +51,7 @@ export class ListComponent implements OnInit {
   selectedColumns: number[] = [];
   isColumnMenuOpen = false;
   customMenuClass = 'custom-menu-panel'
-  selectedPriorities: number[] = [];
+  selectedPriorities:number[] = [];
   appliedFilter: number = 0;
   value = 'Clear me';
   reporterValue: string;
@@ -112,6 +112,7 @@ export class ListComponent implements OnInit {
       this.priorities = this.priorityService.getOptions();
     }
   }
+
   stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
 
@@ -147,8 +148,15 @@ export class ListComponent implements OnInit {
       this.applyFilter('CompletedTasks');
     }
 
+    else if(selectedFilter && selectedFilter.name == 'Priorities') 
+    {
+      this.selectedPriorities.push(selectedFilter.id);
+      this.applyFilter('Priorities');
+    }
+
 
   }
+
   CalendarFilters() {
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'DueDate') {
@@ -305,8 +313,10 @@ export class ListComponent implements OnInit {
 
 
     if (this.activeFilters.includes('Priorities') && this.selectedPriorities.length != 0) {
+
       this.filteredData = this.filteredData.filter(t => this.selectedPriorities.includes(t.priority));
     }
+    
   }
 
   getUserIds(): void {
@@ -345,8 +355,6 @@ export class ListComponent implements OnInit {
     }
     this.applyFilter('Reporter');
   }
-
-
 
 
   handlePriorityClick(priority: number) {

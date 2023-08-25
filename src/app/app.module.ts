@@ -81,6 +81,7 @@ import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialo
 import { UnplannedComponentComponent } from './components/list/unplanned/unplanned.component';
 import { LabelPipe } from 'src/pipes/label.pipe';
 import { TokenInterceptor } from './services/token.interceptor';
+import { PriorityService } from './services/priority.service';
 
 
 
@@ -193,7 +194,8 @@ import { TokenInterceptor } from './services/token.interceptor';
     
   ],
 
-  providers: [JwtHelperService,
+  providers: [
+    JwtHelperService,
     {
       provide: MatDialogRef,
       useValue: {}

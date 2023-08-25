@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class PriorityService {
+  // private priorityClickSource = new Subject<number>();
+  // priorityClick = this.priorityClickSource.asObservable();
+
+  selectedPriorities: number[] = [];
 
   constructor() { }
 
@@ -14,8 +18,7 @@ export class PriorityService {
     '../../assets/high.png': { priority: 4, name: 'High' },
     '../../assets/highest.png': { priority: 5, name: 'Highest' },
   };
-
-
+  
   getIconPriority(iconAddress: string): number {
     return this.priorityIconMapping[iconAddress].priority || 0;
   }
