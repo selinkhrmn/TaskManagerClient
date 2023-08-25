@@ -8,16 +8,18 @@
     </div>
   </div>
 
-
-  <div
-    class="project_names"
-    *ngFor="let project of projects"
-    (click)="selectProject(project)"
-  >
-    <div class="card" (click)="reload()">
-      {{ project.name }}
-      {{ project.id }}
+  <ng-container *ngIf="projects.length > 0; else empty">
+    <div class="project_names" *ngFor="let project of projects" (click)="selectProject(project)">
+      <div class="card" (click)="reload()">
+        {{ project.name }}
+        {{ project.id }}
+      </div>
     </div>
-  </div>
+  </ng-container>
 
+  <ng-template #empty>
+    <div class="empty">
+     {{'emptyMessage' | transloco}}
+    </div>
+  </ng-template>
 </div>

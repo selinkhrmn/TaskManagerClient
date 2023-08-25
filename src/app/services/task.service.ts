@@ -42,8 +42,8 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task);
   }
 
-  deleteTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, { body: task });
+  deleteTask(id: number) {
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, { id: id });
   }
 
   updateTaskColumnId(task: Partial<Task>) {
