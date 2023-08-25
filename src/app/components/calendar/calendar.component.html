@@ -44,8 +44,7 @@
             </div>
             <div class="calendar-days">
                 <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
-                    [class.is-searched]="dayObj.isSearchedDayValid" [class.placeholder]="dayObj.placeholder"
-                    (click)="!dayObj.placeholder && toggleDescription(dayObj)">
+                    [class.is-searched]="dayObj.isSearchedDayValid" (click)="!dayObj.placeholder && toggleDescription(dayObj)">
 
                     <!-- Eğer placeholder bir gün değilse gün bilgisini ve görevleri göster -->
                     <ng-container *ngIf="!dayObj.placeholder">

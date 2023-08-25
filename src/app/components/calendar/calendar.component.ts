@@ -146,7 +146,6 @@ export class CalendarComponent implements OnInit {
               const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
               const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
               const taskIdForTheDay = tasksForTheDay.length > 0 ? tasksForTheDay[0].id : undefined;
-
               this.days.push({
                 taskId: taskIdForTheDay,
                 day: dayNumber,

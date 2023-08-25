@@ -5,11 +5,15 @@
         <input type="text" id="name" [(ngModel)]="name" placeholder="">
         <label for="name">Names or teams*</label>
     </div>
-
+    <ul>
+        <li *ngFor="let sharedItem of sharedData">{{ sharedItem }}</li>
+      </ul>
     <div class="input-group">
         <textarea id="message" [(ngModel)]="message" placeholder=""></textarea>
         <label for="message">Message (optional)</label>
     </div>
 
     <button (click)="paylas()">Share</button>
+    
+    
 </div>

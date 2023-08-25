@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
+import { UserDto } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-share',
@@ -8,10 +10,13 @@ import { Component } from '@angular/core';
 export class ShareComponent {
   name: string = '';
   message: string = '';
+  sharedData: string[] = []; // Yeni dizi
+  userList: UserDto[] = [];
+  users: ProjectUserDto[] = [];
 
   paylas() {
-    // Burada paylaşım işlemlerinizi gerçekleştirebilirsiniz.
-    console.log("Ad:", this.name);
-    console.log("Mesaj:", this.message);
+    this.sharedData.push(this.name); // Diziye ekleme
+    this.name = ''; // Alanı temizle
+    this.message = ''; // Alanı temizle
   }
 }
