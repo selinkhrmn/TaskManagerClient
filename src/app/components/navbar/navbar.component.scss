@@ -45,10 +45,13 @@
 .btn {
   margin-left: 10px;
   float: right;
+  background-color: rgba(255, 255, 255);
+  cursor: pointer;
 }
 
 .btn:disabled{
-  cursor: not-allowed
+  cursor: not-allowed;
+ // background-color: red;
 }
 
 

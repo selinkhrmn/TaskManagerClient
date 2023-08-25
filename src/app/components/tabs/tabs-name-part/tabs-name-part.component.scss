@@ -27,3 +27,10 @@
   border-bottom: 3px solid gray;
 
 }
+
+.setting{
+  cursor: pointer
+}
+.setting:disabled{
+  cursor: not-allowed;
+}

@@ -178,7 +178,17 @@ $atanmisRenk: green; // Atanmış durumu için renk
 }
 
 
-::ng-deep .pointerDisable:disabled {
-  background-color: red;
+
+
+.add-person{
+  border: none;
+  background: none;
+  color: rgb(5, 5, 17);
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}
+
+.add-person:disabled {
   cursor: not-allowed;
 }

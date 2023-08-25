@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="user-info">
-                    <button (click)="openDialog()" class="add-person-button">
+                    <button (click)="openDialog()" class="add-person-button" [disabled]="!tokenService.hasRole('Admin')">
                         <i class="material-icons">person_add</i>Kişi ekle
                     </button>
                 </div>
