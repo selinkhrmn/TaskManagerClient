@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
     'name', 'columnId', 'assigneeId', 'reporterId', 'DueDate',
     'ListTask.Priority', 'UpdateDate', 'CreateDate', 'isDone'
   ];
-  projectId: number ;
+  projectId: number;
   fromDate: Date; updatedFromDate: Date; createdFromDate: Date; isDoneFromDate: Date;
   toDate: Date; updatedToDate: Date; createdToDate: Date; isDoneToDate: Date;
   dueDateFrom: Date; dueDateTo: Date;
@@ -54,6 +54,7 @@ export class ListComponent implements OnInit {
   selectedPriorities: number[] = [];
   appliedFilter: number = 0;
   value = 'Clear me';
+  reporterValue: string;
   assignees: string[] = [];
   reporters: string[] = [];
   selectedAssignees: string[] = [];
@@ -76,38 +77,40 @@ export class ListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.projectId = this.projectService.getProjectLocal().id;
-    this.taskService.getAllProjectTask({ "id": this.projectId }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.listData = res.data;
-        this.filteredData = res.data;
-        this.applySummaryFilters();
-        this.CalendarFilters();
-        this.getUserIds();
+    if (this.projectService.getProjectLocal() != null) {
+      this.projectId = this.projectService.getProjectLocal().id;
+      this.taskService.getAllProjectTask({ "id": this.projectId }).subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.listData = res.data;
+          this.filteredData = res.data;
+          this.applySummaryFilters();
+          this.CalendarFilters();
+          this.getUserIds();
 
-      }
-    });
+        }
+      });
 
-    this.userService.GetAllProjectUsers(this.projectId).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.projectUsers = res.data;
+      this.userService.GetAllProjectUsers(this.projectId).subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.projectUsers = res.data;
 
-      }
-    })
-  
-    this.columnService.GetAllProjectColumns({ "id": this.projectId }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.projectColumns = res.data;
-      }
-    })
+        }
+      })
 
-    this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-      }
-    })
+      this.columnService.GetAllProjectColumns({ "id": this.projectId }).subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.projectColumns = res.data;
+        }
+      })
 
-    this.priorities = this.priorityService.getOptions();
+      this.userService.getAllUsers().subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.userList = res.data;
+        }
+      })
+
+      this.priorities = this.priorityService.getOptions();
+    }
   }
   stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
@@ -131,16 +134,16 @@ export class ListComponent implements OnInit {
       this.applyFilter('CreatedDate');
     }
 
-    else if(selectedFilter && selectedFilter.name == 'selectAssignee'){
+    else if (selectedFilter && selectedFilter.name == 'selectAssignee') {
       this.selectAssignee(selectedFilter.id);
     }
 
-    else if(selectedFilter && selectedFilter.name == 'LastSevendDaysCompletedTasks' ){
+    else if (selectedFilter && selectedFilter.name == 'LastSevendDaysCompletedTasks') {
       this.isDoneFromDate = new Date(selectedFilter.fromDate);
       this.isDoneToDate = new Date(selectedFilter.toDate);
       this.applyFilter('LastSevendDaysCompletedTasks');
     }
-    else if(selectedFilter && selectedFilter == 'CompletedTasks' ){
+    else if (selectedFilter && selectedFilter == 'CompletedTasks') {
       this.applyFilter('CompletedTasks');
     }
 
@@ -151,7 +154,7 @@ export class ListComponent implements OnInit {
     if (selectedFilter && selectedFilter.name === 'DueDate') {
       this.dueDateFrom = new Date(selectedFilter.fromDate);
       this.dueDateTo = new Date(selectedFilter.toDate);
-      this.dueDateTo.setHours(23, 59, 59, 999); 
+      this.dueDateTo.setHours(23, 59, 59, 999);
       console.log(this.dueDateFrom);
 
       this.applyFilter('DueDate');
@@ -209,7 +212,7 @@ export class ListComponent implements OnInit {
       //   });
       // }
       this.filteredData = this.taskService.filterDoneSevenDay(this.filteredData, this.isDoneFromDate, this.isDoneToDate);
-      
+
     }
 
     if (this.activeFilters.includes('BetweenDates')) {
@@ -281,7 +284,7 @@ export class ListComponent implements OnInit {
 
     if (this.activeFilters.includes('DueDate')) {
       if (this.dueDateFrom && this.dueDateTo) {
-        this.dueDateTo.setHours(23, 59, 59, 999); 
+        this.dueDateTo.setHours(23, 59, 59, 999);
         this.filteredData = this.filteredData.filter(t => {
           const taskDueDate = new Date(t.dueDate);
 
@@ -444,6 +447,6 @@ export class ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog kapatıldı:', result);
     });
-}
+  }
 
 }

@@ -74,60 +74,51 @@ export class SummaryComponent implements AfterViewInit, OnInit {
 
   }
   ngOnInit(): void {
-    let projectId = this.projectService.getProjectLocal().id;
-    this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.tasks = res.data;
-        this.totalTasks = this.tasks.length;
-        this.unplannedTasks = this.tasks.filter(t => t.dueDate == new Date(1 / 1 / 1));
-        this.unassignedTasks = this.tasks.filter(t => t.assigneeId == "unassigned");
-        this.updatedTaskLength = this.taskService.filterUpdatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-        this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-        this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-        this.completedAllLength = this.tasks.filter(t => t.isDone == true).length;
+    if(this.projectService.getProjectLocal() != null){
+      let projectId = this.projectService.getProjectLocal()?.id;
+      this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.tasks = res.data;
+          this.totalTasks = this.tasks.length;
+          this.unplannedTasks = this.tasks.filter(t => t.dueDate == new Date(1 / 1 / 1));
+          this.unassignedTasks = this.tasks.filter(t => t.assigneeId == "unassigned");
+          this.updatedTaskLength = this.taskService.filterUpdatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
+          this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
+          this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
+          this.completedAllLength = this.tasks.filter(t => t.isDone == true).length;
+  
+          this.filterLastActivities();
+          this.userService.GetAllProjectUsers(projectId).subscribe((res) => {
+            if (res.isSuccessful == true) {
+              this.users = res.data;
+              this.usersTasks();
+            }
+          })
+        }
+      })
 
-        this.filterLastActivities();
-        this.userService.GetAllProjectUsers(projectId).subscribe((res) => {
-          if (res.isSuccessful == true) {
-            this.users = res.data;
-            this.usersTasks();
-          }
-        })
-      }
-    })
+      this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
+        const priorityCounts = this.calculatePriorityCounts(this.tasks);
+        this.chartData = {
+          labels:this.priorityLabels,
+          datasets: [{
+            label: 'Task Priority',
+            data: [priorityCounts.Difficult, priorityCounts.Hard, priorityCounts.Normal, priorityCounts.Medium, priorityCounts.Easy],
+            backgroundColor: this.priorityColors,
+            borderColor:this.priorityColors,
+            borderWidth: 1
+          }]
+        };
+        this.createPriorityChart();
+      });
 
-    let project = this.projectService.getProjectLocal().id;
-    this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
-      const priorityCounts = this.calculatePriorityCounts(this.tasks);
-      this.chartData = {
-        labels:this.priorityLabels,
-        datasets: [{
-          label: 'Task Priority',
-          data: [priorityCounts.Difficult, priorityCounts.Hard, priorityCounts.Normal, priorityCounts.Medium, priorityCounts.Easy],
-          backgroundColor: this.priorityColors,
-          borderColor:this.priorityColors,
-          borderWidth: 1
-        }]
-      };
-      this.createPriorityChart();
-    });
-
-    this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-      }
-    })
-    // this.taskService.getUnplannedTask(projectId).subscribe((res) => {
-    //   if (res.isSuccessful == true) {
-    //     this.unplannedTasks = res.data;
-    //   }
-    // })
-
-    // this.taskService.getUnassignedTask(projectId).subscribe((res) => {
-    //   if (res.isSuccessful == true) {
-    //     this.unassignedTasks = res.data;
-    //   }
-    // })
+      this.userService.getAllUsers().subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.userList = res.data;
+        }
+      })
+  
+    }
   }
 
 

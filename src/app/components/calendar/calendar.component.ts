@@ -87,11 +87,11 @@ export class CalendarComponent implements OnInit {
     private translocoService: TranslocoService,
     private http: HttpClient,
     private dialog: MatDialog,
-   
+
 
     private projectService: ProjectService,
     private taskService: TaskService,
- 
+
     public priorityService: PriorityService,
     public userService: UserService,
     private router: Router
@@ -108,76 +108,78 @@ export class CalendarComponent implements OnInit {
   async generateDays(): Promise<void> {
     const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
     const lastDate = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-    let id: number = this.projectService.getProjectLocal().id;
+    //let id: number = this.projectService.getProjectLocal().id;
 
     this.days = [];
 
     // Ayın başlangıcındaki boşluklar için placeholder'lar ekleyin
     for (let i = 0; i < (firstDayOfMonth - 1); i++) {
-      this.days.push({ 
+      this.days.push({
         placeholder: true,
-        day: 0, 
-        isToday: false, 
-        showDescription: false, 
-        isSearchedDay: false, 
-        isSearchedDayValid: false, 
-        projectNames: [] 
+        day: 0,
+        isToday: false,
+        showDescription: false,
+        isSearchedDay: false,
+        isSearchedDayValid: false,
+        projectNames: []
       });
-      
+
     }
 
-    this.taskService.getAllProjectTask({ "id": id })
-      .subscribe(response => {
-        if (response && response.data) {
-          const tasksForProjectData = response.data;
+    if (this.projectService.getProjectLocal() != null) {
+      this.taskService.getAllProjectTask({ "id": this.projectService.getProjectLocal().id })
+        .subscribe(response => {
+          if (response && response.data) {
+            const tasksForProjectData = response.data;
 
-          for (let dayNumber = 1; dayNumber <= lastDate; dayNumber++) {
-            const isToday = this.today.getDate() === dayNumber && this.today.getMonth() === this.currentMonth && this.today.getFullYear() === this.currentYear;
-            const isSearchedDay = dayNumber === this.searchedDay && this.searchedDay !== -1;
-            const isSearchedDayValid = isSearchedDay && this.currentMonth === this.searchedMonth && this.currentYear === this.searchedYear;
+            for (let dayNumber = 1; dayNumber <= lastDate; dayNumber++) {
+              const isToday = this.today.getDate() === dayNumber && this.today.getMonth() === this.currentMonth && this.today.getFullYear() === this.currentYear;
+              const isSearchedDay = dayNumber === this.searchedDay && this.searchedDay !== -1;
+              const isSearchedDayValid = isSearchedDay && this.currentMonth === this.searchedMonth && this.currentYear === this.searchedYear;
 
-            const tasksForTheDay = tasksForProjectData.filter((task: any) => {
-              const taskDate = new Date(task.dueDate);
-              return taskDate.getDate() === dayNumber &&
-                taskDate.getMonth() === this.currentMonth &&
-                taskDate.getFullYear() === this.currentYear;
-            });
-            const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
-            const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
-            const taskIdForTheDay = tasksForTheDay.length > 0 ? tasksForTheDay[0].id : undefined;
+              const tasksForTheDay = tasksForProjectData.filter((task: any) => {
+                const taskDate = new Date(task.dueDate);
+                return taskDate.getDate() === dayNumber &&
+                  taskDate.getMonth() === this.currentMonth &&
+                  taskDate.getFullYear() === this.currentYear;
+              });
+              const projectNamesForTheDay = tasksForTheDay.map(task => task.name);
+              const projectName = tasksForTheDay.length > 0 ? tasksForTheDay[0].name : undefined;
+              const taskIdForTheDay = tasksForTheDay.length > 0 ? tasksForTheDay[0].id : undefined;
 
-            this.days.push({
-              taskId: taskIdForTheDay,
-              day: dayNumber,
-              isToday: isToday,
-              showDescription: false,
-              isSearchedDay: isSearchedDay,
-              isSearchedDayValid: isSearchedDayValid,
-              projectNames: projectNamesForTheDay
-            });
+              this.days.push({
+                taskId: taskIdForTheDay,
+                day: dayNumber,
+                isToday: isToday,
+                showDescription: false,
+                isSearchedDay: isSearchedDay,
+                isSearchedDayValid: isSearchedDayValid,
+                projectNames: projectNamesForTheDay
+              });
+            }
+
+            // Ayın sonuna kadar kalan boşlukları doldurun
+            const daysInWeek = 7;
+            const lastDayOfMonth = new Date(this.currentYear, this.currentMonth, lastDate).getDay();
+            for (let i = lastDayOfMonth; i < daysInWeek; i++) {
+              this.days.push({
+                placeholder: true,
+                day: 0,
+                isToday: false,
+                showDescription: false,
+                isSearchedDay: false,
+                isSearchedDayValid: false,
+                projectNames: []
+              });
+
+            }
+
           }
-
-          // Ayın sonuna kadar kalan boşlukları doldurun
-          const daysInWeek = 7;
-          const lastDayOfMonth = new Date(this.currentYear, this.currentMonth, lastDate).getDay();
-          for (let i = lastDayOfMonth; i < daysInWeek; i++) {
-            this.days.push({ 
-              placeholder: true,
-              day: 0, 
-              isToday: false, 
-              showDescription: false, 
-              isSearchedDay: false, 
-              isSearchedDayValid: false, 
-              projectNames: [] 
-            });
-            
-          }
-
-        }
-      },
-        error => {
-          console.error('Görevleri alırken hata:', error);
-        });
+        },
+          error => {
+            console.error('Görevleri alırken hata:', error);
+          });
+    }
   }
 
   openTaskDialog(tId: number) {
@@ -196,8 +198,8 @@ export class CalendarComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.position = {
-      top: `${rect.top -30}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
-      left: `${rect.left-100}px`
+      top: `${rect.top - 30}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
+      left: `${rect.left - 100}px`
     };
 
     this.dialog.open(ShareComponent, dialogConfig);
@@ -350,14 +352,14 @@ export class CalendarComponent implements OnInit {
 
 
 
-  
+
   openPlanDialog(): void {
     this.isDialogOpen = true;
-}
+  }
 
-closePlanDialog(): void {
+  closePlanDialog(): void {
     this.isDialogOpen = false;
-}
+  }
 
 
 }

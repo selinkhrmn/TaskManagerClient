@@ -101,7 +101,7 @@
           <form class="example-form2">
             <mat-form-field class="example-form-field2">
               <mat-label>Ex. John Doe</mat-label>
-              <input matInput type="text" [(ngModel)]="value" />
+              <input matInput type="text" [(ngModel)]="value" [ngModelOptions]="{standalone: true}" />
             </mat-form-field>
           </form>
           <div class="checkboxPart">
@@ -220,7 +220,7 @@
           <form class="example-form2">
             <mat-form-field class="example-form-field2">
               <mat-label>Ex. John Doe</mat-label>
-              <input matInput type="text" [(ngModel)]="value" />
+              <input matInput type="text" [(ngModel)]="value" [ngModelOptions]="{standalone: true}"/>
             </mat-form-field>
           </form>
           <div class="checkboxPart">

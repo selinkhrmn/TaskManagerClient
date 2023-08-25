@@ -19,23 +19,25 @@ export class PlanDialogComponent implements OnInit {
         private dialog: MatDialog,   // MatDialog enjekte edildi
         private taskService: TaskService,
         private projectService: ProjectService
-        
+
     ) { }
     searchTerm: string = '';  // Arama terimi
     filteredTasks: ListTask[] = [];  // Filtrelenmiş görevler
     ngOnInit(): void {
-        this.taskService.getAllProjectTask({id: this.projectService.getProjectLocal().id}).subscribe((res) => {
-            if (res.isSuccessful == true) {
-                this.tasks = res.data;
-                this.tasks = this.tasks.filter(t => new Date(t.dueDate) <= new Date(1/1/1));
-                console.log(this.tasks);
-                
-                // API isteği tamamlandığında filteredTasks'ı güncelle
-                this.filteredTasks = this.tasks;
-            }
-        });
+        if (this.projectService.getProjectLocal() != null) {
+            this.taskService.getAllProjectTask({ id: this.projectService.getProjectLocal().id }).subscribe((res) => {
+                if (res.isSuccessful == true) {
+                    this.tasks = res.data;
+                    this.tasks = this.tasks.filter(t => new Date(t.dueDate) <= new Date(1 / 1 / 1));
+                    console.log(this.tasks);
+
+                    // API isteği tamamlandığında filteredTasks'ı güncelle
+                    this.filteredTasks = this.tasks;
+                }
+            });
+        }
     }
-    
+
     openTaskDialog(taskId: number): void {
         this.taskService.getTaskById(taskId).subscribe((res) => {
             if (res.isSuccessful) {
@@ -58,10 +60,10 @@ export class PlanDialogComponent implements OnInit {
             this.filteredTasks = this.tasks;  // Eğer arama çubuğu boşsa tüm task'ları göster
             return;
         }
-    
-        this.filteredTasks = this.tasks.filter(task => 
+
+        this.filteredTasks = this.tasks.filter(task =>
             task.name.toLowerCase().startsWith(this.searchTerm.toLowerCase())
         );
     }
-    
+
 }
