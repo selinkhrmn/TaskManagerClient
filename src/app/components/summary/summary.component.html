@@ -7,8 +7,11 @@
                 <img src="../../assets/hosgeldiniz.png" alt="" style="width: 30px;">
             </div>
         </div>
+        <div class="center-align custom-container" *ngIf="tasks.length == 0">
+            <p>{{'emptyMessage' | transloco}}</p>
+          </div>
 
-        <div class="center-align custom-container">
+        <div class="center-align custom-container" *ngIf="tasks.length != 0">
             <div class="d-flex align-items-center justify-content-center">
                 Burada {{ projectService.getProjectLocal()?.name }} adlı projenin durumunun, önceliklerinin, iş yükünün
                 ve daha fazlasının bir özetini görebilirsiniz.
@@ -184,10 +187,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button (click)="addUserDialog()"
-                                    style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">
+                                <button (click)="addUserDialog()"  [disabled]="!tokenService.hasRole('Admin')"
+                                    style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);" class="pointerDisable">
                                     <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni
-                                    birini ekleyin.</button>
+                                    birini ekleyin.
+                                </button>
 
                             </div>
                         </div>

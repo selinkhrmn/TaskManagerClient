@@ -320,10 +320,27 @@ button {
   /* Adjust the icon margin to improve spacing */
 }
 
+.add-person-button:disabled {
+  cursor: not-allowed;
+}
+
+
+
 .search-bar button {
   background-color: transparent;
   margin-left: -10px;
 }
 
+.empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-/* ... other styles ... */
+
+.empty p {
+  text-align: center;
+  font-size: 24px;
+
+}

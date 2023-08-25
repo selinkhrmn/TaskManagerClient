@@ -178,3 +178,7 @@ $atanmisRenk: green; // Atanmış durumu için renk
 }
 
 
+::ng-deep .pointerDisable:disabled {
+  background-color: red;
+  cursor: not-allowed;
+}

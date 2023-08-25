@@ -44,6 +44,7 @@
     "new password": "Yeni Şifre",
     "confirm password": "Şifreyi Tekrar Gir",
     "label" : "Etiket",
+    "emptyMessage" : "Açık bir proje bulunmamaktadır.",
     "navigation": {
         "yourWork": "İşlerin"
     },

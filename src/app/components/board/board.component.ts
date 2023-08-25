@@ -17,6 +17,7 @@ export class BoardComponent {
   columns: ColumnTask[];
   projectId: number = 1;
   project : ProjectDto ;
+  isEmpty: boolean = false;
 
   constructor(
     private columnService : ColumnService, 
@@ -27,11 +28,15 @@ export class BoardComponent {
 
     this.project = this.projectService?.getProjectLocal();
     if(this.project != null){
+      this.isEmpty = false;
       this.columnService.GetProjectColumnsTasks({"id": this.project.id}).subscribe((response) => {
         if(response.data != null){
           this.columns = response.data;
         }
       });
+    }
+    else{
+      this.isEmpty = true;
     }   
   }
   

@@ -68,7 +68,7 @@
           </button>
         </div>
       </mat-drawer>
-      <div class="button_container">
+      <div class="button_container" *ngIf="tokenService.hasRole('Admin')">
         <label>{{'addColumn' | transloco}}</label>
         <button mat-mini-fab color="warn" (click)="drawer.toggle()">
           <mat-icon>add</mat-icon>

@@ -5,6 +5,11 @@
     <!-- <app-add-people></app-add-people> -->
   </div>
 </div>
+
+<div class="empty" *ngIf="isEmpty">
+  <p>{{'emptyMessage' | transloco}}</p>
+</div>
+
 <div class="columns_container">
    <app-columns></app-columns>
 </div>

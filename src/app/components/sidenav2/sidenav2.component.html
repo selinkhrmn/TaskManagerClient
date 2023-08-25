@@ -1,7 +1,7 @@
 <div class="container">
   <div class="top_bar">
     <label>{{'projects' | transloco}}</label>
-    <div class="icon_holder">
+    <div class="icon_holder" *ngIf="tokenService.hasRole('Admin')">
       <button (click)="openDialog()" mat-mini-fab color="basic">
         <mat-icon>add</mat-icon>
       </button>

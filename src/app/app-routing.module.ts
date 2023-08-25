@@ -54,7 +54,7 @@ export const routes: Routes = [
       {
         path: 'project-settings',
         component: ProjectDetailsComponent,
-        canActivate: [canActivateGuard, ],
+        canActivate: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'create-issue-dialog',
@@ -80,15 +80,8 @@ export const routes: Routes = [
         path: 'user-setting',
         component: UserSettingComponent,
         canActivateChild: [canActivateGuard,],
-      },
-
-
+      }
     ],
-  },
-  {
-    path: 'admin-page',
-    component: AdminPageComponent,
-    // canActivateChild: [canActivateGuard,]
   },
   {
     path: 'create-project',
@@ -110,22 +103,30 @@ export const routes: Routes = [
    {
     path: 'admin-page',
     component : AdminPageComponent,
+    canActivateChild: [canActivateGuard, isAdminGuard],
     children : [
       {
         path: 'admin-projects',
-        component : AdminProjectsComponent
+        component : AdminProjectsComponent,
+        canActivateChild: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'admin-tasks',
-        component : AdminTasksComponent
+        canActivateChild: [canActivateGuard, isAdminGuard],
+        component : AdminTasksComponent,
       },
       {
         path: 'admin-users',
-        component : AdminUsersComponent
-      },
+        component : AdminUsersComponent,
+        canActivateChild: [canActivateGuard, isAdminGuard],
 
+      },
     ]
-   }
+   },
+   {
+    path: '**',
+    component: PasswordChangePageComponent //error component gerekli...
+  }
 ];
 
 @NgModule({

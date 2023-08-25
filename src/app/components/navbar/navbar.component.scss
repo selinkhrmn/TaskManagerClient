@@ -1,21 +1,24 @@
 // SCSS dosyası
 .navbar {
-  background:#0b1a47ba;
+  background: #0b1a47ba;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
 }
+
 .navbar-brand {
   padding: 12px;
   font-size: 36px;
-    .sedna {
-      font-weight: normal;
-    }
-    .cloud {
-      font-weight: bold;
-    }
+
+  .sedna {
+    font-weight: normal;
   }
-  
-  
+
+  .cloud {
+    font-weight: bold;
+  }
+}
+
+
 .language {
   // background-color: rgb(255, 255, 255);
 
@@ -28,11 +31,12 @@
   &:hover {
     background: transparent;
   }
+
   img {
     width: 30px;
     height: 30px;
   }
-}  
+}
 
 .nav-item {
   margin-left: 10px;
@@ -43,11 +47,15 @@
   float: right;
 }
 
+.btn:disabled{
+  cursor: not-allowed
+}
+
 
 .menu {
   margin-right: 10px;
-  
-  button {  
+
+  button {
     font-size: 16px;
     color: white;
   }
@@ -62,43 +70,53 @@
 
 .dropdown {
   display: flex;
-  
+
 }
 
 @media (max-width: 767px) {
   .navbar-brand {
-    font-size: 24px; /* Adjust font size for smaller screens */
+    font-size: 24px;
+    /* Adjust font size for smaller screens */
   }
 
   .language {
     img {
-      width: 25px; /* Adjust image width for smaller screens */
-      height: 25px; /* Adjust image height for smaller screens */
+      width: 25px;
+      /* Adjust image width for smaller screens */
+      height: 25px;
+      /* Adjust image height for smaller screens */
     }
   }
 
   .nav-item {
-    margin-left: 5px; /* Reduce margin for better spacing */
+    margin-left: 5px;
+    /* Reduce margin for better spacing */
   }
 
   .btn {
-    margin-left: 5px; /* Reduce margin for better spacing */
+    margin-left: 5px;
+    /* Reduce margin for better spacing */
   }
 
   .menu {
-    margin-right: 5px; /* Reduce margin for better spacing */
-    
+    margin-right: 5px;
+    /* Reduce margin for better spacing */
+
     button {
-      font-size: 14px; /* Adjust font size for smaller screens */
+      font-size: 14px;
+      /* Adjust font size for smaller screens */
     }
   }
 
   .user_profile {
     img {
-      width: 15px; /* Adjust image width for smaller screens */
-      height: 25px; /* Adjust image height for smaller screens */
+      width: 15px;
+      /* Adjust image width for smaller screens */
+      height: 25px;
+      /* Adjust image height for smaller screens */
     }
   }
 
 
 }
+

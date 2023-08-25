@@ -1,12 +1,11 @@
 <head>
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- To be Added  -->
 
 </head>
 <script src="https://unpkg.com/notie"></script>
 <div class="row">
-  
+
   <div class="header">
     <span class="user-name" (click)="handleUsernameClick()">{{
       tokenService.tokenNameSurname()
@@ -27,7 +26,7 @@
           &nbsp;{{ activeFilters.length }} applied</span>
       </button>
       &nbsp;
-      <button (click)="openDialog()" class="add-person-button">
+      <button (click)="openDialog()" class="add-person-button" [disabled]="!tokenService.hasRole('Admin')">
         <i class="material-icons">person_add</i>{{ "addPeople" | transloco }}
       </button>
       <!-- <button>
@@ -220,7 +219,7 @@
           <form class="example-form2">
             <mat-form-field class="example-form-field2">
               <mat-label>Ex. John Doe</mat-label>
-              <input matInput type="text" [(ngModel)]="value" [ngModelOptions]="{standalone: true}"/>
+              <input matInput type="text" [(ngModel)]="value" [ngModelOptions]="{standalone: true}" />
             </mat-form-field>
           </form>
           <div class="checkboxPart">
@@ -267,7 +266,11 @@
     </div>
   </mat-menu>
 
-  <div class="outer-container">
+  <div class="empty" *ngIf="listData.length == 0">
+    <p>{{'emptyMessage' | transloco}}</p>
+  </div>
+
+  <div class="outer-container" *ngIf="listData.length != 0">
     <div class="overflow-table-container">
       <table mat-table [dataSource]="filteredData">
         <!-- <ng-container matColumnDef="id">
@@ -390,7 +393,7 @@
     </div>
   </div>
 
-  <div class="add-button-container">
+  <div class="add-button-container" *ngIf="projectId != null">
     <button mat-raised-button color="primary" (click)="openDialog()">
       Oluştur
     </button>
