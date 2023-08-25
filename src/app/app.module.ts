@@ -21,7 +21,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { ChartComponent } from './components/summary/chart/chart.component';
 
 import { NgChartsModule } from 'ng2-charts';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BoardComponent } from './components/board/board.component';
 import { LittleMainComponentsComponent } from './components/little-main-components/little-main-components.component';
@@ -80,6 +80,7 @@ import { ProjectComponent } from './components/project/project.component';
 import { PlanDialogComponent } from './components/calendar/plandialog/plan-dialog.component';
 import { UnplannedComponentComponent } from './components/list/unplanned/unplanned.component';
 import { LabelPipe } from 'src/pipes/label.pipe';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 
@@ -196,7 +197,14 @@ import { LabelPipe } from 'src/pipes/label.pipe';
     {
       provide: MatDialogRef,
       useValue: {}
-    }],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  }
+  ],
+  
   bootstrap: [AppComponent],
   
 })

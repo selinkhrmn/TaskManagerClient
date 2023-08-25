@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from "src/environments/environment";
@@ -23,29 +23,28 @@ export class ProjectService {
     this.getProjectLocal();
   }
 
-  headers = this.tokenService.getHeaders();
-  httpOptions = {
-      headers: this.headers
-  };
+  // httpOptions = {
+  //     headers: this.tokenService.getHeaders()
+  // };
   
   getAllProjects(): Observable<ResponseModel<Project>> {
-    return this.http.get<ResponseModel<Project>>(`${this.baseUrl}/GetAllProjects`, this.httpOptions);
+    return this.http.get<ResponseModel<Project>>(`${this.baseUrl}/GetAllProjects`);
   }
 
   createProject(project: Partial<Project>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project, this.httpOptions);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/CreateProject`, project);
   }
 
   updateProject(project: Partial<any>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project, this.httpOptions);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project);
   }
 
   deleteProject(project: Partial<Project>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project, this.httpOptions);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project);
   }
 
   getProject(id : Partial<Project>){
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/GetProject`, id, this.httpOptions);
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/GetProject`, id);
   }
 
 

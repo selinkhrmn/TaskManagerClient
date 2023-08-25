@@ -31,19 +31,19 @@ export class UserService {
   };
 
   getAllUsers(): Observable<ResponseModel<UserDto>> {
-    return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`, this.httpOptions);
+    return this.http.get<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetAllUsers`);
   }
 
   GetAllProjectUsers(id: number) {
-    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, {id: id}, this.httpOptions);
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, {id: id});
   }
 
   AddUserToProject(projectUser: Partial<ProjectUserList>) {
-    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser, this.httpOptions);
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 
   DeleteUserFromProject(projectUser: Partial<ProjectUserList>) {
-    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/DeleteUserFromProject`, projectUser, this.httpOptions);
+    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/DeleteUserFromProject`, projectUser);
   }
 
   // DeleteUserFromProject(id: string, projectId: number) {
@@ -59,13 +59,13 @@ export class UserService {
   
   ChangePasswordWithToken(token: string, newPassword: string): Observable<any> {
     const payload = { token, newPassword };
-    const url = `${this.baseUrlIdentity}/ChangePasswordWithToken`; // Replace with the appropriate endpoint URL
+    const url = `${this.baseUrlIdentity}/ChangePasswordWithToken`; 
     return this.http.post(url, payload);
   }
 
   ForgotPassword(email : string) :Observable<any>{
     const payload = { email };
-    const url = `${this.baseUrlIdentity}/ForgotPassword`; // Replace with the appropriate endpoint URL
+    const url = `${this.baseUrlIdentity}/ForgotPassword`;
 
     return this.http.post(url, payload)
   }

@@ -27,15 +27,15 @@ export class CommentService {
   }
   
   CreateComment(comment: CommentRequest) {
-    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/CreateComment`, comment, this.httpOptions);
+    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/CreateComment`, comment);
   }
 
   UpdateComment(comment: CommentRequest){
-    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/UpdateComment`, comment, this.httpOptions); 
+    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/UpdateComment`, comment); 
   }
 
   DeleteComment(id: number){
-    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/DeleteComment`, {id: id}, this.httpOptions); 
+    return this.http.post<ResponseModel<Comment>>(`${this.baseUrl}/DeleteComment`, {id: id}); 
   }
   
 }

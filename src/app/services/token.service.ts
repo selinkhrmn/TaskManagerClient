@@ -62,13 +62,14 @@ export class TokenService {
     return this.jwtHelper.isTokenExpired(token);
   }
 
+
   public getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); 
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
-  }
+}
+
 
   getTokenId() {
     let token = this.decodeToken();

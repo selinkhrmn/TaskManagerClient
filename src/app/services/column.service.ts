@@ -20,35 +20,35 @@ export class ColumnService {
   constructor(private http: HttpClient,
     public tokenService: TokenService) { }
 
-  headers = this.tokenService.getHeaders();
-  httpOptions = {
-      headers: this.headers
-  };
+  // headers = this.tokenService.getHeaders();
+  // httpOptions = {
+  //     headers: this.headers
+  // };
 
   CreateColumn(column: Partial<Column>) {
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/CreateColumn`,column, this.httpOptions );
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/CreateColumn`,column );
   }
 
   DeleteColumn(id : number) {
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/DeleteColumn`,{id: id}, this.httpOptions );
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/DeleteColumn`,{id: id} );
   }
 
   UpdateColumn(column: Partial<Column>) {
     
-    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/UpdateColumn`,column, this.httpOptions );
+    return this.http.post<ResponseModel<Column>>(`${this.baseUrl}/UpdateColumn`,column );
   }
 
   GetAllProjectColumns(id: Partial<ProjectDto>) {
-    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/GetAllProjectColumns`, id, this.httpOptions);
+    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/GetAllProjectColumns`, id);
   }
 
   GetProjectColumnsTasks(id: Partial<ProjectDto>): Observable<ResponseModel<ColumnTask>> {
-    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, id, this.httpOptions);
+    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, id);
   }
 
   TransferColumnTasks(transferDto : TransferDto): Observable<ResponseModel<ColumnDto>>{
     debugger
-    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/TransferColumnTasks`, transferDto, this.httpOptions);
+    return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/TransferColumnTasks`, transferDto);
   }
 
   

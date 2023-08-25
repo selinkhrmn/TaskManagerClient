@@ -28,38 +28,38 @@ export class TaskService {
     public tokenService: TokenService) {
   }
 
-  headers = this.tokenService.getHeaders();
-  httpOptions = {
-    headers: this.headers
-  };
+  // headers = this.tokenService.getHeaders();
+  // httpOptions = {
+  //   headers: this.headers
+  // };
 
   createTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task);
   }
 
 
   updateTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTask`, task);
   }
 
   deleteTask(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, { body: task }, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/DeleteTask`, { body: task });
   }
 
   updateTaskColumnId(task: Partial<Task>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/UpdateTaskColumnId`, task);
   }
 
   getAllProjectTask(id: Partial<ProjectDto>) {
-    return this.http.post<ResponseModel<ListTask>>(`${this.baseUrl}/GetAllProjectTask`, id, this.httpOptions);
+    return this.http.post<ResponseModel<ListTask>>(`${this.baseUrl}/GetAllProjectTask`, id);
   }
 
   getTaskById(id: number) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, { id: id }, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, { id: id });
   }
 
   GetAllTaskForUser(id: Partial<UserDto>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id, this.httpOptions);
+    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id);
   }
 
   // setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
