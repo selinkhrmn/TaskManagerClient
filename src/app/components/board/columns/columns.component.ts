@@ -42,7 +42,12 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None,
 })
 export class ColumnsComponent {
-
+  predefinedColors: string[] = [
+    '#FF5733', '#33FF57', '#5733FF', '#FF336A',
+    '#33B4FF', '#FFD633', '#A633FF', '#33FFD6',
+    '#FF33C1', '#33FFA6', '#E433FF', '#33E2FF',
+    '#B333FF', '#33FFB4', '#FFA833', '#E633FF'
+  ];
   tasks: Task[] = [];
 
   columns: ColumnTask[] = [];
@@ -255,5 +260,16 @@ export class ColumnsComponent {
       }
     }
   }
-
+  generateRandomBackgroundColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  getRandomPredefinedColor(): string {
+    const randomIndex = Math.floor(Math.random() * this.predefinedColors.length);
+    return this.predefinedColors[randomIndex];
+  }
 }

@@ -90,8 +90,8 @@
 .example-column {
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #05362d;
-  background: #88b1a830;
+
+  background:#cabac573;
   word-wrap: break-word;
   // max-width: 250px;
 
@@ -99,7 +99,7 @@
   .addTask.sticky-add-task {
     //Mantığı çözülmeli
     position: sticky;
-    background-color: #88b1a8d5;
+    background-color:#e1dbdc;
     width: 100%;
     bottom: 0;
     z-index: 1;
@@ -124,11 +124,11 @@
         height: 100%;
         padding: 5px;
         border-radius: 5px;
-        background-color: #324028;
+        background-color: #f0f0f0;
         text-align: center;
         font-size: 22px;
         font-weight: 700;
-        color: #fff;
+        color: #0d0000;
         margin: 0;
         white-space: nowrap;
         overflow: hidden;
@@ -178,7 +178,7 @@
 
 .example-box {
   padding: 20px 10px;
-  border-bottom: 1px solid #07472471;
+  border-bottom: 1px solid #0a063a71;
   color: #000000;
   display: flex;
   flex-direction: row;
