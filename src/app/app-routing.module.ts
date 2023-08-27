@@ -22,6 +22,7 @@ import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/adm
 import { AdminProjectsComponent } from './components/admin-page/admin-projects/admin-projects.component';
 import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 export const routes: Routes = [
   {
@@ -125,7 +126,7 @@ export const routes: Routes = [
    },
    {
     path: '**',
-    component: PasswordChangePageComponent //error component gerekli...
+    component: ErrorPageComponent //error component gerekli...
   }
 ];
 
