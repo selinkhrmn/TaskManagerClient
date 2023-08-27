@@ -128,7 +128,8 @@
 
           <div class="main">
             <div class="placeholder"></div>
-            <label>{{ comment.comment }}</label>
+            <label *ngIf="!commentWantsToBeEdited">{{ comment.comment }}</label>
+            <input *ngIf="commentWantsToBeEdited && comment.id === commentBeingEditedId" [(ngModel)]="updatedComment"/>
           </div>
 
           <div class="edit_delete_buttons" *ngIf="!commentWantsToBeEdited">
@@ -136,10 +137,7 @@
             <button
               mat-button
               (click)="
-                editComment(comment.id, comment.comment);
-                closeEditAndDeleteButtons()
-              "
-            >
+              closeEditAndDeleteButtons(comment.id, comment.comment);findEditComment(comment.id)">
               Edit
             </button>
             <button mat-button (click)="deleteComment(comment.id)">
@@ -147,11 +145,11 @@
             </button>
           </div>
 
-          <div class="save_cancel_buttons" *ngIf="commentWantsToBeEdited">
-            {{ comment.comment }}
-            <button mat-button>Save</button>
-            <button mat-button>Cancel</button>
+          <div class="save_cancel_buttons" *ngIf="commentWantsToBeEdited && comment.id === commentBeingEditedId">
+            <button mat-button (click)="editComment(comment.id, updatedComment);closeSaveAndCancelButtons()">Save</button>
+            <button mat-button (click)="closeSaveAndCancelButtons()">Cancel</button>
           </div>
+          
         </div>
       </div>
     </div>

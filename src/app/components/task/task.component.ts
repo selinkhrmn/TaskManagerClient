@@ -56,6 +56,7 @@ export class TaskComponent implements OnInit {
   addSubtopicClicked = false;
   commentWantsToGetCreated: boolean;
   commentWantsToBeEdited: boolean;
+  commentBeingEditedId: number = -1; 
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
@@ -75,7 +76,7 @@ export class TaskComponent implements OnInit {
   selectedDate: Date;
   isInputDisabled: boolean = false;
   taskColor: number;
-  
+  updatedComment: string;
 
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
@@ -124,7 +125,7 @@ export class TaskComponent implements OnInit {
   }
   
   ngOnDestroy() {
-    this.closeDialog(); // Call closeDialog() when the component is about to be destroyed
+    this.closeDialog(); 
   }
 
 
@@ -133,9 +134,27 @@ export class TaskComponent implements OnInit {
     this.createComment= ''
   }
 
-  closeEditAndDeleteButtons() {
+  closeEditAndDeleteButtons(id: number, comment: string) { 
+    this.commentReq.id = id;
+    this.commentReq.comment = comment;
+    console.log(this.commentReq);
+    
     this.commentWantsToBeEdited= true;
   }
+
+  closeSaveAndCancelButtons() {
+    this.commentWantsToBeEdited= false;
+    this.commentBeingEditedId = -1;
+    console.log(this.commentReq);
+    
+  }
+
+  // GetCommentById() {
+  //   this.commentService.GetCommentById(this.taskId).subscribe((res) => {
+  //     console.log(res);
+      
+  //   })
+  // }
 
 
   logChange($event: any) {
@@ -264,6 +283,7 @@ export class TaskComponent implements OnInit {
   }
 
   getTaskComments(){
+    
     this.commentService.GetTaskComments(this.taskId).subscribe((res) => {
       if(res.isSuccessful == true){
         this.comments = res.data;
@@ -286,6 +306,8 @@ export class TaskComponent implements OnInit {
     if (this.createComment.trim() !== '') {
       this.commentReq.comment = this.createComment;
       this.commentService.CreateComment(this.commentReq).subscribe((res) => {
+        
+        
         if(res.isSuccessful == true){  
           this.getTaskComments();       
           this.createComment = '';
@@ -296,14 +318,24 @@ export class TaskComponent implements OnInit {
   }
 
   editComment(id: number, comment: string){
+    debugger
     console.log(comment);
+    this.commentBeingEditedId = id;
     this.commentReq.id = id;
-    this.commentReq.comment = comment; //alınan yeni input
+    this.commentReq.comment = this.updatedComment; //alınan yeni input
     this.commentService.UpdateComment({'id': this.commentReq.id, 'comment': this.commentReq.comment}).subscribe((res) => { //değiştirdim 24.08.2023
       if(res.isSuccessful){
         this.getTaskComments();
       }
     })
+  }
+
+  findEditComment(commentId: number) {
+    console.log(this.comments);
+    
+    this.commentWantsToBeEdited = true;
+    this.commentBeingEditedId = commentId;
+    
   }
   
 
