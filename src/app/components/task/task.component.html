@@ -161,20 +161,12 @@
     <div class="container">
       <div class="top_side_details">
         <div class="top_side_buttons">
-
-        <button mat-button [(ngModel)] = "isDone" > <!--Her tıklamada değişecek şekilde ayarlanmalı boolean ile-->
-          Todo
-        </button>
-       
-        <button mat-button [(ngModel)] = "isDone" > <!--Her tıklamada değişecek şekilde ayarlanmalı boolean ile-->
-          I'm on it
-        </button>
-
-        <button mat-button [(ngModel)] = "isDone" (click)="controlIsDone($event)"> <!--Her tıklamada değişecek şekilde ayarlanmalı boolean ile-->
-          Done
-        </button>
-
-          <button class="delete_button" (click)="deleteTask()" mat-mini-fab color="warn">
+          <button
+            class="delete_button"
+            (click)="deleteTask()"
+            mat-mini-fab
+            color="warn"
+          >
             <mat-icon>delete_outline</mat-icon>
           </button>
           <div class="close_icon">
@@ -183,12 +175,37 @@
             </button>
             <!-- Close icon -->
           </div>
-          
         </div>
 
-        <h2>Details</h2>
+        <div class="bottom_side_buttons">
+          <h2>Details</h2>
+          <div class="task_state_buttons">
+             <button
+            mat-button
+            (click)="todoClick(taskChange.label)"
+            [ngClass]="{ gray: taskColor === 0 }"
+          >
+            Todo
+          </button>
 
-        
+          <button
+            mat-button
+            (click)="onProgressClick(taskChange.label)"
+            [ngClass]="{ blue: taskColor === 1 }"
+          >
+            I'm on it
+          </button>
+
+          <button
+            mat-button
+            (click)="doneClick(taskChange.label)"
+            [ngClass]="{ green: taskColor === 2 }"
+          >
+            Done
+          </button>
+          </div>
+         
+        </div>
       </div>
 
       <div class="body">

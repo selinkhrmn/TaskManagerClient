@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit,HostListener,OnDestroy   } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 import { TaskDto } from 'src/app/interfaces/taskDto';
@@ -73,14 +73,17 @@ export class TaskComponent implements OnInit {
   priorities: string[] = [];
   users: ProjectUserDto[] = [];
   selectedDate: Date;
-  InfinityDate: Date = new Date(1, 0, 1);
   isInputDisabled: boolean = false;
+  taskColor: number;
+  
+
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
 
   constructor(
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    
     public translocoService: TranslocoService,
     public projectService: ProjectService,
     private dialogRef: MatDialogRef<TaskComponent>,
@@ -88,10 +91,13 @@ export class TaskComponent implements OnInit {
     public priorityService: PriorityService,
     private fileService: FileService,
     private commentService: CommentService,
-    private userService: UserService
+    private userService: UserService,
+    
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    console.log(this.taskChange.label);
+    
     this.getTaskComments();
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
@@ -108,18 +114,20 @@ export class TaskComponent implements OnInit {
     this.priorities = this.priorityService.getOptions();
     this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
 
-    if(this.taskChange.label == 2) {
-       
-       this.isDone = true;
-    }
-    else {
-      this.alertBox();
-    }
+    this.taskColor = this.taskChange.label  
+
+    
     this.commentWantsToBeEdited= false;
     
-  
-  
+
+
   }
+  
+  ngOnDestroy() {
+    this.closeDialog(); // Call closeDialog() when the component is about to be destroyed
+  }
+
+
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
     this.createComment= ''
@@ -181,11 +189,36 @@ export class TaskComponent implements OnInit {
     
   } 
 
-  controlIsDone(e : any) {
-    this.isDone = true;
-    this.taskChange.label = 2;
-    console.log(this.taskChange);
+  todoClick(label: any) {    
+    label = 0;
+
+    this.taskChange.label = 0;
+    console.log(label);
+    this.taskColor = 0;
   }
+
+  onProgressClick(label: any) {
+    label = 1;
+
+    this.taskChange.label = 1;
+    console.log(label);
+    this.taskColor = 1;
+
+  }
+
+  doneClick(label: any) {
+    label = 2;
+    this.taskChange.label = 2;
+    console.log(label);
+    this.taskColor = 2;
+
+  }
+
+  // controlIsDone(e : any) {
+  //   this.isDone = true;
+  //   this.taskChange.label = 2;
+  //   console.log(this.taskChange);
+  // }
 
 
   getUserProfileImage(x: any){
@@ -272,6 +305,7 @@ export class TaskComponent implements OnInit {
       }
     })
   }
+  
 
   deleteComment(id: number){
     this.commentService.DeleteComment(id).subscribe((res) => {
@@ -279,10 +313,12 @@ export class TaskComponent implements OnInit {
         this.getTaskComments();
       }
     })
-  }
 
+  }
+ 
+  
   closeDialog() {
-    debugger
+    this.taskColor = this.taskChange.label  
     this.dialogRef.close();
     this.updateTask();
   }

@@ -19,7 +19,7 @@ h2 {
   width: 70%;
   padding: 10px;
   overflow: auto;
-  
+
   input {
     padding: 7px;
     border-radius: 3px;
@@ -37,7 +37,7 @@ h2 {
 
     &:focus {
       cursor: auto;
-      border: 1px solid #5CACF2;
+      border: 1px solid #5cacf2;
     }
   }
 }
@@ -50,7 +50,6 @@ h2 {
 .description {
   height: fit-content;
   .top_side {
-
     input {
       margin-top: 7px;
       font-size: 16px;
@@ -134,7 +133,7 @@ h2 {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: #5CACF2;
+      background-color: #5cacf2;
       font-size: 18px;
       color: white;
 
@@ -157,7 +156,6 @@ h2 {
       justify-content: center;
       align-items: center;
       font-size: 16px;
-
     }
   }
 
@@ -218,10 +216,22 @@ h2 {
         justify-content: end;
         gap: 10px;
       }
-    
-      h2 {
-        font-weight: 700;
-        font-size: 28px;
+
+      .bottom_side_buttons {
+        display: flex;
+        justify-content: space-between;
+        h2 {
+          font-weight: 700;
+          font-size: 28px;
+        }
+        .task_state_buttons {
+          display: flex;
+          gap: 5px;
+
+          button {
+            cursor: pointer;
+          }
+        }
       }
     }
   }
@@ -263,8 +273,6 @@ h2 {
             justify-content: center;
             align-items: center;
             width: 80%;
-
-           
           }
           .dateTime {
             margin-top: 10px;
@@ -275,14 +283,12 @@ h2 {
   }
 }
 
-
 .priority-icon {
   margin-top: 4px;
   margin-right: 4px;
   width: 25px;
   height: 25px;
 }
-
 
 label.dropbtn {
   height: 30px;
@@ -296,8 +302,8 @@ label.dropbtn {
   margin: 0;
   cursor: pointer;
   text-indent: 20px;
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-content p:hover {
@@ -336,21 +342,34 @@ input:checked ~ .dropdown .overlay {
 }
 
 .user-image {
-  width: 40px; 
+  width: 40px;
   height: 40px;
-  border-radius: 50%; 
-  overflow: hidden; 
-  // margin-right: 8px; 
+  border-radius: 50%;
+  overflow: hidden;
+  // margin-right: 8px;
 }
 
 .user-image img {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .user-name {
-  font-size: 14px; 
+  font-size: 14px;
 }
 
+.gray {
+  background-color: gray;
+  color: white;
+}
 
+.blue {
+  background-color: lightblue;
+  color: white;
+}
+
+.green {
+  background-color: lightgreen;
+  color: white;
+}
