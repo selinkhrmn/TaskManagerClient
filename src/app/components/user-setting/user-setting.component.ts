@@ -46,7 +46,7 @@ export class UserSettingComponent {
 
   openDialog() {
     this.dialog.open(RegisterPageComponent, {
-      width: '30%'
+      width: '30%',height: '80%'
     });
   }
 

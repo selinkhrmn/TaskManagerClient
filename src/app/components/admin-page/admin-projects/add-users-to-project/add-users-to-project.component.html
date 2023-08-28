@@ -21,7 +21,7 @@
 
   <div class="input_and_save_part">
     <div class="form-group">
-      <label for="usr">Name ÇALIŞMIYOR</label>
+      <label for="usr">Name</label>
       <input type="text" [(ngModel)]="theInput" (keyup)="applyFilter()" class="form-control" id="usr" placeholder="John Doe">
     </div>
     <!-- <form class="example-form">
@@ -30,29 +30,26 @@
         <input matInput placeholder="Search for a user" value="John Doe" />
       </mat-form-field>
     </form> -->
-<!-- 
-    <div class="buttons">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="AddUserToProject(); closeDialog()"
-      >
-        Save
-      </button>
-    </div> -->
 
   </div>
-  <br />
-  <br />
-
+  
+  <div class="buttons">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="AddUserToProject(); closeDialog()"
+    >
+      Save
+    </button>
+  </div>
   <div class="users_part">
       <section 
       class="example-section"
-      *ngFor="let userList of userCheckedList; let i = index" 
+      *ngFor="let userList of inputUserList" 
     >
       <p >
         <mat-checkbox class="checkbox" [(ngModel)]="userList.checked">
-          {{ userList.user.username }}
+          {{  userList.user.username }}
         </mat-checkbox>
       </p>
     </section>

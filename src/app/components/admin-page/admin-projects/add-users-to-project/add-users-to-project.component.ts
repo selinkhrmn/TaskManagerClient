@@ -37,7 +37,7 @@ export class AddUsersToProjectComponent implements OnInit {
   userCheckedList: userChecked[] = [];
   selectedUsers: any[] = [];
   dataSource = new MatTableDataSource<UserDto>(this.users);
-  theInput: string;
+  theInput: string = '';
   inputUserList: any = [];
   constructor(
     private projectService: ProjectService,
@@ -59,6 +59,7 @@ export class AddUsersToProjectComponent implements OnInit {
           user,
           checked: this.isSelected(user.id)
         }));
+        this.inputUserList = this.userCheckedList
       });
     });
 
@@ -70,10 +71,9 @@ export class AddUsersToProjectComponent implements OnInit {
   }
 
   applyFilter() {
-    this.userService.getAllUsers().subscribe((res) => {
-      console.log(res);
-      this.inputUserList = res.data.map(p => p.name).filter(p => p.includes(this.theInput))
-    })
+    this.inputUserList = this.userCheckedList
+      .filter(user => user.user.name.includes(this.theInput));
+    console.log(this.inputUserList);
   }
  
   

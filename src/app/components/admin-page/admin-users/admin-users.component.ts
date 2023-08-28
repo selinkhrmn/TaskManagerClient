@@ -64,6 +64,6 @@ export class AdminUsersComponent {
   }
 
   addPeople() {
-    const dialogRef = this.dialog.open(RegisterPageComponent, { height: '90%', width: '30%', panelClass: 'dialog' });
+    const dialogRef = this.dialog.open(RegisterPageComponent, { height: '80%', width: '30%', panelClass: 'dialog' });
   }
 }
