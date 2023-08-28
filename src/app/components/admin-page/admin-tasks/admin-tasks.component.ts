@@ -124,7 +124,7 @@ openTaskDialog(id : number) {
   this.taskArray = res.data;
   
   
-  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray}, width : '60%'});
+  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray},height: '90%', width: '90%',});
   dialogS.afterClosed().subscribe((res) => {
     window.location.reload();
   })

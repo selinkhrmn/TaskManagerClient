@@ -77,7 +77,9 @@ export class TaskComponent implements OnInit {
   isInputDisabled: boolean = false;
   taskColor: number;
   updatedComment: string;
-
+  // taskComment = {
+  //   lastComment: 
+  // }
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
 
@@ -122,6 +124,11 @@ export class TaskComponent implements OnInit {
   
   
   }
+
+  ngOnDestroy() {
+    this.updateTask()
+  }
+  
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
     this.createComment= ''
@@ -253,11 +260,11 @@ export class TaskComponent implements OnInit {
       console.log("different");
       
 
-      // this.taskService.updateTask(this.taskChange).subscribe((res) =>{
-      //   if(res.isSuccessful == true){
-      //     // alert("YES!")
-      //   }
-      // } )
+      this.taskService.updateTask(this.taskChange).subscribe((res) =>{
+        if(res.isSuccessful == true){
+          // alert("YES!")
+        }
+      } )
     } else {
       console.log("same");
       
@@ -349,9 +356,11 @@ export class TaskComponent implements OnInit {
  
   
   closeDialog() {
+    console.log(this.taskColor);
+     this.updateTask();
     this.taskColor = this.taskChange.label  
     this.dialogRef.close();
-    this.updateTask();
+   
   }
   // config: AngularEditorConfig = {
   //   editable: true,

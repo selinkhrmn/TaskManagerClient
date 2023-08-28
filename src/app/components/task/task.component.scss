@@ -25,7 +25,7 @@ h2 {
     border-radius: 3px;
     font-size: 24px;
     font-weight: 600;
-    width: 100%;
+    width: 80%;
     border: none;
     outline: none;
     background: transparent;
@@ -184,6 +184,9 @@ h2 {
     .placeholder2 {
       background-color: transparent;
       width: 40px;
+    }
+    button {
+      font-weight: 600;
     }
   }
 }
@@ -372,4 +375,19 @@ input:checked ~ .dropdown .overlay {
 .green {
   background-color: lightgreen;
   color: white;
+}
+
+.placeholder3 {
+  width: 25px;
+  height: 1px;
+}
+
+.save_cancel_buttons {
+  margin-top: 7px;
+  display: flex;
+  gap: 5px;
+
+  button {
+    font-weight: 600;
+  }
 }
