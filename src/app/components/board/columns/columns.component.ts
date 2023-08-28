@@ -48,31 +48,24 @@ export class ColumnsComponent {
     '#FF33C1', '#33FFA6', '#E433FF', '#33E2FF',
     '#B333FF', '#33FFB4', '#FFA833', '#E633FF'
   ];
+  @Output() currentColumnId: number;
   tasks: Task[] = [];
-
   columns: ColumnTask[] = [];
   columnGet: ColumnTask;
-
   allTasks: TaskDto[] = [];
-
   todo: TaskDto[] = [];
-
   done: TaskDto[] = [];
-
   InProgress: TaskDto[] = [];
-
   currentProjectId: number;
   columnName: string;
   updatedColumnName: string;
   currentProject: ProjectDto;
   taskName: string;
   defaultEndDate = new Date(1970, 1, 1);
-
-  @Output() currentColumnId: number;
-
   showFiller = false;
   panelOpenState = false;
   taskObj: Partial<Task> = {};
+  columnColors: string[] = [];
 
   constructor(
     private columnService: ColumnService,
@@ -86,16 +79,19 @@ export class ColumnsComponent {
 
   ngOnInit(): void {
     this.getColumnId(this.currentColumnId);
-    if (this.projectService.getProjectLocal()!= null) {
+    if (this.projectService.getProjectLocal() != null) {
       this.currentProject = this.projectService.getProjectLocal();
       this.columnService.GetProjectColumnsTasks({ "id": this.projectService.getProjectLocal().id }).subscribe((response) => {
         if (response.data != null) {
           this.columns = response.data;
+
+          this.updateBackgroundColor();
           console.log(this.columns);
-          
+
         }
       });
     }
+
   }
   stopPropagation(event: { stopPropagation: () => void; }) {
     event.stopPropagation();
@@ -121,8 +117,6 @@ export class ColumnsComponent {
   }
 
   dropColumn(event: CdkDragDrop<any[]>) {
-
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -139,7 +133,7 @@ export class ColumnsComponent {
 
 
   getColumnId(columnId: number) {
-   
+
     this.currentColumnId = columnId;
   }
 
@@ -171,7 +165,7 @@ export class ColumnsComponent {
   //   })
   // }
 
-  
+
 
   createColumn() {
     this.columnService.CreateColumn({ 'projectId': this.projectService.getProjectLocal().id, 'name': this.columnName }).subscribe((res) => {
@@ -179,14 +173,14 @@ export class ColumnsComponent {
     })
   }
 
-  isDeleteButtonDisabled(id: number){
-    if(this.columns.length <= 1){
+  isDeleteButtonDisabled(id: number) {
+    if (this.columns.length <= 1) {
       return true;
     }
-    else{
+    else {
       return false;
     }
-  
+
   }
 
 
@@ -212,7 +206,7 @@ export class ColumnsComponent {
         id: columnId,
         name: columnName
       }
-  
+
       let selectedColumn = this.columns.find(c => c.id == columnId);
       if (selectedColumn?.tasks.length == 0) {
         // Show SweetAlert before directly deleting the column
@@ -260,6 +254,7 @@ export class ColumnsComponent {
       }
     }
   }
+
   generateRandomBackgroundColor(): string {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -271,5 +266,23 @@ export class ColumnsComponent {
   getRandomPredefinedColor(): string {
     const randomIndex = Math.floor(Math.random() * this.predefinedColors.length);
     return this.predefinedColors[randomIndex];
+  }
+
+  updateBackgroundColor() {
+    this.columnColors = [];
+
+    const usedColors = new Set();
+
+    this.columns.forEach(column => {
+      let randomColor = this.getRandomPredefinedColor();
+
+      while (usedColors.has(randomColor)) {
+        randomColor = this.getRandomPredefinedColor();
+      }
+
+      usedColors.add(randomColor); 
+      this.columnColors.push(randomColor);
+    });
+
   }
 }
