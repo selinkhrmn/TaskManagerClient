@@ -23,6 +23,7 @@ import { AdminProjectsComponent } from './components/admin-page/admin-projects/a
 import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-tasks.component';
 import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
 
 export const routes: Routes = [
   {
@@ -123,6 +124,12 @@ export const routes: Routes = [
 
       },
     ]
+   },
+   
+  {
+    path: 'profile-setting',
+    component : ProfileSettingPageComponent,
+    canActivateChild: [canActivateGuard, isAdminGuard],
    },
    {
     path: '**',

@@ -52,6 +52,10 @@ export class NavbarComponent {
       this.router.navigate(['admin-page/admin-projects']);
     }
 
+    routerToProfileSetting() {
+      this.router.navigate(['profile-setting']);
+    }
+
     openCreateIssueDialog() {
 
       const dialog = this.dialog.open(CreateIssueDialogComponent, { data: { table: this.table }, width: '60%' });

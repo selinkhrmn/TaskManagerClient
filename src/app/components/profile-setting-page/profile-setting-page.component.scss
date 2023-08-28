@@ -1,0 +1,35 @@
+.card {
+    display : flex;
+    width: 50%;
+    padding: 10px;
+    // background-color: aqua;
+    // border : 10px solid white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 20px;
+}
+
+h1 {
+    margin : 20px;
+}
+
+
+
+.mat-mdc-card-content {
+    display: flex !important;
+}
+
+h4 {
+    display: flex !important;
+    align-items: center;
+}
+
+
+.mat-mdc-card-header {
+    padding: 16px;
+}

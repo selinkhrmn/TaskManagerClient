@@ -82,10 +82,7 @@ import { UnplannedComponentComponent } from './components/list/unplanned/unplann
 import { LabelPipe } from 'src/pipes/label.pipe';
 import { TokenInterceptor } from './services/token.interceptor';
 import { PriorityService } from './services/priority.service';
-
-
-
-
+import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
 
 
 @NgModule({
@@ -141,7 +138,8 @@ import { PriorityService } from './services/priority.service';
     ProjectComponent,
     PlanDialogComponent,
     UnplannedComponentComponent,
-    LabelPipe
+    LabelPipe,
+    ProfileSettingPageComponent
 
 
   ],
