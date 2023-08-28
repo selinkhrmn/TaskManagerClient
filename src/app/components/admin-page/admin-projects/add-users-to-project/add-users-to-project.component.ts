@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ProjectUserList, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDto } from 'src/app/interfaces/project';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface userChecked {
   user: UserDto;
@@ -35,7 +36,9 @@ export class AddUsersToProjectComponent implements OnInit {
   userList: any = []; // any yerine ne yapıcaz türünü
   userCheckedList: userChecked[] = [];
   selectedUsers: any[] = [];
-
+  dataSource = new MatTableDataSource<UserDto>(this.users);
+  theInput: string;
+  inputUserList: any = [];
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
@@ -66,6 +69,14 @@ export class AddUsersToProjectComponent implements OnInit {
     });
   }
 
+  applyFilter() {
+    this.userService.getAllUsers().subscribe((res) => {
+      console.log(res);
+      this.inputUserList = res.data.map(p => p.name).filter(p => p.includes(this.theInput))
+    })
+  }
+ 
+  
   onChangeProject(event: any) {
     this.projectId = event;
     console.log(event);
@@ -78,6 +89,8 @@ export class AddUsersToProjectComponent implements OnInit {
       }));
     });
   }
+
+ 
 
 
   // toggleUser(username: string, userId: string, index: number): void {

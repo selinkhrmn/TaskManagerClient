@@ -28,7 +28,9 @@ export class LoginPageComponent{
 
   signIn() {
     if(this.user.usernameOrEmail != '' && this.user.password != ''){
-      this.authService.login(this.user).subscribe(() => {
+      this.authService.login(this.user).subscribe((res) => {
+        console.log(res);
+        
         const tokenT = localStorage.getItem("token");
         if (tokenT != null) {
           this.router.navigate(['home'], { relativeTo: this.activatedRoute });

@@ -5,8 +5,6 @@
       <div class="container">
         <label>{{'name' | transloco}}</label>
         <input (keydown.space)="$event.preventDefault()" placeholder="John" [(ngModel)] = 'user.name' (ngModelChange)="updateUserName()"/>
-        <label>{{'password' | transloco}}</label>
-        <input (keydown.space)="$event.preventDefault()" placeholder="JohnDoe123" [(ngModel)] = 'user.password'/>
         <label>{{'surname' | transloco}}</label>
         <input (keydown.space)="$event.preventDefault()" placeholder="Doe"  [(ngModel)] = 'user.surname'  (ngModelChange)="updateUserName()" />
         <label>{{'username' | transloco}}</label>

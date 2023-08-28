@@ -28,6 +28,11 @@
     display: flex;
     flex-direction: column;
 
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      color: red;
+    }
     label {
         margin-bottom: 5px;
         align-self: baseline;
@@ -62,4 +67,14 @@
 
 .mat-mdc-radio-button ~ .mat-mdc-radio-button {
     margin-left: 16px;
+  }
+
+  .display {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dontDisplay {
+    width: 0;
+    height: 0;
   }
