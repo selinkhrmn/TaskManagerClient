@@ -56,10 +56,17 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <button class="btn" [disabled]="!tokenService.hasRole('Admin')" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+        <!-- <button class="btn" [disabled]="!tokenService.hasRole('Admin')" type="button" data-bs-toggle="dropdown" aria-expanded="false"
            (click)="openCreateIssueDialog()">
           {{ "create" | transloco }}
+        </button> -->
+        <button class="create-btn" [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
+          {{ "create" | transloco }}
         </button>
+        
+        
+        
+
         <button class="mx-2 fa-lg language" [matMenuTriggerFor]="changeLang" mat-button>
           <img src="../../../assets/languages.png">
 
@@ -85,7 +92,7 @@
               {{ tokenService.tokenUsername() | titlecase}}
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item  *ngIf="tokenService.hasRole('Admin')" (click)="routerToAdminPage()">
+              <button mat-menu-item *ngIf="tokenService.hasRole('Admin')" (click)="routerToAdminPage()">
                 Admin Page <mat-icon>face</mat-icon>
               </button>
               <button mat-menu-item (click)="logOut()">

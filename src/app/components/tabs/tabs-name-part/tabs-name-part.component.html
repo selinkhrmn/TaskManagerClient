@@ -9,7 +9,12 @@
     <!-- <button mat-button>{{'tabs.forms' | transloco}}</button> -->
     <!-- <button mat-button>Issues</button> -->
     <!-- <button mat-button>{{'tabs.reports' | transloco}}</button> -->
-    <button mat-button class="setting" [disabled]="!tokenService.hasRole('Admin')"  routerLink="project-settings">{{'tabs.projectSettings' | transloco}}</button>
+    
+    <button class="custom-button setting" [disabled]="!tokenService.hasRole('Admin')" routerLink="project-settings">
+      {{ 'tabs.projectSettings' | transloco }}
+    </button>
+    
+    
   </div>
   <div class="placeholder1">
     

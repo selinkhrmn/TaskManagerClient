@@ -42,16 +42,39 @@
   margin-left: 10px;
 }
 
-.btn {
-  margin-left: 10px;
-  float: right;
-  background-color: rgba(255, 255, 255);
+// .btn {
+//   margin-left: 10px;
+//   float: right;
+//   background-color: rgba(255, 255, 255);
+//   cursor: pointer;
+// }
+
+// .btn:disabled{
+//   cursor: not-allowed;
+//  // background-color: red;
+// }
+
+
+.create-btn {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
   cursor: pointer;
+  border: 1px solid rgba(0, 123, 255, 0.25);
+  color: #03172e;
+  border-radius: 0.25rem;
 }
 
-.btn:disabled{
+.create-btn:disabled {
   cursor: not-allowed;
- // background-color: red;
+  background-color: rgba(255,255,255);
+  border-color: rgba(0, 123, 255, 0.1);
+  color:#0e3d73;
 }
 
 

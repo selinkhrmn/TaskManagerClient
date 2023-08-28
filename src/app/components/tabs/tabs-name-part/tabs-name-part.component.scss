@@ -28,9 +28,26 @@
 
 }
 
-.setting{
-  cursor: pointer
+
+.setting {
+  cursor: pointer;
 }
-.setting:disabled{
+
+.setting[disabled],
+.setting[disabled]:hover {
   cursor: not-allowed;
 }
+
+.custom-button {
+  display: inline-block;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-button.disabled {
+  cursor: not-allowed;
+}
+

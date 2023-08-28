@@ -104,30 +104,31 @@ export class SummaryComponent implements AfterViewInit, OnInit {
           this.userList = res.data;
         }
       })
+
+      this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
+        const priorityCounts = this.calculatePriorityCounts(this.tasks);
+        this.chartData = {
+          labels:this.priorityLabels,
+          datasets: [{
+            label: 'Task Priority',
+            data: [priorityCounts.Lowest, priorityCounts.Low, priorityCounts.Normal, priorityCounts.High, priorityCounts.Highest],
+            backgroundColor: this.priorityColors,
+            borderColor:this.priorityColors,
+            borderWidth: 1
+          }]
+        };
+        this.createPriorityChart();
+      });
+  
+      this.userService.getAllUsers().subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.userList = res.data;
+        }
+      })
   
     }
 
-    let project = this.projectService.getProjectLocal().id;
-    this.taskService.getAllProjectTask({ id: project }).subscribe((res) => {
-      const priorityCounts = this.calculatePriorityCounts(this.tasks);
-      this.chartData = {
-        labels:this.priorityLabels,
-        datasets: [{
-          label: 'Task Priority',
-          data: [priorityCounts.Lowest, priorityCounts.Low, priorityCounts.Normal, priorityCounts.High, priorityCounts.Highest],
-          backgroundColor: this.priorityColors,
-          borderColor:this.priorityColors,
-          borderWidth: 1
-        }]
-      };
-      this.createPriorityChart();
-    });
 
-    this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-      }
-    })
     // this.taskService.getUnplannedTask(projectId).subscribe((res) => {
     //   if (res.isSuccessful == true) {
     //     this.unplannedTasks = res.data;

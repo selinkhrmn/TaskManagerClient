@@ -92,11 +92,12 @@
 }
 
 .empty {
-  width: 100%;
+  // width: 15vw;
   padding: 20px;
   font-size: 18px;
   text-align: center;
   color: gray;
+  text-wrap:wrap;
 }
 
 

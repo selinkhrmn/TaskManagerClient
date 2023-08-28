@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit,HostListener,OnDestroy   } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 import { TaskDto } from 'src/app/interfaces/taskDto';
@@ -92,8 +92,7 @@ export class TaskComponent implements OnInit {
     public priorityService: PriorityService,
     private fileService: FileService,
     private commentService: CommentService,
-    private userService: UserService,
-    
+    private userService: UserService
   ) { }
 
   ngOnInit() { 
@@ -120,15 +119,9 @@ export class TaskComponent implements OnInit {
     
     this.commentWantsToBeEdited= false;
     
-
-
-  }
   
-  ngOnDestroy() {
-    this.closeDialog(); 
+  
   }
-
-
   closeSubmitAndCancelButtons() {
     this.commentWantsToGetCreated = false;
     this.createComment= ''
@@ -163,10 +156,13 @@ export class TaskComponent implements OnInit {
 
   selectUserForAssignee(userId: string){
     this.taskChange.assigneeId = userId;
+    this.updateTask();
+
     
   }
   selectUserForReporter(userId: string){
     this.taskChange.reporterId = userId;
+    this.updateTask();
     
   }
 
@@ -174,6 +170,7 @@ export class TaskComponent implements OnInit {
     
     this.sortableElement = event;
     this.taskChange.priority = this.priorityService.getIconPriority(event);
+    this.updateTask();
 
   }
 
@@ -254,11 +251,13 @@ export class TaskComponent implements OnInit {
   updateTask() {    
     if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)){
       console.log("different");
-      this.taskService.updateTask(this.taskChange).subscribe((res) =>{
-        if(res.isSuccessful == true){
-          // alert("YES!")
-        }
-      } )
+      
+
+      // this.taskService.updateTask(this.taskChange).subscribe((res) =>{
+      //   if(res.isSuccessful == true){
+      //     // alert("YES!")
+      //   }
+      // } )
     } else {
       console.log("same");
       
@@ -383,7 +382,4 @@ export class TaskComponent implements OnInit {
 
 }
 
-function isEqual(task: Task, taskChange: Task) {
-  throw new Error('Function not implemented.');
-}
 
