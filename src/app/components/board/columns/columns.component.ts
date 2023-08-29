@@ -18,7 +18,7 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { Task } from 'src/app/interfaces/task';
-import { TaskDto } from 'src/app/interfaces/taskDto';
+import { TaskDto, TaskUserDto } from 'src/app/interfaces/taskDto';
 import { ColumnService } from 'src/app/services/column.service';
 import { ColumnTask } from 'src/app/interfaces/columnTasks';
 import { TaskService } from 'src/app/services/task.service';
@@ -43,13 +43,13 @@ import Swal from 'sweetalert2';
 })
 export class ColumnsComponent {
   predefinedColors: string[] = [
-    '#FF5733', '#33FF57', '#5733FF', '#FF336A',
-    '#33B4FF', '#FFD633', '#A633FF', '#33FFD6',
-    '#FF33C1', '#33FFA6', '#E433FF', '#33E2FF',
-    '#B333FF', '#33FFB4', '#FFA833', '#E633FF'
+    '#D7958692', '#40AF5498', '#5833FF3A', '#FF336961',
+    '#33B4FF90', '#FFD6336D', '#A733FF76', '#33FFD680',
+    '#FF33C240', '#629A9C', '#E433FF4B', '#33E0FF72',
+    '#B433FF80', '#8098645B', '#FFA73363', '#E733FF7D'
   ];
   @Output() currentColumnId: number;
-  tasks: Task[] = [];
+  tasks: TaskUserDto[] = [];
   columns: ColumnTask[] = [];
   columnGet: ColumnTask;
   allTasks: TaskDto[] = [];
@@ -66,7 +66,7 @@ export class ColumnsComponent {
   panelOpenState = false;
   taskObj: Partial<Task> = {};
   columnColors: string[] = [];
-
+  assignedPerson: string[];
   constructor(
     private columnService: ColumnService,
     private taskService: TaskService,
@@ -145,14 +145,27 @@ export class ColumnsComponent {
   }
 
   openTaskDialog(tId: number) {
+    
     this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
-
-        const dialog = this.dialog.open(TaskComponent, { autoFocus: false, data: { task: this.tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
-        dialog.afterClosed().subscribe((res) => {
-          this.ngOnInit();
-        })
+        let task : any  = res.data;
+        let userId: string = this.tokenService.tokenUserId();
+        if(task.assigneeId == userId || task.reporterId == userId || task.createdUser == userId ) {
+          const dialog = this.dialog.open(TaskComponent, { autoFocus: false, data: { task: this.tasks }, height: '90%', width: '90%', panelClass: 'dialog' });
+          dialog.afterClosed().subscribe((res) => {
+            this.ngOnInit();
+          })
+        }
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You are not allowed to look inside!',
+          })
+        }
+        
+       
       }
     })
   }
