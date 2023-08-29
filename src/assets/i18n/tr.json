@@ -45,6 +45,11 @@
     "confirm password": "Şifreyi Tekrar Gir",
     "label" : "Etiket",
     "emptyMessage" : "Açık bir proje bulunmamaktadır.",
+    "hintForAdminSearch": "Görev Adı veya Kullanıcı Adı ile Ara",
+    "Not Started": "Başlanmadı",
+    "Pending" : "Beklemede",
+    "Ongoing": "Devam ediyor",
+    "Completed": "Tamamlandı",
     "navigation": {
         "yourWork": "İşlerin"
     },

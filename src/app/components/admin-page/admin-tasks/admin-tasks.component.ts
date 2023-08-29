@@ -31,13 +31,18 @@ export class AdminTasksComponent implements OnInit {
   currentProject: ProjectDto;
   projectName: string;
   projects: Project[] = [];
-  taskArray: Task[] = [];
+  allTask: TaskUserDto[] = [];
+  taskArray: TaskUserDto[] = [];
   project: ProjectDto;
   // projectId: number;
   task: Task[] = [];
   userList: UserDto[] = [];
   priorities: string[] = [];
-projectList: ProjectDto[] = [];
+  projectList: ProjectDto[] = [];
+  selectedProject: Project | undefined;
+  allProjectShow: boolean = false;
+  isFilterMenuOpen: boolean = false;
+
   constructor(
     private taskService: TaskService,
     private projectService: ProjectService,
@@ -55,44 +60,76 @@ projectList: ProjectDto[] = [];
 
   id: any;
 
-  ngOnInit(): void { }
+  searchResult: any; // Store the search result here
+
+
+
+
+  ngOnInit(): void {
+    this.isFilterMenuOpen = false;
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.fetchTasks();
-    this.getProjectList();
   }
 
 
-  fetchTasks(){
-    this.taskService.GetAllTaskForUser({ "id": this.tokenService.getTokenId() }).subscribe((response) => {
-      if (response.isSuccessful) {
-        this.taskArray = response.data;
+  fetchTasks() {
+
+    this.priorities = this.priorityService.getOptions();
+    this.projectService.getAllProjects().subscribe((res) => {
+      this.projects = res.data;
+      if (this.selectedProject == null) {
+        this.allProjectShow = true;
+      }
+    })
+    this.taskService.getProjectTasksAdmin().subscribe((res) => {
+      if (res.isSuccessful == true) {
+        this.allTask = this.taskArray = res.data;
+        this.userService.getAllUsers().subscribe((res) => {
+          if (res.isSuccessful == true && res.data.length > 0) {
+            this.userList = res.data;
+            this.taskArray.forEach(task => {
+              const assignee = this.userList.find(user => user.id === task.assigneeId);
+              if (assignee) {
+                const name = assignee.name.charAt(0).toUpperCase() + assignee.name.slice(1);
+                const surname = assignee.surname.charAt(0).toUpperCase() + assignee.surname.slice(1);
+                task.assigneeId = name + ' ' + surname;
+              } else {
+                task.assigneeId = 'Unassigned';
+              }
+            });
+          }
+
+        })
+
+
+
+
         this.dataSource = new MatTableDataSource<TaskUserDto>(this.taskArray);
         this.dataSource.paginator = this.paginator;
       }
 
-       this.userService.getAllUsers().subscribe((res) => {
-      if (res.isSuccessful == true) {
-        this.userList = res.data;
-      }
-      this.priorities = this.priorityService.getOptions();
-    })
-    });
-
-   
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-  }
-
-
-  getProjectList(){
-    this.projectService.getAllProjects().subscribe((res)=>{
-      if(res.isSuccessful){
-        this.projectList=res.data;
-      }
     })
   }
+
+
+  selectProject(project: any): void {
+    if (project == 'all') {
+      this.allProjectShow = true;
+      this.selectedProject = null;
+      this.taskArray = this.allTask;
+    }
+    else if (project != null) {
+      this.selectedProject = project;
+      this.allProjectShow = false;
+      this.taskArray = this.allTask.filter(t => t.projectId == project.id);
+    }
+    this.dataSource = new MatTableDataSource<TaskUserDto>(this.taskArray);
+    this.dataSource.paginator = this.paginator;
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -115,22 +152,52 @@ projectList: ProjectDto[] = [];
 
   }
 
-  // openTaskDialog(id: number) {
-  //   this.taskService.getTaskById(id).subscribe((res) => {
-  //     this.taskArray = res.data;
-
-openTaskDialog(id : number) {
- this.taskService.getTaskById(id).subscribe((res) => {
-  this.taskArray = res.data;
-  
-  
-  const dialogS = this.dialog.open(TaskComponent, {data: {task: this.taskArray},height: '90%', width: '90%',});
-  dialogS.afterClosed().subscribe((res) => {
-    window.location.reload();
-  })
- })
+  openTaskDialog(id: number) {
+    this.taskService.getTaskById(id).subscribe((res) => {
+      let task = res.data;
+      const dialogS = this.dialog.open(TaskComponent, { data: { task: task }, width: '60%' });
+      dialogS.afterClosed().subscribe((res) => {
+        this.ngOnInit();
+      })
+    })
+  }
 
 
+  activeTasksFilter() {
+    this.dataSource = new MatTableDataSource<TaskUserDto>(this.taskArray.filter(t => t.label == 0));
+    this.dataSource.paginator.firstPage();
+  }
 
+
+  toggleFilterMenu() {
+    console.log(this.isFilterMenuOpen);
+
+    this.isFilterMenuOpen = !this.isFilterMenuOpen;
+  }
+
+  applyFilterOptions(filter: string) {
+    console.log(`Applying filter: ${filter}`);
+    if (this.selectedProject != null) {
+      this.taskArray = this.allTask.filter(t => t.projectId == this.selectedProject.id)
+    }
+    else {
+      this.taskArray = this.allTask;
+    }
+
+    if (filter == 'unseen') {
+      this.taskArray = this.taskArray.filter(t => t.label == -1);
+    }
+    else if (filter == 'waiting') {
+      this.taskArray = this.taskArray.filter(t => t.label == 0);
+    }
+    else if (filter == 'active') {
+      this.taskArray = this.taskArray.filter(t => t.label == 1);
+    }
+    else if (filter == 'done') {
+      this.taskArray = this.taskArray.filter(t => t.label == -2);
+    }
+    this.isFilterMenuOpen = false;
+    this.dataSource = new MatTableDataSource<TaskUserDto>(this.taskArray);
+    this.dataSource.paginator = this.paginator;
   }
 }

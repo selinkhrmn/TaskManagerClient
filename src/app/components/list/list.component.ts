@@ -119,7 +119,6 @@ export class ListComponent implements OnInit {
   }
 
   applySummaryFilters() {
-    debugger;
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
       this.updatedFromDate = new Date(selectedFilter.fromDate);
