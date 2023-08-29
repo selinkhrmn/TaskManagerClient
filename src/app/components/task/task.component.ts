@@ -98,8 +98,11 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    console.log(this.taskChange.label);
-    
+    if(this.taskChange.label == -1) { 
+      this.taskChange.label = 0;
+      this.taskColor = 0;
+    }    console.log(this.taskChange.label);
+
     this.getTaskComments();
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful == true) {
@@ -274,7 +277,6 @@ export class TaskComponent implements OnInit {
   }
 
   deleteTask() {
-    debugger
     this.taskService.deleteTask(this.taskId).subscribe((res)=> {
       this.closeDialog()
     })

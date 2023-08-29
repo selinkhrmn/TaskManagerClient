@@ -6,10 +6,10 @@
         <span class="sedna">Task</span>
         <span class="cloud">Manager</span>
       </a>
-      
+
     </div>
 
-      <!-- <li class="nav-item dropdown">
+    <!-- <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle text-light"
           data-bs-toggle="dropdown"
@@ -57,37 +57,24 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <button class="btn-light"
-      type="button" routerLink="/"><mat-icon aria-label="home icon" fontIcon="home">Home</mat-icon></button>
-        <button
-        class="btn btn-light"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        [disabled]="!tokenService.hasRole('Admin')"
-        (click)="openCreateIssueDialog()"
-      >
-        {{ "create" | transloco }}
-      </button>
-        <button
-          class="mx-2 fa-lg language"
-          [matMenuTriggerFor]="changeLang"
-          mat-button
-        >
+        <button class="btn-light" type="button" routerLink="/"><mat-icon aria-label="home icon"
+            fontIcon="home">Home</mat-icon></button>
+        <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+          [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
+          {{ "create" | transloco }}
+        </button>
+        <button class="mx-2 fa-lg language" [matMenuTriggerFor]="changeLang" mat-button>
           <img src="../../../assets/languages.png">
 
           <!-- {{'languages.changeLanguages' | transloco}} -->
         </button>
-        <div
-        class="user_profile"
-          style="
+        <div class="user_profile" style="
             width: fit-content;
             height: fit-content;
             border-radius: 50%;
             
-          "
-        >
-        
+          ">
+
           <img src="../../assets/user (4).png" alt="" style="width: 30px" />
         </div>
 
@@ -96,13 +83,13 @@
             {{tokenService.tokenUsername()}}
           </button> -->
           <div *ngIf="hasToken()" class="menu">
-            
+
             <button mat-button [matMenuTriggerFor]="menu">
-              
+
               {{ tokenService.tokenUsername() | titlecase}}
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="routerToAdminPage()">
+              <button *ngIf="tokenService.hasRole('Admin')" mat-menu-item (click)="routerToAdminPage()">
                 Admin Page <mat-icon>face</mat-icon>
               </button>
               <button mat-menu-item (click)="routerToProfileSetting()">
@@ -111,8 +98,8 @@
               <button mat-menu-item (click)="logOut()">
                 {{ "logOut" | transloco }} <mat-icon>exit_to_app</mat-icon>
               </button>
-              
-              
+
+
               <!-- <button mat-menu-item [routerLink]="'/profile'">Profile <mat-icon>how_to_reg</mat-icon></button> -->
             </mat-menu>
           </div>

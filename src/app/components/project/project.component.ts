@@ -67,7 +67,6 @@ export class ProjectComponent implements OnInit {
 
   upload(event: Event) {
     this.fileUploaded = true;
-    debugger;
     this.fileService.uploadFile(event);
 
     this.Files = this.fileService.selectedFiles;

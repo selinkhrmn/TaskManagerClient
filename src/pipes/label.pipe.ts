@@ -7,20 +7,29 @@ import { TaskUserDto } from 'src/app/interfaces/taskDto';
 })
 export class LabelPipe implements PipeTransform {
 
-  transform(labelValue: number, labelList: Task[]): string {
+  transform(labelValue: number): string {
 
-    const taskU = labelList.find(t => t.label == labelValue);
-    switch (taskU.label) {
+    switch (labelValue) {
+      case -1:
+        return "Not Started";
       case 0:
-        return "waiting";
+        return "Pending";
       case 1:
-        return "is working"
+        return "Ongoing";
       case 2:
-        return "done"
+        return "Completed";
       default:
-        return "not started"
+        return "Uncertain";
     }
 
   }
 
 }
+
+/*
+  "Not Started": "Not started",
+    "Pending" : "Pending",
+    "Ongoing": "Ongoing",
+    "Completed": "Completed",
+
+*/

@@ -47,7 +47,6 @@ export class PasswordChangePageComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger
     
       const newPassword = this.passwordChangeForm.value.newPassword;
       // Call your service to update the password using the token
