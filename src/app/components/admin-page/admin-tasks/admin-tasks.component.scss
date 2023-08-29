@@ -68,5 +68,12 @@ h1 {
   padding: 8px;
   cursor: pointer;
 }
+.priorities{
+  display: flex;
+  align-items: center;
+}
 
-/* ... Your existing styles ... */
+.priority{
+  width: 30px;
+  height: 30px
+}

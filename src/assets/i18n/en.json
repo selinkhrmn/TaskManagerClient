@@ -51,6 +51,8 @@
     "Pending" : "Pending",
     "Ongoing": "Ongoing",
     "Completed": "Completed",
+    "task": "Task",
+    "tasks": "Tasks",
     "navigation": {
         "yourWork": "Your Work"
     },
