@@ -15,6 +15,7 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
 
 
 @Component({

@@ -1,4 +1,4 @@
-<div class="body">
+<div class="body" (keyup.enter)="signIn()">
   <div class="wrapper">
     <app-header headerText="Sign in to TaskManager"></app-header>
     <div class="container">
@@ -10,7 +10,8 @@
           <label routerLink="forgot-password">Forgot password?</label>
         </div>
         <input [(ngModel)]="user.password"  />
-        <button routerLink="home" mat-raised-button (click)="signIn()">
+        <button routerLink="home" mat-raised-button
+        (click)="signIn()">
           Sign In
         </button>
 

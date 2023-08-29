@@ -1,14 +1,17 @@
 .container {
   width: 100%;
   height: 100%;
+  padding: 80px;
+  margin: 0;
   display: flex;
+  justify-content: space-between;
 }
 
 .left_side {
-  width: 60%;
+  // width: 60%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: stretch;
 
   img {
@@ -18,8 +21,7 @@
 }
 
 .right_side {
-  width: 60%;
-  height: 120%; 
+  height: 100%; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +34,7 @@
   }
 
   .right_side_wrapper {
-    width: 600px;
+    width:400px;
     height: 600px;
     border-radius: 20px;
     padding: 40px;
@@ -52,7 +54,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         width: 100%;
-        height: 150%;
+        height: 60%;
         color: #012619;
         border-radius: 4px;
         background-color: transparent;
@@ -67,9 +69,10 @@
         width: 100%;
         height: fit-content;
         // border: 1px solid #056cf2;
+        padding: 4px;
         color: white;
         background-color: #012619;
-        border-radius: 8px;
+        border-radius: 2px;
         margin-top: 10px;
         display: flex;
         justify-content: space-evenly;
@@ -97,8 +100,9 @@
       justify-content: space-evenly;
 
       label {
-        margin-bottom: 10px;
+        text-align: center;
         font-weight: 600;
+        margin-bottom: 10px;
       }
 
       .projects_container {
@@ -111,7 +115,12 @@
         box-shadow: 5px 5px #012619;
         border-radius: 8px;
         overflow: auto;
+        margin-bottom: 15px;
+      }
 
+
+      button {
+        margin-top: 5px;
       }
     }
   
@@ -142,4 +151,27 @@
       padding: 10px; /* Adjust padding for better spacing */
     }
   }
+}
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 4px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: gray;
+  border-radius: 5px;
+
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
 }

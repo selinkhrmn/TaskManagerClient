@@ -9,22 +9,16 @@
         <div class="labels">
           <label>Add People</label>
           <label>To Your Project</label>
+          <div class="the_person">
+            <label>{{newProjectName}}</label>
+          </div>
         </div>
 
-        <div class="the_person">
+        <!-- <div class="the_person">
           <label>{{newProjectName}}</label>
-        </div>
+        </div> -->
       </div>
-
-       <!-- <div class="projects">
-        <label>{{'Users' | transloco}}</label>
-        <div class="projects_container">
-          <mat-radio-button>User1</mat-radio-button>
-          <mat-radio-button>User2</mat-radio-button>
-          <mat-radio-button>User3</mat-radio-button>
-          <mat-radio-button>User4</mat-radio-button>
-        </div>
-      </div>  -->
+      
       <div class="projects">
         <label>{{ 'Users' | transloco }}</label>
         <div class="projects_container">
@@ -37,7 +31,8 @@
             {{ user.name }}
           </mat-checkbox>
         </div>
-        <button (click)="saveProjectUsers()">Save</button>
+        <button mat-raised-button color="primary" (click)="saveProjectUsers()">Save</button>
+        <button mat-button  (click)="closeDialog()">Cancel</button>
         
       </div>
       

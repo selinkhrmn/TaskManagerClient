@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
 import { UserDto } from 'src/app/interfaces/user';
@@ -8,6 +8,7 @@ import { ProjectUserList } from 'src/app/interfaces/projectUserDto';
 import { ProjectService } from 'src/app/services';
 import { MatDialog } from '@angular/material/dialog';
 
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AddPeopleToProjectComponent implements OnInit{
   newProjectName: any;
   addedList : ProjectUserList;
   selectedUsers: UserDto[] = [];
+  projectId: number;
+ 
 
   constructor(public translocoService: TranslocoService,
     private userService : UserService,
@@ -53,16 +56,49 @@ export class AddPeopleToProjectComponent implements OnInit{
     }
     
   }
-  saveProjectUsers() {
-    this.addedList.projectId = this.projectService.getProjectLocal().id;
-    this.addedList.users = this.selectedUsers;
-    this.userService.AddUserToProject(this.addedList).subscribe((res) => {
+  saveProjectUsers() {debugger
+    var currentProject ={
+      id: 0,
+      name: ''
+    }
+    var project = localStorage.getItem('current-project')
+    currentProject = JSON.parse(project)
+    this.projectId = JSON.parse(project).id;
+    var projectUser = {
+      users: this.selectedUsers,
+      projectId: this.projectId
+    }
+    
+    //burdan devam aşağısı çalışmıyor
+    debugger
+    projectUser.projectId = currentProject.id;
+    projectUser.users = this.selectedUsers;
+    this.userService.AddUserToProject(projectUser).subscribe((res) => {
       console.log(res.data);
+      if(res.isSuccessful == true) {
+        Swal.fire(
+          'You successfully added the users into your project!',
+          '',
+          'success'
+        )
+      }
+      if(res.isSuccessful == false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          // footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
       
     })
 
     this.dialog.closeAll();
     
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
   }
   
 }

@@ -24,6 +24,7 @@
           (keyup.enter)="createProject()"
           [(ngModel)]="projectName"
         />
+        <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
       </div>
       <div class="button_field">
         <button mat-raised-button routerLink="summary" (click)="closeDialog()">
@@ -31,7 +32,7 @@
         </button>
         <button
           mat-raised-button
-          (click)="createProject();onButtonClick()"
+          (click)="createProject()"
         >
           {{ "createProject" | transloco }}
         </button>
