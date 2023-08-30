@@ -203,7 +203,7 @@ export class AdminTasksComponent implements OnInit {
       this.taskArray = this.taskArray.filter(t => t.label == 1);
     }
     else if (this.currentLabelFilter == 'done') {
-      this.taskArray = this.taskArray.filter(t => t.label == -2);
+      this.taskArray = this.taskArray.filter(t => t.label == -2); //2 değil mi bu ?
     }
     else if(this.currentLabelFilter == 'clear'){
       //

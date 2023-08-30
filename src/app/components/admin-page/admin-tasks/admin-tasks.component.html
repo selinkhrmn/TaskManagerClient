@@ -31,20 +31,25 @@
   
 
   <div class="filter-menu">
-    <button mat-button [matMenuTriggerFor]="filterMenu">{{ 'filter' | transloco }} 
-    </button>
+    <button mat-raised-button [matMenuTriggerFor]="filterMenu">{{ 'filter' | transloco }}</button>
     <mat-menu #filterMenu="matMenu">
-      <button (click)="currentLabelFilter = 'clear';applyFilterOptions()">Clear</button>
+      <div class="aaa">
+         <div class="clear_button">
+        <button mat-raised-button color="warn" (click)="currentLabelFilter = 'clear';applyFilterOptions()">Clear</button>
+      </div>
       <button mat-menu-item (click)="currentLabelFilter = 'active'; applyFilterOptions()">	<mat-icon>flash_on</mat-icon>{{ 'Ongoing' | transloco }} {{ 'tasks' | transloco }}</button>
       <button mat-menu-item (click)="currentLabelFilter = 'done';applyFilterOptions()"><mat-icon>done</mat-icon>{{ 'Completed' | transloco }} {{ 'tasks' | transloco }}</button>
       <button mat-menu-item (click)="currentLabelFilter = 'waiting';applyFilterOptions()"><mat-icon>pause_circle_outline</mat-icon>{{ 'Pending' | transloco }} {{ 'tasks' | transloco }}</button>
       <button mat-menu-item (click)="currentLabelFilter = 'unseen';applyFilterOptions()"><mat-icon>list</mat-icon>{{ 'Not Started' | transloco }} {{ 'tasks' | transloco }}</button>
       <hr>
+      <label>Priorities</label>
       <div class="priorities">
         <button mat-menu-item *ngFor="let priorityUrl of priorities" (click)="selectedPriority = priorityService.getIconPriority(priorityUrl); applyFilterOptions()">
           <img class="priority" [src]="priorityUrl" alt="Priority" />
         </button>
       </div>
+      </div>
+     
     </mat-menu>
   </div>
   

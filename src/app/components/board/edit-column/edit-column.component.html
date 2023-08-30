@@ -1,6 +1,12 @@
 <div class="container">
-    <label>{{'name' | transloco}}</label>
-    <input [(ngModel)] = 'columnName' >
+    <!-- <label>{{'name' | transloco}}</label> -->
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)] = 'columnName'>
+        </mat-form-field>
+      </form>
+    <!-- <input matInput [(ngModel)] = 'columnName' > -->
     <div class="button_container">
         <button mat-raised-button color="primary" (click)="UpdateColumn();closeDialog()">{{'save' | transloco}}</button>
         <button mat-button (click)="closeDialog()">{{'cancel' | transloco}}</button>
