@@ -57,18 +57,17 @@ export class NavbarComponent {
     }
 
     openCreateIssueDialog() {
-
       const dialog = this.dialog.open(CreateIssueDialogComponent, { data: { table: this.table }, width: '60%' });
   
       dialog.afterClosed().subscribe((response) => {
-  
+
         
   
         if (response.isAdded) {
-          this.taskService.GetAllTaskForUser(this.tokenService.getTokenId()).subscribe((tasks) => {
-            console.log(tasks.data);
+          // this.taskService.GetAllTaskForUser(this.tokenService.getTokenId()).subscribe((tasks) => {
+          //   console.log(tasks.data);
             
-          })
+          // })
   
             this.taskService.createTask(response.task).subscribe((res) => {
               //window.location.reload();

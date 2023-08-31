@@ -1,7 +1,7 @@
 <div class="wrapper" #wrapper>
     <div class="left_side">
         <div class="navbar">
-            <input value="{{ projectName }}" spellcheck="false" />
+            <input [(ngModel)]="project.name" spellcheck="false"  (blur)="updateProject()"/>
         </div>
         <div class="description">
             <input type="file" #fileInput multiple style="display:none" (change)="upload($event)" />
@@ -53,24 +53,47 @@
                 <div class="column">
                     <div class="assignee card1">
                         <div class="inside_card">
-                            <div class="label_container">
-                                <label>{{"assignee" | transloco}}</label>
-                            </div>
-                            <div class="right_side_card assigned_person"></div>
+                          <div class="label_container" (click)="isPanelOpen = !isPanelOpen">
+                            <label>{{"userNumber" | transloco}}</label>
+                          </div>
+                          <div class="right_side_card assigned_person" (click)="isPanelOpen = !isPanelOpen">
+                            {{ projectUsers.length }}
+                          </div>
                         </div>
-                    </div>
-
-                    <div class="priority card1">
-                        <div class="inside_card" F>
-                            <div class="label_container">
-                                <label>Reporting</label>
-                            </div>
-                            <div class="right_side_card priority-value">
-                                {{ tokenService.tokenFullName() }}
-                            </div>
+                      </div>
+                      
+                      <br>
+                      
+                      
+                      <div *ngIf="isPanelOpen" class="expansion-panel">
+                        <div class="search-bar">
+                          <mat-form-field>
+                            <input matInput (input)="applyFilter($event)" placeholder="Search with user name...">
+                          </mat-form-field>
                         </div>
-                    </div>
-
+                        
+                        <table class="user-table">
+                          <thead>
+                            <tr>
+                              <th>Name Surname</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let user of paginatedUsers" class="user-row">
+                              <td>{{ user.id}}</td>
+                              <td><mat-icon (click)="deleteUser(user.userId)">delete</mat-icon></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      
+                        <mat-paginator [pageSize]="itemsPerPage" [length]="projectUsers.length" (page)="changePage($event)">
+                        </mat-paginator>
+                      </div>
+                      
+                      
+                      
+                    <br>
                     <div class="started_date card1">
                         <div class="inside_card">
                             <div class="label_container">

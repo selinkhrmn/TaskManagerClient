@@ -20,7 +20,7 @@ export class AddPeopleToProjectComponent implements OnInit{
   users: UserDto[] = [];
   newProjectName: any;
   addedList : ProjectUserList;
-  selectedUsers: UserDto[] = [];
+  selectedUsers: string[] = [];
   projectId: number;
  
 
@@ -47,12 +47,12 @@ export class AddPeopleToProjectComponent implements OnInit{
   }
 
   onCheckboxChange(user: UserDto){
-    const index = this.selectedUsers.findIndex(u => u.id === user.id);
+    const index = this.selectedUsers.findIndex(u => u === user.id);
     if (index !== -1) {
       this.selectedUsers.splice(index, 1);
     } 
     else {
-      this.selectedUsers.push(user); 
+      this.selectedUsers.push(user.id); 
     }
     
   }
@@ -64,16 +64,10 @@ export class AddPeopleToProjectComponent implements OnInit{
     var project = localStorage.getItem('current-project')
     currentProject = JSON.parse(project)
     this.projectId = JSON.parse(project).id;
-    var projectUser = {
-      users: this.selectedUsers,
-      projectId: this.projectId
-    }
-    
+
     //burdan devam aşağısı çalışmıyor
     debugger
-    projectUser.projectId = currentProject.id;
-    projectUser.users = this.selectedUsers;
-    this.userService.AddUserToProject(projectUser).subscribe((res) => {
+    this.userService.AddUserToProject({projectId: currentProject.id, users: this.selectedUsers }).subscribe((res) => {
       console.log(res.data);
       if(res.isSuccessful == true) {
         Swal.fire(

@@ -52,7 +52,7 @@ export class AdminProjectsComponent {
       }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddUsersToProjectComponent,{height: '90%',width: '50%', panelClass: 'dialog'});
+    const dialogRef = this.dialog.open(AddUsersToProjectComponent,{height: '90%',width: '60%', panelClass: 'dialog'});
   }
 
  getProjectDate(createdDate: Date){

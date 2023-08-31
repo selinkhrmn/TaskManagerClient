@@ -176,12 +176,6 @@ export class AdminTasksComponent implements OnInit {
   }
 
 
-  toggleFilterMenu() {
-    console.log(this.isFilterMenuOpen);
-
-    this.isFilterMenuOpen = !this.isFilterMenuOpen;
-  }
-
   applyFilterOptions() {
     console.log(`Applying filter: ${this.currentLabelFilter}}`);
 

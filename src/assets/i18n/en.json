@@ -53,6 +53,7 @@
     "Completed": "Completed",
     "task": "Task",
     "tasks": "Tasks",
+    "userNumber": "Number of user working on the project",
     "navigation": {
         "yourWork": "Your Work"
     },

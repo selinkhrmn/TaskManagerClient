@@ -4,12 +4,13 @@ export interface ProjectUserDto{
     // username: string; // file işlemlerinden sonra silinmesini talep ediyorum. Id ile pipe kullanmak yeterli
     id: string;
     profileImageUrl: string;
+    userId: string;
 
 }
 
 
 export interface ProjectUserList{
-    users : Partial<UserDto>[];
+    users : string[];
     projectId :number;
 }
 

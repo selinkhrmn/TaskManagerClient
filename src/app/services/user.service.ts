@@ -38,20 +38,14 @@ export class UserService {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/GetAllProjectUsers`, {id: id});
   }
 
-  AddUserToProject(projectUser: Partial<ProjectUserList>) {
-    debugger
+  AddUserToProject(projectUser: ProjectUserList) {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 
-  DeleteUserFromProject(projectUser: Partial<ProjectUserList>) {
+  DeleteUserFromProject(projectUser: ProjectUserList) {
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/DeleteUserFromProject`, projectUser);
   }
 
-  // DeleteUserFromProject(id: string, projectId: number) {
-  //   return this.http.post(`${this.baseUrl}/DeleteUserFromProject`, { userId: id, projectId: projectId }, this.httpOptions);
-  // }
-
- 
   GetProjectSelectedUsers(projectId: number): Observable<ResponseModel<ProjectUserDto>> {
     const url = `${this.baseUrl}/GetSelectedUsersForProject`;
     const params = new HttpParams().set('projectId', projectId.toString());

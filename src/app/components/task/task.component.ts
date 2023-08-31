@@ -113,7 +113,7 @@ export class TaskComponent implements OnInit {
     this.userService.GetAllProjectUsers(this.projectService.getProjectLocal().id).subscribe((res) => {
       if(res.isSuccessful == true){
         this.users = res.data
-        this.users.unshift({ id: 'unassigned', profileImageUrl: '../../assets/user.png'});
+        this.users.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png'});
       }
     })
     this.priorities = this.priorityService.getOptions();

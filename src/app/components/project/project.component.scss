@@ -17,7 +17,7 @@ h2 {
   
   
 .left_side {
-    width: 70%;
+    width: 60%;
     padding: 10px;
     overflow: auto;
     
@@ -129,7 +129,7 @@ h2 {
   }
   
   .right_side {
-    width: 30%;
+    width: 40%;
   
     .close_icon {
       display: flex;
@@ -178,7 +178,7 @@ h2 {
               display: flex;
               justify-content: center;
               align-items: center;
-              width: 20%;
+              width: 40%;
               text-align: center;
               label {
                 width: fit-content;
@@ -201,3 +201,28 @@ h2 {
       }
     }
   }
+
+
+.expansion-panel {
+  margin-top: 10px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.user-row:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+mat-icon {
+  cursor: pointer;
+}

@@ -31,7 +31,7 @@ export class UserSettingComponent {
   roleFormControl = new FormControl('');
 
   users: ProjectUserDto[] = [];
-  selectedUser: Partial<UserDto>[] = [];
+  selectedUser: string[] = [];
   userList: UserDto[] = [];
   currentProjectId: number;
 
@@ -77,8 +77,7 @@ export class UserSettingComponent {
     })
   }
   deleteUser(user: any) {
-    this.selectedUser.push({id: user.id});
-    this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: this.selectedUser} ).subscribe((response: any) => {
+    this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [user.id]} ).subscribe((response: any) => {
         console.log('User deleted successfully');
         this.selectedUser =  [];
         this.GetAllProjectUsers();

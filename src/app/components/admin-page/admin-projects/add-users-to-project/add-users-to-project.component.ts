@@ -115,36 +115,28 @@ export class AddUsersToProjectComponent implements OnInit {
   AddUserToProject() {
     this.addedUser.projectId = this.projectId;
 
-    const addUsers: Partial<UserDto>[] = [];
-    const removeUsers: Partial<UserDto>[] = [];
+    const addUsers: string[] = [];
+    const removeUsers: string[] = [];
   
     this.userCheckedList.forEach(userFromList => {
       if (userFromList.checked && !this.isSelected(userFromList.user.id)) {
-        addUsers.push(userFromList.user);
+        addUsers.push(userFromList.user.id);
       } 
       else if (!userFromList.checked && this.isSelected(userFromList.user.id)) {
-        removeUsers.push(userFromList.user);
+        removeUsers.push(userFromList.user.id);
       }
     });
 
     if(removeUsers.length != 0){
-      const removeRequest: ProjectUserList = {
-        users: removeUsers,
-        projectId: this.projectId
-      };
-
-      this.userService.DeleteUserFromProject(removeRequest).subscribe((res) => {
+     
+      this.userService.DeleteUserFromProject({projectId: this.projectId, users: removeUsers}).subscribe((res) => {
 
       });
     }
     
     if(addUsers.length != 0){
-      const addRequest: ProjectUserList = {
-        users: addUsers,
-        projectId: this.projectId
-      };
-
-      this.userService.AddUserToProject(addRequest).subscribe((res) => {
+    
+      this.userService.AddUserToProject({projectId: this.projectId, users: addUsers}).subscribe((res) => {
 
       });
     }
