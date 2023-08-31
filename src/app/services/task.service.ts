@@ -9,7 +9,7 @@ import { TokenService } from './token.service';
 import { ProjectDto } from '../interfaces/project';
 import { ListTask } from '../interfaces/listTask';
 import { UserDto } from '../interfaces/user';
-import { TaskDto } from '../interfaces/taskDto';
+import { TaskDto, TaskUserDto } from '../interfaces/taskDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -60,6 +60,10 @@ export class TaskService {
 
   GetAllTaskForUser(id: Partial<UserDto>) {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id);
+  }
+
+  getProjectTasksAdmin() {
+    return this.http.get<ResponseModel<TaskUserDto>>(`${this.baseUrl}/GetProjectTasks`);
   }
 
   // setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {

@@ -191,7 +191,7 @@ export class CreateIssueDialogComponent {
       if(this.task.name != null) {
 
       this.closeDialog();
-      this.alertBox();
+      
      
     }
     
@@ -312,22 +312,6 @@ export class CreateIssueDialogComponent {
 
 // }
 
-alertBox() {
-  Swal.fire({
-    title:'Are you sure want to Save?',
-    text: 'Your will not to be able recover this file!',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes Keep it',
-    cancelButtonText: 'No Delete it'
-  }).then((result)=>{
-    if(result.value){
-      Swal.fire("Saved","Your file has been save")
-    }
-    else if (result.dismiss === Swal.DismissReason.cancel){
-      Swal.fire('Cancelled','Your imaginary file is deleted :(')
-    }
-})
-} 
+
 
 }

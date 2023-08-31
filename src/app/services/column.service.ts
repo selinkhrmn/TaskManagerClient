@@ -47,7 +47,6 @@ export class ColumnService {
   }
 
   TransferColumnTasks(transferDto : TransferDto): Observable<ResponseModel<ColumnDto>>{
-    debugger
     return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/TransferColumnTasks`, transferDto);
   }
 

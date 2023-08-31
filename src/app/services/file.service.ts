@@ -42,7 +42,6 @@ httpOptionsFormData = {
 
 
   uploadFile(event:Event){
-    debugger
     const inputElement = event.target as HTMLInputElement;
     if(inputElement?.files){
       this.selectedFiles = Array.from(inputElement.files).map((file)=>({
@@ -61,7 +60,6 @@ httpOptionsFormData = {
   }
 
   getFileIconUrl(file: File): string {
-    debugger
     const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
     return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   }

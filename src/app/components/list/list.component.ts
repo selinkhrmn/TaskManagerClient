@@ -119,7 +119,6 @@ export class ListComponent implements OnInit {
   }
 
   applySummaryFilters() {
-    debugger;
     const selectedFilter = this.taskService.getSelectedFilter();
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
       this.updatedFromDate = new Date(selectedFilter.fromDate);
@@ -184,7 +183,6 @@ export class ListComponent implements OnInit {
     }
     else {
       this.activeFilters.push(filter);
-      this.toastr.info('Filter Applied!');
     }
 
 
@@ -211,16 +209,7 @@ export class ListComponent implements OnInit {
     }
 
     if (filter === 'LastSevendDaysCompletedTasks') {
-      //this.filteredData = this.filteredData.filter(t => t.isDone == true);
-      // if (this.isDoneFromDate && this.isDoneToDate) {
-      //   this.isDoneToDate.setHours(23, 59, 59, 999); 
-      //   this.filteredData = this.filteredData.filter(t => {
-      //     const taskUpdatedDate = new Date(t.updatedDate);
-      //     return (taskUpdatedDate >= this.isDoneFromDate && taskUpdatedDate <= this.isDoneToDate && t.isDone == true);
-      //   });
-      // }
       this.filteredData = this.taskService.filterDoneSevenDay(this.filteredData, this.isDoneFromDate, this.isDoneToDate);
-
     }
 
     if (this.activeFilters.includes('BetweenDates')) {
@@ -257,36 +246,11 @@ export class ListComponent implements OnInit {
     }
 
     if (this.activeFilters.includes('UpdatedDate')) {
-      // if (this.updatedFromDate && this.updatedToDate) {
-      //   this.filteredData = this.filteredData.filter(t => {
-      //     const taskUpdatedDate = new Date(t.updatedDate);
-      //     return (taskUpdatedDate >= this.updatedFromDate && taskUpdatedDate <= this.updatedToDate);
-      //   });
-      // }
-      // else if (this.updatedFromDate) {
-      //   this.filteredData = this.filteredData.filter(t => {
-      //     const taskUpdatedDate = new Date(t.updatedDate);
-      //     return (taskUpdatedDate >= this.updatedFromDate);
-      //   });
-      // }
       this.filteredData = this.taskService.filterUpdatedDate(this.filteredData, this.updatedFromDate, this.updatedToDate);
     }
 
 
     if (this.activeFilters.includes('CreatedDate')) {
-      // if (this.createdFromDate && this.createdToDate) {
-      //   this.createdToDate.setHours(23, 59, 59, 999); 
-      //   this.filteredData = this.filteredData.filter(t => {
-      //     const taskCreatedDate = new Date(t.createdDate);
-      //     return (taskCreatedDate >= this.createdFromDate && taskCreatedDate <= this.createdToDate);
-      //   });
-      // }
-      // else if (this.createdFromDate) {
-      //   this.filteredData = this.filteredData.filter(t => {
-      //     const taskCreatedDate = new Date(t.createdDate);
-      //     return (taskCreatedDate >= this.createdFromDate);
-      //   });
-      // }
       this.filteredData = this.taskService.filterCreatedDate(this.filteredData, this.createdFromDate, this.createdToDate);
     }
 

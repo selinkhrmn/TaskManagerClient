@@ -46,6 +46,13 @@
     "confirm password": "Confirm Password",
     "label" : "Label",
     "emptyMessage" : "No open projects available.",
+    "hintForAdminSearch" : "Search by Task Name or User Name",
+    "Not Started": "Not started",
+    "Pending" : "Pending",
+    "Ongoing": "Ongoing",
+    "Completed": "Completed",
+    "task": "Task",
+    "tasks": "Tasks",
     "navigation": {
         "yourWork": "Your Work"
     },

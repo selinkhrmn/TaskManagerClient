@@ -46,7 +46,9 @@
         <mat-icon>add</mat-icon>
       </button>
       <mat-menu #addTask="matMenu" class="addTaskMenu">
-        <input [(ngModel)]="taskObj.name" (click)="stopPropagation($event)" (keyup.enter)="CreateTask()">
+        <div class="input_container">
+          <input  [(ngModel)]="taskObj.name" (click)="stopPropagation($event)" (keyup.enter)="CreateTask()">
+        </div>
         <!--Auto focus lazım input'a -->
       </mat-menu>
     </div>

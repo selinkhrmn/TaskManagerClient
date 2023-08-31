@@ -1,26 +1,30 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>supervised_user_circle</mat-icon>
-  </button>
-  <span>Users</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button color="warn" (click)="openDialog()">Add People</button>
-  <button mat-raised-button color="warn" (click)="openManageRoles()">Manage Roles</button>
-</mat-toolbar>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Search</mat-label>
-    <input type="name,role,e-mail" matInput [formControl]="emailFormControl"
-      placeholder="Search for name, role or e-mail address">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Roles</mat-label>
-    <mat-select [formControl]="roleFormControl" placeholder="Select Role">
-      <mat-option value="admin">Admin</mat-option>
-      <mat-option value="user">User</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
+<br>
+<div class="button-container">
+  <button mat-raised-button class="button" (click)="openDialog()">Add People</button>
+  <!-- <button mat-raised-button class="button" (click)="openManageRoles()">Manage Roles</button> -->
+</div>
+<div class="form-container">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <div class="label-container">
+        <mat-label>Search</mat-label>
+      </div>
+      <input type="name,role,e-mail" matInput [formControl]="emailFormControl"
+        placeholder="Search for name, role or e-mail address">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <div class="label-container">
+        <mat-label>Roles</mat-label>
+      </div>
+      <mat-select [formControl]="roleFormControl" placeholder="Select Role">
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="user">User</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+
+
 
 <table class="example-table">
   <tr>
