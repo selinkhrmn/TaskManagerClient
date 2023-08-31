@@ -12,3 +12,8 @@ export interface ProjectUserList{
     users : Partial<UserDto>[];
     projectId :number;
 }
+
+export interface ProjectUserListForEmail{
+    users : Partial<UserDto>[];
+    message :string;
+}

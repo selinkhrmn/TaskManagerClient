@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
+import { ProjectUserDto, ProjectUserList, ProjectUserListForEmail } from 'src/app/interfaces/projectUserDto';
 import { UserDto } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-share',
@@ -8,15 +9,27 @@ import { UserDto } from 'src/app/interfaces/user';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent {
-  name: string = '';
+  id: any = '';
   message: string = '';
   sharedData: string[] = []; // Yeni dizi
-  userList: UserDto[] = [];
-  users: ProjectUserDto[] = [];
+  userList: ProjectUserList[] = [];
+  justArray: UserDto[] = [];
+ 
+  
+  constructor(public userService: UserService) {}
+
 
   paylas() {
-    this.sharedData.push(this.name); // Diziye ekleme
-    this.name = ''; // Alanı temizle
-    this.message = ''; // Alanı temizle
+    debugger
+    this.userService.getUserById(this.id).subscribe((res) => {
+      this.justArray = res.data
+    })
+    // this.justArray.push(this.name)
+    var emails:ProjectUserListForEmail = {
+      message: this.message,
+      users: this.justArray
+    }
+    
+    this.userService.SendEmailToUsers(emails)
   }
 }

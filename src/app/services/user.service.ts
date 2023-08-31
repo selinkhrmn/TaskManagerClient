@@ -64,6 +64,10 @@ export class UserService {
     return this.http.post(url, payload);
   }
 
+  SendEmailToUsers(emails : Partial<ProjectUserList>){
+    return this.http.post<ResponseModel<ProjectUserList>>(`${this.baseUrlIdentity}/SendsEmail`, emails);
+  }
+
   ForgotPassword(email : string) :Observable<any>{
     const payload = { email };
     const url = `${this.baseUrlIdentity}/ForgotPassword`;
