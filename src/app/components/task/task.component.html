@@ -5,7 +5,7 @@
     </div>
 
     <div class="description">
-      <input type="file" #fileInput multiple style="display: none" (change)="upload($event.target)" />
+      <input type="file" #fileInput multiple style="display: none" />
       <div class="button-container">
         <button mat-button (click)="fileInput.click()">
           <mat-icon>attach_file</mat-icon>Attach
