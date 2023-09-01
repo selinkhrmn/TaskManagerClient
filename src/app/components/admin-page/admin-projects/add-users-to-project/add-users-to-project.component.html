@@ -6,12 +6,7 @@
   <div class="main">
     <mat-form-field>
       <mat-label>Projects</mat-label>
-      <select
-        [(ngModel)]="projectId"
-        matNativeControl
-        required
-        (ngModelChange)="onChangeProject($event)"
-      >
+      <select [(ngModel)]="projectId" matNativeControl required (ngModelChange)="onChangeProject($event)">
         <option *ngFor="let project of projects" [value]="project.id">
           {{ project.name }}
         </option>
@@ -22,7 +17,8 @@
   <div class="input_and_save_part">
     <div class="form-group">
       <label for="usr">Name</label>
-      <input type="text" [(ngModel)]="theInput" (keyup)="applyFilter()" class="form-control" id="usr" placeholder="John Doe">
+      <input type="text" [(ngModel)]="theInput" (keyup)="applyFilter()" class="form-control" id="usr"
+        placeholder="John Doe">
     </div>
     <!-- <form class="example-form">
       <mat-form-field class="example-full-width">
@@ -32,27 +28,20 @@
     </form> -->
 
   </div>
-  
+
   <div class="buttons">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="AddUserToProject(); closeDialog()"
-    >
+    <button mat-raised-button color="primary" (click)="AddUserToProject(); closeDialog()">
       Save
     </button>
   </div>
   <div class="users_part">
-      <section 
-      class="example-section"
-      *ngFor="let userList of inputUserList" 
-    >
-      <p >
+    <section class="example-section" *ngFor="let userList of inputUserList">
+      <p>
         <mat-checkbox class="checkbox" [(ngModel)]="userList.checked">
-          {{  userList.user.username }}
+          {{ userList.user.username }}
         </mat-checkbox>
       </p>
     </section>
-    
+
   </div>
 </div>

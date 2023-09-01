@@ -57,8 +57,8 @@ export class ProjectComponent implements OnInit {
     this.GetProject();
     console.log("bak");
     console.log(this.data.project);
-    
-    
+
+
     this.userService.GetProjectSelectedUsers(this.projectId).subscribe((res) => {
       this.projectUsers = res.data;
       this.userService.getAllUsers().subscribe((res) => {
@@ -141,10 +141,10 @@ export class ProjectComponent implements OnInit {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.DeleteUserFromProject({projectId: this.projectId, users: [id]}).subscribe((res) => {
+        this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [id] }).subscribe((res) => {
           if (res.isSuccessful == true) {
             Swal.fire('Saved!', '', 'success'),
-            this.ngOnInit();
+              this.ngOnInit();
           }
         })
         Swal.fire('Saved!', '', 'success')
@@ -156,34 +156,46 @@ export class ProjectComponent implements OnInit {
 
   }
 
-  deleteProject(){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.projectService.deleteProject(this.data.project.id).subscribe((res) => {
-          if(res.isSuccessful){
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-            this.closeDialog();
-          }
-          else{
+  deleteProject() {
+    debugger;
+    if (this.data.project.createdByUser == this.tokenService.getTokenId()) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.projectService.deleteProject(this.data.project.id).subscribe((res) => {
+            if (res.isSuccessful) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.closeDialog();
+            }
+            else {
 
-          }
-        })
-        
-      }
-    })
+            }
+          })
+
+        }
+
+      })
+    }
+    else {
+      Swal.fire(
+        'You are not allowed to delete this project!',
+        'This project deleted by creator',
+        'error'
+      )
+    }
   }
+
 
   closeDialog() {
     this.dialogRef.close();

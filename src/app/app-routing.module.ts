@@ -129,7 +129,7 @@ export const routes: Routes = [
   {
     path: 'profile-setting',
     component : ProfileSettingPageComponent,
-    canActivateChild: [canActivateGuard, isAdminGuard],
+    canActivate: [canActivateGuard],
    },
    {
     path: '**',

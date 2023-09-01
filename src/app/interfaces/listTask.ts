@@ -10,7 +10,6 @@ export interface ListTask {
     priority: number;
     updatedDate:Date;
     createdDate:Date;
-    isDone: boolean;
     createdByUser: string;
     label: number;
     

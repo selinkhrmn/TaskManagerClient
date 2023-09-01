@@ -39,6 +39,7 @@ export class UserService {
   }
 
   AddUserToProject(projectUser: ProjectUserList) {
+    debugger
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 
@@ -70,7 +71,7 @@ export class UserService {
   }
 
   getUserById(id : any): Observable<any>{
-    debugger;
+
     return this.http.post(`${this.baseUrlIdentity}/GetUserById`, id);
   }
 

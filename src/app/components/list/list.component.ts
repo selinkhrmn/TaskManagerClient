@@ -86,7 +86,7 @@ export class ListComponent implements OnInit {
           this.applySummaryFilters();
           this.CalendarFilters();
           this.getUserIds();
-
+          
         }
       });
 
@@ -123,8 +123,6 @@ export class ListComponent implements OnInit {
     if (selectedFilter && selectedFilter.name === 'UpdatedDate') {
       this.updatedFromDate = new Date(selectedFilter.fromDate);
       this.updatedToDate = new Date(selectedFilter.toDate);
-      console.log(this.updatedFromDate);
-
       this.applyFilter('UpdatedDate');
     }
 
@@ -147,8 +145,7 @@ export class ListComponent implements OnInit {
       this.applyFilter('CompletedTasks');
     }
 
-    else if(selectedFilter && selectedFilter.name == 'Priorities') 
-    {
+    else if(selectedFilter && selectedFilter.name == 'Priorities') {
       this.selectedPriorities.push(selectedFilter.id);
       this.applyFilter('Priorities');
     }
@@ -205,7 +202,11 @@ export class ListComponent implements OnInit {
     }
 
     if (filter === 'CompletedTasks') {
-      this.filteredData = this.filteredData.filter(t => t.isDone == true);
+      this.filteredData = this.filteredData.filter(t => t.label == 2);
+    }
+
+    if(filter === 'ActiveTasks'){
+      this.filteredData = this.filteredData.filter(t => t.label == 1);
     }
 
     if (filter === 'LastSevendDaysCompletedTasks') {
@@ -246,12 +247,14 @@ export class ListComponent implements OnInit {
     }
 
     if (this.activeFilters.includes('UpdatedDate')) {
+      debugger;
       this.filteredData = this.taskService.filterUpdatedDate(this.filteredData, this.updatedFromDate, this.updatedToDate);
     }
 
 
     if (this.activeFilters.includes('CreatedDate')) {
       this.filteredData = this.taskService.filterCreatedDate(this.filteredData, this.createdFromDate, this.createdToDate);
+      debugger;
     }
 
     if (this.activeFilters.includes('DueDate')) {

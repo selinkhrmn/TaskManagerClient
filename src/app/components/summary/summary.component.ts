@@ -84,10 +84,11 @@ export class SummaryComponent implements AfterViewInit, OnInit {
           this.totalTasks = this.tasks.length;
           this.unplannedTasks = this.tasks.filter(t => t.dueDate == new Date(1 / 1 / 1));
           this.unassignedTasks = this.tasks.filter(t => t.assigneeId == "unassigned");
-          this.updatedTaskLength = this.taskService.filterUpdatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-          this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-          this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate.setDate(this.today.getDate() - 7)), this.today).length;
-          this.completedAllLength = this.tasks.filter(t => t.isDone == true).length;
+          this.fromDate.setDate(this.today.getDate() - 7)
+          this.updatedTaskLength = this.taskService.filterUpdatedDate(this.tasks, new Date(this.fromDate), this.today).length;
+          this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate), this.today).length;
+          this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate), this.today).length;
+          this.completedAllLength = this.tasks.filter(t => t.label == 2).length;
   
           this.filterLastActivities();
           this.userService.GetAllProjectUsers(projectId).subscribe((res) => {

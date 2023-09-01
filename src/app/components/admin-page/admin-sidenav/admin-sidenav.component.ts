@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FileService } from 'src/app/services/file.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -8,12 +9,20 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./admin-sidenav.component.scss']
 })
 export class AdminSidenavComponent {
+url : string;
 
   constructor(
     private router : Router,
-    public tokenService: TokenService) {}
+    public tokenService: TokenService,
+    public fileService : FileService) {}
 
   navigateToHome() {
     this.router.navigate(['home'])
+  }
+
+  ngOnInit() {
+    this.fileService.getProfilePhoto({"userId" : this.tokenService.getTokenId()}).subscribe((res)=> {
+      this.url = res[res.length-1];
+    });
   }
 }

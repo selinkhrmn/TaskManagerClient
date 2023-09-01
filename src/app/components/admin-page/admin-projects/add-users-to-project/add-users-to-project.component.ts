@@ -14,6 +14,7 @@ import { ProjectUserList, ProjectUserDto } from 'src/app/interfaces/projectUserD
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 export interface userChecked {
   user: UserDto;
@@ -87,25 +88,10 @@ export class AddUsersToProjectComponent implements OnInit {
         user,
         checked: this.isSelected(user.id)
       }));
+      this.inputUserList = this.userCheckedList
     });
   }
 
- 
-
-
-  // toggleUser(username: string, userId: string, index: number): void {
-  
-  
-  //   const userIndex = this.userCheckedList.findIndex(user => user.user.id === userId);
-  //   console.log(this.userCheckedList[userIndex].user.name);
-    
-  //   // if (userIndex !== -1) {
-  //   //   debugger;
-  //   //   this.userCheckedList[userIndex].checked = !this.userCheckedList[userIndex].checked;
-  //   // }
-
-  
-  // }
 
   isSelected(userId: string): boolean {
     const isSelected = this.selectedUsers.some((selectedUser) => selectedUser.userId === userId);
@@ -114,7 +100,7 @@ export class AddUsersToProjectComponent implements OnInit {
   
   AddUserToProject() {
     this.addedUser.projectId = this.projectId;
-
+    debugger;
     const addUsers: string[] = [];
     const removeUsers: string[] = [];
   
@@ -128,16 +114,19 @@ export class AddUsersToProjectComponent implements OnInit {
     });
 
     if(removeUsers.length != 0){
-     
       this.userService.DeleteUserFromProject({projectId: this.projectId, users: removeUsers}).subscribe((res) => {
-
+        if(res.isSuccessful == true){
+          Swal.fire('Saved!', '', 'success');
+        }
       });
     }
     
     if(addUsers.length != 0){
-    
       this.userService.AddUserToProject({projectId: this.projectId, users: addUsers}).subscribe((res) => {
-
+        if(res.isSuccessful == true){
+          Swal.fire('Saved!', '', 'success');
+        }
+        
       });
     }
    
