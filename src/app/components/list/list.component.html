@@ -29,20 +29,14 @@
       <button (click)="openDialog()" class="add-person-button" [disabled]="!tokenService.hasRole('Admin')">
         <i class="material-icons">person_add</i>{{ "addPeople" | transloco }}
       </button>
-      <!-- <button>
-      <i class="material-icons">share</i>{{ "share" | transloco }}
-    </button> -->
       <button (click)="getUnplannedTasks()">
         <i class="material-icons">event</i>{{ "unplanned" | transloco }}
       </button>
-      <!-- <button>
-      <i class="material-icons">more_horiz</i>{{ "more" | transloco }}
-    </button> -->
     </div>
   </div>
   <mat-menu #filterMenu="matMenu" [class]="customMenuClass">
     <div class="clear-button">
-      <button (click)="clearFilter()">Clear</button>
+      <button mat-raised-button color="warn" (click)="clearFilter()">Clear</button>
     </div>
     <br />
     <button class="custom-menu-item" mat-menu-item [class.active]="activeFilters.includes('AssignedToMe')"
@@ -66,13 +60,17 @@
       <mat-icon>flash_on</mat-icon> {{ 'Ongoing' | transloco }} {{'Tasks' | transloco}}
     </button>
 
-    <span>
-      <mat-icon>calendar_today</mat-icon> &nbsp; Date Range
+    <div class="date_range">
+      <span>
+      <mat-icon>calendar_today</mat-icon> &nbsp;
+      <label>Date Range</label> 
       <button *ngIf="fromDate != null || toDate != null" (click)="cancelCreateDates();stopPropagation($event)">
         (x)
       </button>
       <!--cancelDates() -->
     </span>
+    </div>
+    
 
     <div class="date-input-container">
       <mat-form-field>
@@ -112,25 +110,29 @@
             <section class="example-section">
               <mat-checkbox *ngFor="let assignee of assignees" class="example-margin"
                 (change)="selectAssignee(assignee)">{{ assignee | user:userList }}</mat-checkbox>
-            </section>s
+            </section>
           </div>
         </form>
       </div>
     </mat-menu>
 
-    <span><mat-icon>view_column</mat-icon> Columns
+    <div class="columns">
+      <span><mat-icon>view_column</mat-icon>
+      <label>Columns</label>
       <span *ngIf="selectedColumns.length != 0">{{ selectedColumns.length }}
         <button (click)="cancelPriorities()">(x)</button>
         <!--DÜZENLEME GEREKLİ  cancelColumns() -->
       </span>
     </span>
+    </div>
+    
 
-    <div *ngFor="let column of projectColumns">
-      <label (click)="stopPropagation($event)">
+    <div *ngFor="let column of projectColumns" class="projectColumns">
+      <div (click)="stopPropagation($event)" class="inside_project_columns">
         <input type="checkbox" [value]="column.id" [checked]="selectedColumns.includes(column.id)"
           (change)="handleColumnSelect(column.id)" />
         {{ column.name }}
-      </label>
+      </div>
     </div>
     <br />
     <span>
@@ -397,9 +399,9 @@
     </div>
   </div>
 
-  <div class="add-button-container" *ngIf="projectId != null">
+  <!-- <div class="add-button-container" *ngIf="projectId != null">
     <button mat-raised-button color="primary" (click)="openDialog()">
       Oluştur
     </button>
-  </div>
+  </div> -->
 </div>

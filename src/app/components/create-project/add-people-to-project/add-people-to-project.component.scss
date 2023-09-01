@@ -37,13 +37,13 @@
     width:400px;
     height: 600px;
     border-radius: 20px;
-    padding: 40px;
+    padding: 20px;
     background-color: hsla(210, 18%, 87%, 1);
     box-shadow: 5px 5px #012619;
 
     .topside {
       text-align: center;
-      height: 40%;
+      
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
@@ -54,12 +54,16 @@
         flex-direction: column;
         justify-content: space-evenly;
         width: 100%;
-        height: 60%;
+        height: 40%;
         color: #012619;
         border-radius: 4px;
         background-color: transparent;
         border: 1px solid #012619;
         box-shadow: 5px 5px #012619;
+
+        label {
+          margin-top: 5px;
+        }
       }
     }
   }
@@ -69,14 +73,18 @@
         width: 100%;
         height: fit-content;
         // border: 1px solid #056cf2;
-        padding: 4px;
+        padding: 7px;
         color: white;
-        background-color: #012619;
+        background-color: #015958;
         border-radius: 2px;
         margin-top: 10px;
         display: flex;
         justify-content: space-evenly;
 
+        label {
+
+        }
+        
         button {
           width: 50%;
           color: white;
@@ -94,11 +102,10 @@
     }
 
     .projects {
-      height: 60%;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-
+      margin-top: 20px;
       label {
         text-align: center;
         font-weight: 600;
@@ -107,8 +114,10 @@
 
       .projects_container {
         padding: 6px;
+        margin: 0;
         width: 100%;
-        height: 200px;
+        min-height: 320px;
+        // height: 200px;
         display: flex;
         flex-direction: column;
         border: 1px solid #012619;
@@ -116,6 +125,7 @@
         border-radius: 8px;
         overflow: auto;
         margin-bottom: 15px;
+        overflow: auto; //çalışmayabilir user ekle ve dene
       }
 
 

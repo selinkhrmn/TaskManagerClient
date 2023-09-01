@@ -1,7 +1,11 @@
 <div class="wrapper" #wrapper>
   <div class="left_side">
     <div class="navbar">
-      <input [(ngModel)]="taskChange.name" spellcheck="false" (blur)="updateTask()"/>
+      <input
+        [(ngModel)]="taskChange.name"
+        spellcheck="false"
+        (blur)="updateTask()"
+      />
     </div>
 
     <div class="description">
@@ -141,8 +145,18 @@
 
           <div class="main">
             <div class="placeholder"></div>
-            <label *ngIf="!commentWantsToBeEdited || comment.id !== commentBeingEditedId">{{ comment.comment }}</label>
-            <input *ngIf="commentWantsToBeEdited && comment.id === commentBeingEditedId" [(ngModel)]="comment.comment"/>
+            <label
+              *ngIf="
+                !commentWantsToBeEdited || comment.id !== commentBeingEditedId
+              "
+              >{{ comment.comment }}</label
+            >
+            <input
+              *ngIf="
+                commentWantsToBeEdited && comment.id === commentBeingEditedId
+              "
+              [(ngModel)]="comment.comment"
+            />
           </div>
 
           <div class="edit_delete_buttons" *ngIf="!commentWantsToBeEdited">
@@ -150,7 +164,10 @@
             <button
               mat-button
               (click)="
-              closeEditAndDeleteButtons(comment.id, comment.comment);findEditComment(comment.id)">
+                closeEditAndDeleteButtons(comment.id, comment.comment);
+                findEditComment(comment.id)
+              "
+            >
               Edit
             </button>
             <button mat-button (click)="deleteComment(comment.id)">
@@ -158,14 +175,29 @@
             </button>
           </div>
 
-          <div class="save_cancel_buttons" *ngIf="commentWantsToBeEdited && comment.id === commentBeingEditedId">
+          <div
+            class="save_cancel_buttons"
+            *ngIf="
+              commentWantsToBeEdited && comment.id === commentBeingEditedId
+            "
+          >
             <div class="placeholder3"></div>
             <div class="placeholder3"></div>
 
-            <button mat-raised-button color="primary" (click)="editComment(comment.id, updatedComment);closeSaveAndCancelButtons()">Save</button>
-            <button mat-button (click)="closeSaveAndCancelButtons()">Cancel</button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="
+                editComment(comment.id, updatedComment);
+                closeSaveAndCancelButtons()
+              "
+            >
+              Save
+            </button>
+            <button mat-button (click)="closeSaveAndCancelButtons()">
+              Cancel
+            </button>
           </div>
-          
         </div>
       </div>
     </div>
@@ -194,31 +226,30 @@
         <div class="bottom_side_buttons">
           <h2>Details</h2>
           <div class="task_state_buttons">
-             <button
-            mat-button
-            (click)="todoClick(taskChange.label)"
-            [ngClass]="{ gray: taskColor === 0 }"
-          >
-            Todo
-          </button>
+            <button
+              mat-button
+              (click)="todoClick(taskChange.label)"
+              [ngClass]="{ gray: taskColor === 0 }"
+            >
+              Todo
+            </button>
 
-          <button
-            mat-button
-            (click)="onProgressClick(taskChange.label)"
-            [ngClass]="{ blue: taskColor === 1 }"
-          >
-            I'm on it
-          </button>
+            <button
+              mat-button
+              (click)="onProgressClick(taskChange.label)"
+              [ngClass]="{ blue: taskColor === 1 }"
+            >
+              I'm on it
+            </button>
 
-          <button
-            mat-button
-            (click)="doneClick(taskChange.label)"
-            [ngClass]="{ green: taskColor === 2 }"
-          >
-            Done
-          </button>
+            <button
+              mat-button
+              (click)="doneClick(taskChange.label)"
+              [ngClass]="{ green: taskColor === 2 }"
+            >
+              Done
+            </button>
           </div>
-         
         </div>
       </div>
 
@@ -436,16 +467,22 @@
                 <label>{{ "dueDate" | transloco }}</label>
               </div>
               <div class="right_side_card dateTime">
-                <mat-form-field>
+                <mat-form-field *ngIf="dateChangeCheck">
                   <input
                     matInput
                     [matDatepicker]="picker1"
                     placeholder="Choose a date"
                     [formControl]="taskDueDate"
+                    (dateChange)="onDateChange($event)"
                   />
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
+                
+
+                <label *ngIf="!dateChangeCheck" (click)="changeDueDate()"
+                  >Unplanned</label
+                >
               </div>
             </div>
           </div>

@@ -67,6 +67,9 @@ export class ColumnsComponent {
   taskObj: Partial<Task> = {};
   columnColors: string[] = [];
   assignedPerson: string[];
+  columnsLength: any[] = []; // Your column data
+  tallestColumnHeight: string; // Store the tallest column's height
+
   constructor(
     private columnService: ColumnService,
     private taskService: TaskService,
@@ -78,6 +81,9 @@ export class ColumnsComponent {
   }
 
   ngOnInit(): void {
+    debugger
+
+    
     this.getColumnId(this.currentColumnId);
     if (this.projectService.getProjectLocal() != null) {
       this.currentProject = this.projectService.getProjectLocal();
@@ -87,10 +93,15 @@ export class ColumnsComponent {
 
           this.updateBackgroundColor();
           console.log(this.columns);
-
+          const columnHeights = this.columns.map(column => column.tasks.length * 60.8 + 142); // Assuming each task is 40px tall
+          console.log(columnHeights);
+          
+          this.tallestColumnHeight = Math.max(...columnHeights) + 'px';
+          console.log(this.tallestColumnHeight);
         }
       });
     }
+    
 
   }
   stopPropagation(event: { stopPropagation: () => void; }) {
@@ -102,6 +113,7 @@ export class ColumnsComponent {
   drop(event: CdkDragDrop<TaskDto[]>, column: ColumnTask) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -111,7 +123,7 @@ export class ColumnsComponent {
       );
 
       this.taskService.updateTaskColumnId({ "id": event.container.data[event.currentIndex].id, "columnId": column.id }).subscribe((res) => {
-
+        this.ngOnInit()
       });
     }
   }
@@ -182,6 +194,7 @@ export class ColumnsComponent {
 
   createColumn() {
     this.columnService.CreateColumn({ 'projectId': this.projectService.getProjectLocal().id, 'name': this.columnName }).subscribe((res) => {
+      this.columnName = ''
       this.ngOnInit()
     })
   }

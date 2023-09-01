@@ -27,27 +27,19 @@ interface DialogData {
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
 })
-
-
-
-
 export class TaskComponent implements OnInit {
-
-  
-
-
-
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
   taskName: string = this.data.task.name;
   taskId: number = this.data.task.id;
   taskProjectId: number = this.data.task.projectId;
-  isDone : boolean = false;
-  isWorking : boolean = false;
+  isDone: boolean = false;
+  isWorking: boolean = false;
   taskChange: Task = JSON.parse(JSON.stringify(this.data.task));
   taskDueDate = new FormControl(this.taskChange.endDate);
-  taskUpdatedDate = new FormControl(this.taskChange.updatedDate)
+  taskDueDateValue: Date = this.taskDueDate.value;
+  taskUpdatedDate = new FormControl(this.taskChange.updatedDate);
   taskC = new FormControl(this.taskChange.createdDate);
   editorContent: string;
   descriptionText: string = '';
@@ -56,7 +48,7 @@ export class TaskComponent implements OnInit {
   addSubtopicClicked = false;
   commentWantsToGetCreated: boolean;
   commentWantsToBeEdited: boolean;
-  commentBeingEditedId: number = -1; 
+  commentBeingEditedId: number = -1;
   fileIcons: { [extension: string]: string } = {
     jpg: '../../../assets/hosgeldiniz.png',
     png: '../../../assets/hosgeldiniz.png',
@@ -66,7 +58,7 @@ export class TaskComponent implements OnInit {
   };
   commentReq: CommentRequest = {
     id: this.taskId,
-    comment: ''
+    comment: '',
   };
   comments: Comment[] = [];
   userList: UserDto[] = [];
@@ -77,10 +69,10 @@ export class TaskComponent implements OnInit {
   isInputDisabled: boolean = false;
   taskColor: number;
   updatedComment: string;
-  // taskComment = {
-  //   lastComment: 
-  // }
-  public sortableElement: any
+  emptyCheck: boolean;
+  dateChangeCheck: boolean = false;
+
+  public sortableElement: any;
   public selectedUser: string = this.data.task.reporterId;
   imageUrl : string[] = [];
   uploadFile: File | null ;
@@ -94,7 +86,7 @@ export class TaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    
+
     public translocoService: TranslocoService,
     public projectService: ProjectService,
     private dialogRef: MatDialogRef<TaskComponent>,
@@ -103,13 +95,22 @@ export class TaskComponent implements OnInit {
     private fileService: FileService,
     private commentService: CommentService,
     private userService: UserService
-  ) { }
+  ) {}
 
-  ngOnInit() { 
-    if(this.taskChange.label == -1) { 
+  ngOnInit() {
+    const minDate = new Date('2000-01-01T00:00:00');
+    debugger;
+    if (new Date(this.data.task.endDate).getTime() < minDate.getTime()) {
+      this.dateChangeCheck = false;
+    } else {
+      this.dateChangeCheck = true;
+    }
+
+    if (this.taskChange.label == -1) {
       this.taskChange.label = 0;
       this.taskColor = 0;
-    }    console.log(this.taskChange.label);
+    }
+    console.log(this.taskChange.label);
 
     this.getTaskComments();
     this.userService.getAllUsers().subscribe((res) => {
@@ -118,12 +119,18 @@ export class TaskComponent implements OnInit {
       }
     });
 
-    this.userService.GetAllProjectUsers(this.projectService.getProjectLocal().id).subscribe((res) => {
-      if(res.isSuccessful == true){
-        this.users = res.data
-        this.users.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png'});
-      }
-    })
+    this.userService
+      .GetAllProjectUsers(this.projectService.getProjectLocal().id)
+      .subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.users = res.data;
+          this.users.unshift({
+            id: 'unassigned',
+            userId: 'unassigned',
+            profileImageUrl: '../../assets/user.png',
+          });
+        }
+      });
     this.priorities = this.priorityService.getOptions();
     this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
 
@@ -133,82 +140,64 @@ export class TaskComponent implements OnInit {
     this.commentWantsToBeEdited= false;
     
   
-    this.fileService.GetFileForTask({"TaskId" : this.taskId}).subscribe((res)=> {
-      this.imageUrl = res;
-      
-    });
   
   }
 
   ngOnDestroy() {
-    this.updateTask()
-  }
-  
-  closeSubmitAndCancelButtons() {
-    this.commentWantsToGetCreated = false;
-    this.createComment= ''
+    this.updateTask();
   }
 
-  closeEditAndDeleteButtons(id: number, comment: string) { 
+  closeSubmitAndCancelButtons() {
+    this.commentWantsToGetCreated = false;
+    this.createComment = '';
+  }
+
+  closeEditAndDeleteButtons(id: number, comment: string) {
     this.commentReq.id = id;
     this.commentReq.comment = comment;
     console.log(this.commentReq);
-    
-    this.commentWantsToBeEdited= true;
+
+    this.commentWantsToBeEdited = true;
   }
 
   closeSaveAndCancelButtons() {
-    this.commentWantsToBeEdited= false;
+    this.commentWantsToBeEdited = false;
     this.commentBeingEditedId = -1;
     console.log(this.commentReq);
-    
   }
 
   // GetCommentById() {
   //   this.commentService.GetCommentById(this.taskId).subscribe((res) => {
   //     console.log(res);
-      
+
   //   })
   // }
-
 
   logChange($event: any) {
     console.log('Content changed:', $event);
   }
 
-  selectUserForAssignee(userId: string){
+  selectUserForAssignee(userId: string) {
     this.taskChange.assigneeId = userId;
     this.updateTask();
-
-    
   }
-  selectUserForReporter(userId: string){
+  selectUserForReporter(userId: string) {
     this.taskChange.reporterId = userId;
     this.updateTask();
-    
   }
 
   setSortableElement(event: any) {
-    
     this.sortableElement = event;
     this.taskChange.priority = this.priorityService.getIconPriority(event);
     this.updateTask();
-
   }
 
-  upload(e: any) {
-    debugger
-    this.uploadFile = e.files.item(0);
-    this.uploadFileLabel = this.uploadFile?.name;
-    let x:any[]=[];
-  for(let i = this.images.length; i < e.files.length; i++){
-  x.push(e.files[i]);
-  }
-  if(x.length>0){
-    x.forEach(f=> {
-      this.images.push(f);
-    });
-  }
+  upload(event: Event) {
+    this.fileUploaded = true;
+    
+    this.fileService.uploadFile(event);
+
+    this.Files = this.fileService.selectedFiles;
    
   }
 
@@ -220,21 +209,17 @@ export class TaskComponent implements OnInit {
     //   inputValue: 1,
     //   confirmButtonText:
     //     'Continue <i class="fa fa-arrow-right"></i>',
-      
     // })
-    
     // if (accept) {
     //   this.data.task.label = 1;
     // }
     // else {
     //   this.data.task.label = 0;
     // }
-
     // console.log(this.data.task.label);
-    
-  } 
+  }
 
-  todoClick(label: any) {    
+  todoClick(label: any) {
     label = 0;
 
     this.taskChange.label = 0;
@@ -248,7 +233,6 @@ export class TaskComponent implements OnInit {
     this.taskChange.label = 1;
     console.log(label);
     this.taskColor = 1;
-
   }
 
   doneClick(label: any) {
@@ -256,7 +240,6 @@ export class TaskComponent implements OnInit {
     this.taskChange.label = 2;
     console.log(label);
     this.taskColor = 2;
-
   }
 
   // controlIsDone(e : any) {
@@ -265,66 +248,95 @@ export class TaskComponent implements OnInit {
   //   console.log(this.taskChange);
   // }
 
-
-  getUserProfileImage(x: any){
-    return "../../assets/user (1).png"
+  getUserProfileImage(x: any) {
+    return '../../assets/user (1).png';
   }
-
-  
 
   onSave() {
     console.log('Description:', this.descriptionText);
     console.log('Selected Files:', this.Files);
   }
 
-  updateTask() {    
-    if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)){
-      console.log("different");
-      
+  changeDueDate() {
+    debugger;
+    const todaysDate = new Date();
+    const minDate = new Date('2000-01-01T00:00:00');
+    const taskDueDateValue = new Date(this.taskDueDate.value);
 
-      this.taskService.updateTask(this.taskChange).subscribe((res) =>{
-        if(res.isSuccessful == true){
+    if (taskDueDateValue < minDate) {
+      Swal.fire({
+        title: 'Would you like to change the due date',
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          debugger;
+          console.log(this.taskDueDate);
+
+          this.dateChangeCheck = true;
+          this.taskChange.endDate = new Date(todaysDate);
+          this.taskDueDate = new FormControl(this.taskChange.endDate);
+          //this.updateTask();
+        } else {
+          this.dateChangeCheck = false;
+          this.taskChange.endDate = this.taskDueDateValue;
+        }
+      });
+    }
+  }
+
+  onDateChange(event: MatDatepickerInputEvent<Date>){
+    console.log(event.value);
+    this.taskChange.endDate = event.value;
+    console.log(this.taskDueDate);
+    this.updateTask()
+    
+  }
+
+  updateTask() {
+    debugger;
+    console.log(this.dateChangeCheck);
+
+    if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)) {
+      console.log('different');
+
+      this.taskService.updateTask(this.taskChange).subscribe((res) => {
+        if (res.isSuccessful == true) {
           // alert("YES!")
         }
-      } )
+      });
     } else {
-      console.log("same");
-      
+      console.log('same');
     }
-    
-
   }
 
   deleteTask() {
-    this.taskService.deleteTask(this.taskId).subscribe((res)=> {
-      this.closeDialog()
-    })
-    
+    this.taskService.deleteTask(this.taskId).subscribe((res) => {
+      this.closeDialog();
+    });
   }
-  
 
- 
-
-  editOpen(id: number){
+  editOpen(id: number) {
     return true;
   }
 
-  getTaskComments(){
-    
+  getTaskComments() {
     this.commentService.GetTaskComments(this.taskId).subscribe((res) => {
-      if(res.isSuccessful == true){
+      if (res.isSuccessful == true) {
         this.comments = res.data;
         console.log(res.data);
-    
       }
-    })
+    });
   }
 
   checkIfCommentAdded() {
-    if(this.commentReq.comment != null) {
+    if (this.commentReq.comment != null) {
       this.commentWantsToGetCreated = true;
-    }
-    else {
+    } else {
       this.commentWantsToGetCreated = false;
     }
   }
@@ -333,62 +345,53 @@ export class TaskComponent implements OnInit {
     if (this.createComment.trim() !== '') {
       this.commentReq.comment = this.createComment;
       this.commentService.CreateComment(this.commentReq).subscribe((res) => {
-        
-        
-        if(res.isSuccessful == true){  
-          this.getTaskComments();       
+        if (res.isSuccessful == true) {
+          this.getTaskComments();
           this.createComment = '';
         }
-      })
-      
+      });
     }
   }
 
-  editComment(id: number, comment: string){
-    debugger
+  editComment(id: number, comment: string) {
+    debugger;
     console.log(comment);
     this.commentBeingEditedId = id;
     this.commentReq.id = id;
     this.commentReq.comment = this.updatedComment; //alınan yeni input
-    this.commentService.UpdateComment({'id': this.commentReq.id, 'comment': this.commentReq.comment}).subscribe((res) => { //değiştirdim 24.08.2023
-      if(res.isSuccessful){
-        this.getTaskComments();
-      }
-    })
+    this.commentService
+      .UpdateComment({
+        id: this.commentReq.id,
+        comment: this.commentReq.comment,
+      })
+      .subscribe((res) => {
+        //değiştirdim 24.08.2023
+        if (res.isSuccessful) {
+          this.getTaskComments();
+        }
+      });
   }
 
   findEditComment(commentId: number) {
     console.log(this.comments);
-    
+
     this.commentWantsToBeEdited = true;
     this.commentBeingEditedId = commentId;
-    
   }
-  
 
-  deleteComment(id: number){
+  deleteComment(id: number) {
     this.commentService.DeleteComment(id).subscribe((res) => {
-      if(res.isSuccessful == true){
+      if (res.isSuccessful == true) {
         this.getTaskComments();
       }
-    })
-
+    });
   }
- 
-  
-  closeDialog() {
 
-    this.images.forEach(f=>{
-      this.formData.append('file',f); 
-      });
+  closeDialog() {
     console.log(this.taskColor);
      this.updateTask();
     this.taskColor = this.taskChange.label  
-    this.dialogRef.close({
-      isAdded: true,
-      task : this.taskChange,
-      file : this.formData
-    });
+    this.dialogRef.close();
    
   }
   // config: AngularEditorConfig = {
@@ -418,25 +421,4 @@ export class TaskComponent implements OnInit {
   //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   // }
 
-  handleFileInput(e:any) {
-    
-    
-    this.uploadFile = e.files.item(0);
-    this.uploadFileLabel = this.uploadFile?.name;
-    let x:any[]=[];
-  for(let i = this.images.length; i < e.files.length; i++){
-  x.push(e.files[i]);
-  }
-  if(x.length>0){
-    x.forEach(f=> {
-      this.images.push(f);
-    });
-  }
-  
-
-  
 }
-
-}
-
-

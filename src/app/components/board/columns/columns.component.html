@@ -4,7 +4,7 @@
 
   </div>
 
-  <div class="example-column" *ngFor="let column of columns; let i = index">
+  <div class="example-column" *ngFor="let column of columns; let i = index" [style]="{'--column-height': tallestColumnHeight}" #column>
     <div class="update_column">
       <div class="column_name">
         
@@ -40,7 +40,7 @@
 
     </div>
 
-    <div class="addTask" [ngClass]="{'sticky-add-task': column.tasks.length >= 9}">
+    <div class="addTask" [ngClass]="{'sticky-add-task': column.tasks.length >=7}">
       <button mat-raised-button [matMenuTriggerFor]="addTask" (click)="getColumnId(column.id)">
         Add Task
         <mat-icon>add</mat-icon>
