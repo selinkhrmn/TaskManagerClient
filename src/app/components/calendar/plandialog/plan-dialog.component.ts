@@ -5,6 +5,7 @@ import { TaskDto } from 'src/app/interfaces/taskDto';
 import { ProjectService, TaskService } from 'src/app/services';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskComponent } from '../../task/task.component';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-plan-dialog',
@@ -18,7 +19,8 @@ export class PlanDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<PlanDialogComponent>,
         private dialog: MatDialog,   // MatDialog enjekte edildi
         private taskService: TaskService,
-        private projectService: ProjectService
+        private projectService: ProjectService,
+        private translocoService: TranslocoService
 
     ) { }
     searchTerm: string = '';  // Arama terimi
@@ -65,5 +67,9 @@ export class PlanDialogComponent implements OnInit {
             task.name.toLowerCase().startsWith(this.searchTerm.toLowerCase())
         );
     }
+    someMethod(): void {
+        const translatedText = this.translocoService.translate('your_translation_key');
+        console.log(translatedText);
+      }
 
 }

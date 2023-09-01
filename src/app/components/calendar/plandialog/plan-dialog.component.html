@@ -3,12 +3,12 @@
         <span class="close-icon">X</span>
     </button>
     <br>
-    <h3><strong>Planlanmamış Tasklar</strong></h3>
+    <h3><strong>{{ 'unplannedTasksTitle' | transloco }}</strong></h3>
 
     <div class="dialog-content">
 
         <ul class="task-list">
-            <input type="text" [(ngModel)]="searchTerm" (keyup)="filterTasks()" placeholder="Task ara...">
+            <input type="text" [(ngModel)]="searchTerm" (keyup)="filterTasks()" placeholder="{{ 'searchTaskPlaceholder' | transloco }}">
             <br>
             <ng-container *ngFor="let task of filteredTasks">
                 <li>

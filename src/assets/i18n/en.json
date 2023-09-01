@@ -38,6 +38,14 @@
         "true": "Today",
         "false": ""
     },
+    
+    "namePlaceholder": "Names or teams*",
+    "nameInputLabel": "Names or teams*",
+    "messagePlaceholder": "Message (optional)",
+    "messageInputLabel": "Message (optional)",
+    "shareButtonLabel": "Share",
+    "unplannedTasksTitle": "Unplanned Tasks",
+    "searchTaskPlaceholder": "Search Task...",
     "next month":"Next month",
     "column" : "Column",
     "assignee" : "Assignee",

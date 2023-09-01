@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { ProjectUserDto, ProjectUserList, ProjectUserListForEmail } from 'src/app/interfaces/projectUserDto';
 import { UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
@@ -16,7 +17,7 @@ export class ShareComponent {
   justArray: UserDto[] = [];
  
   
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService,private translocoService: TranslocoService) {}
 
 
   paylas() {
@@ -31,5 +32,9 @@ export class ShareComponent {
     }
     
     this.userService.SendEmailToUsers(emails)
+  }
+  someMethod(): void {
+    const translatedText = this.translocoService.translate('your_translation_key');
+    console.log(translatedText);
   }
 }
