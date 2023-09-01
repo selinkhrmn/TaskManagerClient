@@ -22,8 +22,9 @@ export class NavbarComponent {
 
   @ViewChild(MatTable) table: MatTable<Task>;
   taskData : any;
-  
-  
+  url : string;
+  id = this.tokenService.getTokenId();
+
     constructor(
       public tokenService: TokenService,
       private dialog : MatDialog,
@@ -38,7 +39,11 @@ export class NavbarComponent {
 
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+      this.fileService.getProfilePhoto({"userId" : this.id}).subscribe((res)=> {
+        this.url = res[res.length-1];
+      });
+    }
 
     hasToken(): boolean {
       return localStorage.getItem('token') !== null;

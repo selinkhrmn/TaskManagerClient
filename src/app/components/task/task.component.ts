@@ -82,6 +82,14 @@ export class TaskComponent implements OnInit {
   // }
   public sortableElement: any
   public selectedUser: string = this.data.task.reporterId;
+  imageUrl : string[] = [];
+  uploadFile: File | null ;
+  uploadFileLabel: string | undefined = 'Choose an image to upload';
+  uploadProgress: number;
+  uploadUrl: string;
+  images:any[]=[];
+  formData = new FormData();
+
 
   constructor(
     private taskService: TaskService,
@@ -125,6 +133,10 @@ export class TaskComponent implements OnInit {
     this.commentWantsToBeEdited= false;
     
   
+    this.fileService.GetFileForTask({"TaskId" : this.taskId}).subscribe((res)=> {
+      this.imageUrl = res;
+      
+    });
   
   }
 
@@ -184,12 +196,19 @@ export class TaskComponent implements OnInit {
 
   }
 
-  upload(event: Event) {
-    this.fileUploaded = true;
-    
-    this.fileService.uploadFile(event);
-
-    this.Files = this.fileService.selectedFiles;
+  upload(e: any) {
+    debugger
+    this.uploadFile = e.files.item(0);
+    this.uploadFileLabel = this.uploadFile?.name;
+    let x:any[]=[];
+  for(let i = this.images.length; i < e.files.length; i++){
+  x.push(e.files[i]);
+  }
+  if(x.length>0){
+    x.forEach(f=> {
+      this.images.push(f);
+    });
+  }
    
   }
 
@@ -358,10 +377,18 @@ export class TaskComponent implements OnInit {
  
   
   closeDialog() {
+
+    this.images.forEach(f=>{
+      this.formData.append('file',f); 
+      });
     console.log(this.taskColor);
      this.updateTask();
     this.taskColor = this.taskChange.label  
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isAdded: true,
+      task : this.taskChange,
+      file : this.formData
+    });
    
   }
   // config: AngularEditorConfig = {
@@ -390,6 +417,25 @@ export class TaskComponent implements OnInit {
   //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
   //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   // }
+
+  handleFileInput(e:any) {
+    
+    
+    this.uploadFile = e.files.item(0);
+    this.uploadFileLabel = this.uploadFile?.name;
+    let x:any[]=[];
+  for(let i = this.images.length; i < e.files.length; i++){
+  x.push(e.files[i]);
+  }
+  if(x.length>0){
+    x.forEach(f=> {
+      this.images.push(f);
+    });
+  }
+  
+
+  
+}
 
 }
 

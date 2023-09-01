@@ -45,7 +45,7 @@
       </div> -->
   <div class="row ">
     <div class="custom-file d-flex justify-content-center align-items-center">
-      <input type="file" accept="image/*" class="custom-file-input" id="customFile"
+      <input type="file" accept="image/*" class="custom-file-input" id="customFile" multiple
         (change)="handleFileInput($event.target)" [disabled]="working">
       <label class="custom-file-label" for="customFile">{{ uploadFileLabel }}</label>
     </div>

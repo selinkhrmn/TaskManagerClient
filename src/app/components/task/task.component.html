@@ -43,10 +43,10 @@
       </div>
 
       <br />
-      <div class="attachments" *ngIf="fileUploaded">
+      <!-- <div class="attachments" *ngIf="fileUploaded">
         <h2>Attachments</h2>
-        <!-- ngIf uygulanacak-->
-        <ul>
+         ngIf uygulanacak-->
+        <!-- <ul>
           <li *ngFor="let fileData of Files">
             <img
               [src]="fileData.iconUrl"
@@ -57,7 +57,20 @@
             {{ fileData.file.name }}
           </li>
         </ul>
-      </div>
+      </div> --> 
+
+              <div class="attachments">
+                <h2>Attachments</h2>
+                <ng-container *ngFor="let img of imageUrl" class="d-flex">
+                  <tr>
+                    <td>
+                      <img class ="img" width="30" height="30" [src]="img">
+                    </td>
+                  </tr>
+                </ng-container>
+              </div>
+
+
     </div>
     <br />
     <br />

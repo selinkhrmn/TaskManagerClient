@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 import { Token } from '@angular/compiler';
 import { ResponseModel } from '../interfaces/responseModel';
+import { UserDto } from '../interfaces/user';
+import { Observable } from 'rxjs';
 
 
 
@@ -64,12 +66,9 @@ httpOptionsFormData = {
     return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   }
 
+  //for task files 
   saveFile(files: any, taskId: string) {
-    
-
      const url = `${this.baseUrl}/UploadWithout`;
-    // const params = new HttpParams().set('taskId', taskId.toString());
-    // return this.http.post(url, { params: params });
 
     const params = new HttpParams().set('taskId', taskId);
   const httpOptionsFormData = {
@@ -80,27 +79,39 @@ httpOptionsFormData = {
   };
 
    return this.http.post(url, files, httpOptionsFormData);
-
-    // return this.http.post(`${this.baseUrl}/UploadWithout?taskId=${taskIdString}`, files, this.httpOptionsFormData);
   }
+
+  //to get tasks files
+  GetFileForTask(id : any) : Observable<any> {
+    const url = `${this.baseUrl}/GetFileForTask`;
+    return this.http.post(url, id);
+  }
+
+  // for user profile photo
+  addFile(files : any , userId : string) {
+  
+    const url = `${this.baseUrl}/AddFile`;
+    const params = new HttpParams().set('userId', userId);
+    const httpOptionsFormData = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      }),
+      params: params
+    };
+  
+     return this.http.post(url, files, httpOptionsFormData);
+  }
+
+  //to get profile photos
+  getProfilePhoto(id: any): Observable<any> {
+  
+    const url = `${this.baseUrl}/GetFile`;
+    return this.http.post(url, id);
+  }
+
+ 
+
 }
 
-// saveFile(files: File[], taskId: string): Observable<any> {
-//   const url = `${this.baseUrl}/UploadWithout`;
-  
-//   const formData = new FormData();
-//   for (const file of files) {
-//     formData.append('files', file, file.name);
-//   }
 
-//   const params = new HttpParams().set('taskId', taskId);
-//   const httpOptionsFormData = {
-//     headers: new HttpHeaders({
-//       'Accept': 'application/json'
-//     }),
-//     params: params
-//   };
-
-//   return this.http.post(url, formData, httpOptionsFormData);
-// }
 

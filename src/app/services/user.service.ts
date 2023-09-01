@@ -70,7 +70,7 @@ export class UserService {
   }
 
   getUserById(id : any): Observable<any>{
-    debugger;
+
     return this.http.post(`${this.baseUrlIdentity}/GetUserById`, id);
   }
 

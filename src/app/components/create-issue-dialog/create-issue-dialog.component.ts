@@ -247,70 +247,12 @@ export class CreateIssueDialogComponent {
         this.images.push(f);
       });
     }
-    console.log(this.uploadFile);
-
-   
-
-  //   this.files = files;
-  // this.uploadFileLabel = ''; 
-
-  // for (let i = 0; i < files.length; i++) {
-  //   const file = files.item(i);
-  //   this.uploadFileLabel += file?.name;
-  //   this.uploadFileLabel += "-";
     
-  // }
+
     
   }
 
-//   upload() {
-//     debugger
-//     // if (!this.task.name) {
-//     //   alert('Please write a task name');
-//     //   return;
-//     // }
 
-//     if(!this.uploadFile) {
-//       // alert("file boş");
-//       return;
-//     }
-
-//     const formData = new FormData();
-//     this.formData = formData;
-//     formData.append(this.uploadFile.name, this.uploadFile, this.task.id?.toString());
-
-    
-
-//     this.uploadUrl = '';
-//     this.uploadProgress = 0;
-//     this.working = true;
-
-//   // this.http.post(`${this.baseUrl}/UploadFile`, formData, {reportProgress : true}).subscribe((event : any) => {
-//   //   if (event.type === HttpEventType.UploadProgress) {
-//   //     this.uploadProgress = Math.round((100 * event.loaded) / event.total);
-//   //   } else if (event.type === HttpEventType.Response) {
-//   //     this.uploadUrl = event.body.url;
-//   //   }
-//   // }, (error: any) => {
-//   //   console.error(error);
-//   // }).add(() => {
-//   //   this.working = false;
-//   // });;
-
-//   this.fileService.saveFile(formData, this.task.id?.toString()).subscribe((event : any) => {
-//     if (event.type === HttpEventType.UploadProgress) {
-//       this.uploadProgress = Math.round((100 * event.loaded) / event.total);
-//     } else if (event.type === HttpEventType.Response) {
-//       this.uploadUrl = event.body.url;
-//     }
-//   }, (error: any) => {
-//     console.error(error);
-//   }).add(() => {
-//     this.working = false;
-//   });;
-
-
-// }
 
 
 
