@@ -18,24 +18,29 @@
           <label>{{newProjectName}}</label>
         </div> -->
       </div>
-      
+
       <div class="projects">
         <label>{{ 'Users' | transloco }}</label>
         <div class="projects_container">
-          <mat-checkbox
-            *ngFor="let user of users"
-            [(ngModel)]="user.selected"
-            [value]="user.id"
-            (change)="onCheckboxChange(user)"
-          >
-            {{ user.name }}
-          </mat-checkbox>
+          <ng-container *ngFor="let user of users">
+            <tr>
+              <td>
+                <img width="30px" height="30px" [src]="url">
+              </td>
+              <td>
+                <mat-checkbox [(ngModel)]="user.selected" [value]="user.id" (change)="onCheckboxChange(user)">
+                  {{ user.name }} 
+                </mat-checkbox>
+              </td>
+            </tr>
+          </ng-container>
+
         </div>
         <button mat-raised-button color="primary" (click)="saveProjectUsers()">Save</button>
-        <button mat-button  (click)="closeDialog()">Cancel</button>
-        
+        <button mat-button (click)="closeDialog()">Cancel</button>
+
       </div>
-      
+
     </div>
   </div>
 </div>

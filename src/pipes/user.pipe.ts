@@ -27,6 +27,8 @@ export class UserPipe implements PipeTransform {
 
     return name + ' ' + surname;
   }
+
+
   
 
 }

@@ -9,6 +9,7 @@ import { ProjectService } from 'src/app/services';
 import { MatDialog } from '@angular/material/dialog';
 
 import Swal from 'sweetalert2';
+import { FileService } from 'src/app/services/file.service';
 
 
 @Component({
@@ -18,6 +19,8 @@ import Swal from 'sweetalert2';
 })
 export class AddPeopleToProjectComponent implements OnInit{
   users: UserDto[] = [];
+  userId : string;
+  url : any;
   newProjectName: any;
   addedList : ProjectUserList;
   selectedUsers: string[] = [];
@@ -27,19 +30,25 @@ export class AddPeopleToProjectComponent implements OnInit{
   constructor(public translocoService: TranslocoService,
     private userService : UserService,
     private projectService : ProjectService,
-    private dialog : MatDialog) { }
+    private dialog : MatDialog,
+    private fileService : FileService) { }
   ngOnInit() 
   {
+    debugger
     this.getAllUsers();
     this.newProjectName = localStorage.getItem('newProject');
+    
+    this.fileService.GetFileForProjectUsers({"projectId" : this.projectService.getCurrentProject().id}).subscribe((res)=> {
+      this.url = res[res.length - 1];
+    })
+    
   }
 
   getAllUsers() {
     this.userService.getAllUsers().subscribe(resp=>{
       if(resp.isSuccessful){
         this.users=resp.data
-        console.log(this.users);
-        
+
       }else{
         //alert error
       }

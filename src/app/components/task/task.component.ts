@@ -81,8 +81,8 @@ export class TaskComponent implements OnInit {
   uploadUrl: string;
   images:any[]=[];
   formData = new FormData();
-
-
+  url : string;
+  id = this.tokenService.getTokenId();
   constructor(
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -119,18 +119,12 @@ export class TaskComponent implements OnInit {
       }
     });
 
-    this.userService
-      .GetAllProjectUsers(this.projectService.getProjectLocal().id)
-      .subscribe((res) => {
-        if (res.isSuccessful == true) {
-          this.users = res.data;
-          this.users.unshift({
-            id: 'unassigned',
-            userId: 'unassigned',
-            profileImageUrl: '../../assets/user.png',
-          });
-        }
-      });
+    this.userService.GetAllProjectUsers(this.projectService.getProjectLocal().id).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.users = res.data
+        this.users.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png'});
+      }
+    })
     this.priorities = this.priorityService.getOptions();
     this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
 
@@ -140,6 +134,10 @@ export class TaskComponent implements OnInit {
     this.commentWantsToBeEdited= false;
     
   
+    this.fileService.GetFileForTask({"TaskId" : this.taskId}).subscribe((res)=> {
+      this.imageUrl = res;
+      
+    });
   
   }
 

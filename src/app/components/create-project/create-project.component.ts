@@ -12,6 +12,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import Swal from 'sweetalert2';
 import { AddPeopleToProjectComponent } from './add-people-to-project/add-people-to-project.component';
 
+
+
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
@@ -26,6 +28,8 @@ import { AddPeopleToProjectComponent } from './add-people-to-project/add-people-
   ],
 })
 export class CreateProjectComponent implements OnInit {
+  newProject : Project;
+  description : string;
   projectName : string;
   projects : Project[] = [];
   data: Object ;
@@ -64,6 +68,8 @@ export class CreateProjectComponent implements OnInit {
     else {
       this.projectService.createProject({name: this.projectName, description: ""}).subscribe((res) => {
       this.selectedProject(res.data);
+      // this.newProjectId = res.data[0].id;
+      
       if(res.isSuccessful == true) {
         Swal.fire({
           title: 'You successfully created a project!',
@@ -106,6 +112,9 @@ export class CreateProjectComponent implements OnInit {
 
   selectedProject(project: any) {
     this.projectService.setCurrentProject(project);
+    this.newProject = project;
+    this.projectService.setCurrentProject(this.newProject);
+    return this.newProject;
   }
 
   

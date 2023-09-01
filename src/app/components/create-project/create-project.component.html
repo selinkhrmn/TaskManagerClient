@@ -24,6 +24,8 @@
           (keyup.enter)="createProject()"
           [(ngModel)]="projectName"
         />
+        <label>{{"description" | transloco}}</label>
+        <textarea mat-Input type="textarea" [(ngModel)]="description"> </textarea>
         <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
       </div>
       <div class="button_field">

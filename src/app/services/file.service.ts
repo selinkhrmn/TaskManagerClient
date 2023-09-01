@@ -104,11 +104,17 @@ httpOptionsFormData = {
 
   //to get profile photos
   getProfilePhoto(id: any): Observable<any> {
-  
+
     const url = `${this.baseUrl}/GetFile`;
     return this.http.post(url, id);
   }
 
+  //to get all users profile photo
+  GetFileForProjectUsers(projectId : any) : Observable<any> {
+    debugger
+    const url = `${this.baseUrl}/GetFileForProjectUsers`;
+    return this.http.post(url, projectId);
+  }
  
 
 }
