@@ -2,17 +2,22 @@
     <h2>Share in Slack</h2>
 
     <div class="input-group">
-        <input type="text" id="name" [(ngModel)]="id" placeholder="{{ 'namePlaceholder' | transloco }}">
+        <input type="text" id="name" [(ngModel)]="id" placeholder="{{ 'namePlaceholder' | transloco }}"
+               [matAutocomplete]="auto">
         <label for="name"></label>
-    </div>
-    <ul>
-        <li *ngFor="let sharedItem of sharedData">{{ sharedItem }}</li>
-      </ul>
+      </div>
+      
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onUserNameSelected($event)">
+        <mat-option *ngFor="let userName of filteredUserNames | async" [value]="userName">
+          {{ userName }}
+        </mat-option>
+      </mat-autocomplete>
+      
       <div class="input-group">
         <textarea id="message" [(ngModel)]="message" placeholder="{{ 'messagePlaceholder' | transloco }}"></textarea>
         <label for="message"></label>
     </div>
-    
+
     <button (click)="paylas()">{{ 'shareButtonLabel' | transloco }}</button>
     
     
