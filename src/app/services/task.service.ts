@@ -120,6 +120,7 @@ export class TaskService {
 
 
   filterCreatedDate(filteredData: ListTask[], createdFromDate: Date, createdToDate?: Date){
+    debugger;
     if (createdFromDate && createdToDate) {
         createdToDate.setHours(23, 59, 59, 999); 
         filteredData = filteredData.filter(t => {
@@ -133,6 +134,7 @@ export class TaskService {
           return (taskCreatedDate >= createdFromDate);
         });
       }
+      
     return filteredData;
   }
 
@@ -159,7 +161,7 @@ export class TaskService {
       isDoneToDate.setHours(23, 59, 59, 999); 
       filteredData = filteredData.filter(t => {
         const taskUpdatedDate = new Date(t.updatedDate);
-        return (taskUpdatedDate >= isDoneFromDate && taskUpdatedDate <= isDoneToDate && t.isDone == true);
+        return (taskUpdatedDate >= isDoneFromDate && taskUpdatedDate <= isDoneToDate && t.label == 2);
       });
       return filteredData;
     }

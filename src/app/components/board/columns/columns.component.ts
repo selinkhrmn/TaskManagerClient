@@ -199,8 +199,8 @@ export class ColumnsComponent {
 
 
   CreateTask() {
-    this.taskObj.columnId = this.currentColumnId
-    this.taskObj.projectId = this.currentProjectId
+    this.taskObj.columnId = this.currentColumnId;
+    this.taskObj.projectId = this.projectService.getProjectLocal().id;
     this.taskObj.assigneeId = "unassigned";
     this.taskObj.reporterId = this.tokenService.tokenUserId();
     this.taskObj.priority = 3
