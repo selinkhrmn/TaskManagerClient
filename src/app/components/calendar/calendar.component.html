@@ -7,40 +7,40 @@
                 </div>
                 <div class="search-bar">
                     <input type="text" [(ngModel)]="searchDate" (change)="searchDay()"
-                        placeholder="Tarih Ara.... Örn:11.01.2021">
+                        placeholder="{{ 'searchPlaceholder' | transloco }}">
                     <button (click)="searchDay()" class="search-button">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
                 <div class="user-info">
                     <button (click)="openDialog()" class="add-person-button" [disabled]="!tokenService.hasRole('Admin')">
-                        <i class="material-icons">person_add</i>Kişi ekle
+                        <i class="material-icons">person_add</i>{{"add person" | transloco}}
                     </button>
                 </div>
                 <div class="center-content">
                     <button (click)="prevMonth()">
-                        <i class="material-icons icon-left">keyboard_arrow_left</i>Önceki Ay
+                        <i class="material-icons icon-left">keyboard_arrow_left</i>{{"last month" | transloco}}
                     </button>
-                    <div class="current-date">{{ months[currentMonth] }} {{ currentYear }}</div>
+                    <div class="current-date">{{ 'months.' + months[currentMonth] | transloco }} {{ currentYear }}</div>
                     <button (click)="nextMonth()">
-                        Sonraki Ay<i class="material-icons icon-right">keyboard_arrow_right</i>
+                        <i class="material-icons icon-right">keyboard_arrow_right</i>{{"Next month" | transloco}}
                     </button>
                 </div>
                 <div class="right-controls">
                     <button (click)="goToToday()" data-toggle="tooltip" data-placement="bottom"
                         title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
-                        <i class="material-icons">today</i>Bugün
+                        <i class="material-icons">today</i>{{"today" | transloco}}
                     </button>
                     <button #shareButton (click)="openShareDialog(shareButton)">
-                        <i class="material-icons">share</i>Paylaş
+                        <i class="material-icons">share</i>{{"share" | transloco}}
                     </button>
                     <button (click)="openPlanDialog()">
-                        <i class="material-icons">event</i>Planlanmamış
+                        <i class="material-icons">event</i>{{"unplanned" | transloco}}
                     </button>
                 </div>
             </div>
             <div class="weekdays">
-                <div *ngFor="let day of ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Pzr']">{{ day }}</div>
+                <div *ngFor="let day of weekdays">{{ day | transloco }}</div>
             </div>
             <div class="calendar-days">
                 <div *ngFor="let dayObj of days" [class.is-today]="isToday(dayObj.day)"
@@ -51,8 +51,7 @@
 
                         <!-- "Bugün" yazısını en üste taşıdık ve sadece bugün için gösteriyoruz -->
                         <span *ngIf="isToday(dayObj.day)"
-                            [style.font-weight]="getTodayText(dayObj) ? 'bold' : 'normal'">{{ getTodayText(dayObj)
-                            }}</span>
+                        [style.font-weight]="getTodayText(dayObj) ? 'bold' : 'normal'">{{ getTodayText(dayObj) | transloco }}</span>
 
 
                         <!-- Eğer bugün değilse tarih bilgisini gösteriyoruz -->
@@ -62,10 +61,9 @@
                             <mat-icon class="icon">check_circle</mat-icon>
 
                             <button mat-button *ngIf="dayObj.taskId" (click)="openTaskDialog(dayObj.taskId!)"
-                                class="task-name-button">
-                                Task Name: <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
-                            </button>
-
+                            class="task-name-button">
+                            {{ 'taskNameButton' | transloco }} <span class="bold-text">{{ dayObj.projectNames[0] }}</span>
+                    </button>
                             <mat-icon *ngIf="dayObj.projectNames && dayObj.projectNames.length > 1"
                                 class="icon-more-tasks-icon" (click)="toggleFilter('DueDate', dayObj.day)">
                                 more_horiz

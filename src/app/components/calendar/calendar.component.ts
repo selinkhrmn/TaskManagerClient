@@ -304,7 +304,7 @@ export class CalendarComponent implements OnInit {
   }
 
   getTodayText(dayObj: DayObject): string {
-    return dayObj.isToday ? "Bugün" : "";
+    return dayObj.isToday ? this.translocoService.translate('todayText.true') : '';
   }
 
   isSearchedDay(day: number): boolean {

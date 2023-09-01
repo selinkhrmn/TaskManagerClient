@@ -1,4 +1,32 @@
-// SCSS dosyası
+.custom-button {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: #f5f5f5;
+  border: 1px solid #881b74;
+  padding: 5px 10px; /* Increased horizontal padding for more space */
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  .home-icon {
+    font-size: 25px;
+    color: #8023639e; /* Change the color to your preferred color */
+    margin-right: 5px; /* Add margin to the right of the icon */
+    text-align: center; 
+  }
+}
+
+/* your-component.css */
+.create-button {
+  color: #751d59; /* Change this to your desired text color */
+}
+
+
 .navbar {
   background: #0b1a47ba;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);

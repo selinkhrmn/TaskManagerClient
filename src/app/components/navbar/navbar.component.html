@@ -57,12 +57,17 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <button class="btn-light" type="button" routerLink="/"><mat-icon aria-label="home icon"
-            fontIcon="home">Home</mat-icon></button>
-        <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-          [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
-          {{ "create" | transloco }}
+        <button class="custom-button" type="button" (click)="navigateToSummary()">
+          <mat-icon class="home-icon" aria-label="home icon">home</mat-icon>
         </button>
+        
+
+        <button class="btn btn-light create-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+          [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
+          <strong>{{ "create" | transloco }}</strong>
+
+        </button>
+
         <button class="mx-2 fa-lg language" [matMenuTriggerFor]="changeLang" mat-button>
           <img src="../../../assets/languages.png">
 

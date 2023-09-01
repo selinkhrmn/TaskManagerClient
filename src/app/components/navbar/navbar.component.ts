@@ -51,7 +51,10 @@ export class NavbarComponent {
     routerToAdminPage() {
       this.router.navigate(['admin-page/admin-projects']);
     }
-
+    navigateToSummary() {
+      this.router.navigate(['/home/summary']); // Replace '/summary' with the actual route path of your summary component
+    }
+    
     routerToProfileSetting() {
       this.router.navigate(['profile-setting']);
     }
