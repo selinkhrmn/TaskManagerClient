@@ -1,7 +1,7 @@
 export interface Base {
     id: number;
     createdDate: Date;
-    createdUser: string; 
+    createdByUser: string; 
     updatedDate: Date;
-    updatedUser: string;
+    updatedByUser: string;
 }

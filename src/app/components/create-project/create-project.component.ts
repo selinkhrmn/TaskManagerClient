@@ -62,7 +62,7 @@ export class CreateProjectComponent implements OnInit {
       this.projectNameIsEmpty = true;
     }
     else {
-      this.projectService.createProject({name: this.projectName}).subscribe((res) => {
+      this.projectService.createProject({name: this.projectName, description: ""}).subscribe((res) => {
       this.selectedProject(res.data);
       if(res.isSuccessful == true) {
         Swal.fire({
