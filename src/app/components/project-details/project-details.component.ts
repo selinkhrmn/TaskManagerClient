@@ -40,7 +40,7 @@ export class ProjectDetailsComponent {
   // }
 
   deleteProject() {
-    this.projectService.deleteProject({ id: this.projectId }).subscribe(() => {
+    this.projectService.deleteProject( this.projectId ).subscribe(() => {
       //window.location.reload()      
     });
   }

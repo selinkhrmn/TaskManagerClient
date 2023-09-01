@@ -119,9 +119,10 @@ h2 {
     }
   }
 
-  .edit_delete_buttons {
+  .buttons {
     display: flex;
     margin-top: 10px;
+    justify-content: end;
     .placeholder2 {
       background-color: transparent;
       width: 40px;
@@ -139,6 +140,8 @@ h2 {
         cursor: pointer;
       }
     }
+
+   
     .container {
       padding: 0;
       height: 90%;
@@ -151,6 +154,10 @@ h2 {
         h2 {
           font-weight: 700;
           font-size: 28px;
+        }
+
+        .delete {
+          justify-content: end;
         }
       }
     }

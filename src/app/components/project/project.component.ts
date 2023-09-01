@@ -55,7 +55,10 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetProject();
-
+    console.log("bak");
+    console.log(this.data.project);
+    
+    
     this.userService.GetProjectSelectedUsers(this.projectId).subscribe((res) => {
       this.projectUsers = res.data;
       this.userService.getAllUsers().subscribe((res) => {
@@ -119,21 +122,10 @@ export class ProjectComponent implements OnInit {
   }
 
   onSave() {
-    console.log('Description:', this.descriptionText);
-    console.log('Selected Files:', this.Files);
   }
 
   updateProject() {
-    console.log("comes");
-    console.log(this.project);
-
     if (JSON.stringify(this.data.project) != JSON.stringify(this.project)) {
-      console.log(this.data.project);
-      console.log("****");
-      console.log(this.project);
-
-
-
       this.projectService.updateProject(this.project).subscribe((res) => {
         console.log(res.data);
       })
@@ -164,11 +156,37 @@ export class ProjectComponent implements OnInit {
 
   }
 
+  deleteProject(){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.deleteProject(this.data.project.id).subscribe((res) => {
+          if(res.isSuccessful){
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            this.closeDialog();
+          }
+          else{
+
+          }
+        })
+        
+      }
+    })
+  }
+
   closeDialog() {
     this.dialogRef.close();
   }
-
-
-
 }
 

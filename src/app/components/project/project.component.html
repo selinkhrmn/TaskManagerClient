@@ -1,112 +1,126 @@
 <div class="wrapper" #wrapper>
-    <div class="left_side">
-        <div class="navbar">
-            <input [(ngModel)]="project.name" spellcheck="false"  (blur)="updateProject()"/>
-        </div>
-        <div class="description">
-            <input type="file" #fileInput multiple style="display:none" (change)="upload($event)" />
-            <br>
-            <br>
-            <div class="button-container">
-                <button mat-button (click)="fileInput.click()">
-                    <mat-icon>attach_file</mat-icon>Attach
-                </button>
-                <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
+  <div class="left_side">
+    <div class="navbar">
+      <input [(ngModel)]="project.name" spellcheck="false" (blur)="updateProject()" />
+    </div>
+    <div class="description">
+      <input type="file" #fileInput multiple style="display:none" (change)="upload($event)" />
+      <br>
+      <br>
+      <div class="button-container">
+        <button mat-button (click)="fileInput.click()">
+          <mat-icon>attach_file</mat-icon>Attach
+        </button>
+        <!--<button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
                     Add Subtopic <mat-icon>add_circle</mat-icon>
-                </button>
+                </button> -->
 
-                <br>
-            </div>
-            <br>
-            <div class="attachments" *ngIf="fileUploaded">
-                <h2>Attachments</h2>
-                <ul>
-                    <li *ngFor="let fileData of Files">
-                        <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon" />
-                        {{fileData.file.name}}
-                    </li>
-                </ul>
-            </div>
-            <div class="top-side">
-                <h2>{{"description" |transloco}}</h2>
-                <input placeholder="Add a description..." />
-            </div>
-            <br>
-
-        </div>
         <br>
-        <br>
-
+      </div>
+      <br>
+      <div class="attachments" *ngIf="fileUploaded">
+        <h2>Attachments</h2>
+        <ul>
+          <li *ngFor="let fileData of Files">
+            <img [src]="fileData.iconUrl" width="24" height="24" alt="File Icon" />
+            {{fileData.file.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="top-side">
+        <h2>{{"description" |transloco}}</h2>
+        <input [(ngModel)]="project.description" placeholder="Add a description..." (blur)="updateProject()" />
+      </div>
+      <br>
 
     </div>
+    <br>
+    <br>
 
-    <div class="right_side">
-        <div class="close_icon">
-            <mat-icon class="icon" (click)="closeDialog()">close</mat-icon>
-        </div>
-        <div class="container">
-            <div class="top_side_details">
-                <h2>Details</h2>
-            </div>
 
-            <div class="body">
-                <div class="column">
-                    <div class="assignee card1">
-                        <div class="inside_card">
-                          <div class="label_container" (click)="isPanelOpen = !isPanelOpen">
-                            <label>{{"userNumber" | transloco}}</label>
-                          </div>
-                          <div class="right_side_card assigned_person" (click)="isPanelOpen = !isPanelOpen">
-                            {{ projectUsers.length }}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <br>
-                      
-                      
-                      <div *ngIf="isPanelOpen" class="expansion-panel">
-                        <div class="search-bar">
-                          <mat-form-field>
-                            <input matInput (input)="applyFilter($event)" placeholder="Search with user name...">
-                          </mat-form-field>
-                        </div>
-                        
-                        <table class="user-table">
-                          <thead>
-                            <tr>
-                              <th>Name Surname</th>
-                              <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let user of paginatedUsers" class="user-row">
-                              <td>{{ user.id}}</td>
-                              <td><mat-icon (click)="deleteUser(user.userId)">delete</mat-icon></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      
-                        <mat-paginator [pageSize]="itemsPerPage" [length]="projectUsers.length" (page)="changePage($event)">
-                        </mat-paginator>
-                      </div>
-                      
-                      
-                      
-                    <br>
-                    <div class="started_date card1">
-                        <div class="inside_card">
-                            <div class="label_container">
-                                <label>{{ "startedDate" | transloco }}</label>
-                            </div>
-                            <div class="right_side_card dateTime">
-                                {{ project.createdDate | date }}
-                            </div>
-                        </div>
-                    </div>
+  </div>
 
-                </div>
-            </div>
-        </div>
+  <div class="right_side">
+    <div class="buttons">
+      <div class="delete">
+        <mat-icon (click)="deleteProject()">delete_forever </mat-icon>
+      </div>
+      &nbsp;
+      <div class="close_icon">
+        <mat-icon class="icon" (click)="closeDialog()">close</mat-icon>
+      </div>
+      
     </div>
+  
+    <div class="container">
+      <div class="top_side_details">
+        <h2>Details</h2>
+      </div>
+
+      <div class="body">
+        <div class="column">
+          <div class="assignee card1">
+            <div class="inside_card">
+              <div class="label_container" (click)="isPanelOpen = !isPanelOpen">
+                <label>{{"userNumber" | transloco}}</label>
+              </div>
+              <div class="right_side_card assigned_person" (click)="isPanelOpen = !isPanelOpen">
+                {{ projectUsers.length }}
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+
+          <div *ngIf="isPanelOpen" class="expansion-panel">
+            <div class="search-bar">
+              <mat-form-field>
+                <input matInput (input)="applyFilter($event)" placeholder="Search with user name...">
+              </mat-form-field>
+            </div>
+
+            <table class="user-table">
+              <thead>
+                <tr>
+                  <th>Name Surname</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of paginatedUsers" class="user-row">
+                  <td>{{ user.id}}</td>
+                  <td><mat-icon (click)="deleteUser(user.userId)">delete</mat-icon></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <mat-paginator [pageSize]="itemsPerPage" [length]="projectUsers.length" (page)="changePage($event)">
+            </mat-paginator>
+          </div>
+
+
+
+          <br>
+          <div class="started_date card1">
+            <div class="inside_card">
+              <div class="label_container">
+                <label>{{ "startedDate" | transloco }}</label>
+              </div>
+              <div class="right_side_card dateTime">
+                {{ project.createdDate | date }}
+              </div>
+            </div>
+          </div>
+          <div class="inside_card">
+            <div class="label_container">
+              <label>{{ "updatedDate" | transloco}}</label>
+              &nbsp;
+              {{ project.updatedDate | date:'MMM d, y, h:mm a' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

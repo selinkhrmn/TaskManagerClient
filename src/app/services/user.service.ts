@@ -6,7 +6,7 @@ import { ResponseModel } from '../interfaces/responseModel';
 import { UserDto } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 import { ProjectDto } from '../interfaces/project';
-import { ProjectUserList, ProjectUserDto } from '../interfaces/projectUserDto';
+import { ProjectUserList, ProjectUserDto, ProjectUserListForEmail } from '../interfaces/projectUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +58,7 @@ export class UserService {
     return this.http.post(url, payload);
   }
 
-  SendEmailToUsers(emails : Partial<ProjectUserList>){
+  SendEmailToUsers(emails : Partial<ProjectUserListForEmail>){
     return this.http.post<ResponseModel<ProjectUserList>>(`${this.baseUrlIdentity}/SendsEmail`, emails);
   }
 

@@ -39,8 +39,8 @@ export class ProjectService {
     return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/UpdateProject`, project);
   }
 
-  deleteProject(project: Partial<Project>) {
-    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, project);
+  deleteProject(id: number) {
+    return this.http.post<ResponseModel<Project>>(`${this.baseUrl}/DeleteProject`, {id:id});
   }
 
   getProject(id : Partial<Project>){
