@@ -17,7 +17,7 @@ export class Sidenav2Component implements OnInit{
   projects : Project[] = [];
   selectedProject: Project;
   currentProject: Project;
-
+  theProject: string;
   constructor(  
     public projectService: ProjectService, 
     private router: Router, 
@@ -35,12 +35,17 @@ export class Sidenav2Component implements OnInit{
       }
       
     });
+    let project = this.projectService.getCurrentProject();          
+    this.theProject = project.name;
+    console.log(this.theProject);
+    
   }
 
 
   selectProject(selectProject: Project){
     this.selectedProject = selectProject;
     this.projectService.setCurrentProject(selectProject);
+    location.reload()
   }
 
   public updateProject(currentProjectName: string){
@@ -72,5 +77,5 @@ export class Sidenav2Component implements OnInit{
   reload() {
     window.location.reload();
   }
-  
+
 }

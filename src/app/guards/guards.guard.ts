@@ -39,7 +39,7 @@ export const isLoggedIn: CanActivateFn = () => {
 export const loginCheck: CanActivateFn = () => {
   const router = inject(Router);
   if (localStorage.getItem('token')) {
-    router.navigate(['home']);
+    router.navigate(['home/summary']);
     return false;
   } else {
     return true;

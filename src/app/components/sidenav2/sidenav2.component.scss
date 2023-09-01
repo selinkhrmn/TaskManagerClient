@@ -1,33 +1,46 @@
 .container {
   width: 15vw;
-  height: 98%;
+  height: 100%;
   overflow: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .top_bar {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  margin-top: 30px;
-
+  // padding: 20px;
+  margin-top: 23px;
+  margin-bottom: 20px;
+  // border-bottom: 3px solid gray;
+  // background-color: rgba(9, 30, 66, 0.04);
+  border-radius: 10px 10px 0 0;
   label {
-    font-size: 30px;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 4px;
   }
 
   .icon_holder {
-    width: 30px;
-    height: 30px;
+    // width: 15px;
+    // height: 15px;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     transition: 0.1s;
-    img {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
+    // img {
+    //   width: 15px;
+    //   height: 15px;
+    //   border-radius: 50%;
+    // }
+    button {
+      width: 35px;
+      height: 35px;
     }
     // &:hover {
     //   background-color: #57bcff;
@@ -36,30 +49,45 @@
 }
 
 .project_names {
-  width: 90%;
+  width: 100%;
+  height: 20px;
   height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   .card {
     width: 100%;
     padding: 10px;
     background-color: transparent;
-    margin-top: 10px;
     border: none;
     cursor: pointer;
     font-size: 20px;
-
-    &:hover {
-      // border: 1px solid gray;
-      // color: white;
-      background-color: #e9ecef;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    img {
+      width: 20px;
+      height: 20px;
     }
+   
+  }
+
+  &:hover {
+
+    background-color: #e9ecef;
   }
 }
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    text-align: center;
 
+    label {
+      font-size: 11px;
+    }
+  }
 /* For screens up to 767px wide */
 @media (max-width: 1010px) {
   .container {
@@ -72,7 +100,6 @@
     flex-direction: column; /* Stack elements vertically */
     align-items: center; /* Center align items horizontally */
     margin-top: 15px; /* Adjust top margin for spacing */
-    
     .icon_holder {
       margin-right: 0; /* Remove right margin for better spacing */
       margin-top: 5px; /* Adjust top margin for spacing */
@@ -101,3 +128,6 @@
 }
 
 
+.selected-project {
+  background-color: #e9ecef; /* Set your desired background color here */
+}

@@ -51,7 +51,7 @@ export class ProjectService {
   setCurrentProject(proj: any) {
     this.project = proj;
     this.project$.next(proj);
-    localStorage.setItem('current-project', JSON.stringify({"id": this.project.id, "name": this.project.name} ));
+    localStorage.setItem('current-project', JSON.stringify({"id": this.project.id, "name": this.project.name,"description": this.project.description} ));
   }
 
   getCurrentProject() { 

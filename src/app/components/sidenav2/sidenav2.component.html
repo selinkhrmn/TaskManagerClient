@@ -1,6 +1,6 @@
 <div class="container">
   <div class="top_bar">
-    <label>{{'projects' | transloco}}</label>
+    <label>{{ "projects" | transloco }}</label>
     <div class="icon_holder" *ngIf="tokenService.hasRole('Admin')">
       <button (click)="openDialog()" mat-mini-fab color="basic">
         <mat-icon>add</mat-icon>
@@ -9,8 +9,14 @@
   </div>
 
   <ng-container *ngIf="projects.length > 0; else empty">
-    <div class="project_names" *ngFor="let project of projects" (click)="selectProject(project)">
-      <div class="card" (click)="reload()">
+    <div
+      class="project_names"
+      *ngFor="let project of projects"
+      (click)="selectProject(project)"
+      [class.selected-project]="project.name === theProject"
+    >
+      <div class="card">
+        <img src="../../../assets/hosgeldiniz.png"/>
         {{ project.name }}
       </div>
     </div>
@@ -18,7 +24,11 @@
 
   <ng-template #empty>
     <div class="empty">
-     {{'emptyMessage' | transloco}}
+      {{ "emptyMessage" | transloco }}
     </div>
   </ng-template>
+
+  <div class="footer">
+    <label>You're in a team-managed project</label>
+  </div>
 </div>

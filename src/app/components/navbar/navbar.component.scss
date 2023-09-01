@@ -23,12 +23,12 @@
 
 /* your-component.css */
 .create-button {
-  color: #751d59; /* Change this to your desired text color */
+  color: #2168c6; /* Change this to your desired text color */
 }
 
-
+// #2168c6
 .navbar {
-  background: #0b1a47ba;
+  background: #2168c6; 
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   overflow: hidden;
 
@@ -36,7 +36,7 @@
 
 .navbar-brand {
   padding: 12px;
-  font-size: 36px;
+  font-size: 32px;
 
   .sedna {
     font-weight: normal;
@@ -121,7 +121,8 @@
 
 .user_profile {
   img {
-    width: 20px;
+    border-radius: 50%;
+    width: 30px;
     height: 30px;
   }
 }

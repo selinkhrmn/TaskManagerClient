@@ -247,14 +247,32 @@ margin: 0;
 }
 
 .search-input {
-  width: 400px; // Arama çubuğunun genişliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
-  height: 40px; // Arama çubuğunun yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+
+  input {
+    padding: 14px;
+    border-radius: 7px;
+    border: transparent;
+    font-size: 18px;
+    &:focus {
+      outline: 1px solid #2168c6;
+    }
+  }
+  button {
+    width: 20px;
+    height: 20px;
+  }
+  // width: 400px; // Arama çubuğunun genişliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+  // height: 40px; // Arama çubuğunun yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
 }
 
-.search-input input {
-  height: 25px; // Input elemanının yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
-  font-size: 16px; // Input elemanındaki yazının boyutunu ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
-}
+// .search-input input {
+//   height: 25px; // Input elemanının yüksekliğini ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+//   font-size: 16px; // Input elemanındaki yazının boyutunu ayarlar. Bu değeri ihtiyacınıza göre değiştirebilirsiniz.
+// }
 
 
 input {
@@ -270,6 +288,18 @@ button {
   background-color: rgb(255, 255, 255);
   padding: 5px;
   font-size: 12px;
+}
+
+.example-form {
+  input {
+    height: 30px;
+  }
+}
+
+.left-part {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
 }
 
 .user-info {
@@ -295,18 +325,20 @@ button {
 
 .user-name {
   cursor: pointer;
-  font-size: 22px;
+  font-size: 16px;
   border-radius: 50%;
-  background-color: #5f5fcc;
-  color: #ffffff;
-  padding: 18px;
-  margin-left: 2px;
-  margin-right: 5px;
+  background-color: #fff;
+  color: #2168c6;
+  font-weight: 600;
+  border: 2px solid rgba(9, 30, 66, 0.08);
+  padding: 12px;
+  margin-left: 12px;
+  // margin-right: 5px;
 }
 
-.user-name:hover {
-  background-color: rgb(55, 3, 20);
-}
+// .user-name:hover {
+//   background-color: rgb(55, 3, 20);
+// }
 
 .add-person-button {
   border-radius: 10%;

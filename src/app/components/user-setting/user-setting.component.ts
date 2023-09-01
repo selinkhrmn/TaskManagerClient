@@ -81,6 +81,7 @@ export class UserSettingComponent {
         console.log('User deleted successfully');
         this.selectedUser =  [];
         this.GetAllProjectUsers();
+        location.reload();
       },
       (error: any) => {
         console.error('Error deleting user:', error);

@@ -66,8 +66,10 @@ export class CreateProjectComponent implements OnInit {
       this.projectNameIsEmpty = true;
     }
     else {
-      this.projectService.createProject({name: this.projectName, description: ""}).subscribe((res) => {
+      this.projectService.createProject({name: this.projectName, description: this.description}).subscribe((res) => {
       this.selectedProject(res.data);
+      console.log(res.data);
+      
       // this.newProjectId = res.data[0].id;
       
       if(res.isSuccessful == true) {
@@ -87,11 +89,11 @@ export class CreateProjectComponent implements OnInit {
           }
           else {
             this.closeDialog();
+            location.reload();
+
           }
         })
       }
-
-      // this.ngOnInit()
     });
     localStorage.setItem('newProject', this.projectName);
     }

@@ -57,10 +57,10 @@
 
     <form class="d-flex">
       <div class="user-section">
-        <button class="custom-button" type="button" (click)="navigateToSummary()">
+        <!-- <button class="custom-button" type="button" (click)="navigateToSummary()">
           <mat-icon class="home-icon" aria-label="home icon">home</mat-icon>
         </button>
-        
+         -->
 
         <button class="btn btn-light create-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
           [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
@@ -80,7 +80,7 @@
             
           ">
 
-          <img [src]="url" alt="" style="width: 30px" />
+          <img [src]="url" alt="" />
         </div>
 
         <div class="dropdown">

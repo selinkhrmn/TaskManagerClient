@@ -1,16 +1,16 @@
 <div class="tabs_container_tabs_name_part">
   <div class="tabs_container_tabs_name_part_holder">
-    <button mat-button routerLink="summary">{{'tabs.summary' | transloco}}</button>
+    <button mat-button routerLink="summary" routerLinkActive="active">{{'tabs.summary' | transloco}}</button>
     <!-- <button mat-button routerLink="board" (click)="GetProjectColumns()">Board</button> -->
-    <button mat-button routerLink="board">{{'tabs.board' | transloco}}</button>
-    <button mat-button routerLink="list">{{'tabs.list' | transloco}}</button>
-    <button mat-button routerLink="calendar">{{'tabs.calender' | transloco}}</button>
+    <button mat-button routerLink="board" routerLinkActive="active">{{'tabs.board' | transloco}}</button>
+    <button mat-button routerLink="list" routerLinkActive="active">{{'tabs.list' | transloco}}</button>
+    <button mat-button routerLink="calendar" routerLinkActive="active">{{'tabs.calender' | transloco}}</button>
     <!-- <button mat-button>{{'tabs.timeline' | transloco}}</button> -->
     <!-- <button mat-button>{{'tabs.forms' | transloco}}</button> -->
     <!-- <button mat-button>Issues</button> -->
     <!-- <button mat-button>{{'tabs.reports' | transloco}}</button> -->
     
-    <button class="custom-button setting" [disabled]="!tokenService.hasRole('Admin')" routerLink="project-settings">
+    <button mat-button class="custom-button setting" [disabled]="!tokenService.hasRole('Admin')" routerLink="project-settings" routerLinkActive="active">
       {{ 'tabs.projectSettings' | transloco }}
     </button>
     
@@ -20,3 +20,4 @@
     
   </div>
 </div>
+<!-- [class.selected-project]="project.name === theProject" -->

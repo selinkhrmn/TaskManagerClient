@@ -85,7 +85,7 @@
     "new password": "New Password",
     "confirm password": "Confirm Password",
     "label" : "Label",
-    "emptyMessage" : "No open projects available.",
+    "emptyMessage" : "No created task available.",
     "hintForAdminSearch" : "Search by Task Name or User Name",
     "Not Started": "Not started",
     "Pending" : "Pending",

@@ -44,6 +44,8 @@ export class AddPeopleToProjectComponent implements OnInit{
     
   }
 
+
+
   getAllUsers() {
     this.userService.getAllUsers().subscribe(resp=>{
       if(resp.isSuccessful){
@@ -79,11 +81,14 @@ export class AddPeopleToProjectComponent implements OnInit{
     this.userService.AddUserToProject({projectId: currentProject.id, users: this.selectedUsers }).subscribe((res) => {
       console.log(res.data);
       if(res.isSuccessful == true) {
-        Swal.fire(
-          'You successfully added the users into your project!',
-          '',
-          'success'
-        )
+        Swal.fire({
+          title: 'You successfully added the users into your project!',
+          icon: 'success',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
       }
       if(res.isSuccessful == false) {
         Swal.fire({
@@ -102,6 +107,8 @@ export class AddPeopleToProjectComponent implements OnInit{
 
   closeDialog() {
     this.dialog.closeAll();
+    location.reload();
+
   }
   
 }
