@@ -24,13 +24,14 @@
     width: 100%;
     border-left: 1px solid black;
     margin: 0;
-    
+
   }
 
   .routers_container {
     width: 84vw;
     height: 89%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     }
 
 

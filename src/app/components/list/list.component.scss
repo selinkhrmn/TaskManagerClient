@@ -1,9 +1,14 @@
+.row {
+  overflow: hidden;
+
+}
+
+
 .overflow-table-container {
   width: 120%;
-  height: 500px; // Bu değeri tablonun içeriğine göre ayarlayabilirsiniz.
+  // height: 500px; // Bu değeri tablonun içeriğine göre ayarlayabilirsiniz.
 
   border: 1px solid #ccc;
-
   table {
     width: 100%;
     min-width: 1500px; // Bu değeri tablonuzun genişliğine göre ayarlayabilirsiniz.
