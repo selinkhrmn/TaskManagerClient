@@ -83,7 +83,7 @@ import { LabelPipe } from 'src/pipes/label.pipe';
 import { TokenInterceptor } from './services/token.interceptor';
 import { PriorityService } from './services/priority.service';
 import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
-
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -177,6 +177,7 @@ import { ProfileSettingPageComponent } from './components/profile-setting-page/p
     BrowserAnimationsModule, // required animations module
     MatPaginatorModule,
     FormsModule,
+    GoogleChartsModule,
     MatTableModule,
     ToastrModule.forRoot(
       {positionClass: 'toast-bottom-right',}

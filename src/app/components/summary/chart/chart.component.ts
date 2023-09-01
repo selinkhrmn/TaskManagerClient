@@ -1,74 +1,78 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartEvent } from 'chart.js';
+import { Project, ProjectDto } from 'src/app/interfaces/project';
+import { ColumnTask } from 'src/app/interfaces/columnTasks';
+import { ColumnService, ProjectService } from 'src/app/services';
+import { ChartType, Column, Row } from 'angular-google-charts';
+import { ColumnDto } from 'src/app/interfaces/columnDto';
+import { ThemeService } from 'ng2-charts';
 
+export interface Chart{
+  name: string,
+  taskLength: number
+}
 
 @Component({
   selector: 'app-chart',
   templateUrl: 'chart.component.html',
   styleUrls: [ 'chart.component.scss' ]
 })
-export class ChartComponent {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+export class ChartComponent implements OnInit {
 
-  pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [ [ 'To do' ], [ 'In Progress' ], 'Done' ],
-    datasets: [ {
-      data: [ 100, 100, 100 ]
-    } ]
-  };
-  public chartClicked({ event, active }: { event: ChartEvent, active: { index?: number }[] }): void {
-    if (active.length > 0 && active[0].index !== undefined) {
-      const clickedSegmentIndex = active[0].index;
-      const clickedSegmentLabel = this.pieChartData.labels[clickedSegmentIndex];
-      console.log(`Clicked on segment: ${clickedSegmentLabel}`);
-    }
-
-    function newFunction(this: any) {
-      return this.pieChartData.labels;
-    }
-  }
-
-  // Pie
-  public pieChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'right', // Bu kısım etiketlerin konumunu belirler.
-        
-      },
-      
-      datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-          return value; // Add a default return statement
-        },
-      },
-    }
-  };
+  columnData : Chart[] = [];
+  chartLabels: string[] = [];
+  formattedChartData: any[][] = [];
+  chartData = this.formattedChartData;
   
-  public doughnutChartData: ChartData<'doughnut', number[], string | string[]> = {
-    labels: ['Label 1', 'Label 2', 'Label 3'],
-    datasets: [{
-      data: [100,100, 100],
-    }],
+  chartTitle: string = '';
+  googleChartType =   ChartType.PieChart; 
+  columnNames =  ['Value', 'Count'];
+  chartOptions=  {
+    legend: 'none'
   };
-  public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [ DatalabelsPlugin ];
+  taskLength: number[] = []
+  columns: ColumnTask[] = []
 
-  // events
-  // public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
-  //   console.log(event, active);
-  // }
+constructor(
+  private projectService: ProjectService,
+  private columnService: ColumnService
+){}
 
-  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
+  ngOnInit(): void {
+    const getCurrentProject: ProjectDto = this.projectService.getProjectLocal();
+
+    this.chartTitle = getCurrentProject.name;
+
+    this.columnService.GetProjectColumnsTasks(getCurrentProject.id).subscribe((res) => {
+      debugger
+      this.columns = res.data
+      this.columnData = this.columns.map((column) => ({
+        name: column.name,
+        taskLength: column.tasks.length
+      }));
+     const formattedChartData: any[][] = this.columnData.map((column) => [column.name, column.taskLength]);
+      console.log(formattedChartData);
+      
+
+      console.log(this.columnData);
+
+      this.chartData = formattedChartData;
+
+    })
+    
   }
+  
+
+  loadPieChartData() {
+    const getCurrentProject: ProjectDto = this.projectService.getProjectLocal();
+
+    if (getCurrentProject) {
+      this.columnService.GetProjectColumnsTasks(getCurrentProject.id).subscribe((res) => {
+        const columnTask = res.data;
+      })
+    }
+  }
+ public pieChartPlugins = [DatalabelsPlugin];
 
 }
 

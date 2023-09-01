@@ -42,10 +42,11 @@ export class ColumnService {
     return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/GetAllProjectColumns`, id);
   }
 
-  GetProjectColumnsTasks(id: Partial<ProjectDto>): Observable<ResponseModel<ColumnTask>> {
-    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, id);
+  GetProjectColumnsTasks(id: number): Observable<ResponseModel<ColumnTask>> {
+    debugger
+    return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, {id:id});
   }
-
+  
   TransferColumnTasks(transferDto : TransferDto): Observable<ResponseModel<ColumnDto>>{
     return this.http.post<ResponseModel<ColumnDto>>(`${this.baseUrl}/TransferColumnTasks`, transferDto);
   }

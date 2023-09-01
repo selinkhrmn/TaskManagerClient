@@ -1,12 +1,19 @@
-
-    <div style="display: block; height: 350px; width: 350px;">
-        <canvas baseChart class="chart"
-            [data]="pieChartData"
-            [type]="pieChartType"
-            [options]="pieChartOptions"
-            [plugins]="pieChartPlugins">
-            (chartClick)="chartClicked($event)"
-
-        </canvas>
-    </div>
-
+      <div class="chart-container">
+        <div style="display: flex; flex-direction: column; align-items: center; height: 100%">
+          <div style="width: 70%">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <h1>{{chartTitle}}</h1>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <google-chart
+                
+                [type]="googleChartType" 
+                [data]="chartData" 
+                [columns]="columnNames"
+                [options]="chartOptions"
+              ></google-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      

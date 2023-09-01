@@ -29,7 +29,7 @@ export class BoardComponent {
     this.project = this.projectService?.getProjectLocal();
     if(this.project != null){
       this.isEmpty = false;
-      this.columnService.GetProjectColumnsTasks({"id": this.project.id}).subscribe((response) => {
+      this.columnService.GetProjectColumnsTasks(this.project.id).subscribe((response) => {
         if(response.data != null){
           this.columns = response.data;
         }
