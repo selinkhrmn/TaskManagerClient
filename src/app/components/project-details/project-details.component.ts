@@ -6,6 +6,8 @@ import { Sidenav2Component } from '../sidenav2/sidenav2.component';
 import { HomepageComponent } from '../homepage/homepage.component';
 import { TokenService } from 'src/app/services/token.service';
 import { TranslocoService} from '@ngneat/transloco';
+import Swal from 'sweetalert2';
+import { ProjectDto } from 'src/app/interfaces/project';
 
 @Component({
   selector: 'app-project-details',
@@ -18,6 +20,7 @@ export class ProjectDetailsComponent {
   projectId: number;
   currentProject: Partial<Project>;
   currentProjectName : string;
+  projects: Project[] = []
   constructor(
     public projectService: ProjectService,
     private sideNav: Sidenav2Component,
@@ -40,9 +43,44 @@ export class ProjectDetailsComponent {
   // }
 
   deleteProject() {
-    this.projectService.deleteProject( this.projectId ).subscribe(() => {
-      //window.location.reload()      
-    });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      debugger
+      if (result.isConfirmed) {
+        this.projectService.deleteProject( this.projectId ).subscribe((res) => {
+        });
+        this.projectService.getAllProjects().subscribe((res) => {
+          console.log(res);
+          
+         if(res.isSuccessful) {
+          this.projects = res.data;
+  
+          const lowest = this.projects.reduce((lowest, current) => {
+            if (current.id !== this.projectId && (lowest === null || current.id < lowest.id)) {
+              return current;
+            } else {
+              return lowest;
+            }
+          }, null);
+  
+          if (lowest !== null) {
+            this.projectService.setCurrentProject(lowest);
+          }
+  
+          location.reload();
+         }
+         
+        })
+      }
+    })
+    
   }
 
   saveProjectDetails(){
