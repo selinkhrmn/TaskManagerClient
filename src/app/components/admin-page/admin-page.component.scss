@@ -1,13 +1,22 @@
 .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    // display: flex;
+
+
+    .main {
+        width: 100%;
+        height: 90%;
+        display: flex;
+    }
     .left_side {
-        width: 20%;
+        width: 18%;
         height: 100%;
+        // height: 100%;
     }
     .right_side {
-        width: 80%;
+        width:82%;
+        height: 100%;
         overflow: auto;
     }
 }

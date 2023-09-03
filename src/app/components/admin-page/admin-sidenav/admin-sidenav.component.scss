@@ -13,12 +13,14 @@
         gap: 20px;
         border-bottom: 2px solid black;
         img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
         }
 
         label {
-            font-size: 26px;
+            font-size: 28px;
+            font-weight: 900;
         }
     }
 

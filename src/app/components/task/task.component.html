@@ -256,7 +256,7 @@
             </div>
           </div>
 
-          <!-- <div class="reporter card1">
+          <div class="reporter card1">
             <div class="inside_card">
               <div class="label_container">
                 <label>{{ "reporter" | transloco }}</label>
@@ -308,7 +308,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
           <div class="priority card1">
             <div class="inside_card">
@@ -348,7 +348,7 @@
           </div>
 
           <!-- Reporting -->
-          <div class="priority card1">
+          <!-- <div class="priority card1">
             <div class="inside_card">
               <div class="label_container">
                 <label>Reporting</label>
@@ -372,7 +372,7 @@
                 <label>{{ taskC.value | date }}</label>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="due_date card1">
             <div class="inside_card">
@@ -380,7 +380,7 @@
                 <label>{{ "dueDate" | transloco }}</label>
               </div>
               <div class="right_side_card dateTime">
-                <mat-form-field>
+                <mat-form-field *ngIf="dateChangeCheck">
                   <input
                     matInput
                     [matDatepicker]="picker1"

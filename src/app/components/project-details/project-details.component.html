@@ -23,8 +23,8 @@
         <input [(ngModel)]="currentProjectName" />
       </div>
       <div class="save_button">
-        <button mat-raised-button (click)="saveProjectDetails()">{{'save' | transloco}}</button>
-        <button mat-raised-button (click)="deleteProject()">{{'delete' | transloco}}</button>
+        <button mat-raised-button color="primary" (click)="saveProjectDetails()">{{'save' | transloco}}</button>
+        <button mat-raised-button color="warn" (click)="deleteProject()">{{'delete' | transloco}}</button>
       </div>
     </div>
 

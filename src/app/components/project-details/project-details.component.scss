@@ -86,6 +86,7 @@
 
     label {
         font-weight: 600;
+        height: 10px;
     }
 
     input {
@@ -109,13 +110,7 @@
     button {
         color: white;
     }
-    button:first-child {
-        background-color: #345fa0e3;
-    }
-
-    button:last-child {
-        background-color: #b6645ee6;
-    }
+   
 
     
 }
