@@ -1,6 +1,10 @@
 .more-tasks-icon {
     cursor: pointer;
 }
+.row {
+    margin-top: 0;
+  }
+  
 .custom-button {
   display: flex;
   justify-content: center; /* Center horizontally */
@@ -78,12 +82,13 @@ h3.project-heading {
 }
 
 .calendar {
+    margin-top: -10px;
     display: flex;
     flex-direction: column;
     border: 1px solid #d7d3d3;
     width: 1300px;
     padding: 10px;
-    margin-top: 20px;
+   
     background-color: #ffffff;
     /* Beyaz arka plan rengi */
     border: 1px solid #dddddd;
@@ -311,24 +316,35 @@ button {
 .search-bar {
     display: flex;
     align-items: center;
-    margin-left: 5px;
-}
+    height: 50px; /* İstediğiniz yüksekliği ayarlayın */
+    border-radius: 15px; /* Köşeleri hafifçe yuvarlar */
+    border: 1px solid transparent; /* Köşe çizgilerini şeffaf yapar */
+    background-color: transparent; /* Arka plan rengini şeffaf yapar */
+  }
+  
 
 .search-bar input {
-    padding: 5px;
-    font-size: 14px;
+    padding: 8px;
+    font-size: 15px;
     margin-right: -9px;
+    height: 40px;
+    border-radius: 7px;
+    border-radius: 0; /* Köşeleri keskin yapar */
+    border: 1px solid transparent; 
+    border: 1px solid rgba(128, 0, 128, 0.379); /* Köşe çizgilerini mor yapar */
 }
 
 .search-button {
     background-color: #e4c7e6;
     border: none;
     margin-left: 1px;
+   
 }
 
 .search-button i {
     font-size: 18px;
     color: #ffffff;
+    
 }
 
 
@@ -348,20 +364,17 @@ button {
 }
 
 .user-name {
-    font-size: 14px;
-    /* Yazı boyutunu istediğiniz gibi ayarlayabilirsiniz */
-    border-radius: 20px;
-    /* Yuvarlak köşeler için 20px border-radius değeri */
-    padding: 20px 20px;
-    /* İçeriğin içinde biraz boşluk bırakmak için padding ekleyebilirsiniz */
-    background-color: #89518d;
-    /* Arkaplan rengini belirleyebilirsiniz */
-    color: #ffffff;
-    /* Yazı rengini beyaz yaparak metnin daha iyi görünmesini sağlayabilirsiniz */
-    cursor: default;
-    /* Kullanıcı adının üzerine tıklanamaz hale gelmesini sağlar */
-    margin-right: 15px;
-}
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #791a76;
+    font-weight: 600;
+    border: 2px solid rgba(9, 30, 66, 0.08);
+    padding: 12px;
+    margin-left: 1px;
+    // margin-right: 5px;
+  }
 .placeholder {
     background: repeating-linear-gradient(
         45deg,

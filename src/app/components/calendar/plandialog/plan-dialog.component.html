@@ -10,6 +10,7 @@
         <ul class="task-list">
             <input type="text" [(ngModel)]="searchTerm" (keyup)="filterTasks()" placeholder="{{ 'searchTaskPlaceholder' | transloco }}">
             <br>
+            <br>
             <ng-container *ngFor="let task of filteredTasks">
                 <li>
                     <button mat-button (click)="openTaskDialog(task.id)" class="task-name-button">

@@ -1,11 +1,9 @@
 .task-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    list-style-type: none;
+    list-style-type: none; /* Madde işaretini kaldırır */
     padding: 0;
-}
-
+    text-align: center;
+  }
+  
 .plan-dialog .col-9 {
     width: calc(100% - 30px);
     transition: width 0.3s ease-in-out;
@@ -27,7 +25,7 @@ h3 {
     transform: translateY(-50%);
     width: 5px;
     height: 5px;
-    background-color: #630a0a1e;  // Change this to your desired color
+    background-color: #23171788;  // Change this to your desired color
 }
 
 
@@ -39,8 +37,9 @@ h3 {
     margin-bottom: 15px;  // Adjust the value based on your desired spacing
 }
 .task-name-button{
-    background: #60576180;
- 
+    background: linear-gradient(135deg, #6ea3d825, #556ab558);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    color: #333;
 }
 .task-name-button h2 {
     font-size: 16px;  // Adjust this value to your desired size
@@ -61,7 +60,7 @@ h3 {
 .dialog-content {
     max-height: 540px;  /* Örnek olarak 300px verilmiştir. İhtiyacınıza göre bu değeri değiştirebilirsiniz. */
     overflow-y: auto;  /* Yatayda kaydırma çubuğu otomatik olarak görünecek */
-    background: #c7ced23c;
+    background: #cbc5cb10;
 }
 
 .close-icon {
@@ -70,14 +69,16 @@ h3 {
     padding: 5px 10px;
     border-radius: 20%;
     font-weight: bold;
-    background: #d710104f;
+    background: #d7101020;
 }
 
 .dialog-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    background: #c4c7cd27;
+    background: linear-gradient(135deg, #6ea3d825, #f372b058);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    color: #333;
     border: 2px solid rgba(7, 7, 38, 0.208); /* Örnek olarak kenar çizgisini mavi yapalım */
     padding: 20px; /* İsteğe bağlı olarak içeriği biraz kenarlardan uzaklaştırabilirsiniz */
     border-radius: 10px; /* Kenarların yuvarlatılması */
