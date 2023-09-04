@@ -149,7 +149,10 @@ export class ListComponent implements OnInit {
       this.selectedPriorities.push(selectedFilter.id);
       this.applyFilter('Priorities');
     }
-
+    else if(selectedFilter && selectedFilter.name == 'Columns') {
+      this.selectedColumns.push(selectedFilter.id);
+      this.applyFilter('Columns');
+    }
 
   }
 

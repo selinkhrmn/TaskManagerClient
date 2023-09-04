@@ -4,12 +4,13 @@
             <div style="display: flex; justify-content: center; align-items: center;">
               <h1>{{chartTitle}}</h1>
             </div>
-            <div style="display: flex; justify-content: center; align-items: center;">
+            <div style="display: flex; justify-content: center; align-items: center;" >
               <google-chart
                 
                 [type]="googleChartType" 
                 [data]="chartData" 
                 [columns]="columnNames"
+                (select)="handleClickColumn($event)"
                 [options]="chartOptions"
               ></google-chart>
             </div>
