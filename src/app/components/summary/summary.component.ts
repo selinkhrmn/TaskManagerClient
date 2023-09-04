@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { select, scaleBand, scaleLinear, axisBottom, axisLeft, scaleOrdinal, format } from 'd3';
+import { select, scaleBand, scaleLinear, axisBottom, axisLeft, scaleOrdinal } from 'd3';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -13,8 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { PriorityService } from 'src/app/services/priority.service';
 import { TaskComponent } from '../task/task.component';
-import { ListComponent } from '../list/list.component';
-
 
 type PriorityCounts = {
   Lowest: number;
@@ -23,6 +21,7 @@ type PriorityCounts = {
   High: number;
   Highest: number;
 };
+
 interface ChartDataset {
   labels: string[];
   datasets: ChartDataEntry[];
@@ -58,10 +57,8 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   lastActivities: ListTask[] = [];
   today: Date = new Date();
   fromDate: Date = new Date();
-  private readonly priorityColors = ['#237DB0','#0B5F8F', '#FFDF00', '#EB7934', '#E44C23'];
+  private readonly priorityColors = ['#237DB0', '#0B5F8F', '#FFDF00', '#EB7934', '#E44C23'];
   private readonly priorityLabels = ['Lowest', 'Low', 'Normal', 'High', 'Highest'];
-  private readonly userActivities = ['assigneeId', 'reporterId', 'createdByUser'];
-
 
   constructor(
     public tokenService: TokenService,
@@ -72,11 +69,17 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     public priorityService: PriorityService,
-    ) {
+  ) {}
 
-  }
   ngOnInit(): void {
-    if(this.projectService.getProjectLocal() != null){
+  }
+
+  ngAfterViewInit() {
+    this.loadData();
+  }
+
+  loadData(): void {
+    if (this.projectService.getProjectLocal() != null) {
       let projectId = this.projectService.getProjectLocal()?.id;
       this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
         if (res.isSuccessful == true) {
@@ -89,7 +92,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
           this.createdTaskLength = this.taskService.filterCreatedDate(this.tasks, new Date(this.fromDate), this.today).length;
           this.completedSevenDay = this.taskService.filterDoneSevenDay(this.tasks, new Date(this.fromDate), this.today).length;
           this.completedAllLength = this.tasks.filter(t => t.label == 2).length;
-  
+
           this.filterLastActivities();
           this.userService.GetAllProjectUsers(projectId).subscribe((res) => {
             if (res.isSuccessful == true) {
@@ -97,6 +100,22 @@ export class SummaryComponent implements AfterViewInit, OnInit {
               this.usersTasks();
             }
           })
+
+          this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
+            const priorityCounts = this.calculatePriorityCounts(this.tasks);
+            this.chartData = {
+              labels: this.priorityLabels,
+              datasets: [{
+                label: 'Task Priority',
+                data: [priorityCounts.Lowest, priorityCounts.Low, priorityCounts.Normal, priorityCounts.High, priorityCounts.Highest],
+                backgroundColor: this.priorityColors,
+                borderColor: this.priorityColors,
+                borderWidth: 1
+              }]
+            };
+            this.createPriorityChart();
+          });
+
         }
       })
 
@@ -106,43 +125,13 @@ export class SummaryComponent implements AfterViewInit, OnInit {
         }
       })
 
-      this.taskService.getAllProjectTask({ id: projectId }).subscribe((res) => {
-        const priorityCounts = this.calculatePriorityCounts(this.tasks);
-        this.chartData = {
-          labels:this.priorityLabels,
-          datasets: [{
-            label: 'Task Priority',
-            data: [priorityCounts.Lowest, priorityCounts.Low, priorityCounts.Normal, priorityCounts.High, priorityCounts.Highest],
-            backgroundColor: this.priorityColors,
-            borderColor:this.priorityColors,
-            borderWidth: 1
-          }]
-        };
-        this.createPriorityChart();
+      this.userService.getAllUsers().subscribe((res) => {
+        if (res.isSuccessful == true) {
+          this.userList = res.data;
+        }
       });
-  
-      this.userService.getAllUsers().subscribe((res) => {
-        if (res.isSuccessful == true) {
-          this.userList = res.data;
-        }
-      })
-  
     }
-
-
-    // this.taskService.getUnplannedTask(projectId).subscribe((res) => {
-    //   if (res.isSuccessful == true) {
-    //     this.unplannedTasks = res.data;
-    //   }
-    // })
-
-    // this.taskService.getUnassignedTask(projectId).subscribe((res) => {
-    //   if (res.isSuccessful == true) {
-    //     this.unassignedTasks = res.data;
-    //   }
-    // })
   }
-
 
   private calculatePriorityCounts(tasks: ListTask[]): PriorityCounts {
     const counts = { Lowest: 0, Low: 0, Normal: 0, High: 0, Highest: 0 };
@@ -162,10 +151,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     return counts;
   }
 
-  ngAfterViewInit() {
-    this.createPriorityChart();
-  }  
-  private readonly priorityIds:{ [key: string]: { value: number } } = {
+  private readonly priorityIds: { [key: string]: { value: number } } = {
     'Lowest': { value: 1 },
     'Low': { value: 2 },
     'Normal': { value: 3 },
@@ -175,14 +161,15 @@ export class SummaryComponent implements AfterViewInit, OnInit {
 
   handleClickPriority(clickedPriorityId: number) {
     console.log('Clicked priority Id:', clickedPriorityId);
-    this.taskService.setSelectedFilter({id: clickedPriorityId, name:'Priorities'});
+    this.taskService.setSelectedFilter({ id: clickedPriorityId, name: 'Priorities' });
     this.router.navigate(['/home/list']);
-}
+  }
+
   createPriorityChart() {
     const svg = select<SVGSVGElement, unknown>('#priority-chart').attr('width', 400).attr('height', 300);
 
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    const width = 400 - margin.left - margin.right; 
+    const width = 400 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
     const xScale = scaleBand<string>()
@@ -191,40 +178,36 @@ export class SummaryComponent implements AfterViewInit, OnInit {
       .padding(0.2);
 
     if (this.chartData) {
-    
       const yScale = scaleLinear()
-        .domain([0, Math.max(...this.chartData.datasets[0].data)]) // Use spread operator to get maximum value
+        .domain([0, Math.max(...this.chartData.datasets[0].data)])
         .range([height - margin.bottom, margin.top]);
 
       const colorScale = scaleOrdinal<string, string>()
         .domain(this.priorityLabels)
-        .range(this.priorityColors); // Renkleri isteğinize göre ayarlayın
-        const self = this;
+        .range(this.priorityColors);
+
+      const self = this;
       svg.selectAll<SVGRectElement, string>('rect')
-        .data(this.chartData.labels) // Use chartData.labels directly
+        .data(this.chartData.labels)
         .enter()
         .append('rect')
         .attr('x', d => xScale(d) || 0)
-        .attr('y', d => yScale(this.chartData.datasets[0].data[this.chartData.labels.indexOf(d)])) // chartData örneğinizi kullanın
+        .attr('y', d => yScale(this.chartData.datasets[0].data[this.chartData.labels.indexOf(d)]))
         .attr('width', xScale.bandwidth())
-        .attr('height', d => yScale(0) - yScale(this.chartData.datasets[0].data[this.chartData.labels.indexOf(d)])) // chartData örneğinizi kullanın
+        .attr('height', d => yScale(0) - yScale(this.chartData.datasets[0].data[this.chartData.labels.indexOf(d)]))
         .attr('fill', d => colorScale(d))
         .on('click', function (event, d) {
-          // const clickedPriorityLabel = d; // Tıklanan sütunun etiketi (adı)
           const clickedPriorityId = self.priorityIds[d].value;
-          // Örneğin, priorityIds dizisini kullanarak ilgili Priority Id'yi alın
-          self.handleClickPriority(clickedPriorityId); // İlgili Priority Id'yi işleyen fonksiyonu çağırın
-      });
+          self.handleClickPriority(clickedPriorityId);
+        });
+
       const xAxis = axisBottom(xScale);
       const yAxis = axisLeft(yScale).ticks(5);
 
       svg.append('g').attr('transform', `translate(0,${height - margin.bottom})`).call(xAxis);
-
       svg.append('g').attr('transform', `translate(${margin.left},0)`).call(yAxis);
     }
-
   }
-
 
   usersTasks() {
     this.userTasks = {};
@@ -235,7 +218,6 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   }
 
   filterLastActivities() {
-   
     const currentDate = new Date();
     const twoWeeksAgo = new Date();
     twoWeeksAgo.setDate(currentDate.getDate() - 14);
@@ -247,21 +229,19 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   }
 
   openTaskDialog(id: number) {
-
     let selectedTask = this.tasks.find(t => t.id == id);
     const dialog = this.dialog.open(TaskComponent, { autoFocus: false, data: { task: selectedTask }, height: '90%', width: '90%', panelClass: 'dialog' });
     dialog.afterClosed().subscribe((res) => {
       this.ngOnInit();
-    })
+    });
   }
 
   addUserDialog(): void {
     const dialogRef = this.dialog.open(AddUsersToProjectComponent, { height: '90%', width: '50%', panelClass: 'dialog' });
     dialogRef.afterClosed().subscribe((res) => {
       this.ngOnInit();
-    })
+    });
   }
-
 
   summaryFilter(filter: string, id?: string) {
     const today = new Date();
@@ -305,5 +285,4 @@ export class SummaryComponent implements AfterViewInit, OnInit {
 
     this.router.navigate(['/home/list']);
   }
-
 }
