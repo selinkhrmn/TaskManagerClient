@@ -1,24 +1,29 @@
 <div class="paylas-container">
-    <h2>Share in Slack</h2>
+  <h2>Share in Slack</h2>
 
-    <div class="input-group">
-        <input type="text" id="name" [(ngModel)]="id" placeholder="{{ 'namePlaceholder' | transloco }}"
-               [matAutocomplete]="auto">
-        <label for="name"></label>
-      </div>
-      
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onUserNameSelected($event)">
-        <mat-option *ngFor="let userName of filteredUserNames | async" [value]="userName">
-          {{ userName }}
-        </mat-option>
-      </mat-autocomplete>
-      
-      <div class="input-group">
-        <textarea id="message" [(ngModel)]="message" placeholder="{{ 'messagePlaceholder' | transloco }}"></textarea>
-        <label for="message"></label>
+  <!-- Seçilen kullanıcıları gösteren bölüm -->
+  <div class="selected-users">
+    <div class="user-chip" *ngFor="let userName of selectedUserNames">
+      <span>{{ userName }}</span>
+      <span class="remove-user" (click)="removeUser(userName)">x</span>
     </div>
+  </div>
+<br>  
+  <div class="input-group">
+    <input type="text" id="name" [(ngModel)]="id" placeholder="{{ 'namePlaceholder' | transloco }}" [matAutocomplete]="auto">
+    <label for="name"></label>
+  </div>
 
-    <button (click)="paylas()">{{ 'shareButtonLabel' | transloco }}</button>
-    
-    
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onUserNameSelected($event)">
+    <mat-option *ngFor="let userName of filteredUserNames | async" [value]="userName">
+      {{ userName }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <div class="input-group">
+    <textarea id="message" [(ngModel)]="message" placeholder="{{ 'messagePlaceholder' | transloco }}"></textarea>
+    <label for="message"></label>
+  </div>
+
+  <button (click)="paylas()">{{ 'shareButtonLabel' | transloco }}</button>
 </div>

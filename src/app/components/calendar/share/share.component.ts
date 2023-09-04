@@ -16,6 +16,7 @@ export class ShareComponent {
   message: string = '';
   justArray: UserDto[] = [];
   userList: UserDto[] = [];
+  selectedUserNames: string[] = [];
 
   filteredUserNames: Observable<string[]>; // Değiştirilen tür
 
@@ -38,7 +39,20 @@ export class ShareComponent {
       }
     });
   }
-
+  onUserNameSelected(event: MatAutocompleteSelectedEvent) {
+    const selectedUserName = event.option.viewValue;
+    if (!this.selectedUserNames.includes(selectedUserName)) {
+      this.selectedUserNames.push(selectedUserName);
+    }
+    this.id = ''; // İnputu temizle
+  }
+  removeUser(userName: string) {
+    const index = this.selectedUserNames.indexOf(userName);
+    if (index !== -1) {
+      this.selectedUserNames.splice(index, 1);
+    }
+  }
+    
   // Function to filter and update the autocomplete options
   filterUserNames(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -48,10 +62,7 @@ export class ShareComponent {
   }
 
   // Handle autocomplete option selection
-  onUserNameSelected(event: MatAutocompleteSelectedEvent) {
-    this.id = event.option.viewValue;
-  }
-
+ 
   paylas() {
     debugger;
     this.userService.getUserById(this.id).subscribe((res) => {

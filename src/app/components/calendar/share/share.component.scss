@@ -34,7 +34,31 @@
         color: #2e0534; // Focused label color
     }
 }
-
+.selected-users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .user-chip {
+    background-color: #5386bd;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-chip span {
+    margin-right: 4px;
+    cursor: pointer;
+  }
+  
+  .remove-user {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
 input, textarea {
     width: 100%;
     padding: 10px 12px; // padding artırıldı
