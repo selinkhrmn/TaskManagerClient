@@ -15,7 +15,7 @@
       (click)="selectProject(project)"
       [class.selected-project]="project.name === theProject"
     >
-      <div class="card">
+      <div class="card" [class.selected-project2]="project.name === theProject">
         <img src="../../../assets/hosgeldiniz.png"/>
         {{ project.name }}
       </div>

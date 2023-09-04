@@ -66,6 +66,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    font-weight: 600;
     img {
       width: 20px;
       height: 20px;
@@ -129,5 +130,11 @@
 
 
 .selected-project {
-  background-color: #e9ecef; /* Set your desired background color here */
+  background-color: #435773;
+  &:hover {
+    background-color: #435773;
+  }
+}
+.selected-project2 {
+  color: white; /* Set your desired background color here */
 }
