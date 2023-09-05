@@ -9,7 +9,7 @@
         </div>
         <div class="center-align custom-container" *ngIf="tasks.length == 0"> <!-- TUANAAAAAAAAAAAAAA-->
             <p>{{'emptyMessage' | transloco}}</p>
-          </div>
+        </div>
 
         <div class="center-align custom-container" *ngIf="tasks.length != 0">
             <div class="d-flex align-items-center justify-content-center">
@@ -22,7 +22,8 @@
             <div class="row gx-5">
                 <div class="col">
                     <div class="button-container">
-                        <button type="button" class="btn btn-primary" (click)="summaryFilter('LastSevendDaysCompletedTasks')">
+                        <button type="button" class="btn btn-primary"
+                            (click)="summaryFilter('LastSevendDaysCompletedTasks')">
                             <div class="p-4 d-flex align-items-center">
                                 <img src="../../assets/takvim.png" alt="" class="me-2">
                                 <div>
@@ -57,7 +58,7 @@
                                     <h5>{{ updatedTaskLength }} task güncellendi.</h5>
                                 </div>
                             </div>
-                        </button> 
+                        </button>
                     </div>
                 </div>
                 <div class="col">
@@ -69,7 +70,7 @@
                                     <h4>Toplam &nbsp;</h4>
                                     <h5>{{ completedAllLength }} task tamamlandı.</h5>
                                 </div>
-                            </div> 
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
                             <button
                                 style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
                                 öğe oluşturun</button>
-                                <app-chart></app-chart>
+                            <app-chart></app-chart>
                         </h6>
                         <!-- <div class="center-content">
                             
@@ -118,183 +119,104 @@
                                 <tbody class="click-user">
                                     <tr *ngFor="let task of lastActivities" (click)="openTaskDialog(task.id)">
                                         <td><a>{{ task.name }}</a></td>
-                                        <td><img [src]="priorityService.getIcon(task.priority, 'icon')" alt="Priority Icon" class="priority-icon" /></td>
+                                        <td><img [src]="priorityService.getIcon(task.priority, 'icon')"
+                                                alt="Priority Icon" class="priority-icon" /></td>
                                         <td>{{ task.dueDate | calculateDate }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                            <!-- <h6 style="text-align: left; margin-top: 0;">
+                        <!-- <h6 style="text-align: left; margin-top: 0;">
                             Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım arkadaşlarınızı projenize davet edin.
                             <button (click)="filterLastActivities()" style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
                         </h6>
                         <img src="../../assets/sonetkinlik.png" alt="" style="width: 250px;" class="me-2"> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <br><br>
-
-            <div class="container overflow-hidden text-center">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="p-4 rounded"
-                            style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım
-                                İş Yükü</h5>
-                            <br>
-                            <!-- <h6 style="text-align: left; margin-top: 0;">
-                            İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
-                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
-                        </h6> -->
-                            <div class="scroll">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Atanan Kişi</th>
-                                            <th scope="col">İş Dağılımı</th>
-                                            <th scope="col">Task Sayısı</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr (click)="summaryFilter('selectAssignee','unassigned')" class="click-user">
-                                            <td>Atanmamış</td>
-                                            <!-- <th scope="row" style="text-align: left;">Atanmamış</th> -->
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar"
-                                                        [style.width.%]="(userTasks['unassigned'] / totalTasks) * 100">
-                                                        {{ ((userTasks['unassigned'] || 0) / totalTasks) * 100 | number:
-                                                        '1.0-0' }}%
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>{{ userTasks['unassigned'] || 0 }}</td>
-                                        </tr>
-                                        <tr *ngFor="let user of users"
-                                            (click)="summaryFilter('selectAssignee', user.id)" class="click-user">
-                                            <td>{{ user.id | user:userList}}</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar"
-                                                        [style.width.%]="(userTasks[user.id] / totalTasks) * 100">
-                                                        {{ ((userTasks[user.id] || 0) / totalTasks) * 100 | number:
-                                                        '1.0-0' }}%
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>{{ userTasks[user.id] || 0 }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button (click)="addUserDialog()"  [disabled]="!tokenService.hasRole('Admin')" class="add-person">
-                                    <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni
-                                    birini ekleyin.
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="p-4 rounded"
-                            style="display: block; height: 375px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İş
-                                Türleri</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Başlamak için projenizde birkaç öğe oluşturmalısınız.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Tür</th>
-                                        <th scope="col">Dağılım</th>
-                                        <th scope="col">Sayı</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" style="text-align: left;"> <img src="../../assets/tik.png"
-                                                alt="" style="width: 30px;"> Task</th>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 0%">0%</div>
-                                            </div>
-                                        </td>
-                                        <td id="progress-value">0</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="text-align: left;"><img src="../../assets/subtask.png"
-                                                alt="" style="width: 30px;"> Sub-Task</th>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 0%">0%</div>
-                                            </div>
-                                        </td>
-                                        <td id="progress-value">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <button><img src="../../assets/ayarlar.png" alt=""
-                                                    style="width: 30px;"></button>
-                                            <button
-                                                style="border: none; background: none; color: rgb(5, 5, 17); text-decoration: underline; cursor: pointer;background-color: rgb(255, 255, 255);">Türleri
-                                                yönetin.</button>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <br><br>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container overflow-hidden text-center">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="p-4 rounded custom-container"
-                            style="display: block; height: 440px; max-width: 550px; border: 1px solid black; background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">İlgili
-                                Projeler</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                Tüm çalışmalarınızı aynı yerde yönetmek ve paydaşlarla uyum içinde olmak için projeleri
-                                kullanın.
-                            </h6>
-                            <img src="../../assets/ilgiliprojeler.png" alt="" style="width: 280px;" class="me-2">
-                            <br><br>
-                            <div class="button-container">
-                                <button type="button" class="btn custom-button">Bir proje oluştur</button>
-                                <button type="button" class="btn btn-secondary custom-button">Tüm projeleri
-                                    görüntüle</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
-                            <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik
-                                Dökümü</h5>
-                            <br>
-                            <h6 style="text-align: left; margin-top: 0;">
-                                İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
-                                <button
-                                    style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
-                                    öğe oluşturun</button>
-                            </h6>
-                            <svg id="priority-chart"></svg>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <br><br>
+
+        <div class="container overflow-hidden text-center">
+            <div class="row">
+                <div class="col-6">
+                    <div class="p-4 rounded"
+                        style="display: block; height: 375px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım
+                            İş Yükü</h5>
+                        <br>
+                        <!-- <h6 style="text-align: left; margin-top: 0;">
+                            İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
+                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        </h6> -->
+                        <div class="scroll">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Atanan Kişi</th>
+                                        <th scope="col">İş Dağılımı</th>
+                                        <th scope="col">Task Sayısı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr (click)="summaryFilter('selectAssignee','unassigned')" class="click-user">
+                                        <td>Atanmamış</td>
+                                        <!-- <th scope="row" style="text-align: left;">Atanmamış</th> -->
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar"
+                                                    [style.width.%]="(userTasks['unassigned'] / totalTasks) * 100">
+                                                    {{ ((userTasks['unassigned'] || 0) / totalTasks) * 100 | number:
+                                                    '1.0-0' }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ userTasks['unassigned'] || 0 }}</td>
+                                    </tr>
+                                    <tr *ngFor="let user of users" (click)="summaryFilter('selectAssignee', user.id)"
+                                        class="click-user">
+                                        <td>{{ user.id | user:userList}}</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar"
+                                                    [style.width.%]="(userTasks[user.id] / totalTasks) * 100">
+                                                    {{ ((userTasks[user.id] || 0) / totalTasks) * 100 | number:
+                                                    '1.0-0' }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ userTasks[user.id] || 0 }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button (click)="addUserDialog()" [disabled]="!tokenService.hasRole('Admin')"
+                                class="add-person">
+                                <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni
+                                birini ekleyin.
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik
+                            Dökümü</h5>
+                        <br>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
+                            <button
+                                style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                öğe oluşturun</button>
+                        </h6>
+                        <svg id="priority-chart"></svg>
+                    </div>
+
+                    <br><br>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
