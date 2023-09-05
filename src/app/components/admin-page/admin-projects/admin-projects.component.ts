@@ -51,6 +51,15 @@ export class AdminProjectsComponent {
     );
   }
 
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+
+    if(this.dataSource.paginator){
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUsersToProjectComponent, { height: '90%', width: '60%', panelClass: 'dialog' });
   }
