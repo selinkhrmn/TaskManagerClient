@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@kolkov/angular-editor": "^3.0.0-beta.0",
+    "@microsoft/signalr": "^7.0.10",
     "@nebular/theme": "^11.0.0",
     "@ngneat/transloco": "^4.3.0",
     "@ngrx/store": "^16.1.0",

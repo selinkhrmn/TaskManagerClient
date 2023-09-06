@@ -43,7 +43,6 @@ export class ColumnService {
   }
 
   GetProjectColumnsTasks(id: number): Observable<ResponseModel<ColumnTask>> {
-    debugger
     return this.http.post<ResponseModel<ColumnTask>>(`${this.baseUrl}/GetProjectColumnsTasks`, {id:id});
   }
   

@@ -14,6 +14,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RegisterPageComponent } from '../../register-page/register-page.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PriorityService } from 'src/app/services/priority.service';
+import Swal from 'sweetalert2';
+import { CommentHubService } from 'src/app/services/comment-hub.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -32,16 +34,19 @@ export class AdminUsersComponent {
     public userService: UserService,
     public tokenService: TokenService,
     public dialog: MatDialog,
-    public priorityService: PriorityService
+    public priorityService: PriorityService,
+    private projectService: ProjectService,
+    private commentHubService: CommentHubService
   ) { }
 
-  displayedColumns: string[] = ['name', 'surname', 'username', 'email'];
+  displayedColumns: string[] = ['name', 'surname', 'username', 'email', 'actions'];
   dataSource = new MatTableDataSource<UserDto>(this.users);
 
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.fetchTasks()
+    this.fetchTasks();
+    this.commentHubService.startConnection();
   }
 
   fetchTasks() {
@@ -66,4 +71,36 @@ export class AdminUsersComponent {
   addPeople() {
     const dialogRef = this.dialog.open(RegisterPageComponent, { height: '80%', width: '30%', panelClass: 'dialog' });
   }
+
+  openUserDetailDialog(id: any){
+    console.log(id);
+    
+  }
+
+  deleteUser(id: string){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [id]}).subscribe((res)=> {
+          if(res.isSuccessful){
+            Swal.fire(
+              'Deleted!',
+              'User has been deleted.',
+              'success'
+            )
+          }
+        })
+       
+      }
+    })
+    
+  }
+
 }
