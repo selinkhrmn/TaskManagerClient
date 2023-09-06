@@ -29,6 +29,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+       
         .buttons {
             height: 40%;
             display: flex;
@@ -44,6 +45,11 @@
 
         button {
             margin-bottom: 10px;
+            transition: 0.3s;
+            &:hover {
+                background-color: #007bff;
+                color: white;
+            }
         }
     }
 }

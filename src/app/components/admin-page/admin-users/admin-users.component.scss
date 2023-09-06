@@ -24,8 +24,15 @@ h1 {
 .topbar {
     display: flex;
     align-items: center;
-    justify-content:center
-
+    justify-content:center;
+    position: relative;
+    button {
+        position: absolute;
+        right: 0;
+        bottom: 20px;
+        margin-right: 10px;
+        
+    }
 }
 
 .btn {
