@@ -16,7 +16,7 @@ export class CommentHubService {
     
     try {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl('ws://localhost:5013/business/ws/commenthub', {
+        .withUrl('ws://localhost:5011/comment-hub', {
           skipNegotiation: true,
           transport: signalR.HttpTransportType.WebSockets,
         })
