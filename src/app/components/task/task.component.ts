@@ -19,6 +19,7 @@ import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import Swal from 'sweetalert2';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { LogService } from 'src/app/services/log.service';
 
 interface DialogData {
   task: Task;
@@ -94,7 +95,8 @@ export class TaskComponent implements OnInit {
     public priorityService: PriorityService,
     private fileService: FileService,
     private commentService: CommentService,
-    private userService: UserService
+    private userService: UserService,
+    public logService: LogService
   ) {}
 
   ngOnInit() {
@@ -391,6 +393,13 @@ export class TaskComponent implements OnInit {
     this.taskColor = this.taskChange.label  
     this.dialogRef.close();
    
+  }
+
+  getTaskLogs(){
+    this.logService.getLogs('Task', this.data.task.id.toString()).subscribe((res) => {
+      console.log(res);
+      
+    })
   }
   // config: AngularEditorConfig = {
   //   editable: true,
