@@ -19,9 +19,9 @@
           project details anytime in project settings.
         </p>
         <div class="input_field">
-          <label>{{ "name" | transloco }}</label>
+         <strong> <label>{{ "name" | transloco }}:</label></strong>
           <input matInput (keyup.enter)="createProject()" [(ngModel)]="projectName" />
-          <label>{{"description" | transloco}}</label>
+         <strong><label>{{"description" | transloco}}:</label></strong>
           <textarea mat-Input type="textarea" [(ngModel)]="description"> </textarea>
           <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
         </div>

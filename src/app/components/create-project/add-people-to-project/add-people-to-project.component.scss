@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   height: 100%;
-  padding: 80px;
+  padding: 60px;
   margin: 0;
   display: flex;
   justify-content: space-between;
@@ -10,17 +10,20 @@
   color: white; /* Yazı rengi */
   background-color: rgba(206, 40, 40, 0.763); /* Arka plan rengi */
 }
-
+.blue {
+  color: #fff;
+  background: #3d85de;
+}
 .left_side {
-  // width: 60%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
 
   img {
-    width: 90%;
-    height: 90%;
+    width: 110%;
+    height: 95%;
   }
 }
 
