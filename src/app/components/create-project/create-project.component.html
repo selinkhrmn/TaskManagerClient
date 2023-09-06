@@ -1,53 +1,44 @@
-<head>
-  <link
-    rel="stylesheet"
-    type="text/css"
-    href="https://unpkg.com/notie/dist/notie.min.css"
-  />
-</head>
+<div class="back_arrow_img" (click)="closeDialog()">
+  <img src="assets/back.png" />
+  {{ "back" | transloco }}
+</div>
 <div class="wrapper">
-  <div class="back_arrow_img" (click)="closeDialog()">
-    <img src="assets/back.png" />
-    {{ "back" | transloco }}
+  
+  <div class="background">
+    <div class="overlay"></div>
   </div>
-  <div class="body" *ngIf="showFirstComponent" [@slideIn]="showFirstComponent">
-    <div class="container">
-      <h4>{{ "createProject" | transloco }}</h4>
-      <p>
-        Explore what's possible when you collaborate with your team. Edit
-        project details anytime in project settings.
-      </p>
-      <div class="input_field">
-        <label>{{ "name" | transloco }}</label>
-        <input
-          matInput
-          (keyup.enter)="createProject()"
-          [(ngModel)]="projectName"
-        />
-        <label>{{"description" | transloco}}</label>
-        <textarea mat-Input type="textarea" [(ngModel)]="description"> </textarea>
-        <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
+  <div class="content">
+    
+
+
+    <div class="body" *ngIf="showFirstComponent" [@slideIn]="showFirstComponent">
+      <div class="container">
+        <h4>{{ "createProject" | transloco }}</h4>
+        <p>
+          Explore what's possible when you collaborate with your team. Edit
+          project details anytime in project settings.
+        </p>
+        <div class="input_field">
+          <label>{{ "name" | transloco }}</label>
+          <input matInput (keyup.enter)="createProject()" [(ngModel)]="projectName" />
+          <label>{{"description" | transloco}}</label>
+          <textarea mat-Input type="textarea" [(ngModel)]="description"> </textarea>
+          <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
+        </div>
+        <div class="button_field">
+          <button mat-raised-button routerLink="summary" (click)="closeDialog()">
+            {{ "cancel" | transloco }}
+          </button>
+          <button mat-raised-button (click)="createProject()">
+            {{ "createProject" | transloco }}
+          </button>
+        </div>
       </div>
-      <div class="button_field">
-        <button mat-raised-button routerLink="summary" (click)="closeDialog()">
-          {{ "cancel" | transloco }}
-        </button>
-        <button
-          mat-raised-button
-          (click)="createProject()"
-        >
-          {{ "createProject" | transloco }}
-        </button>
-      </div>
+
+      <!-- <button>{{'next' | transloco}}</button> -->
     </div>
-    <div class="image_container">
-      <img src="../../../assets/meeting.jpg" />
-    </div>
-    <!-- <button>{{'next' | transloco}}</button> -->
+    <app-add-people-to-project *ngIf="showSecondComponent"
+      [@slideOut]="showSecondComponent"></app-add-people-to-project>
   </div>
-  <app-add-people-to-project
-    *ngIf="showSecondComponent"
-    [@slideOut]="showSecondComponent"
-  ></app-add-people-to-project>
 </div>
 <script src="https://unpkg.com/notie"></script>

@@ -18,6 +18,7 @@ import { AddPeopleToProjectComponent } from './add-people-to-project/add-people-
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.scss'],
+  
   animations: [
     trigger('slideIn', [
       transition(':enter', [
@@ -85,7 +86,7 @@ export class CreateProjectComponent implements OnInit {
           
           if (result.isConfirmed) {
             this.dialog.closeAll()
-            const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '95.5%',width: '80%', panelClass: 'dialog'}); 
+            const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '75%',width: '60%', panelClass: 'dialog'}); 
           }
           else {
             this.closeDialog();

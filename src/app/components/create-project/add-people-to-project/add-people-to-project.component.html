@@ -1,16 +1,17 @@
 <div class="container">
   <div class="left_side">
-    <img src="../../../../assets/add-person.jpg" />
+    <img src="../../../../assets/kişiler.png" />
   </div>
   <div class="right_side">
-    <p>You can also easily add people to your project</p>
+    
     <div class="right_side_wrapper">
       <div class="topside">
         <div class="labels">
-          <label>Add People</label>
-          <label>To Your Project</label>
+          <label><strong>Add People To Your Project</strong></label>
+
+          
           <div class="the_person">
-            <label>{{newProjectName}}</label>
+            <label><h4>Proje Name :</h4>{{newProjectName}}</label>
           </div>
         </div>
 
@@ -37,7 +38,8 @@
 
         </div>
         <button mat-raised-button color="primary" (click)="saveProjectUsers()">Save</button>
-        <button mat-button (click)="closeDialog()">Cancel</button>
+        <button mat-button class="red-button" (click)="closeDialog()">Cancel</button>
+
 
       </div>
 
