@@ -5,3 +5,11 @@ export interface LogDto {
     actionDate: Date;
     userId: string;
 }
+
+export interface LogUserDto {
+    fieldName: string;
+    oldValue: string;
+    newValue: string;
+    actionDate: Date;
+    projectId: string;
+}

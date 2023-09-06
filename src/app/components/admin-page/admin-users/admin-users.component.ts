@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { PriorityService } from 'src/app/services/priority.service';
 import Swal from 'sweetalert2';
 import { CommentHubService } from 'src/app/services/comment-hub.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -36,7 +37,8 @@ export class AdminUsersComponent {
     public dialog: MatDialog,
     public priorityService: PriorityService,
     private projectService: ProjectService,
-    private commentHubService: CommentHubService
+    private commentHubService: CommentHubService,
+    private logService: LogService
   ) { }
 
   displayedColumns: string[] = ['name', 'surname', 'username', 'email', 'actions'];
@@ -75,6 +77,16 @@ export class AdminUsersComponent {
   openUserDetailDialog(id: any){
     console.log(id);
     
+  }
+
+  getUserLogs(userId: string){
+    console.log(userId);
+    
+    let projects: number[] = [2];
+    this.logService.getUserLogs(projects, userId).subscribe((res)=> {
+      console.log(res);
+      
+    })
   }
 
   deleteUser(id: string){
