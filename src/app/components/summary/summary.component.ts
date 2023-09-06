@@ -169,7 +169,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     const svg = select<SVGSVGElement, unknown>('#priority-chart').attr('width', 400).attr('height', 300);
 
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    const width = 400 - margin.left - margin.right;
+    const width = 450 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
     const xScale = scaleBand<string>()

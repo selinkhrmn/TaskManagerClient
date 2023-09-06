@@ -1,3 +1,19 @@
+.icon-container-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: -50px;
+  width: 200px;
+  margin-left: -130px; /* 20px sola kaydır */
+}
+
+.priority-icon {
+  margin: 0 23px;
+}
 
 .row {
 
@@ -173,8 +189,8 @@ $atanmisRenk: green; // Atanmış durumu için renk
 }
 
 .priority-icon {
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
 }
 
 

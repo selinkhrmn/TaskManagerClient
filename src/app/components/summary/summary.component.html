@@ -3,8 +3,8 @@
         <br>
         <div class="center-align custom-container">
             <div class="d-flex align-items-center justify-content-center">
-                <h3 class="text-center me-2 m-0">Hoş geldiniz {{ tokenService.tokenFullName() }}</h3>
-                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 40px;height: 40px;">
+                <h3 class="text-center me-2">Hoş geldiniz {{ tokenService.tokenFullName() }}</h3>
+                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 30px;">
             </div>
         </div>
         <div class="center-align custom-container" *ngIf="tasks.length == 0"> <!-- TUANAAAAAAAAAAAAAA-->
@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="p-4 rounded custom-content"
-                        style="display: block; max-height: 400px; max-width: 600px; border: 1px solid black; background-color: rgb(255, 255, 255);">
+                        style="display: block; max-height: 400px; max-width: 550px; border: 1px solid black; background-color: rgb(255, 255, 255);">
                         <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Durum Genel
                             Bakışı</h5>
                         <br>
@@ -102,8 +102,8 @@
                 </div>
 
                 <div class="col-6">
-                    <div class="p-4 rounded custom-content"
-                        style="display: block; height: 100%; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                    <div class="p-4 rounded"
+                        style="display: block; height: 375px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
                         <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">En Son
                             Etkinlikleriniz</h5>
                         <br>
@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="p-4 rounded"
-                        style="display: block; height: 400px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        style="display: block; height: 420px; max-width: 550px; border: 1px solid black;background-color: rgb(255, 255, 255);">
                         <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım
                             İş Yükü</h5>
                         <br>
@@ -201,7 +201,7 @@
                 </div>
 
                 <div class="col-6">
-                    <div class="p-4 rounded" style="border: 1px solid black;  height: 400px; background-color: rgb(255, 255, 255);">
+                    <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
                         <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik
                             Dökümü</h5>
                         <br>
@@ -212,8 +212,19 @@
                                 öğe oluşturun</button>
                         </h6>
                         <svg id="priority-chart"></svg>
+                        <div class="icon-container-wrapper">
+                        <div class="icon-container">
+                            <img src="../../assets/lowest.png" alt="Priority Icon" class="priority-icon" />
+                            <img src="../../assets/low.png" alt="Priority Icon" class="priority-icon" />
+                            <img src="../../assets/medium.png" alt="Priority Icon" class="priority-icon" />
+                            <img src="../../assets/high.png" alt="Priority Icon" class="priority-icon" />
+                            <img src="../../assets/highest.png" alt="Priority Icon" class="priority-icon" />
+                        </div>
                     </div>
-
+                </div>
+                    
+                    
+                    
                     <br><br>
                 </div>
             </div>
