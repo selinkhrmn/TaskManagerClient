@@ -31,9 +31,7 @@
                         title="{{ today | date:'dd.MM.yyyy' }}" class="btn custom-tooltip">
                         <i class="material-icons">today</i>{{"today" | transloco}}
                     </button>
-                    <button #shareButton (click)="openShareDialog(shareButton)">
-                        <i class="material-icons">share</i>{{"share" | transloco}}
-                    </button>
+                    
                     <button (click)="openPlanDialog()">
                         <i class="material-icons">event</i>{{"unplanned" | transloco}}
                     </button>

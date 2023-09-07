@@ -2,9 +2,15 @@
     <div class="col-12">
         <br>
         <div class="center-align custom-container">
-            <div class="d-flex align-items-center justify-content-center">
-                <h3 class="text-center me-2">Hoş geldiniz {{ tokenService.tokenFullName() }}</h3>
-                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 30px;">
+            <div class="d-flex align-items-center justify-content-center userName">
+                <h3 class="text-center me-2 m-0" >Hoş geldiniz </h3>
+                <div class="label_part">
+                  <label>
+                    {{ tokenService.tokenFullName() }}
+                </label>  
+                </div>
+                
+                <img src="../../assets/hosgeldiniz.png" alt="" style="width: 40px;height: 40px;">
             </div>
         </div>
         <div class="center-align custom-container" *ngIf="tasks.length == 0"> <!-- TUANAAAAAAAAAAAAAA-->
@@ -12,8 +18,9 @@
         </div>
 
         <div class="center-align custom-container" *ngIf="tasks.length != 0">
-            <div class="d-flex align-items-center justify-content-center">
-                Burada {{ projectService.getProjectLocal()?.name }} adlı projenin durumunun, önceliklerinin, iş yükünün
+            <div class="d-flex align-items-center justify-content-center projectName">
+                Burada 
+                <label>{{ projectService.getProjectLocal()?.name }}</label> adlı projenin durumunun, önceliklerinin, iş yükünün
                 ve daha fazlasının bir özetini görebilirsiniz.
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { CreateIssueDialogComponent } from '../create-issue-dialog/create-issue-dialog.component';
 import { TokenService } from 'src/app/services/token.service';
 import { AuthService, TaskService } from 'src/app/services';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ColumnsComponent } from '../board/columns/columns.component';
 import { TranslocoService} from '@ngneat/transloco';
 import { FileService } from 'src/app/services/file.service';
+import { ShareComponent } from './share/share.component';
 
 
 
@@ -62,6 +63,18 @@ export class NavbarComponent {
     
     routerToProfileSetting() {
       this.router.navigate(['profile-setting']);
+    }
+
+    openShareDialog(shareButton: HTMLElement) {
+      const rect = shareButton.getBoundingClientRect();
+  
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.position = {
+        top: `${rect.top - 30}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
+        left: `${rect.left - 130}px`
+      };
+  
+      this.dialog.open(ShareComponent, dialogConfig);
     }
 
     openCreateIssueDialog() {

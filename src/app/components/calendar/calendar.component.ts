@@ -22,7 +22,7 @@ import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { HttpClient } from '@angular/common/http';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { TranslocoService } from '@ngneat/transloco';
-import { ShareComponent } from './share/share.component';
+import { ShareComponent } from '../navbar/share/share.component';
 import { PlanDialogComponent } from './plandialog/plan-dialog.component';
 
 

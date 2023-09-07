@@ -122,6 +122,7 @@ export class AddUsersToProjectComponent implements OnInit {
     }
     
     if(addUsers.length != 0){
+      
       this.userService.AddUserToProject({projectId: this.projectId, users: addUsers}).subscribe((res) => {
         if(res.isSuccessful == true){
           Swal.fire('Saved!', '', 'success');

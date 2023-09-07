@@ -40,6 +40,8 @@ export class UserService {
 
   AddUserToProject(projectUser: ProjectUserList) {
     debugger
+    console.log(projectUser);
+    
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 
@@ -59,8 +61,8 @@ export class UserService {
     return this.http.post(url, payload);
   }
 
-  SendEmailToUsers(emails : Partial<ProjectUserListForEmail>){
-    return this.http.post<ResponseModel<ProjectUserList>>(`${this.baseUrlIdentity}/SendsEmail`, emails);
+  SendEmailToUsers(emails : ProjectUserListForEmail){
+    return this.http.post( `${this.baseUrlIdentity}/SendsEmail`,emails);
   }
 
   ForgotPassword(email : string) :Observable<any>{

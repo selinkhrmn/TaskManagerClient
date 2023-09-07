@@ -37,7 +37,6 @@ export class Sidenav2Component implements OnInit{
     });
     let project = this.projectService.getCurrentProject();          
     this.theProject = project.name;
-    console.log(this.theProject);
     
   }
 

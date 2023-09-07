@@ -13,21 +13,20 @@ export class CommentHubService {
   
    public startConnection = () => {
     debugger;
-    
-    try {
+
       this.hubConnection = new signalR.HubConnectionBuilder()
         .withUrl('ws://localhost:5011/comment-hub', {
           skipNegotiation: true,
           transport: signalR.HttpTransportType.WebSockets,
         })
+        .withAutomaticReconnect([0, 2000, 10000, 30000, null])
         .build();
 
-      // Log to indicate that build was successful
-      console.log('HubConnection build successful');
-    } catch (buildError) {
-      console.error('Error while building HubConnection:', buildError);
-      // Handle the build error here, if needed
-    }
+        this.hubConnection.onreconnected(connectionId => {
+          console.log('SignalR reconnected');
+          console.log('Connection ID:', connectionId);
+          console.log('Connection State:', this.hubConnection.state);
+        });
 
     try {
       this.hubConnection
@@ -58,5 +57,12 @@ export class CommentHubService {
 
   addMessageReceivedHandler(callback: (message: string) => void) {
     this.hubConnection.on('ReceiveMessage', callback);
-}
+  }
+
+  userJoined() {
+    debugger
+    this.hubConnection.on('userJoined', connectionId => {
+    })
+    
+  }
 }

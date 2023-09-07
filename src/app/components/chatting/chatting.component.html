@@ -1,0 +1,8 @@
+<div class="container">
+    <input  [(ngModel)]="inputMessage"/>
+    <button (click)="sendMessage()">Gönder</button>
+</div>
+<div *ngFor="let message of messages">
+    {{message}}
+</div>
+<div>{{connectionId}}</div>

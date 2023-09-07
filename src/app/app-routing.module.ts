@@ -24,6 +24,7 @@ import { AdminTasksComponent } from './components/admin-page/admin-tasks/admin-t
 import { AdminUsersComponent } from './components/admin-page/admin-users/admin-users.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
+import { ChattingComponent } from './components/chatting/chatting.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,11 @@ export const routes: Routes = [
         component: CalendarComponent,
         canActivate: [canActivateGuard],
 
+      },
+      {
+        path: 'chatting',
+        component: ChattingComponent,
+        canActivate: [canActivateGuard, isAdminGuard],
       },
       {
         path: 'project-settings',

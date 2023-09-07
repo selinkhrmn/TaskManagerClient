@@ -208,3 +208,26 @@ $atanmisRenk: green; // Atanmış durumu için renk
 .add-person:disabled {
   cursor: not-allowed;
 }
+
+.projectName {
+  label {
+    font-weight: 700;
+    // font-size: 18px;
+    color: blue;
+    margin: 5px;
+  }
+}
+
+.userName {
+ 
+  .label_part {
+    border-radius: 4px;
+    // padding: 5px;
+    // background-color:#2168c6 ;
+    color: #435773;
+  }
+  label {
+    font-weight: bold;
+    font-size: 24px;
+  }
+}

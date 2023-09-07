@@ -382,6 +382,11 @@ input:checked ~ .dropdown .overlay {
   height: 1px;
 }
 
+.placeholder4 {
+  width: 100px;
+  height: 10px;
+}
+
 .save_cancel_buttons {
   margin-top: 7px;
   display: flex;
@@ -391,3 +396,5 @@ input:checked ~ .dropdown .overlay {
     font-weight: 600;
   }
 }
+
+

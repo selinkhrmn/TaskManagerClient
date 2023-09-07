@@ -71,7 +71,7 @@ import {MatTableModule} from '@angular/material/table';
 import { ToastrModule } from 'ngx-toastr';
 import { TransferColumnTaskComponent } from './components/transfer-column-task/transfer-column-task.component';
 import { TimePipe } from 'src/pipes/time.pipe';
-import { ShareComponent } from './components/calendar/share/share.component';
+import { ShareComponent } from './components/navbar/share/share.component';
 import { ChartEvent } from 'chart.js';
 import { ColumnPipe } from 'src/pipes/column.pipe';
 import { CalculateDatePipe } from 'src/pipes/calculate-date.pipe';
@@ -84,7 +84,7 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { PriorityService } from './services/priority.service';
 import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
 import { GoogleChartsModule } from 'angular-google-charts';
-
+import { ChattingComponent } from './components/chatting/chatting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,7 +139,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     PlanDialogComponent,
     UnplannedComponentComponent,
     LabelPipe,
-    ProfileSettingPageComponent
+    ProfileSettingPageComponent,
+    ChattingComponent
 
 
   ],
