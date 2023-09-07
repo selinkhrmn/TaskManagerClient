@@ -67,7 +67,7 @@
           </button>
 
         <button class="btn btn-light create-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-          [disabled]="!tokenService.hasRole('Admin')" (click)="openCreateIssueDialog()">
+          [disabled]="tokenService.hasRole('User')" (click)="openCreateIssueDialog()">
           <strong>{{ "create" | transloco }}</strong>
 
         </button>
@@ -98,7 +98,7 @@
               {{ tokenService.tokenUsername() | titlecase}}
             </button>
             <mat-menu #menu="matMenu">
-              <button *ngIf="tokenService.hasRole('Admin')" mat-menu-item (click)="routerToAdminPage()">
+              <button *ngIf="tokenService.hasRole('Admin') || tokenService.hasRole('SuperAdmin')" mat-menu-item (click)="routerToAdminPage()">
                 Admin Page <mat-icon>face</mat-icon>
               </button>
               <button mat-menu-item (click)="routerToProfileSetting()">

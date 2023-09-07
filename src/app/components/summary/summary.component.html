@@ -197,7 +197,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button (click)="addUserDialog()" [disabled]="!tokenService.hasRole('Admin')"
+                            <button (click)="addUserDialog()" [disabled]="tokenService.hasRole('User')"
                                 class="add-person">
                                 <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni
                                 birini ekleyin.

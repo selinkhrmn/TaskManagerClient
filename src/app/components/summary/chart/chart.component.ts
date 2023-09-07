@@ -49,7 +49,7 @@ export class ChartComponent implements OnInit {
     this.chartTitle = getCurrentProject.name;
 
     this.columnService.GetProjectColumnsTasks(getCurrentProject.id).subscribe((res) => {
-      debugger
+
       this.columns = res.data
       this.columnData = this.columns.map((column) => ({
         name: column.name,

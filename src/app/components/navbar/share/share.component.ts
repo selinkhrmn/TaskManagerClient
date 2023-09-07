@@ -51,7 +51,7 @@ export class ShareComponent {
     });
   }
   logit(event : MatSelectChange) {
-    debugger
+
     let theObj = event.value;
     this.selectedUsers.users.push(theObj[0].email.toString())
     console.log(typeof theObj[0].email.toString());

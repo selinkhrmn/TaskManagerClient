@@ -61,8 +61,6 @@ export class CreateProjectComponent implements OnInit {
   }
    
   createProject(){
-    console.log(this.projectName);
-    debugger
     if(this.projectName == '' || this.projectName ==  null || this.projectName == undefined ){
       this.projectNameIsEmpty = true;
     }
@@ -103,7 +101,6 @@ export class CreateProjectComponent implements OnInit {
 
 
   closeDialog() {
-    debugger
     this.dialog.closeAll()
     // this.dialog.afterOpened.subscribe((result)=>{
     //   if(result.afterClosed){

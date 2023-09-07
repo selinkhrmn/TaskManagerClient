@@ -101,7 +101,6 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     const minDate = new Date('2000-01-01T00:00:00');
-    debugger;
     if (new Date(this.data.task.endDate).getTime() < minDate.getTime()) {
       this.dateChangeCheck = false;
     } else {
@@ -258,7 +257,6 @@ export class TaskComponent implements OnInit {
   }
 
   changeDueDate() {
-    debugger;
     const todaysDate = new Date();
     const minDate = new Date('2000-01-01T00:00:00');
     const taskDueDateValue = new Date(this.taskDueDate.value);
@@ -274,7 +272,6 @@ export class TaskComponent implements OnInit {
         confirmButtonText: 'Yes',
       }).then((result) => {
         if (result.isConfirmed) {
-          debugger;
           console.log(this.taskDueDate);
 
           this.dateChangeCheck = true;
@@ -298,7 +295,6 @@ export class TaskComponent implements OnInit {
   }
 
   updateTask() {
-    debugger;
     console.log(this.dateChangeCheck);
 
     if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)) {
@@ -370,7 +366,6 @@ export class TaskComponent implements OnInit {
   }
 
   editComment(id: number, comment: string) {
-    debugger;
     console.log(comment);
     this.commentBeingEditedId = id;
     this.commentReq.id = id;

@@ -11,7 +11,7 @@
     <!-- <button mat-button>Issues</button> -->
     <!-- <button mat-button>{{'tabs.reports' | transloco}}</button> -->
     
-    <button mat-button class="custom-button setting" [disabled]="!tokenService.hasRole('Admin')" routerLink="project-settings" routerLinkActive="active">
+    <button mat-button class="custom-button setting" [disabled]="tokenService.hasRole('User')" routerLink="project-settings" routerLinkActive="active">
       {{ 'tabs.projectSettings' | transloco }}
     </button>
     

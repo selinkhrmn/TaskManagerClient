@@ -7,7 +7,7 @@ import {
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
 import { MatInputModule } from '@angular/material/input';
-import { UserDto } from 'src/app/interfaces/user';
+import { UserActionDto, UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 
 import { ProjectUserList, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
@@ -100,16 +100,15 @@ export class AddUsersToProjectComponent implements OnInit {
   
   AddUserToProject() {
     this.addedUser.projectId = this.projectId;
-    debugger;
-    const addUsers: string[] = [];
-    const removeUsers: string[] = [];
+    const addUsers: UserActionDto[] = [];
+    const removeUsers: UserActionDto[] = [];
   
     this.userCheckedList.forEach(userFromList => {
       if (userFromList.checked && !this.isSelected(userFromList.user.id)) {
-        addUsers.push(userFromList.user.id);
+        addUsers.push({'userId':userFromList.user.id, 'roleId': userFromList.user.role});
       } 
       else if (!userFromList.checked && this.isSelected(userFromList.user.id)) {
-        removeUsers.push(userFromList.user.id);
+        removeUsers.push({'userId':userFromList.user.id, 'roleId': userFromList.user.role});
       }
     });
 

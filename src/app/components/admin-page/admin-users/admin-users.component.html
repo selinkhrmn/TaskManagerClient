@@ -44,6 +44,11 @@
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let row"> {{row.role | userRole}} </td>
+    </ng-container>
+
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>{{ 'Actions' | transloco }}</th>
@@ -74,7 +79,7 @@ showFirstLastButtons
 <mat-menu #menu>
   <ng-template matMenuContent let-element="element">
       <button mat-menu-item (click)="openUserDetailDialog(element.id)">	<mat-icon>edit</mat-icon>{{ 'edit' | transloco }}</button>
-      <button mat-menu-item (click)="deleteUser(element.id)"><mat-icon>delete_outline</mat-icon>{{ 'delete' | transloco }}</button>
+      <button mat-menu-item (click)="deleteUser(element.id, element.role)"><mat-icon>delete_outline</mat-icon>{{ 'delete' | transloco }}</button>
       <button mat-menu-item (click)="getUserLogs(element.id)">LOG</button>
   </ng-template>
 </mat-menu>

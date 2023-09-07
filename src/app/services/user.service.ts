@@ -39,9 +39,8 @@ export class UserService {
   }
 
   AddUserToProject(projectUser: ProjectUserList) {
-    debugger
-    console.log(projectUser);
-    
+  
+   
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 

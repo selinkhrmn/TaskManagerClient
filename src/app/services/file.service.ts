@@ -111,7 +111,6 @@ httpOptionsFormData = {
 
   //to get all users profile photo
   GetFileForProjectUsers(projectId : any) : Observable<any> {
-    debugger
     const url = `${this.baseUrl}/GetFileForProjectUsers`;
     return this.http.post(url, projectId);
   }

@@ -120,7 +120,6 @@ export class TaskService {
 
 
   filterCreatedDate(filteredData: ListTask[], createdFromDate: Date, createdToDate?: Date){
-    debugger;
     if (createdFromDate && createdToDate) {
         createdToDate.setHours(23, 59, 59, 999); 
         filteredData = filteredData.filter(t => {

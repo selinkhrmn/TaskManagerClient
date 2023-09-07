@@ -27,9 +27,12 @@ export interface UserDto{
     surname: string;
     username: string;
     email: string;
-    role?: string;
-
-
+    role: string;
 }
 
+
+export interface UserActionDto{
+    userId: string
+    roleId: string
+}
 

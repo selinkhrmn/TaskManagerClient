@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
-import { UserDto } from 'src/app/interfaces/user';
+import { UserActionDto, UserDto } from 'src/app/interfaces/user';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserList } from 'src/app/interfaces/projectUserDto';
@@ -23,7 +23,7 @@ export class AddPeopleToProjectComponent implements OnInit{
   url : any;
   newProjectName: any;
   addedList : ProjectUserList;
-  selectedUsers: string[] = [];
+  selectedUsers: UserActionDto[] = [];
   projectId: number;
  
 
@@ -34,7 +34,7 @@ export class AddPeopleToProjectComponent implements OnInit{
     private fileService : FileService) { }
   ngOnInit() 
   {
-    debugger
+    
     this.getAllUsers();
     this.newProjectName = localStorage.getItem('newProject');
     
@@ -58,16 +58,16 @@ export class AddPeopleToProjectComponent implements OnInit{
   }
 
   onCheckboxChange(user: UserDto){
-    const index = this.selectedUsers.findIndex(u => u === user.id);
+    const index = this.selectedUsers.findIndex(u => u.userId === user.id);
     if (index !== -1) {
       this.selectedUsers.splice(index, 1);
     } 
     else {
-      this.selectedUsers.push(user.id); 
+      this.selectedUsers.push({'userId':user.id, 'roleId': user.role}); 
     }
     
   }
-  saveProjectUsers() {debugger
+  saveProjectUsers() {
     var currentProject ={
       id: 0,
       name: ''
@@ -77,7 +77,7 @@ export class AddPeopleToProjectComponent implements OnInit{
     this.projectId = JSON.parse(project).id;
 
     //burdan devam aşağısı çalışmıyor
-    debugger
+
     this.userService.AddUserToProject({projectId: currentProject.id, users: this.selectedUsers }).subscribe((res) => {
       console.log(res.data);
       if(res.isSuccessful == true) {

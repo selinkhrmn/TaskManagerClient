@@ -42,7 +42,7 @@
       <button
         (click)="openDialog()"
         class="add-person-button"
-        [disabled]="!tokenService.hasRole('Admin')"
+        [disabled]="tokenService.hasRole('User')"
       >
         <i class="material-icons">person_add</i>{{ "addPeople" | transloco }}
       </button>

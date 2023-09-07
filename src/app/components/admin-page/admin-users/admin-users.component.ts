@@ -41,14 +41,13 @@ export class AdminUsersComponent {
     private logService: LogService
   ) { }
 
-  displayedColumns: string[] = ['name', 'surname', 'username', 'email', 'actions'];
+  displayedColumns: string[] = ['name', 'surname', 'username', 'email', 'role', 'actions'];
   dataSource = new MatTableDataSource<UserDto>(this.users);
 
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.fetchTasks();
-    this.commentHubService.startConnection();
   }
 
   fetchTasks() {
@@ -82,14 +81,14 @@ export class AdminUsersComponent {
   getUserLogs(userId: string){
     console.log(userId);
     
-    let projects: number[] = [2];
+    let projects: number[] = [2,3];
     this.logService.getUserLogs(projects, userId).subscribe((res)=> {
       console.log(res);
       
     })
   }
 
-  deleteUser(id: string){
+  deleteUser(id: string, role: string){
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -100,7 +99,7 @@ export class AdminUsersComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [id]}).subscribe((res)=> {
+        this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [{'userId':id, 'roleId': role}]}).subscribe((res)=> {
           if(res.isSuccessful){
             Swal.fire(
               'Deleted!',

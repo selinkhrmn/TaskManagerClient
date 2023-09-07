@@ -85,6 +85,9 @@ import { PriorityService } from './services/priority.service';
 import { ProfileSettingPageComponent } from './components/profile-setting-page/profile-setting-page.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ChattingComponent } from './components/chatting/chatting.component';
+import { UserRolePipe } from 'src/pipes/user-role.pipe';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,7 +143,8 @@ import { ChattingComponent } from './components/chatting/chatting.component';
     UnplannedComponentComponent,
     LabelPipe,
     ProfileSettingPageComponent,
-    ChattingComponent
+    ChattingComponent,
+    UserRolePipe
 
 
   ],

@@ -23,10 +23,11 @@ export class LogService {
   }
 
   getUserLogs(projectIds: number[], userId: string): Observable<ResponseModel<LogUserDto>> {
-    let queryParams = new HttpParams();
-    const tableIdString = projectIds.join(',');
-    queryParams = queryParams.set('ProjectIds', tableIdString);
-    queryParams= queryParams.set('UserId', userId);
-    return this.http.get<ResponseModel<LogUserDto>>(`${this.baseUrl}/GetUserLogs`,{params:queryParams});
+    const params = new HttpParams({ 
+      fromObject: { 'ProjectIds[]': projectIds, 'userId': userId },
+   });
+    
+    return this.http.get<ResponseModel<LogUserDto>>(`${this.baseUrl}/GetUserLogs`, { params: params });
   }
+  
 }

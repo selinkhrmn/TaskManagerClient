@@ -25,7 +25,7 @@ export class AuthService {
         return this.http.post(this.baseUrl + '/LoginUser', user).pipe(
             map((response: any) => {
                 const result = response;
-                debugger;
+
                 if (result.isSuccessful) {
                     localStorage.setItem("token", result.data.accessToken)
                 }
@@ -58,7 +58,7 @@ export class AuthService {
         const headers = this.tokenService.getHeaders();
 
         
-        debugger
+
         return this.http.post(this.baseUrl + '/RegisterUser', user)
     }
 

@@ -12,7 +12,6 @@ export class CommentHubService {
    }
   
    public startConnection = () => {
-    debugger;
 
       this.hubConnection = new signalR.HubConnectionBuilder()
         .withUrl('ws://localhost:5011/comment-hub', {
@@ -60,7 +59,7 @@ export class CommentHubService {
   }
 
   userJoined() {
-    debugger
+
     this.hubConnection.on('userJoined', connectionId => {
     })
     

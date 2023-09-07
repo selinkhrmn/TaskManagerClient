@@ -141,7 +141,7 @@ export class ProjectComponent implements OnInit {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [id] }).subscribe((res) => {
+        this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [] }).subscribe((res) => {
           if (res.isSuccessful == true) {
             Swal.fire('Saved!', '', 'success'),
               this.ngOnInit();
@@ -157,7 +157,6 @@ export class ProjectComponent implements OnInit {
   }
 
   deleteProject() {
-    debugger;
     if (this.data.project.createdByUser == this.tokenService.getTokenId()) {
       Swal.fire({
         title: 'Are you sure?',

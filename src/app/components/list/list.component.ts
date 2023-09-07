@@ -250,14 +250,14 @@ export class ListComponent implements OnInit {
     }
 
     if (this.activeFilters.includes('UpdatedDate')) {
-      debugger;
+
       this.filteredData = this.taskService.filterUpdatedDate(this.filteredData, this.updatedFromDate, this.updatedToDate);
     }
 
 
     if (this.activeFilters.includes('CreatedDate')) {
       this.filteredData = this.taskService.filterCreatedDate(this.filteredData, this.createdFromDate, this.createdToDate);
-      debugger;
+
     }
 
     if (this.activeFilters.includes('DueDate')) {

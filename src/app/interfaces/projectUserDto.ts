@@ -1,4 +1,4 @@
-import { UserDto } from "./user";
+import { UserActionDto, UserDto } from "./user";
 
 export interface ProjectUserDto{
     // username: string; // file işlemlerinden sonra silinmesini talep ediyorum. Id ile pipe kullanmak yeterli
@@ -10,7 +10,7 @@ export interface ProjectUserDto{
 
 
 export interface ProjectUserList{
-    users : string[];
+    users : UserActionDto[];
     projectId :number;
 }
 

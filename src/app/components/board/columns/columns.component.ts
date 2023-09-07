@@ -95,8 +95,6 @@ export class ColumnsComponent {
   ) {}
 
   ngOnInit(): void {
-    debugger;
-
     this.getColumnId(this.currentColumnId);
     if (this.projectService.getProjectLocal() != null) {
       this.currentProject = this.projectService.getProjectLocal();
@@ -167,7 +165,6 @@ export class ColumnsComponent {
   }
 
   openMenuAndFocusInput() {
-    debugger;
     this.yourMatMenuTrigger.openMenu();
 
   // Use a timeout to set focus after a brief delay

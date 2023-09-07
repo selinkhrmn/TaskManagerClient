@@ -52,7 +52,7 @@ export class ProjectDetailsComponent {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      debugger
+
       if (result.isConfirmed) {
         this.projectService.deleteProject( this.projectId ).subscribe((res) => {
         });
