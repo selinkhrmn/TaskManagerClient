@@ -238,7 +238,8 @@ export class ColumnsComponent {
   }
 
   CreateTask() {
-    this.taskObj.columnId = this.currentColumnId;
+    if(this.taskObj.name !='') {
+      this.taskObj.columnId = this.currentColumnId;
     this.taskObj.projectId = this.projectService.getProjectLocal().id;
     this.taskObj.assigneeId = 'unassigned';
     this.taskObj.reporterId = this.tokenService.tokenUserId();
@@ -252,6 +253,8 @@ export class ColumnsComponent {
     });
 
     this.taskObj.name = ''; //!
+    }
+    
   }
 
   OpenDeleteDialog(columnId: number, columnName: string) {

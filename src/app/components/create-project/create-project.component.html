@@ -26,7 +26,7 @@
           <label *ngIf="projectNameIsEmpty">Project Name can't be empty</label>
         </div>
         <div class="button_field">
-          <button mat-raised-button routerLink="summary" (click)="closeDialog()">
+          <button mat-raised-button routerLink="home/summary" (click)="closeDialog()">
             {{ "cancel" | transloco }}
           </button>
           <button mat-raised-button (click)="createProject()">

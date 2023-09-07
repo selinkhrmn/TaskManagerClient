@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
 import { User, UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-password-change-page',
@@ -49,19 +50,41 @@ export class PasswordChangePageComponent implements OnInit {
   onSubmit() {
     
       const newPassword = this.passwordChangeForm.value.newPassword;
-      // Call your service to update the password using the token
-      this.userService.ChangePasswordWithToken(this.token, newPassword)
+      const oldPassword = this.passwordChangeForm.value.confirmNewPassword
+      if(newPassword == oldPassword) {
+        this.userService.ChangePasswordWithToken(this.token, newPassword)
         .subscribe(response => {
           if (response.success) {
-            // Password change successful, show success message or navigate to login
-            this.router.navigate(['/login']); // Redirect to login page
+            Swal.fire(
+              'Good job!',
+              'You clicked the button!',
+              'success'
+            ).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/login']);
+              }
+            });
           } else {
-            // Password change failed, show error message
-            this.resultMessage = 'Password change failed. Please try again.';
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Password change failed. Please try again.',
+            })
           }
         });
-    
-  }
+       }
+
+       else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Passwords should match!',
+        })
+      }
+      }
+
+      
+      
 
 
 }

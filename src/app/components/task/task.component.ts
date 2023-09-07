@@ -316,7 +316,23 @@ export class TaskComponent implements OnInit {
 
   deleteTask() {
     this.taskService.deleteTask(this.taskId).subscribe((res) => {
-      this.closeDialog();
+      if(res.isSuccessful) {
+        Swal.fire(
+          'You succesfully deleted the task!',
+          '',
+          'success'
+        ).then(() => {
+          this.closeDialog();
+        })
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+      }
+     
     });
   }
 
