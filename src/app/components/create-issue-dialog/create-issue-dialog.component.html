@@ -73,9 +73,11 @@
   <br />
 
   <div class="row">
+   
         <mat-form-field>
-            <mat-label>Description</mat-label>
-            <textarea name="textarea" id="default" matInput maxlength="300"></textarea>
+            <!-- <mat-label>Description</mat-label> -->
+            <strong><label>{{"description" | transloco}}:</label></strong>
+            <textarea matInput maxlength="300" mat-Input type="textarea" [(ngModel)]="task.description"></textarea>
         </mat-form-field>
        
     </div>

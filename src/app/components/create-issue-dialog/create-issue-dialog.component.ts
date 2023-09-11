@@ -51,7 +51,6 @@ export class CreateIssueDialogComponent {
   assignees: ProjectUserDto[] = [];
   userList: UserDto[] = [];
 
-  
   descriptionText: string = '';
   Files: FileData[];
   addSubtopicClicked = false;
@@ -82,7 +81,8 @@ export class CreateIssueDialogComponent {
     priority : 3,
     endDate: this.currentDate,
     assigneeId : "unassigned",
-    reporterId : this.tokenService.getTokenId()
+    reporterId : this.tokenService.getTokenId(),
+    description: ""
   }
 
   config: AngularEditorConfig = {
@@ -251,8 +251,6 @@ export class CreateIssueDialogComponent {
 
     
   }
-
-
 
 
 

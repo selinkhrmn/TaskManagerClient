@@ -31,7 +31,7 @@
 
       <div class="top_side">
         <h2>{{ "description" | transloco }}</h2>
-        <input placeholder="Add a description..." />
+        <input [(ngModel)]="taskChange.description" placeholder="Add a description..." (blur)="updateTask()" />
       </div>
       <!-- Add the input box here with *ngIf directive -->
       <div *ngIf="addSubtopicClicked" class="subtopic-input-container">

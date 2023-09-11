@@ -11,6 +11,7 @@ export interface Task extends Base {
     assigneeId: string;
     reporterId : string;
     label : number;
+    description: string;
     files : File;
 
 }
