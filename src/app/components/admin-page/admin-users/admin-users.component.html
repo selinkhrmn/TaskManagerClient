@@ -97,12 +97,10 @@
 
 <mat-menu #menu>
   <ng-template matMenuContent let-element="element">
-    <button mat-menu-item (click)="openUserDetailDialog(element.id)">
-      <mat-icon>edit</mat-icon>{{ "edit" | transloco }}
-    </button>
-    <button mat-menu-item (click)="deleteUser(element.id, element.role)">
-      <mat-icon>delete_outline</mat-icon>{{ "delete" | transloco }}
-    </button>
-    <button mat-menu-item (click)="getUserLogs(element.id)">LOG</button>
+
+      <button mat-menu-item (click)="openUserDetailDialog(element.id)">	<mat-icon>edit</mat-icon>{{ 'edit' | transloco }}</button>
+      <button mat-menu-item (click)="userDeleteWithHandleTasks(element.id, element.role)"><mat-icon>delete_outline</mat-icon>{{ 'delete' | transloco }}</button>
+      <button mat-menu-item (click)="getUserLogs(element.id)">LOG</button>
+
   </ng-template>
 </mat-menu>

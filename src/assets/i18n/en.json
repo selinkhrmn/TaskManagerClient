@@ -2,15 +2,15 @@
     "admin": "Admin",
     "user": "User",
     "close": "Close",
-    "back" : "Back",
+    "back": "Back",
     "save": "Save",
     "create": "Create",
     "projects": "Projects",
-    "name" : "Name",
-    "id" : "Id",
-    "add person":"Add person",
-    "last month":"Last Month",
-    "today" :"Today",
+    "name": "Name",
+    "id": "Id",
+    "add person": "Add person",
+    "last month": "Last Month",
+    "today": "Today",
     "Pzt": "Mon",
     "Sal": "Tue",
     "Çar": "Wed",
@@ -38,7 +38,6 @@
         "true": "Today",
         "false": ""
     },
-    
     "namePlaceholder": "Names or teams*",
     "nameInputLabel": "Names or teams*",
     "messagePlaceholder": "Message (optional)",
@@ -46,49 +45,51 @@
     "shareButtonLabel": "Share",
     "unplannedTasksTitle": "Unplanned Tasks",
     "searchTaskPlaceholder": "Search Task...",
-    "next month":"Next month",
-    "column" : "Column",
-    "assignee" : "Assignee",
+    "next month": "Next month",
+    "column": "Column",
+    "assignee": "Assignee",
     "reporter": "Reporter",
-    "dueDate" : "Due Date",
-    "priority" : "Priority",
-    "updateDate" : "Update Date",
-    "startedDate" : "Started Date",
-    "createdDate" : "Created Date",
-    "updatedDate" : "Updated Date",
-    "addPeople" : "Add People",
+    "dueDate": "Due Date",
+    "priority": "Priority",
+    "updateDate": "Update Date",
+    "startedDate": "Started Date",
+    "createdDate": "Created Date",
+    "updatedDate": "Updated Date",
+    "addPeople": "Add People",
     "share": "Share",
-    "unplanned" : "Unplanned",
+    "unplanned": "Unplanned",
     "filter": "Filter",
-    "more" : "More",
-    "logOut" : "Log Out",
+    "more": "More",
+    "logOut": "Log Out",
     "rolSelection": "Role Selection",
-    "add" : "Add",
-    "cancel" : "Cancel",
-    "edit" : "Edit",
-    "delete" : "Delete",
-    "addColumn" : "Add Column",
-    "projectName" : "Project Name",
-    "columnName" : "Column Name",
-    "taskName" : "Task Name",
-    "description" : "Description",
-    "createProject" : "Create Project",
-    "next" : "Next",
+    "selectProject": "Select a Project",
+    "assigneeReporterSelect": "Assignee and Reporter Selection",
+    "add": "Add",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addColumn": "Add Column",
+    "projectName": "Project Name",
+    "columnName": "Column Name",
+    "taskName": "Task Name",
+    "description": "Description",
+    "createProject": "Create Project",
+    "next": "Next",
     "backToProjectTemplate": "Back to project templates",
-    "search" : "Search",
-    "password" : "Password",
-    "needHelp" : "Need help",
-    "contactTaskManager" : "Contact Task Manager",
-    "logIn" : "Log In",
-    "username" : "Username",
-    "surname" : "Surname",
+    "search": "Search",
+    "password": "Password",
+    "needHelp": "Need help",
+    "contactTaskManager": "Contact Task Manager",
+    "logIn": "Log In",
+    "username": "Username",
+    "surname": "Surname",
     "new password": "New Password",
     "confirm password": "Confirm Password",
-    "label" : "Label",
-    "emptyMessage" : "No created task available.",
-    "hintForAdminSearch" : "Search by Task Name or User Name",
+    "label": "Label",
+    "emptyMessage": "No created task available.",
+    "hintForAdminSearch": "Search by Task Name or User Name",
     "Not Started": "Not started",
-    "Pending" : "Pending",
+    "Pending": "Pending",
     "Ongoing": "Ongoing",
     "Completed": "Completed",
     "task": "Task",
@@ -116,7 +117,6 @@
     "userSettings": {
         "addPerson": "Add Person",
         "personSelection": "Person Selection"
-
     },
     "taskSetting": {
         "filter": "Filter",
@@ -127,27 +127,29 @@
     "projectDetail": {
         "changeIcon": "Change Icon"
     },
-    "summary" : {
-        "welcome" : "Welcome",
-        "completedinthelast7days" : "Completed in the last 7 days",
-        "updatedinthelast7days" : "Updated in the last 7 days",
-        "createdinthelast7days" : "Created in the last 7 days"
-        
+    "summary": {
+        "welcome": "Welcome",
+        "completedinthelast7days": "Completed in the last 7 days",
+        "updatedinthelast7days": "Updated in the last 7 days",
+        "createdinthelast7days": "Created in the last 7 days"
     },
-    "board" : 
-    {
-        "searchBoard" : "Search Board"
+    "board": {
+        "searchBoard": "Search Board"
     },
-    "list" : {
-        "searchInList" : "Search In List"
+    "list": {
+        "searchInList": "Search In List"
     },
-    "calendar" : {
-        "searchDate" : "Search Date"
+    "calendar": {
+        "searchDate": "Search Date"
     },
     "languages": {
         "tr": "Turkish",
         "en": "English",
-        "changeLanguages" : "Change Language"
-    }
-
+        "changeLanguages": "Change Language"
+    },
+    "Are you sure?": "Are you sure?",
+    "You won't be able to revert this!": "You won't be able to revert this!",
+    "Yes, delete it!": "Yes, delete it!",
+    "Deleted!": "Deleted!",
+    "Tasks belonging to {{name}} have been edited, and the user has been deleted.": "The tasks belonging to {{name}} have been edited, and the user has been deleted."
 }

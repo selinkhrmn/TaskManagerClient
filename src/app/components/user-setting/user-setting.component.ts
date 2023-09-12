@@ -77,16 +77,16 @@ export class UserSettingComponent {
     })
   }
   deleteUser(user: any) {
-    this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [user.id]} ).subscribe((response: any) => {
-        console.log('User deleted successfully');
-        this.selectedUser =  [];
-        this.GetAllProjectUsers();
-        location.reload();
-      },
-      (error: any) => {
-        console.error('Error deleting user:', error);
-      }
-    );
+    // this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [user.id]} ).subscribe((response: any) => {
+    //     console.log('User deleted successfully');
+    //     this.selectedUser =  [];
+    //     this.GetAllProjectUsers();
+    //     location.reload();
+    //   },
+    //   (error: any) => {
+    //     console.error('Error deleting user:', error);
+    //   }
+    // );
   }
 
   openManageRoles(): void {

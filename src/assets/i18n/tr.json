@@ -61,6 +61,8 @@
     "more" : "Daha fazla",
     "logOut" : "Çıkış",
     "rolSelection": "Rol seçimi",
+    "selectProject": "Proje Seçimi",
+    "assigneeReporterSelect": "Atanan ve Raporlanan Kullanıcı Seçimi",
     "add" : "Ekle",
     "cancel" : "İptal",
     "edit" : "Düzenle",
@@ -145,6 +147,11 @@
         "tr": "Türkçe",
         "en": "İngilizce",
         "changeLanguages" : "Dili değiştir"
-    }
-
-}
+    },
+    "Are you sure?": "Emin misiniz?",
+   "You won't be able to revert this!": "Bu işlemi geri alamayacaksınız!",
+   "Yes, delete it!": "Evet, sil!",
+   "Deleted!": "Silindi!",
+    "Tasks belonging to {{name}} have been edited, and the user has been deleted.": "{{name}}'a ait görevler düzenlendi ve kullanıcı silindi."
+  }
+  

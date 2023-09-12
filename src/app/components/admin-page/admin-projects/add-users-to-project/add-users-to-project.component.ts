@@ -113,11 +113,11 @@ export class AddUsersToProjectComponent implements OnInit {
     });
 
     if(removeUsers.length != 0){
-      this.userService.DeleteUserFromProject({projectId: this.projectId, users: removeUsers}).subscribe((res) => {
-        if(res.isSuccessful == true){
-          Swal.fire('Saved!', '', 'success');
-        }
-      });
+      // this.userService.DeleteUserFromProject({projectId: this.projectId, users: removeUsers}).subscribe((res) => {
+      //   if(res.isSuccessful == true){
+      //     Swal.fire('Saved!', '', 'success');
+      //   }
+      // });
     }
     
     if(addUsers.length != 0){

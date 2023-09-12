@@ -3,7 +3,7 @@ import { TokenService } from './token.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ResponseModel } from '../interfaces/responseModel';
-import { UserDto } from '../interfaces/user';
+import { DeleteUserDto, UserDto } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 import { ProjectDto } from '../interfaces/project';
 import { ProjectUserList, ProjectUserDto, ProjectUserListForEmail } from '../interfaces/projectUserDto';
@@ -39,14 +39,24 @@ export class UserService {
   }
 
   AddUserToProject(projectUser: ProjectUserList) {
-  
-   
     return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/AddUserToProject`, projectUser);
   }
 
-  DeleteUserFromProject(projectUser: ProjectUserList) {
-    return this.http.post<ResponseModel<ProjectUserDto>>(`${this.baseUrl}/DeleteUserFromProject`, projectUser);
+  DeleteUserFromProjectTasks(deleteUserDto: DeleteUserDto) {
+    debugger;
+    return this.http.post<ResponseModel<DeleteUserDto>>(`${this.baseUrl}/DeleteUserFromProjectTasks`, deleteUserDto);
   }
+
+  deleteUserFromProjectAfterTasks(projectId: number, userId: string){
+    return this.http.post<ResponseModel<DeleteUserDto>>(`${this.baseUrl}/DeleteUserFromProjectAfterTasks`, {projectId: projectId, userId: userId});
+  }
+
+  getUsersProjects(userId: string){
+    let params = new HttpParams()
+    .set('userId', userId.toString())
+    return this.http.get<ResponseModel<ProjectDto>>(`${this.baseUrl}/GetUsersProjects`, {params})
+  }
+
 
   GetProjectSelectedUsers(projectId: number): Observable<ResponseModel<ProjectUserDto>> {
     const url = `${this.baseUrl}/GetSelectedUsersForProject`;

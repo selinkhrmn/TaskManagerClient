@@ -1,0 +1,124 @@
+
+
+<mat-horizontal-stepper class="custom-stepper">
+  <mat-step>
+    <div>
+      <b>{{ this.data.userId | user:userList }}</b> kişisi aktif olarak <b>{{ projectList.length }} </b>tane projede rol almaktadır. 
+      Kullanıcyı silmek istediğiniz projeyi seçip işleme devam ediniz.
+    </div>
+    <br>
+    <br>
+    <ng-template matStepLabel>{{ 'selectProject' | transloco}}</ng-template>
+    <mat-form-field class="selectProject">
+      <mat-label>Select a Project</mat-label>
+      <mat-select [(ngModel)]="selectedProject">
+        <mat-option *ngFor="let project of projectList" [value]="project.id">{{ project.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+    </div>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+      <button (click)="cancel()"> Cancel</button>
+    </div>
+  </mat-step>
+  
+  <mat-step>
+    <ng-template matStepLabel>{{ 'assigneeReporterSelect' | transloco }}</ng-template>
+    <div>
+      <b>{{ this.data.userId | user:userList }}</b> kişisinin
+      <b>{{ this.data.projectId | project : projectList }}</b> projesinde atanmış ve raporlanan toplam
+      <b>{{ this.data.tasks.length }}</b> task bulunuyor.
+    </div>
+    <span>Bu taskları görevlendirmek için lütfen işlem yapınız.</span>
+    <br>
+    <br>
+    <mat-form-field>
+      <mat-label>Select an Assignee</mat-label>
+      <mat-select [(ngModel)]="selectedAssignee">
+        <mat-option *ngFor="let user of projectUserList" [value]="user.userId">
+          {{ user.userId | user:userList }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp; &nbsp;
+    <mat-form-field>
+      <mat-label>Select a Reporter</mat-label>
+      <mat-select [(ngModel)]="selectedReporter">
+        <mat-option *ngFor="let user of projectUserList" [value]="user.userId">
+          {{ user.userId | user:userList }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+
+    <div *ngIf="isLoading">
+      <!-- <mat-progress-spinner mode="indeterminate"></mat-progress-spinner> -->
+      <span class="loader"></span>
+    </div>
+  
+    <div>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Previous</button>
+      <button mat-button (click)="save()">Save</button>
+    </div>
+  </mat-step>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-dialog-content>
+  <div>
+   <b>{{ this.data.userId | user:userList }}</b> kişisinin <b>{{ this.data.projectId | project : projectList }} </b>projesinde 
+    atanmış ve raporlanan toplam <b>{{this.data.tasks.length }}</b> task bulunuyor.
+  </div>
+  <span>Bu taskları görevlendirmek için lütfen işlem yapınız.</span>
+      <br>
+      <br>
+    <div class="select-boxes">
+      
+      <mat-form-field class="assignee-select">
+        <mat-label>Assignee</mat-label>
+        <mat-select [(ngModel)]="selectedAssignee">
+          <mat-option *ngFor="let assignee of projectUserList" [value]="assignee.userId">{{ assignee.userId | user:userList}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field class="reporter-select">
+        <mat-label>Reporter</mat-label>
+        <mat-select [(ngModel)]="selectedReporter">
+          <mat-option *ngFor="let reporter of projectUserList" [value]="reporter.userId">{{ reporter.userId | user:userList }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button color="primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+   -->

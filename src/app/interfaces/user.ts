@@ -44,3 +44,9 @@ export interface UserConnection {
     connectionId: string,
     id: string
 }
+export interface DeleteUserDto{
+    userId: string;
+    projectId: number;
+    assigneeId: string;
+    reporterId: string;
+}

@@ -28,11 +28,6 @@ export class TaskService {
     public tokenService: TokenService) {
   }
 
-  // headers = this.tokenService.getHeaders();
-  // httpOptions = {
-  //   headers: this.headers
-  // };
-
   createTask(task: Partial<Task>): Observable<ResponseModel<Task>> {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/CreateTask`, task);
   }
@@ -58,19 +53,17 @@ export class TaskService {
     return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetTaskById`, { id: id });
   }
 
-  GetAllTaskForUser(id: Partial<UserDto>) {
-    return this.http.post<ResponseModel<Task>>(`${this.baseUrl}/GetAllTaskForUser`, id);
+  GetAllProjectTaskForUser(projectId: number, userId: string) : Observable<ResponseModel<TaskDto>>{
+    let params = new HttpParams()
+    .set('projectId', projectId.toString())
+    .set('userId', userId);
+
+    return this.http.get<ResponseModel<TaskDto>>(`${this.baseUrl}/GetAllProjectTaskForUser`, {params});
   }
 
   getProjectTasksAdmin() {
-    return this.http.get<ResponseModel<TaskUserDto>>(`${this.baseUrl}/GetProjectTasks`);
+    return this.http.get<ResponseModel<TaskUserDto>>(`${this.baseUrl}/GetUsersProjectsTasks`);
   }
-
-  // setSelectedFilter(filter: { name: string, fromDate: Date, toDate: Date }) {
-  //   console.log("Setting filter:", filter);
-  //   this.selectedFilter = filter;
-  // }
-
   
   setSelectedFilter(filter: any) {
     console.log("Setting filter:", filter);
@@ -82,23 +75,10 @@ export class TaskService {
     return this.selectedFilter;
   }
 
-
-
   getSummaryFilter(){
     return this.summaryFilter;
   }
 
-  getUnplannedTask(projectId: number){
-    const url = `${this.baseUrl}/UnplannedTask`;
-    const params = new HttpParams().set('id', projectId.toString());
-    return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
-  }
-
-  // getUnassignedTask(projectId: number){
-  //   const url = `${this.baseUrl}/UnassignedTask`;
-  //   const params = new HttpParams().set('id', projectId.toString());
-  //   return this.http.get<ResponseModel<TaskDto>>(url, { params: params });
-  // }
 
   filterUpdatedDate(filteredData: ListTask[], updatedFromDate: Date, updatedToDate?: Date ){
     if (updatedFromDate && updatedToDate) {

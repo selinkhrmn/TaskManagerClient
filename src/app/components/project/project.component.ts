@@ -133,26 +133,26 @@ export class ProjectComponent implements OnInit {
   }
 
   deleteUser(id: string) {
-    Swal.fire({
-      title: 'Do you want to delete this user?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [] }).subscribe((res) => {
-          if (res.isSuccessful == true) {
-            Swal.fire('Saved!', '', 'success'),
-              this.ngOnInit();
-          }
-        })
-        Swal.fire('Saved!', '', 'success')
-      } else if (result.isDenied) {
-        console.log("not delete");
-        Swal.fire('Changes are not saved', '', 'info')
-      }
-    })
+    // Swal.fire({
+    //   title: 'Do you want to delete this user?',
+    //   showDenyButton: true,
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Yes',
+    //   denyButtonText: `No`,
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [] }).subscribe((res) => {
+    //       if (res.isSuccessful == true) {
+    //         Swal.fire('Saved!', '', 'success'),
+    //           this.ngOnInit();
+    //       }
+    //     })
+    //     Swal.fire('Saved!', '', 'success')
+    //   } else if (result.isDenied) {
+    //     console.log("not delete");
+    //     Swal.fire('Changes are not saved', '', 'info')
+    //   }
+    // })
 
   }
 

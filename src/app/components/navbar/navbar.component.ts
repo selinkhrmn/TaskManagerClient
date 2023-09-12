@@ -85,11 +85,6 @@ export class NavbarComponent {
         
   
         if (response.isAdded) {
-          // this.taskService.GetAllTaskForUser(this.tokenService.getTokenId()).subscribe((tasks) => {
-          //   console.log(tasks.data);
-            
-          // })
-  
             this.taskService.createTask(response.task).subscribe((res) => {
               //window.location.reload();
               console.log(res.data);

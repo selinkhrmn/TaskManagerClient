@@ -21,7 +21,8 @@ import { PriorityService } from 'src/app/services/priority.service';
 import Swal from 'sweetalert2';
 import { CommentHubService } from 'src/app/services/comment-hub.service';
 import { LogService } from 'src/app/services/log.service';
-import { BehaviorSubject, Observable, mergeMap, take } from 'rxjs';
+import { DeleteUserDialogComponent } from '../../delete-user-dialog/delete-user-dialog.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-users',
@@ -68,8 +69,9 @@ export class AdminUsersComponent {
     private projectService: ProjectService,
     private commentHubService: CommentHubService,
     private logService: LogService,
+    private taskService: TaskService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   displayedColumns: string[] = [
     'name',
@@ -123,7 +125,7 @@ export class AdminUsersComponent {
         this.users.find((u) => u.id == user.id).isConnected = false;
         this.connected = false;
         console.log(this.connected);
-        
+
         this.dataSource.data = [...this.users];
       });
     });
@@ -175,28 +177,49 @@ export class AdminUsersComponent {
     });
   }
 
-  deleteUser(id: string, role: string) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService
-          .DeleteUserFromProject({
-            projectId: this.projectService.getProjectLocal().id,
-            users: [{ userId: id, roleId: role }],
-          })
-          .subscribe((res) => {
-            if (res.isSuccessful) {
-              Swal.fire('Deleted!', 'User has been deleted.', 'success');
-            }
-          });
+
+  userDeleteWithHandleTasks(id: string, role: string) {
+    debugger;
+    if(this.tokenService.hasRole('Admin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' || role == '6a2c4fe5-5b10-45b6-a1f6-7cfecc629d3f')){
+      Swal.fire({
+        icon: 'error',
+        title: 'You are not allowed to delete this user!',
+        showConfirmButton: false
+      })
+      return;
+    }
+    else if(this.tokenService.hasRole('SuperAdmin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' )){
+      Swal.fire({
+        icon: 'error',
+        title: 'This user cannot be deleted!',
+        showConfirmButton: false
+      })
+      return;
+    }
+    let projectId = this.projectService.getProjectLocal().id;
+    this.taskService.GetAllProjectTaskForUser(projectId, id).subscribe((res) => {
+      if (res.isSuccessful) {
+        console.log(res);
+        const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+          data: { userId: id, tasks: res.data, projectId: this.projectService.getProjectLocal().id, getAllUsers: this.users }, width: '40%'
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          // this.ngOnInit();
+        });
       }
+    })
+
+  }
+
+  /*
+   openEditDialog(columnName: string, currentColumnId: number) {
+    const dialogRef = this.dialog.open(EditColumnComponent, {
+      data: { data: columnName, currentColumnId: currentColumnId },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.ngOnInit();
     });
   }
+  */
+
 }

@@ -86,6 +86,7 @@ import { ProfileSettingPageComponent } from './components/profile-setting-page/p
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ChattingComponent } from './components/chatting/chatting.component';
 import { UserRolePipe } from 'src/pipes/user-role.pipe';
+import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 
 
 @NgModule({
@@ -144,7 +145,8 @@ import { UserRolePipe } from 'src/pipes/user-role.pipe';
     LabelPipe,
     ProfileSettingPageComponent,
     ChattingComponent,
-    UserRolePipe
+    UserRolePipe,
+    DeleteUserDialogComponent
 
 
   ],
