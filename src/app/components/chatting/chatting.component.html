@@ -5,4 +5,8 @@
 <div *ngFor="let message of messages">
     {{message}}
 </div>
-<div>{{connectionId}}</div>
+<div>{{connectionId}}</div> 
+<div *ngFor="let user of userList">
+    <label>{{user.id}}</label>
+    <label>{{user.message}}</label>
+</div>

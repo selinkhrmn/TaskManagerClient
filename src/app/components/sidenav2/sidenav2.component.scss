@@ -94,7 +94,7 @@
   .container {
     width: 100vw; /* Make the container full width */
     height: auto; /* Allow content to determine height */
-    overflow: visible; /* Disable horizontal overflow */
+    overflow: auto; /* Disable horizontal overflow */
   }
 
   .top_bar {

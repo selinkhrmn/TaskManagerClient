@@ -8,6 +8,7 @@ export interface User {
     // email: string;
     password: string;
     role?: string;
+    
 }
 
 
@@ -18,6 +19,7 @@ export interface User1 {
       email:string
       password :string
       role: string;
+      
 }
 
 export interface UserDto{
@@ -28,6 +30,7 @@ export interface UserDto{
     username: string;
     email: string;
     role: string;
+    isConnected: boolean;
 }
 
 
@@ -36,3 +39,8 @@ export interface UserActionDto{
     roleId: string
 }
 
+
+export interface UserConnection {
+    connectionId: string,
+    id: string
+}

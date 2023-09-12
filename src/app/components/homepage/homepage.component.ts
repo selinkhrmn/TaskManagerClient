@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/interfaces';
 import { ProjectService } from 'src/app/services';
 import { TranslocoService} from '@ngneat/transloco';
+import { CommentHubService } from 'src/app/services/comment-hub.service';
 
 @Component({
   selector: 'app-homepage',
@@ -12,27 +13,14 @@ export class HomepageComponent implements OnInit {
   projects : Project[];
   constructor(
     private projectService : ProjectService,
-    public translocoService : TranslocoService
+    public translocoService : TranslocoService,
+    private commentHubService: CommentHubService,
 
   ){
 
   }
 
    ngOnInit(): void {
-  //   this.projectService.getAllProjects().subscribe((response) => {
-  //     if(response.data != null){
-  //       this.projects = response.data;
-  //       this.ngOnInit();
-  //     }
-  //   });
-   }
-
-  // public updateProject(){
-  //   this.projectService.getAllProjects().subscribe((response) => {
-  //     if(response.data != null){
-  //       this.projects = response.data;
-  //       this.ngOnInit();
-  //     }
-  //   });
-  // }
+    this.commentHubService.startConnection();
+  }
 }

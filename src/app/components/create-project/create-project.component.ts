@@ -38,6 +38,7 @@ export class CreateProjectComponent implements OnInit {
   showFirstComponent = true;
   showSecondComponent = false;
   projectNameIsEmpty: boolean;
+  descriptionIsEmpty: boolean;
   private openDialogRef: MatDialogRef<AddPeopleToProjectComponent>;
 
   constructor(
@@ -65,35 +66,45 @@ export class CreateProjectComponent implements OnInit {
       this.projectNameIsEmpty = true;
     }
     else {
-      this.projectService.createProject({name: this.projectName, description: this.description}).subscribe((res) => {
-      this.selectedProject(res.data);
-      console.log(res.data);
-      
-      // this.newProjectId = res.data[0].id;
-      
-      if(res.isSuccessful == true) {
-        Swal.fire({
-          title: 'You successfully created a project!',
-          text: "Would you like to add some user into your project?",
-          icon: 'success',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, go for it!'
-        }).then((result) => {
-          
-          if (result.isConfirmed) {
-            this.dialog.closeAll()
-            const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '85%',width: '60%', panelClass: 'dialog'}); 
-          }
-          else {
-            this.closeDialog();
-            location.reload();
+      this.projectNameIsEmpty = false;
 
-          }
-        })
+      if(this.description == '' || this.description == null || this.description == undefined) {
+        this.descriptionIsEmpty = true;
       }
-    });
+      else {
+        this.descriptionIsEmpty = false;
+
+        this.projectService.createProject({name: this.projectName, description: this.description}).subscribe((res) => {
+          this.selectedProject(res.data);
+          console.log(res.data);
+          
+          // this.newProjectId = res.data[0].id;
+          
+          if(res.isSuccessful == true) {
+            Swal.fire({
+              title: 'You successfully created a project!',
+              text: "Would you like to add some user into your project?",
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, go for it!'
+            }).then((result) => {
+              
+              if (result.isConfirmed) {
+                this.dialog.closeAll()
+                const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '75%',width: '60%', panelClass: 'dialog'}); 
+              }
+              else {
+                this.closeDialog();
+                location.reload();
+    
+              }
+            })
+          }
+        });
+      }
+     
     localStorage.setItem('newProject', this.projectName);
     }
     

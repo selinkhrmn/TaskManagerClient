@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { TranslocoService } from '@ngneat/transloco';
-import { User, UserDto } from 'src/app/interfaces/user';
+import { User, UserConnection, UserDto } from 'src/app/interfaces/user';
 import { ProjectService, TaskService } from 'src/app/services';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,6 +21,7 @@ import { PriorityService } from 'src/app/services/priority.service';
 import Swal from 'sweetalert2';
 import { CommentHubService } from 'src/app/services/comment-hub.service';
 import { LogService } from 'src/app/services/log.service';
+import { BehaviorSubject, Observable, mergeMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-admin-users',
@@ -26,10 +31,34 @@ import { LogService } from 'src/app/services/log.service';
 export class AdminUsersComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  private userStatusSubject = new BehaviorSubject<string[]>([]); // Define the BehaviorSubject
 
+  userList3: UserConnection[] = [];
+  userList4: UserConnection[] = [];
+  userList2: string[] = [];
   users: UserDto[] = [];
-  user: User[] = [];
+  user: UserDto[] = [];
   priorities: string[] = [];
+  ids: string[] = [];
+  conIds: string[] = [];
+  isConnected: boolean;
+  getOneUser: UserDto = {
+    selected: undefined,
+    id: '',
+    name: '',
+    surname: '',
+    username: '',
+    email: '',
+    role: '',
+    isConnected: false,
+  };
+  user3: UserConnection = {
+    connectionId: '',
+    id: '',
+  };
+  userId: string;
+  connected: boolean;
+
   constructor(
     public translocoService: TranslocoService,
     public userService: UserService,
@@ -38,24 +67,78 @@ export class AdminUsersComponent {
     public priorityService: PriorityService,
     private projectService: ProjectService,
     private commentHubService: CommentHubService,
-    private logService: LogService
-  ) { }
+    private logService: LogService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  displayedColumns: string[] = ['name', 'surname', 'username', 'email', 'role', 'actions'];
+  displayedColumns: string[] = [
+    'name',
+    'surname',
+    'username',
+    'email',
+    'role',
+    'isConnected',
+    'actions',
+  ];
   dataSource = new MatTableDataSource<UserDto>(this.users);
 
+  ngOnInit() {
+    debugger;
+    this.commentHubService.startConnection();
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.fetchTasks();
+
+    this.commentHubService.userJoined((connectionId) => {
+      if (!this.ids.includes(connectionId)) {
+        this.ids.push(connectionId);
+
+        let userId = this.tokenService.tokenUserId();
+        this.commentHubService.AllUsers(userId);
+        this.commentHubService.GetAllUsers((user) => {
+          if (this.userList4.find((u) => u.id == user.id) != null) {
+            return;
+          } else {
+            this.userList4.push(user);
+            this.users.find((u) => u.id == user.id).isConnected = true;
+            this.connected = true;
+            this.dataSource.data = [...this.users];
+          }
+        });
+      } else {
+        return;
+      }
+    });
+
+    this.commentHubService.userLeaved((ConnectionId) => {
+      debugger;
+
+      let id = this.userList4.find((u) => u.connectionId == ConnectionId).id;
+
+      this.commentHubService.AllUsers(id);
+      this.commentHubService.GetAllUsers((user) => {
+        console.log(user);
+        console.log(this.users);
+        const index = this.userList4.indexOf(user);
+        this.userList4.splice(index, 1)
+        this.users.find((u) => u.id == user.id).isConnected = false;
+        this.connected = false;
+        console.log(this.connected);
+        
+        this.dataSource.data = [...this.users];
+      });
+    });
+
+    this.dataSource.paginator = this.paginator;
   }
 
   fetchTasks() {
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful) {
+        debugger;
+        console.log(res.data);
         this.users = res.data;
-        this.dataSource = new MatTableDataSource<UserDto>(this.users);
-        this.dataSource.paginator = this.paginator
+
+        this.dataSource.paginator = this.paginator;
       }
     });
   }
@@ -70,25 +153,29 @@ export class AdminUsersComponent {
   }
 
   addPeople() {
-    const dialogRef = this.dialog.open(RegisterPageComponent, { height: '80%', width: '30%', panelClass: 'dialog' });
+    console.log(this.users);
+
+    const dialogRef = this.dialog.open(RegisterPageComponent, {
+      height: '80%',
+      width: '30%',
+      panelClass: 'dialog',
+    });
   }
 
-  openUserDetailDialog(id: any){
+  openUserDetailDialog(id: any) {
     console.log(id);
-    
   }
 
-  getUserLogs(userId: string){
+  getUserLogs(userId: string) {
     console.log(userId);
-    
-    let projects: number[] = [2,3];
-    this.logService.getUserLogs(projects, userId).subscribe((res)=> {
+
+    let projects: number[] = [2, 3];
+    this.logService.getUserLogs(projects, userId).subscribe((res) => {
       console.log(res);
-      
-    })
+    });
   }
 
-  deleteUser(id: string, role: string){
+  deleteUser(id: string, role: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -96,22 +183,20 @@ export class AdminUsersComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.DeleteUserFromProject({projectId: this.projectService.getProjectLocal().id, users: [{'userId':id, 'roleId': role}]}).subscribe((res)=> {
-          if(res.isSuccessful){
-            Swal.fire(
-              'Deleted!',
-              'User has been deleted.',
-              'success'
-            )
-          }
-        })
-       
+        this.userService
+          .DeleteUserFromProject({
+            projectId: this.projectService.getProjectLocal().id,
+            users: [{ userId: id, roleId: role }],
+          })
+          .subscribe((res) => {
+            if (res.isSuccessful) {
+              Swal.fire('Deleted!', 'User has been deleted.', 'success');
+            }
+          });
       }
-    })
-    
+    });
   }
-
 }
