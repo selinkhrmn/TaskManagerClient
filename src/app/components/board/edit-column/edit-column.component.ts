@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, NgZone } from '@angular/core';
 import { ColumnsComponent } from '../columns/columns.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ColumnService, ProjectService } from 'src/app/services';
 import { Column } from 'src/app/interfaces/column';
-import { TranslocoService} from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   data: string,
@@ -16,8 +16,8 @@ interface DialogData {
   styleUrls: ['./edit-column.component.scss'],
 })
 export class EditColumnComponent implements OnInit {
-  
-  columnName: string;
+
+  columnName: string = this.data.data;
   updatedColumnName2: string;
   currentProjectId: number;
   currentColumnId: number;
@@ -27,35 +27,42 @@ export class EditColumnComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private projectService: ProjectService,
     private columnService: ColumnService,
-    public translocoService: TranslocoService
-  ) {}
+    public translocoService: TranslocoService,
+    private ngZone: NgZone
+  ) { }
   ngOnInit(): void {
+    console.log(this.data.data);
 
-      this.columnName = this.data.data;
-      this.currentColumnId = this.data.currentColumnId
-  
+    this.columnName = this.data.data;
+    this.currentColumnId = this.data.currentColumnId;
+
   }
 
   closeDialog() {
     this.dialogRef.close();
   }
-  
+
   getProjectLocal() {
     this.currentProjectId = this.projectService.getProjectLocal().id;
 
   }
 
+
   UpdateColumn() {
-    
-    this.getProjectLocal();
-    
-    this.columnService
-      .UpdateColumn({
-        'id': this.currentColumnId,
-        'name': this.columnName
-      })
-      .subscribe((res) => {
-        
-      });
+    let column: Partial<Column> = {
+      name: this.columnName,
+      id: this.currentColumnId
+    }
+    this.columnService.UpdateColumn(column).subscribe((res) => {
+      if (res.isSuccessful == true) {
+        console.log(this.columnName);
+        this.ngZone.run(() => {
+          // Değişiklikleri Angular içinde tetikler
+        });
+      }
+    });
+
   }
+
+
 }
