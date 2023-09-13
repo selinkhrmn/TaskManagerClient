@@ -1,4 +1,4 @@
 export interface Chat {
-    message: string,
-    id: string
+    Message: string,
+    Id: string
 }

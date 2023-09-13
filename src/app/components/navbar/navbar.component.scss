@@ -21,6 +21,15 @@
   }
 }
 
+.create-button-container {
+  button {
+    background: white;
+    border: none;
+    color: #2168c6;
+    font-size: 16px;
+
+  }
+}
 /* your-component.css */
 .create-button {
   color: #2168c6; /* Change this to your desired text color */
@@ -184,4 +193,33 @@
   }
 
   /* Add more adjustments as needed */
+}
+
+.mail-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #2168c6;
+  gap: 10px;
+}
+
+
+.user-section {
+
+  .mail-button-container {
+
+    button {
+    background: white;
+    border: none;
+    color: #2168c6;
+    font-size: 16px;
+  }
+
+  
+  &:hover {
+    background: #d3d4d5;
+  }
+  }
+  
 }

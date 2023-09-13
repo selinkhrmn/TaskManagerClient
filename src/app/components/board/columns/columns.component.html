@@ -44,7 +44,7 @@
     </div>
 
     <div class="addTask" [ngClass]="{'sticky-add-task': column.tasks.length >=7}">
-      <button mat-raised-button [matMenuTriggerFor]="addTask" (click)="getColumnId(column.id)" (menuOpened)="openMenuAndFocusInput()">
+      <button mat-raised-button [matMenuTriggerFor]="addTask" (click)="getColumnId(column.id)">
         Add Task
         <mat-icon>add</mat-icon>
       </button>

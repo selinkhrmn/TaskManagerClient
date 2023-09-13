@@ -65,13 +65,7 @@ export class CommentHubService {
 
   // Rest of your code...
 
-  public sendMessage = (userMessage: Chat) => {
-    this.hubConnection.invoke('SendMessage', userMessage );
-  };
-
-  addMessageReceivedHandler(callback: (userMessage: Chat) => void) {
-    this.hubConnection.on('ReceiveMessage', callback);
-  }
+ 
 
   userLeaved(callback: (ConnectionId: string) => void) {
     this.hubConnection.on('userLeaved', callback)
