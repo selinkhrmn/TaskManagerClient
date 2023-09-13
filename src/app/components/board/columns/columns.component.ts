@@ -167,10 +167,10 @@ export class ColumnsComponent {
   openMenuAndFocusInput() {
     this.yourMatMenuTrigger.openMenu();
 
-  // Use a timeout to set focus after a brief delay
-  setTimeout(() => {
-    this.taskInput.nativeElement.focus();
-  }, 0);
+    // Use a timeout to set focus after a brief delay
+    setTimeout(() => {
+      this.taskInput.nativeElement.focus();
+    }, 0);
 
 
   }
@@ -235,23 +235,23 @@ export class ColumnsComponent {
   }
 
   CreateTask() {
-    if(this.taskObj.name !='') {
+    if (this.taskObj.name != '') {
       this.taskObj.columnId = this.currentColumnId;
-    this.taskObj.projectId = this.projectService.getProjectLocal().id;
-    this.taskObj.assigneeId = 'unassigned';
-    this.taskObj.reporterId = this.tokenService.tokenUserId();
-    this.taskObj.priority = 3;
-    //this.taskObj.endDate = this.defaultEndDate
+      this.taskObj.projectId = this.projectService.getProjectLocal().id;
+      this.taskObj.assigneeId = 'unassigned';
+      this.taskObj.reporterId = this.tokenService.tokenUserId();
+      this.taskObj.priority = 3;
+      //this.taskObj.endDate = this.defaultEndDate
 
-    this.taskService.createTask(this.taskObj).subscribe((res) => {
-      if (res.isSuccessful) {
-        this.ngOnInit();
-      }
-    });
+      this.taskService.createTask(this.taskObj).subscribe((res) => {
+        if (res.isSuccessful) {
+          this.ngOnInit();
+        }
+      });
 
-    this.taskObj.name = ''; //!
+      this.taskObj.name = ''; //!
     }
-    
+
   }
 
   OpenDeleteDialog(columnId: number, columnName: string) {
@@ -279,6 +279,8 @@ export class ColumnsComponent {
               }
             });
           }
+
+
         });
       } else {
         const dialogRef = this.dialog.open(TransferColumnTaskComponent, {
@@ -286,31 +288,39 @@ export class ColumnsComponent {
           width: '540px',
         });
         dialogRef.afterClosed().subscribe((result) => {
-          this.columnService
-            .TransferColumnTasks(result.transfer)
-            .subscribe((res) => {
-              if (res.isSuccessful) {
-                // Show SweetAlert before deleting the column after transferring tasks
-                Swal.fire({
-                  icon: 'warning',
-                  title: 'Delete Column',
-                  text: 'Are you sure you want to delete this column?',
-                  showCancelButton: true,
-                  confirmButtonText: 'Delete',
-                  cancelButtonText: 'Cancel',
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    this.columnService
-                      .DeleteColumn(column.id)
-                      .subscribe((res) => {
-                        if (res.isSuccessful) {
-                          this.ngOnInit();
-                        }
-                      });
-                  }
-                });
-              }
-            });
+          if (result != "") {
+            this.columnService
+              .TransferColumnTasks(result.transfer)
+              .subscribe((res) => {
+                if (res.isSuccessful) {
+                  // Show SweetAlert before deleting the column after transferring tasks
+                  Swal.fire({
+                    icon: 'warning',
+                    title: 'Delete Column',
+                    text: 'Are you sure you want to delete this column?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Cancel',
+                  }).then((result) => {
+
+                    if (result.isConfirmed) {
+                      this.columnService
+                        .DeleteColumn(column.id)
+                        .subscribe((res) => {
+                          if (res.isSuccessful) {
+                            this.ngOnInit();
+                          }
+                        });
+                    }
+
+                  });
+
+                }
+              });
+          }
+          else {
+            console.log("No changes were made");
+          }
         });
       }
     }

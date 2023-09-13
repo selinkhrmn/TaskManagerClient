@@ -31,10 +31,13 @@
         
     </div>
 
-    <div class="buttons" mat-dialog-actions>
-        <button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>
-        <button mat-flat-button color="warn" (click)="delete()">
-            {{ "delete" | transloco }}
-        </button>
+    <div class="buttons">
+        <mat-dialog-actions>
+            <button mat-button mat-flat-button mat-dialog-close>{{ "cancel" | transloco }}</button>
+            <button mat-button mat-flat-button color="warn" (click)="delete()">
+                {{ "delete" | transloco }}
+            </button>
+        </mat-dialog-actions>
+
     </div>
 </div>
