@@ -63,7 +63,7 @@
       <mat-drawer #drawer class="example-sidenav" mode="side">
         <div class="just">
           <h3>{{'name' | transloco}}:</h3>
-          <input [(ngModel)]="columnName" />
+          <input [(ngModel)]="columnName" (keyup.enter)="createColumn()"/>
           <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
 
           <button mat-button (click)="drawer.toggle()">

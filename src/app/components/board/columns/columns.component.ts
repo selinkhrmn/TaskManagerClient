@@ -103,16 +103,11 @@ export class ColumnsComponent {
         .subscribe((response) => {
           if (response.data != null) {
             this.columns = response.data;
-
             this.updateBackgroundColor();
-            console.log(this.columns);
             const columnHeights = this.columns.map(
               (column) => column.tasks.length * 60.8 + 120
-            ); // Assuming each task is 40px tall
-            console.log(columnHeights);
-
+            ); 
             this.tallestColumnHeight = Math.max(...columnHeights) + 'px';
-            console.log(this.tallestColumnHeight);
           }
         });
     }
@@ -241,6 +236,7 @@ export class ColumnsComponent {
     this.taskObj.assigneeId = 'unassigned';
     this.taskObj.reporterId = this.tokenService.tokenUserId();
     this.taskObj.priority = 3;
+    this.taskObj.description = '';
     //this.taskObj.endDate = this.defaultEndDate
 
     this.taskService.createTask(this.taskObj).subscribe((res) => {

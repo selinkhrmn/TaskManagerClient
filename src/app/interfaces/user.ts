@@ -23,7 +23,7 @@ export interface User1 {
 }
 
 export interface UserDto{
-    selected: unknown;
+    selected?: unknown;
     id: string;
     name: string;
     surname: string;
@@ -31,6 +31,7 @@ export interface UserDto{
     email: string;
     role: string;
     isConnected: boolean;
+    status: boolean;
 }
 
 

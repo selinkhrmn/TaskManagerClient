@@ -481,12 +481,15 @@
             </div>
           </div>
 
-          <div class="updated_date card1">
+          <!-- <div class="updated_date card1"> -->
+            <br>
             <div class="inside_card">
               <div class="label_container">
-                <label>{{ "updatedDate" | transloco }}</label>
+                <label><b>{{ "updatedDate" | transloco}}</b></label>
+                &nbsp;
+                {{ taskChange.updatedDate | date:'MMM d, y, h:mm a' }}
               </div>
-              <div class="right_side_card dateTime">
+              <!-- <div class="right_side_card dateTime">
                 <mat-form-field>
                   <input
                     matInput
@@ -500,9 +503,9 @@
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
-              </div>
+              </div> -->
             </div>
-          </div>
+          <!-- </div> -->
         </div>
         <br />
       </div>

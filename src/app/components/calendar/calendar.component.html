@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="user-info">
-                    <button (click)="openDialog()" class="add-person-button" [disabled]="!tokenService.hasRole('Admin') || !tokenService.hasRole('SuperAdmin')">
+                    <button (click)="openDialog()" class="add-person-button" [disabled]="tokenService.hasRole('User')">
                         <i class="material-icons">person_add</i>{{"add person" | transloco}}
                     </button>
                 </div>

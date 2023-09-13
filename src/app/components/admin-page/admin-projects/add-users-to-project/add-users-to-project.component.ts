@@ -53,7 +53,7 @@ export class AddUsersToProjectComponent implements OnInit {
     }
 
     this.userService.getAllUsers().subscribe((res) => {
-      this.users = res.data;
+      this.users = res.data.filter(u => u.status = true);
       this.userService.GetProjectSelectedUsers(this.projectId).subscribe((resr) => {
         this.selectedUsers = resr.data;
         this.userCheckedList = this.users.map((user) => ({

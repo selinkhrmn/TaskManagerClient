@@ -11,7 +11,7 @@ export class TokenService {
 
   constructor(
     public jwtHelper: JwtHelperService) {
-     this.role = this.tokenRole();
+     //this.role = this.tokenRole();
   }
 
 
@@ -53,7 +53,7 @@ export class TokenService {
   }
 
   hasRole(role: string): boolean {
-    return this.role === role;
+    return role === this.tokenRole();;
   }
 
   loggedIn(): boolean{
