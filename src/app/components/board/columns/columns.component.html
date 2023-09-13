@@ -8,7 +8,7 @@
     <div class="update_column">
       <div class="column_name">
         
-          <h2 class="text-wrap" [style.backgroundColor]="columnColors[i]" [style.color]="'#000000'">{{ column.name }}</h2>
+          <h2 [title]="column.name" [style.backgroundColor]="columnColors[i]" [style.color]="'#000000'">{{ column.name }}</h2>
        
       </div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -37,7 +37,7 @@
     <div cdkDropList [cdkDropListData]="column.tasks" [cdkDropListConnectedTo]="['example-list']" class="example-list"
       (cdkDropListDropped)="drop($event, column)" #droppedContainer>
 
-      <div class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openTaskDialog(task.id)">
+      <div [title]="task.name" class="example-box" *ngFor="let task of column.tasks" cdkDrag (click)="openTaskDialog(task.id)">
         {{ task.name }}
       </div>
 

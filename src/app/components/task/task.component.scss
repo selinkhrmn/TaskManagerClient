@@ -4,7 +4,7 @@
   display: flex;
   padding: 20px;
   background-color: white; // Bu satırı ekleyin.
-  > *:last-child {
+  *:last-child {
     margin-bottom: 0; // Son çocuk elemanın alt marjını sıfırla
   }
 }
@@ -397,4 +397,28 @@ input:checked ~ .dropdown .overlay {
   }
 }
 
+.history_button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 
+  button {
+    span {
+      border-bottom: 1px solid gray;
+    }
+  }
+}
+
+.log-wrapper {
+  width: 90%;
+  height: 95%;
+
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 7px;
+  z-index: 1;
+  position: absolute;
+  -webkit-box-shadow: 5px 5px 5px 0px gray;
+  -moz-box-shadow: 5px 5px 5px 0px gray;
+  box-shadow: 5px 5px 5px 0px gray;
+}

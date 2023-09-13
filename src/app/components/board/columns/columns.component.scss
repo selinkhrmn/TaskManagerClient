@@ -27,6 +27,7 @@
 
   .just {
     // background-color: aqua;
+  
     border-radius: 6px;
     padding: 10px;
     width: 200px;
@@ -37,6 +38,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 3px;
+    
 
     input {
       border: 1px solid gray;
@@ -99,7 +101,7 @@
   background:#dfc5d663;
   word-wrap: break-word;
 
-
+  
   .addTask.sticky-add-task {
     //Mantığı çözülmeli
     position: sticky;
@@ -114,7 +116,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: auto;
+    // overflow: auto;
     width: 250px;
     padding: 5px;
     position: sticky;
@@ -123,10 +125,10 @@
     .column_name {
       width: 100%;
       height: 100%;
-
+      text-overflow: ellipsis;
 
       h2 {
-        // width: 250px;
+        width: 200px;
         height: 100%;
         padding: 5px;
         border-radius: 5px;
@@ -194,6 +196,7 @@
 }
 
 .example-box {
+  width: 250px;
   padding: 20px 10px;
   border-bottom: 1px solid #0a063a71;
   color: #000000;
@@ -207,6 +210,9 @@
   font-size: 14px;
   font-weight: 500;
   word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .cdk-drag-preview {
@@ -232,3 +238,25 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+// .ellipsis-text {
+//   white-space: nowrap; /* Prevent text from wrapping to the next line */
+//   overflow: hidden; /* Hide the overflowing text */
+//   text-overflow: ellipsis; /* Display an ellipsis (...) for truncated text */
+//   width: 250px; /* Adjust this value to your desired width */
+// }
+
+// .ellipsis-text:hover::before {
+//   content: attr(data-text); 
+//   font-size: 16px;/* Display the full text when hovering */
+//   background-color: rgba(255, 255, 255, 0.9); /* Add a background for readability */
+//   position:absolute;
+//   bottom: 40px;
+//   left: 20px;
+//   color: black;
+//   z-index: 2;
+//   // white-space: normal; /* Allow text to wrap within the hover box */
+//   word-break: break-all; /* Break long words if necessary */
+//   // padding: 5px; /* Add some padding for readability */
+//   // border: 1px solid #ccc; /* Add a border for better separation */
+//   max-width: 300px; /* Adjust this value to your desired width */
+// }

@@ -236,6 +236,7 @@ export class ColumnsComponent {
     this.taskObj.assigneeId = 'unassigned';
     this.taskObj.reporterId = this.tokenService.tokenUserId();
     this.taskObj.priority = 3;
+    this.taskObj.description = '';
     //this.taskObj.endDate = this.defaultEndDate
 
       this.taskService.createTask(this.taskObj).subscribe((res) => {

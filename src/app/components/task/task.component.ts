@@ -20,6 +20,9 @@ import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import Swal from 'sweetalert2';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { LogService } from 'src/app/services/log.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { LogDto } from 'src/app/interfaces/logDto';
+import { MatPaginator } from '@angular/material/paginator';
 
 interface DialogData {
   task: Task;
@@ -32,6 +35,8 @@ interface DialogData {
 })
 export class TaskComponent implements OnInit {
   @ViewChild('wrapper') wrapperElement!: ElementRef<HTMLElement>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   taskName: string = this.data.task.name;
   taskId: number = this.data.task.id;
   taskProjectId: number = this.data.task.projectId;
@@ -83,7 +88,12 @@ export class TaskComponent implements OnInit {
   images:any[]=[];
   formData = new FormData();
   url : string;
+  openCloseLog: boolean;
   id = this.tokenService.getTokenId();
+
+  logTable: LogDto[] = [];
+
+
   constructor(
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -99,7 +109,19 @@ export class TaskComponent implements OnInit {
     public logService: LogService
   ) {}
 
+  displayedColumns: string[] = [
+    'fieldName',
+    'oldValue',
+    'newValue',
+    'actionDate',
+    'userId'
+  ];
+  dataSource = new MatTableDataSource<LogDto>(this.logTable);
+
+  
+
   ngOnInit() {
+    this.getTaskLogs();
     const minDate = new Date('2000-01-01T00:00:00');
     if (new Date(this.data.task.endDate).getTime() < minDate.getTime()) {
       this.dateChangeCheck = false;
@@ -408,8 +430,8 @@ export class TaskComponent implements OnInit {
 
   getTaskLogs(){
     this.logService.getLogs('Task', this.data.task.id.toString()).subscribe((res) => {
-      console.log(res);
-      
+      this.dataSource.data = res.data;
+      this.dataSource.paginator = this.paginator;
     })
   }
   // config: AngularEditorConfig = {
@@ -438,5 +460,9 @@ export class TaskComponent implements OnInit {
   //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
   //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
   // }
+
+  openCloseLogFunc() {
+    this.openCloseLog = !this.openCloseLog
+  }
 
 }
