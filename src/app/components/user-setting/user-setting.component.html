@@ -1,7 +1,6 @@
 <br>
 <div class="button-container">
   <button mat-raised-button class="button" (click)="openDialog()">Add People</button>
-  <!-- <button mat-raised-button class="button" (click)="openManageRoles()">Manage Roles</button> -->
 </div>
 <div class="form-container">
   <form class="example-form">
@@ -28,17 +27,13 @@
 
 <table class="example-table">
   <tr>
-    <!-- <th>Name</th> -->
     <th>Name Surname</th>
-    <!-- <th>E-mail</th>
-    <th>Roles</th> -->
+    <th>Role</th>
   </tr>
   <tr *ngFor="let user of users">
-    <!-- <td>{{user.username}}</td> -->
     <td>{{user.id | user:userList}}</td>
-    <!-- <td>{{user.email}}</td>
-    <td>{{user.role}}</td> -->
-    <td><button mat-icon-button class="delete-button" aria-label="Delete" (click)="deleteUser(user)">
+    <td>{{user.role | userRole}}</td>
+    <td><button mat-icon-button class="delete-button" aria-label="Delete" (click)="deleteUser(user.id, user.role)">
         <mat-icon>delete</mat-icon>
       </button></td>
   </tr>

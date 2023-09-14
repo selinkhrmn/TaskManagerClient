@@ -7,6 +7,7 @@ export interface LogDto {
 }
 
 export interface LogUserDto {
+    tableName: string;
     fieldName: string;
     oldValue: string;
     newValue: string;

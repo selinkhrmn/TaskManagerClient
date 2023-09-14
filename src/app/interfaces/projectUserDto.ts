@@ -5,6 +5,7 @@ export interface ProjectUserDto{
     id: string;
     profileImageUrl: string;
     userId: string;
+    role?: string;
 
 }
 

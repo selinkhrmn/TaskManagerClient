@@ -6,13 +6,12 @@ import { ProjectDto } from 'src/app/interfaces/project';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
 import { TaskDto } from 'src/app/interfaces/taskDto';
 import { DeleteUserDto, UserDto } from 'src/app/interfaces/user';
-import { ProjectService } from 'src/app/services';
+import { ProjectService, TaskService } from 'src/app/services';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
 interface DialogData {
   userId: string;
-  tasks: TaskDto[];
   projectId: number;
   getAllUsers: UserDto[];
 }
@@ -29,6 +28,7 @@ export class DeleteUserDialogComponent implements OnInit {
   selectedProject: number;
   userList: UserDto[] = this.data.getAllUsers;
   projectList: ProjectDto[] = [];
+  tasks: TaskDto[] = [];
   isLoading: boolean = false;
  transloco = this.translocoService;
   constructor(
@@ -36,12 +36,17 @@ export class DeleteUserDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private userService: UserService,
     private projectService: ProjectService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
-    this.getProjectUsers();
     this.usersProjects();
+    if(this.data.projectId != 0){  // User deleted from inside the project
+      this.selectedProject = this.projectService.getProjectLocal()?.id;
+      this.getProjectUsers();
+      this.getProjectTasks();
+    }
   }
 
   usersProjects(){
@@ -53,11 +58,19 @@ export class DeleteUserDialogComponent implements OnInit {
   }
 
   getProjectUsers(){
-    this.userService.GetProjectSelectedUsers(this.data.projectId).subscribe((res) => {
+    this.userService.GetProjectSelectedUsers(this.selectedProject).subscribe((res) => {
       if (res.isSuccessful) {
         this.projectUserList = res.data;
         this.projectUserList.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png' });
         this.selectedAssignee = this.selectedReporter = this.projectUserList[0].userId
+      }
+    })
+  }
+
+  getProjectTasks(){
+    this.taskService.GetAllProjectTaskForUser(this.selectedProject, this.data.userId).subscribe((res) => {
+      if(res.isSuccessful == true){
+        this.tasks = res.data;
       }
     })
   }
@@ -67,9 +80,6 @@ export class DeleteUserDialogComponent implements OnInit {
   }
 
   save() {
-    console.log(this.selectedProject);
-    
-   
     Swal.fire({
       title: this.transloco.translate('Are you sure?'),
       text: this.transloco.translate("You won't be able to revert this!"),

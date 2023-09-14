@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { PriorityService } from 'src/app/services/priority.service';
 import { TaskComponent } from '../task/task.component';
+import { LogService } from 'src/app/services/log.service';
+import { LogDto, LogUserDto } from 'src/app/interfaces/logDto';
 
 type PriorityCounts = {
   Lowest: number;
@@ -57,6 +59,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   lastActivities: ListTask[] = [];
   today: Date = new Date();
   fromDate: Date = new Date();
+  userLogs : LogUserDto[] = [];
   private readonly priorityColors = ['#237DB0', '#0B5F8F', '#FFDF00', '#EB7934', '#E44C23'];
   private readonly priorityLabels = ['Lowest', 'Low', 'Normal', 'High', 'Highest'];
 
@@ -69,9 +72,11 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     public priorityService: PriorityService,
+    public logService: LogService
   ) {}
 
   ngOnInit(): void {
+    this.getUserLogs();
   }
 
   ngAfterViewInit() {
@@ -241,6 +246,16 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.ngOnInit();
     });
+  }
+
+  getUserLogs(){
+    this.logService.getUserLogs([this.projectService.getProjectLocal()?.id] , this.tokenService.tokenUserId() ).subscribe((res) => {
+      if(res.isSuccessful){
+        this.userLogs = res.data;
+        console.log(this.userLogs);
+        
+      }
+    })
   }
 
   summaryFilter(filter: string, id?: string) {

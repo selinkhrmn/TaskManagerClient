@@ -90,7 +90,7 @@
               <tbody>
                 <tr *ngFor="let user of paginatedUsers" class="user-row">
                   <td>{{ user.id}}</td>
-                  <td><mat-icon (click)="deleteUser(user.userId)">delete</mat-icon></td>
+                  <td><mat-icon (click)="deleteUser(user.userId, user.role)">delete</mat-icon></td>
                 </tr>
               </tbody>
             </table>

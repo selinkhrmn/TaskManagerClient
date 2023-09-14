@@ -93,5 +93,9 @@ export class UserService {
     return this.http.post<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/DeleteUser`, {UserId: id});
   }
 
+  deleteUserDialog(projectId: number){
+
+  }
+
 }
 

@@ -1,109 +1,109 @@
-<div *ngIf="projectList.length == 0">
-  <div>
-    <b>{{ this.data.userId | user:userList }}</b> kişisi aktif olarak hiçbir projede rol almamaktadır.
-    Kullanıcıyı ana projeden silmek istediğinize emin misiniz?
-    !! Bu işlem geri alınamaz.
-    <br>
-    <br>
-    <div class="buttons">
-    
-    <button mat-button (click)="deleteUserFromCompany()">Delete</button>
-    &nbsp; &nbsp;
-    <button mat-button (click)="cancel()">Cancel</button>
-
-  </div>
-  </div>
-  <button></button>
-</div>
-<div *ngIf="projectList.length != 0">
-  <mat-horizontal-stepper class="custom-stepper">
-    <mat-step>
-      <div>
-        <b>{{ this.data.userId | user:userList }}</b> kişisi aktif olarak <b>{{ projectList.length }} </b>tane projede
-        rol almaktadır.
-        Kullanıcyı silmek istediğiniz projeyi seçip işleme devam ediniz.
-      </div>
+ <div *ngIf="projectList.length == 0">
+    <div>
+      <b>{{ this.data.userId | user:userList }}</b> kişisi aktif olarak hiçbir projede rol almamaktadır.
+      Kullanıcıyı ana projeden silmek istediğinize emin misiniz?
+      !! Bu işlem geri alınamaz.
       <br>
       <br>
-      <ng-template matStepLabel>{{ 'selectProject' | transloco}}</ng-template>
-      <mat-form-field class="selectProject">
-        <mat-label>Select a Project</mat-label>
-        <mat-select [(ngModel)]="selectedProject">
-          <mat-option *ngFor="let project of projectList" [value]="project.id">{{ project.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-      </div>
       <div class="buttons">
-       
-        <button (click)="cancel()"> Cancel</button>
+
+        <button mat-button (click)="deleteUserFromCompany()">Delete</button>
         &nbsp; &nbsp;
-        <button mat-button matStepperNext [disabled] = 'selectedProject == null'>Next</button>
+        <button mat-button (click)="cancel()">Cancel</button>
 
       </div>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>{{ 'assigneeReporterSelect' | transloco }}</ng-template>
-      <div *ngIf="data.tasks.length == 0">
+    </div>
+    <button></button>
+  </div>
+  <div *ngIf="projectList.length != 0">
+    <mat-horizontal-stepper class="custom-stepper">
+      <mat-step *ngIf="data.projectId == 0">
         <div>
-          <b>{{ this.data.userId | user:userList }}</b> kişisinin
-          <b>{{ this.data.projectId | project : projectList }}</b> projesinde atanmış ve raporlanan hiçbir task
-          bulunmuyor.
-          Kullanıcıyı projeden silmek istediğinize emin misiniz?
-          <br>
-          <br>
-          <div class="buttons">
-          
-          <button mat-button (click)="deleteUserFromProject()">Delete</button>
-          &nbsp; &nbsp;
-          <button mat-button (click)="cancel()">Cancel</button>
+          <b>{{ this.data.userId | user:userList }}</b> kişisi aktif olarak <b>{{ projectList.length }} </b>tane projede
+          rol almaktadır.
+          Kullanıcyı silmek istediğiniz projeyi seçip işleme devam ediniz.
         </div>
-        </div>
-      </div>
-      <div *ngIf="data.tasks.length != 0">
-        <div>
-          <b>{{ this.data.userId | user:userList }}</b> kişisinin
-          <b>{{ this.data.projectId | project : projectList }}</b> projesinde atanmış ve raporlanan toplam
-          <b>{{ this.data.tasks.length }}</b> task bulunuyor.
-        </div>
-        <span>Bu taskları görevlendirmek için lütfen işlem yapınız.</span>
         <br>
         <br>
-        <mat-form-field>
-          <mat-label>Select an Assignee</mat-label>
-          <mat-select [(ngModel)]="selectedAssignee">
-            <mat-option *ngFor="let user of projectUserList" [value]="user.userId"
-              [disabled]="user.userId == data.userId">
-              {{ user.userId | user:userList }}
-            </mat-option>
+        <ng-template matStepLabel>{{ 'selectProject' | transloco}}</ng-template>
+        <mat-form-field class="selectProject">
+          <mat-label>Select a Project</mat-label>
+          <mat-select [(ngModel)]="selectedProject" (ngModelChange)="getProjectUsers(); getProjectTasks()">
+            <mat-option *ngFor="let project of projectList" [value]="project.id">{{ project.name }}</mat-option>
           </mat-select>
         </mat-form-field>
-        &nbsp; &nbsp;
-        <mat-form-field>
-          <mat-label>Select a Reporter</mat-label>
-          <mat-select [(ngModel)]="selectedReporter">
-            <mat-option *ngFor="let user of projectUserList" [value]="user.userId">
-              {{ user.userId | user:userList }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <div *ngIf="isLoading">
-          <!-- <mat-progress-spinner mode="indeterminate"></mat-progress-spinner> -->
-          <span class="loader"></span>
-        </div>
-
         <div>
         </div>
         <div class="buttons">
-          <button mat-button matStepperPrevious>Previous</button>
-          &nbsp; &nbsp;
-          <button mat-button (click)="save()">Save</button>
-        </div>
-      </div>
-    </mat-step>
 
-  </mat-horizontal-stepper>
-</div>
+          <button (click)="cancel()"> Cancel</button>
+          &nbsp; &nbsp;
+          <button mat-button matStepperNext [disabled]='selectedProject == null'>Next</button>
+
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>{{ 'assigneeReporterSelect' | transloco }}</ng-template>
+        <div *ngIf="tasks.length == 0">
+          <div>
+            <b>{{ this.data.userId | user:userList }}</b> kişisinin
+            <b>{{ this.data.projectId | project : projectList }}</b> projesinde atanmış ve raporlanan hiçbir task
+            bulunmuyor.
+            Kullanıcıyı projeden silmek istediğinize emin misiniz?
+            <br>
+            <br>
+            <div class="buttons">
+
+              <button mat-button (click)="deleteUserFromProject()">Delete</button>
+              &nbsp; &nbsp;
+              <button mat-button (click)="cancel()">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="tasks.length != 0">
+          <div>
+            <b>{{ this.data.userId | user:userList }}</b> kişisinin
+            <b>{{ this.data.projectId | project : projectList }}</b> projesinde atanmış ve raporlanan toplam
+            <b>{{ this.tasks.length }}</b> task bulunuyor.
+          </div>
+          <span>Bu taskları görevlendirmek için lütfen işlem yapınız.</span>
+          <br>
+          <br>
+          <mat-form-field>
+            <mat-label>Select an Assignee</mat-label>
+            <mat-select [(ngModel)]="selectedAssignee">
+              <mat-option *ngFor="let user of projectUserList" [value]="user.userId"
+                [disabled]="user.userId == data.userId">
+                {{ user.userId | user:userList }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          &nbsp; &nbsp;
+          <mat-form-field>
+            <mat-label>Select a Reporter</mat-label>
+            <mat-select [(ngModel)]="selectedReporter">
+              <mat-option *ngFor="let user of projectUserList" [value]="user.userId">
+                {{ user.userId | user:userList }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <div *ngIf="isLoading">
+            <!-- <mat-progress-spinner mode="indeterminate"></mat-progress-spinner> -->
+            <span class="loader"></span>
+          </div>
+
+          <div>
+          </div>
+          <div class="buttons">
+            <button mat-button matStepperPrevious *ngIf="data.projectId == 0">Previous</button>
+            &nbsp; &nbsp;
+            <button mat-button (click)="save()">Save</button>
+          </div>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </div>
