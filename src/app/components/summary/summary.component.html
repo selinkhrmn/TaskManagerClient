@@ -163,9 +163,9 @@
                                     <tr *ngFor="let log of userLogs">
                                         <td><a>{{ log.tableName}}</a></td>
                                         <td>{{ log.fieldName }}</td>
-                                        <td>{{ log.oldValue | user:userList }}</td>
-                                        <td>{{ log.newValue | user:userList }}</td>
-                                        <td>{{ log.actionDate | date:'MMM d, y, h:mm a' }}</td>
+                                        <td>{{ log.oldValue | dynamicTransform: log.fieldName: userList}}</td>
+                                        <td>{{ log.newValue | dynamicTransform: log.fieldName: userList}}</td>
+                                        <td>{{ log.actionDate | date:'MMM d, y, h:mm a'}}</td>
                                     </tr>
                                 </tbody>
                             </table>

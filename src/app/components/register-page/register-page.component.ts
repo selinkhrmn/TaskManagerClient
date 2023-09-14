@@ -4,6 +4,7 @@ import { User, User1 } from 'src/app/interfaces/user';
 import { TranslocoService} from '@ngneat/transloco';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export class RegisterPageComponent  {
   constructor(private authService: AuthService,
     public translocoService : TranslocoService,public dialog: MatDialog,) {}
+    emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
 
   user: User1 = {
@@ -41,12 +43,13 @@ export class RegisterPageComponent  {
 
          console.log(response);
          
-        if(response.isSuccessful == true) {
+        if(response.isSuccessful == true && response.message != "User created but the username has changed") {
           Swal.fire(
             'Good job!',
             'You registered a person successfully',
             'success'
           )
+          this.closeDialog();
         }
         else if(response.message == "User Email already exist") {
           Swal.fire({
@@ -64,18 +67,18 @@ export class RegisterPageComponent  {
             footer: '<a href="">Why do I have this issue?</a>'
           })
         }
-        else if(response.message == "User Created But") {
+        else if(response.isSuccessful &&  response.message == "User created but the username has changed") {
           Swal.fire({
             icon: 'info',
             title: 'You registered a person successfully',
             text: `But there is another person with the same username so we changed that to ${response.data.username}`,
-            footer: '<a href="">Why do I have this issue?</a>'
           })
+          this.closeDialog();
+
         }
         
       });
       console.log(this.user);
-      
     }
     else {
       Swal.fire({
@@ -85,6 +88,7 @@ export class RegisterPageComponent  {
         footer: '<a href="">Why do I have this issue?</a>'
       })
     }
+    
   }
   closeDialog() {
     const dialogRef = this.dialog.closeAll()

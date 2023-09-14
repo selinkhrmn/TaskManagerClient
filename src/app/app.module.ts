@@ -88,6 +88,7 @@ import { ChattingComponent } from './components/chatting/chatting.component';
 import { UserRolePipe } from 'src/pipes/user-role.pipe';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 import { CommonModule } from '@angular/common';
+import { DynamicTransformPipe } from 'src/pipes/logpipe.pipe';
 
 
 @NgModule({
@@ -147,8 +148,8 @@ import { CommonModule } from '@angular/common';
     ProfileSettingPageComponent,
     ChattingComponent,
     UserRolePipe,
-    DeleteUserDialogComponent
-
+    DeleteUserDialogComponent,
+    DynamicTransformPipe
 
   ],
   imports: [

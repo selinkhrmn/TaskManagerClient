@@ -18,7 +18,11 @@ import { LogDto, LogUserDto } from 'src/app/interfaces/logDto';
 import * as d3 from 'd3';
 import { PagedResult } from 'src/app/interfaces/pagedResult';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
-
+import { UserPipe } from 'src/pipes/user.pipe';
+import { LabelPipe } from 'src/pipes/label.pipe';
+import { DynamicTransformPipe } from 'src/pipes/logpipe.pipe';
+import { TimePipe } from 'src/pipes/time.pipe';
+import { DatepipePipe } from 'src/pipes/datepipe.pipe';
 
 type PriorityCounts = {
   Lowest: number;
@@ -44,7 +48,10 @@ interface ChartDataEntry {
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss']
+  styleUrls: ['./summary.component.scss'],
+  providers: [
+    UserPipe,LabelPipe,DynamicTransformPipe,TimePipe,DatepipePipe
+  ]
 })
 export class SummaryComponent implements AfterViewInit, OnInit {
   public chartData: ChartDataset;

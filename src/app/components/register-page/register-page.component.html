@@ -10,7 +10,7 @@
         <label>{{'username' | transloco}}</label>
         <input   [(ngModel)]="user.userName" disabled="">
         <label>E-mail</label> 
-        <input placeholder="john.doe@email.com" [(ngModel)] = 'user.email'/>
+        <input type="email" placeholder="john.doe@email.com" [(ngModel)] = 'user.email'/>
         <mat-radio-group aria-label="Select an option " [(ngModel)] = 'user.role'>
             <mat-radio-button value="admin">{{'admin' | transloco}}</mat-radio-button>
             <mat-radio-button value="user">{{'user' | transloco}}</mat-radio-button>

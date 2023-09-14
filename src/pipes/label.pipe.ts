@@ -7,7 +7,7 @@ import { TaskUserDto } from 'src/app/interfaces/taskDto';
 })
 export class LabelPipe implements PipeTransform {
 
-  transform(labelValue: number): string {
+  transform(labelValue: any): any {
 
     switch (labelValue) {
       case -1:
