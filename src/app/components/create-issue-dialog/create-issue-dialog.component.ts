@@ -73,7 +73,7 @@ export class CreateIssueDialogComponent {
   images: any[] = [];
   files: FileList;
   projectIdFromLocal: number;
-
+  FileLabel: string[] = [];
 
   task: Partial<Task> = {
     name: "",
@@ -221,10 +221,15 @@ export class CreateIssueDialogComponent {
   }
 
   handleFileInput(e:any) {
-    
-    
-      this.uploadFile = e.files.item(0);
-      this.uploadFileLabel = this.uploadFile?.name;
+    var i = 0;
+    let list: FileList = e.files;
+ 
+    const listArray = Array.from(list);
+
+    listArray.forEach((file: File, i: number) => {
+      this.FileLabel[i] = file.name;
+      i++;
+    });
       let x:any[]=[];
     for(let i = this.images.length; i < e.files.length; i++){
     x.push(e.files[i]);
