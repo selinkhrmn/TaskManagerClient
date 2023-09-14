@@ -13,7 +13,7 @@ import { FileService } from 'src/app/services/file.service';
 import { FileData } from 'src/app/interfaces/FileData';
 import { CommentService } from 'src/app/services/comment.service';
 import { CommentRequest, Comment } from 'src/app/interfaces/comment';
-import { UserDto } from 'src/app/interfaces/user';
+import { UserDto, UserProfilPhoto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectUserDto } from 'src/app/interfaces/projectUserDto';
@@ -26,6 +26,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 interface DialogData {
   task: Task;
+  file : FormData
 }
 
 @Component({
@@ -43,6 +44,7 @@ export class TaskComponent implements OnInit {
   isDone: boolean = false;
   isWorking: boolean = false;
   taskChange: Task = JSON.parse(JSON.stringify(this.data.task));
+  taskChangeFile : FormData = this.data.file;
   taskDueDate = new FormControl(this.taskChange.endDate);
   taskDueDateValue: Date = this.taskDueDate.value;
   taskUpdatedDate = new FormControl(this.taskChange.updatedDate);
@@ -80,19 +82,22 @@ export class TaskComponent implements OnInit {
 
   public sortableElement: any;
   public selectedUser: string = this.data.task.reporterId;
-  imageUrl : string[] = [];
-  uploadFile: File | null ;
+  imageUrl: string[] = [];
+  uploadFile: File | null;
   uploadFileLabel: string | undefined = 'Choose an image to upload';
   uploadProgress: number;
   uploadUrl: string;
-  images:any[]=[];
+  images: any[] = [];
   formData = new FormData();
-  url : string;
+  url: string;
   openCloseLog: boolean;
   id = this.tokenService.getTokenId();
 
   logTable: LogDto[] = [];
 
+  usersProfiles: UserProfilPhoto[] = [];
+  noImage = '../../assets/noImage.png';
+  FileLabel: string[] = [];
 
   constructor(
     private taskService: TaskService,
@@ -107,7 +112,7 @@ export class TaskComponent implements OnInit {
     private commentService: CommentService,
     private userService: UserService,
     public logService: LogService
-  ) {}
+  ) { }
 
   displayedColumns: string[] = [
     'fieldName',
@@ -118,9 +123,11 @@ export class TaskComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<LogDto>(this.logTable);
 
-  
+
 
   ngOnInit() {
+    
+    
     this.getTaskLogs();
     const minDate = new Date('2000-01-01T00:00:00');
     if (new Date(this.data.task.endDate).getTime() < minDate.getTime()) {
@@ -143,25 +150,31 @@ export class TaskComponent implements OnInit {
     });
 
     this.userService.GetAllProjectUsers(this.projectService.getProjectLocal().id).subscribe((res) => {
-      if(res.isSuccessful == true){
+      if (res.isSuccessful == true) {
         this.users = res.data
-        this.users.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png'});
+        this.users.unshift({ id: 'unassigned', userId: 'unassigned', profileImageUrl: '../../assets/user.png' });
       }
     })
+
+    //to get users profile
+    this.fileService.GetFileForProjectUsers({ "projectId": this.projectService.getCurrentProject().id }).subscribe((res) => {
+      this.usersProfiles = res;
+    });
+
     this.priorities = this.priorityService.getOptions();
     this.sortableElement = this.priorityService.getIcon(this.data.task.priority, 'icon');
 
-    this.taskColor = this.taskChange.label  
+    this.taskColor = this.taskChange.label
 
-    
-    this.commentWantsToBeEdited= false;
-    
-  
-    this.fileService.GetFileForTask({"TaskId" : this.taskId}).subscribe((res)=> {
+
+    this.commentWantsToBeEdited = false;
+
+
+    this.fileService.GetFileForTask(this.taskId).subscribe((res) => {
       this.imageUrl = res;
-      
+
     });
-  
+
   }
 
   ngOnDestroy() {
@@ -215,11 +228,11 @@ export class TaskComponent implements OnInit {
 
   upload(event: Event) {
     this.fileUploaded = true;
-    
+
     this.fileService.uploadFile(event);
 
     this.Files = this.fileService.selectedFiles;
-   
+
   }
 
   async alertBox() {
@@ -269,8 +282,15 @@ export class TaskComponent implements OnInit {
   //   console.log(this.taskChange);
   // }
 
-  getUserProfileImage(x: any) {
-    return '../../assets/user (1).png';
+  getProfilePhoto(id: string): string {
+    const a = this.usersProfiles.find(u => u.userId == id)
+    if (a) {
+      if (a.path != null) {
+        return a.path;
+      }
+    }
+    return this.noImage;
+
   }
 
   onSave() {
@@ -308,18 +328,25 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  onDateChange(event: MatDatepickerInputEvent<Date>){
+  onDateChange(event: MatDatepickerInputEvent<Date>) {
     console.log(event.value);
     this.taskChange.endDate = event.value;
     console.log(this.taskDueDate);
     this.updateTask()
-    
+
   }
 
   updateTask() {
+    debugger
     console.log(this.dateChangeCheck);
+if(this.images.length > 0) {
+  this.fileService.saveFile(this.images,this.data.task.id).subscribe((res)=> {
 
-    if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange)) {
+  })
+  
+}
+
+    if (JSON.stringify(this.data.task) != JSON.stringify(this.taskChange) ) {
       console.log('different');
 
       this.taskService.updateTask(this.taskChange).subscribe((res) => {
@@ -334,7 +361,7 @@ export class TaskComponent implements OnInit {
 
   deleteTask() {
     this.taskService.deleteTask(this.taskId).subscribe((res) => {
-      if(res.isSuccessful) {
+      if (res.isSuccessful) {
         Swal.fire(
           'You succesfully deleted the task!',
           '',
@@ -350,7 +377,7 @@ export class TaskComponent implements OnInit {
           text: 'Something went wrong!',
         })
       }
-     
+
     });
   }
 
@@ -421,14 +448,22 @@ export class TaskComponent implements OnInit {
   }
 
   closeDialog() {
+    debugger
+this.images.forEach(f=> {
+  this.formData.append('file', f);
+});
+
     console.log(this.taskColor);
-     this.updateTask();
-    this.taskColor = this.taskChange.label  
-    this.dialogRef.close();
-   
+    this.updateTask();
+    this.taskColor = this.taskChange.label
+    this.dialogRef.close({
+      isAdded: true,
+      file: this.formData
+    });
+
   }
 
-  getTaskLogs(){
+  getTaskLogs() {
     this.logService.getLogs('Task', this.data.task.id.toString()).subscribe((res) => {
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
@@ -446,23 +481,33 @@ export class TaskComponent implements OnInit {
 
   // };
 
-  // onFileSelect(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement?.files) {
-  //     this.selectedFiles = Array.from(inputElement.files).map((file) => ({
-  //       file,
-  //       iconUrl: this.getFileIconUrl(file),
-  //     }));
-  //   }
-  // }
-
-  // getFileIconUrl(file: File): string {
-  //   const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-  //   return this.fileIcons[fileExtension] || 'default-icon'; // Provide a default icon URL for unknown types
-  // }
 
   openCloseLogFunc() {
     this.openCloseLog = !this.openCloseLog
   }
 
+  handleFileInput(e : any) {
+    
+    var i = 0;
+    let list: FileList = e.files;
+ 
+    const listArray = Array.from(list);
+
+    listArray.forEach((file: File, i: number) => {
+      this.FileLabel[i] = file.name;
+      i++;
+    });
+
+      let x:any[]=[];
+    for(let i = this.images.length; i < e.files.length; i++){
+    x.push(e.files[i]);
+    }
+    if(x.length>0){
+      x.forEach(f=> {
+        this.images.push(f);
+      });
+    }
+   
+    
+  }
 }

@@ -1,50 +1,53 @@
 <div class="wrapper" #wrapper>
   <div class="left_side">
     <div class="navbar">
-      <input
-        [(ngModel)]="taskChange.name"
-        spellcheck="false"
-        (blur)="updateTask()"
-      />
+      <input [(ngModel)]="taskChange.name" spellcheck="false" (blur)="updateTask()" />
     </div>
     <!-- <div>
       <button (click)="getTaskLogs()">BAK BU LOG</button>
     </div> -->
     <div class="description">
+
       <input type="file" #fileInput multiple style="display: none" />
       <div class="button-container">
-        <button mat-button (click)="fileInput.click()">
-          <mat-icon>attach_file</mat-icon>Attach
+        <button mat-button>
+
+          <input type="file" accept="image/*" class="custom-file-input" id="customFile" multiple
+            (change)="handleFileInput($event.target)" hidden>
+          <label class="custom-file-label" for="customFile"><mat-icon>attach_file</mat-icon>Attach</label>
         </button>
-        <button
-          class="add-subtopic-button"
-          mat-button
-          (click)="addSubtopicClicked = true"
-        >
+
+        <button class="add-subtopic-button" mat-button (click)="addSubtopicClicked = true">
           Add Subtopic<mat-icon>add_circle</mat-icon>
         </button>
 
         <br />
+
+
+
       </div>
+      <div *ngIf="FileLabel.length > 0">
+        <h4>Selected Files:</h4>
+        <div *ngFor="let fileName of FileLabel">
+          <label class="custom-file-label" for="customFile">{{ fileName }}</label>
+        </div>
+      </div>
+
       <br />
       <br />
 
       <div class="top_side">
         <h2>{{ "description" | transloco }}</h2>
-        <input
-          [(ngModel)]="taskChange.description"
-          placeholder="Add a description..."
-          (blur)="updateTask()"
-        />
+        <input [(ngModel)]="taskChange.description" placeholder="Add a description..." (blur)="updateTask()" />
       </div>
+
+
+
       <!-- Add the input box here with *ngIf directive -->
       <div *ngIf="addSubtopicClicked" class="subtopic-input-container">
-        <input
-          type="text"
-          class="subtopic-input"
-          placeholder="What should be done ?"
-        />
+        <input type="text" class="subtopic-input" placeholder="What should be done ?" />
       </div>
+
 
       <br />
       <!-- <div class="attachments" *ngIf="fileUploaded">
@@ -68,12 +71,7 @@
         <ng-container *ngFor="let img of imageUrl" class="d-flex">
           <tr>
             <td>
-              <a
-                class="btn"
-                role="button"
-                [href]="img"
-                download="proposed_file_name"
-              >
+              <a class="btn" role="button" [href]="img" download="proposed_file_name">
                 <img class="img" id="img" width="30" height="30" [src]="img" />
               </a>
             </td>
@@ -106,22 +104,14 @@
 
       <div class="footer">
         <div class="comments">
-          <textarea
-            (keypress)="checkIfCommentAdded()"
-            placeholder="Add a comment..."
-            class="small-textarea"
-            [(ngModel)]="createComment"
-            (keyupEnter)="submitComment()"
-          ></textarea>
+          <textarea (keypress)="checkIfCommentAdded()" placeholder="Add a comment..." class="small-textarea"
+            [(ngModel)]="createComment" (keyupEnter)="submitComment()"></textarea>
         </div>
       </div>
 
       <div class="submitAndCancelButtons">
         <div *ngIf="commentWantsToGetCreated">
-          <button
-            mat-raised-button
-            (click)="submitComment(); getTaskComments()"
-          >
+          <button mat-raised-button (click)="submitComment(); getTaskComments()">
             Submit Comment
           </button>
         </div>
@@ -150,29 +140,20 @@
 
           <div class="main">
             <div class="placeholder"></div>
-            <label
-              *ngIf="
+            <label *ngIf="
                 !commentWantsToBeEdited || comment.id !== commentBeingEditedId
-              "
-              >{{ comment.comment }}</label
-            >
-            <input
-              *ngIf="
+              ">{{ comment.comment }}</label>
+            <input *ngIf="
                 commentWantsToBeEdited && comment.id === commentBeingEditedId
-              "
-              [(ngModel)]="comment.comment"
-            />
+              " [(ngModel)]="comment.comment" />
           </div>
 
           <div class="edit_delete_buttons" *ngIf="!commentWantsToBeEdited">
             <div class="placeholder2"></div>
-            <button
-              mat-button
-              (click)="
+            <button mat-button (click)="
                 closeEditAndDeleteButtons(comment.id, comment.comment);
                 findEditComment(comment.id)
-              "
-            >
+              ">
               Edit
             </button>
             <button mat-button (click)="deleteComment(comment.id)">
@@ -180,23 +161,16 @@
             </button>
           </div>
 
-          <div
-            class="save_cancel_buttons"
-            *ngIf="
+          <div class="save_cancel_buttons" *ngIf="
               commentWantsToBeEdited && comment.id === commentBeingEditedId
-            "
-          >
+            ">
             <div class="placeholder3"></div>
             <div class="placeholder3"></div>
 
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="
+            <button mat-raised-button color="primary" (click)="
                 editComment(comment.id, updatedComment);
                 closeSaveAndCancelButtons()
-              "
-            >
+              ">
               Save
             </button>
             <button mat-button (click)="closeSaveAndCancelButtons()">
@@ -212,12 +186,7 @@
     <div class="container">
       <div class="top_side_details">
         <div class="top_side_buttons">
-          <button
-            class="delete_button"
-            (click)="deleteTask()"
-            mat-mini-fab
-            color="warn"
-          >
+          <button class="delete_button" (click)="deleteTask()" mat-mini-fab color="warn">
             <mat-icon>delete_outline</mat-icon>
           </button>
           <div class="close_icon">
@@ -231,27 +200,15 @@
         <div class="bottom_side_buttons">
           <h2>Details</h2>
           <div class="task_state_buttons">
-            <button
-              mat-raised-button
-              (click)="todoClick(taskChange.label)"
-              [ngClass]="{ gray: taskColor === 0 }"
-            >
+            <button mat-raised-button (click)="todoClick(taskChange.label)" [ngClass]="{ gray: taskColor === 0 }">
               Todo
             </button>
 
-            <button
-            mat-raised-button
-              (click)="onProgressClick(taskChange.label)"
-              [ngClass]="{ blue: taskColor === 1 }"
-            >
+            <button mat-raised-button (click)="onProgressClick(taskChange.label)" [ngClass]="{ blue: taskColor === 1 }">
               I'm on it
             </button>
 
-            <button
-            mat-raised-button
-              (click)="doneClick(taskChange.label)"
-              [ngClass]="{ green: taskColor === 2 }"
-            >
+            <button mat-raised-button (click)="doneClick(taskChange.label)" [ngClass]="{ green: taskColor === 2 }">
               Done
             </button>
           </div>
@@ -276,43 +233,29 @@
               </div>
               <div class="right_side_card assigned_person">
                 <div class="container-dropdown">
-                  <input
-                    style="display: none"
-                    id="userDropdownInput"
-                    type="checkbox"
-                  />
+                  <input style="display: none" id="userDropdownInput" type="checkbox" />
                   <div class="dropdown">
                     <label class="dropbtn" for="userDropdownInput">
                       <div class="user-profile">
                         <div class="user-image">
-                          <img
-                            [src]="getUserProfileImage(taskChange.assigneeId)"
-                            alt="User Profile"
-                          />
+                          <img [src]="getProfilePhoto(taskChange.assigneeId)" alt="User Profile" />
                         </div>
                         <span class="user-name">{{
                           taskChange.assigneeId | user : userList
-                        }}</span>
+                          }}</span>
                       </div>
                     </label>
                     <div class="dropdown-content">
                       <!-- Inside the dropdown-content -->
-                      <p
-                        *ngFor="let user of users"
-                        (click)="selectUserForAssignee(user.id)"
-                        for="userDropdownInput"
-                      >
+                      <p *ngFor="let user of users" (click)="selectUserForAssignee(user.id)" for="userDropdownInput">
                         <label for="userDropdownInput">
                           <div class="user-profile">
                             <div class="user-image">
-                              <img
-                                [src]="getUserProfileImage(user.id)"
-                                alt="User Profile"
-                              />
+                              <img [src]="getProfilePhoto(user.id)" alt="User Profile" />
                             </div>
                             <span class="user-name">{{
                               user.id | user : userList
-                            }}</span>
+                              }}</span>
                           </div>
                         </label>
                       </p>
@@ -331,42 +274,28 @@
               </div>
               <div class="right_side_card reported_person">
                 <div class="container-dropdown">
-                  <input
-                    style="display: none"
-                    id="userDropdownInput2"
-                    type="checkbox"
-                  />
+                  <input style="display: none" id="userDropdownInput2" type="checkbox" />
                   <div class="dropdown">
                     <label class="dropbtn" for="userDropdownInput2">
                       <div class="user-profile">
                         <div class="user-image">
-                          <img
-                            [src]="getUserProfileImage(taskChange.reporterId)"
-                            alt="User Profile"
-                          />
+                          <img [src]="getProfilePhoto(taskChange.reporterId)" alt="User Profile" />
                         </div>
                         <span class="user-name">{{
                           taskChange.reporterId | user : userList
-                        }}</span>
+                          }}</span>
                       </div>
                     </label>
                     <div class="dropdown-content">
-                      <p
-                        *ngFor="let user of users"
-                        (click)="selectUserForReporter(user.id)"
-                        for="userDropdownInput2"
-                      >
+                      <p *ngFor="let user of users" (click)="selectUserForReporter(user.id)" for="userDropdownInput2">
                         <label for="userDropdownInput2">
                           <div class="user-profile">
                             <div class="user-image">
-                              <img
-                                [src]="getUserProfileImage(user.id)"
-                                alt="User Profile"
-                              />
+                              <img [src]="getProfilePhoto(user.id)" alt="User Profile" />
                             </div>
                             <span class="user-name">{{
                               user.id | user : userList
-                            }}</span>
+                              }}</span>
                           </div>
                         </label>
                       </p>
@@ -385,33 +314,17 @@
               </div>
               <div class="right_side_card priority-value">
                 <div class="container-dropdown">
-                  <input
-                    style="display: none"
-                    id="priorityDropdownInput"
-                    type="checkbox"
-                  />
+                  <input style="display: none" id="priorityDropdownInput" type="checkbox" />
                   <div class="dropdown">
                     <button mat-button [matMenuTriggerFor]="menuPriority">
                       <label class="dropbtn" for="priorityDropdownInput">
-                        <img
-                          class="priority-icon"
-                          [src]="sortableElement"
-                          alt="Icon"
-                        />
+                        <img class="priority-icon" [src]="sortableElement" alt="Icon" />
                         &nbsp;{{ priorityService.getIconName(sortableElement) }}
                       </label>
                     </button>
                     <mat-menu #menuPriority="matMenu">
-                      <button
-                        mat-menu-item
-                        *ngFor="let priority of priorities"
-                        (click)="setSortableElement(priority)"
-                      >
-                        <img
-                          class="priority-icon"
-                          [src]="priority"
-                          alt="Icon"
-                        />
+                      <button mat-menu-item *ngFor="let priority of priorities" (click)="setSortableElement(priority)">
+                        <img class="priority-icon" [src]="priority" alt="Icon" />
                         {{ priorityService.getIconName(priority) }}
                       </button>
                     </mat-menu>
@@ -465,22 +378,12 @@
               </div>
               <div class="right_side_card dateTime">
                 <mat-form-field *ngIf="dateChangeCheck">
-                  <input
-                    matInput
-                    [matDatepicker]="picker1"
-                    placeholder="Choose a date"
-                    [formControl]="taskDueDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker1"
-                  ></mat-datepicker-toggle>
+                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [formControl]="taskDueDate" />
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <label *ngIf="!dateChangeCheck" (click)="changeDueDate()"
-                  >Unplanned</label
-                >
+                <label *ngIf="!dateChangeCheck" (click)="changeDueDate()">Unplanned</label>
               </div>
             </div>
           </div>
@@ -489,9 +392,7 @@
           <br />
           <div class="inside_card">
             <div class="label_container">
-              <label
-                ><b>{{ "updatedDate" | transloco }}</b></label
-              >
+              <label><b>{{ "updatedDate" | transloco }}</b></label>
               &nbsp;
               {{ taskChange.updatedDate | date : "MMM d, y, h:mm a" }}
             </div>
@@ -525,35 +426,35 @@
   <div class="history_button">
     <button mat-button (click)="openCloseLogFunc();getTaskLogs()">
       <span>
-         History
+        History
       </span>
-       
+
     </button>
   </div>
 
-  <div class="log-wrapper"  *ngIf="openCloseLog">
-   
+  <div class="log-wrapper" *ngIf="openCloseLog">
+
     <!-- Input Eklenmeli mi ? (Bence evet) -->
-    
+
     <table mat-table [dataSource]="dataSource" matPaginator class="mat-elevation-z8">
 
       <ng-container matColumnDef="fieldName">
         <th mat-header-cell *matHeaderCellDef> <strong>Name</strong> </th>
         <td mat-cell *matCellDef="let row"> {{row.fieldName}} </td>
       </ng-container>
-    
+
 
       <ng-container matColumnDef="oldValue">
         <th mat-header-cell *matHeaderCellDef> <strong>Old Value</strong> </th>
         <td mat-cell *matCellDef="let row"> {{row.oldValue | user: userList}} </td>
       </ng-container>
-    
+
 
       <ng-container matColumnDef="newValue">
         <th mat-header-cell *matHeaderCellDef> <strong>New Value</strong> </th>
         <td mat-cell *matCellDef="let row"> {{row.newValue | user: userList}} </td>
       </ng-container>
-    
+
       <ng-container matColumnDef="actionDate">
         <th mat-header-cell *matHeaderCellDef> <strong>Update Date</strong> </th>
         <td mat-cell *matCellDef="let row"> {{row.actionDate| date:'MMM d, y, h:mm a'}} </td>
@@ -563,16 +464,12 @@
         <th mat-header-cell *matHeaderCellDef> <strong>User</strong> </th>
         <td mat-cell *matCellDef="let row"> {{row.userId | user: userList}} </td>
       </ng-container>
-    
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
-    <mat-paginator
-    [pageSizeOptions]="[5, 10]"
-    showFirstLastButtons
-    aria-label="Select page of periodic elements"
-  >
-  </mat-paginator>
+
+    <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
 </div>

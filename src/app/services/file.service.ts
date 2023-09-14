@@ -67,7 +67,8 @@ httpOptionsFormData = {
   }
 
   //for task files 
-  saveFile(files: any, taskId: string) {
+  saveFile(files: any, taskId: number) {
+    debugger
      const url = `${this.baseUrl}/UploadWithout`;
 
     const params = new HttpParams().set('taskId', taskId);
@@ -81,10 +82,17 @@ httpOptionsFormData = {
    return this.http.post(url, files, httpOptionsFormData);
   }
 
+  updateTaskFile(files: any ,taskId : number) {
+    const url  = `${this.baseUrl}/Upload`;
+    return this.http.post(url, files);
+  }
+
   //to get tasks files
   GetFileForTask(id : any) : Observable<any> {
+    debugger
     const url = `${this.baseUrl}/GetFileForTask`;
-    return this.http.post(url, id);
+    const x = {"TaskId": id };
+    return this.http.post(url,x);
   }
 
   // for user profile photo

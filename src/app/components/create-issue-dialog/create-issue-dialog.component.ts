@@ -220,14 +220,14 @@ export class CreateIssueDialogComponent {
     console.log('Selected Files:', this.Files);
   }
 
-  handleFileInput(e: any) {
-
-
-    this.uploadFile = e.files.item(0);
-    this.uploadFileLabel = this.uploadFile?.name;
-    let x: any[] = [];
-    for (let i = this.images.length; i < e.files.length; i++) {
-      x.push(e.files[i]);
+  handleFileInput(e:any) {
+    
+    
+      this.uploadFile = e.files.item(0);
+      this.uploadFileLabel = this.uploadFile?.name;
+      let x:any[]=[];
+    for(let i = this.images.length; i < e.files.length; i++){
+    x.push(e.files[i]);
     }
     if (x.length > 0) {
       x.forEach(f => {

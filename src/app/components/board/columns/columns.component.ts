@@ -34,6 +34,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { TransferColumnTaskComponent } from '../../transfer-column-task/transfer-column-task.component';
 import Swal from 'sweetalert2';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-columns',
@@ -62,6 +63,7 @@ export class ColumnsComponent {
   ];
   @Output() currentColumnId: number;
   tasks: Task[] = [];
+  files : any[] = [];
   columns: ColumnTask[] = [];
   columnGet: ColumnTask;
   allTasks: TaskDto[] = [];
@@ -91,7 +93,8 @@ export class ColumnsComponent {
     public dialog: MatDialog,
     private projectService: ProjectService,
     public translocoService: TranslocoService,
-    public tokenService: TokenService
+    public tokenService: TokenService,
+    public fileService: FileService
   ) {}
 
   ngOnInit(): void {
@@ -183,13 +186,20 @@ export class ColumnsComponent {
   }
 
   openTaskDialog(tId: number) {
+    debugger
+this.fileService.GetFileForTask(tId).subscribe((files)=> {
+  this.files = files;
+})
+
     this.taskService.getTaskById(tId).subscribe((res) => {
       if (res.isSuccessful == true) {
         this.tasks = res.data;
 
+
         const dialog = this.dialog.open(TaskComponent, {
           autoFocus: false,
-          data: { task: this.tasks },
+          data: { task: this.tasks ,
+          file : this.files},
           height: '90%',
           width: '90%',
           panelClass: 'dialog',

@@ -49,6 +49,9 @@
         (change)="handleFileInput($event.target)" [disabled]="working">
       <label class="custom-file-label" for="customFile">{{ uploadFileLabel }}</label>
     </div>
+    <div *ngFor="let fileName of FileLabel">
+      <label class="custom-file-label" for="customFile">{{ fileName }}</label>
+    </div>
 
   </div>
   <div class="row" *ngIf="working">
