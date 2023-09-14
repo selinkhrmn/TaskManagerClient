@@ -42,6 +42,10 @@ export class NavbarComponent {
   ) { }
 
   ngOnInit() {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      this.translocoService.setActiveLang(savedLanguage);
+    }
     this.fileService.getProfilePhoto({ "userId": this.id }).subscribe((res) => {
       this.url = res[res.length - 1];
     });
@@ -97,13 +101,14 @@ export class NavbarComponent {
         });
 
       }
-
+      
     });
 
   }
 
   changeLanguage(language: 'tr' | 'en') {
     this.translocoService.setActiveLang(language);
+    localStorage.setItem('selectedLanguage', language);
   }
 
 }
