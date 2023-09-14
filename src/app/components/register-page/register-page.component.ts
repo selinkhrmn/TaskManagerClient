@@ -38,7 +38,9 @@ export class RegisterPageComponent  {
        console.log(res);
        
         let response : any = res;
+
          console.log(response);
+         
         if(response.isSuccessful == true) {
           Swal.fire(
             'Good job!',
@@ -46,16 +48,42 @@ export class RegisterPageComponent  {
             'success'
           )
         }
-        else{
+        else if(response.message == "User Email already exist") {
+          Swal.fire({
+                icon: 'error',
+                title: 'Something went wrong!',
+                text: 'There is already a user with the same email!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        }
+        else if (response.message == "Role doesn't exist") {
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
+            title: 'Something went wrong!',
+            text: 'You have to pick a role!',
             footer: '<a href="">Why do I have this issue?</a>'
           })
         }
+        else if(response.message == "User Created But") {
+          Swal.fire({
+            icon: 'info',
+            title: 'You registered a person successfully',
+            text: `But there is another person with the same username so we changed that to ${response.data.username}`,
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+        }
+        
       });
       console.log(this.user);
+      
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Something went wrong!',
+        text: 'Fill in the blanks!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     }
   }
   closeDialog() {

@@ -81,8 +81,9 @@ export class UserService {
     return this.http.post(url, payload)
   }
 
-  getUserById(id : any): Observable<any>{
-    return this.http.post(`${this.baseUrlIdentity}/GetUserById`, {id: id});
+  getUserById(id : string): Observable<any>{
+    debugger
+    return this.http.post<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/GetUserById`, {id: id});
   }
 
   updateUser(user: Partial<UserDto>){

@@ -71,7 +71,7 @@ export class ProfileSettingPageComponent implements OnInit {
     this.token = localStorage.getItem('token');
 
 
-    this.userService.getUserById({ "id": this.id }).subscribe(
+    this.userService.getUserById( this.id ).subscribe(
       {
         next: (response) => {
 
