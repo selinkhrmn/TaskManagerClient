@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { ResponseModel } from 'src/app/interfaces/responseModel';
-import { UserActionDto, UserDto } from 'src/app/interfaces/user';
-import { Observable } from 'rxjs';
+import { UserActionDto, UserDto, UserProfilPhoto } from 'src/app/interfaces/user';
+import { Observable, debounce } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectUserList } from 'src/app/interfaces/projectUserDto';
 import { ProjectService } from 'src/app/services';
@@ -25,7 +25,8 @@ export class AddPeopleToProjectComponent implements OnInit{
   addedList : ProjectUserList;
   selectedUsers: UserActionDto[] = [];
   projectId: number;
- 
+  usersProfiles : UserProfilPhoto[] = [];
+  noImage= '../../assets/noImage.png';
 
   constructor(public translocoService: TranslocoService,
     private userService : UserService,
@@ -34,16 +35,29 @@ export class AddPeopleToProjectComponent implements OnInit{
     private fileService : FileService) { }
   ngOnInit() 
   {
-    
+    debugger
     this.getAllUsers();
     this.newProjectName = localStorage.getItem('newProject');
     
-    this.fileService.GetFileForProjectUsers({"projectId" : this.projectService.getCurrentProject().id}).subscribe((res)=> {
-      this.url = res[res.length - 1];
-    })
+
+    
     
   }
 
+
+  getProfilePhoto(user : UserDto) : string{
+     const a = this.usersProfiles.find(u => u.userId == user.id)
+    if(a) {
+      if(a.path != null) {
+        return a.path;
+      }
+      
+    }
+    return this.noImage;
+
+    
+    
+  }
 
 
   getAllUsers() {
@@ -55,6 +69,11 @@ export class AddPeopleToProjectComponent implements OnInit{
         //alert error
       }
     });
+
+    //to get users profile
+    this.fileService.GetFileForProjectUsers({"projectId" : this.projectService.getCurrentProject().id}).subscribe((res)=> {
+      this.usersProfiles = res;
+    });
   }
 
   onCheckboxChange(user: UserDto){
@@ -65,6 +84,8 @@ export class AddPeopleToProjectComponent implements OnInit{
     else {
       this.selectedUsers.push({'userId':user.id, 'roleId': user.role}); 
     }
+
+    
     
   }
   saveProjectUsers() {

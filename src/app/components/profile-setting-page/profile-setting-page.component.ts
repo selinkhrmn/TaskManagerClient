@@ -42,7 +42,9 @@ export class ProfileSettingPageComponent implements OnInit {
   newPassword: any;
 
   id = this.tokenService.getTokenId();
-  url = '';
+  url = '' ;
+  noImage= '../../assets/noImage.png';
+  
   imageUrl : any[] = [];
   images: any[] = [];
   formData = new FormData();

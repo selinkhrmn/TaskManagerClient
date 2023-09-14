@@ -109,7 +109,8 @@ httpOptionsFormData = {
     return this.http.post(url, id);
   }
 
-  //to get all users profile photo
+  //to get all users profile photo 
+  // userId'ye göre filtreleme yapmak yeterli
   GetFileForProjectUsers(projectId : any) : Observable<any> {
     const url = `${this.baseUrl}/GetFileForProjectUsers`;
     return this.http.post(url, projectId);
