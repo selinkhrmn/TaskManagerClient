@@ -15,6 +15,7 @@ import { PriorityService } from 'src/app/services/priority.service';
 import { TaskComponent } from '../task/task.component';
 import { LogService } from 'src/app/services/log.service';
 import { LogDto, LogUserDto } from 'src/app/interfaces/logDto';
+import * as d3 from 'd3';
 
 type PriorityCounts = {
   Lowest: number;
@@ -204,6 +205,16 @@ export class SummaryComponent implements AfterViewInit, OnInit {
         .on('click', function (event, d) {
           const clickedPriorityId = self.priorityIds[d].value;
           self.handleClickPriority(clickedPriorityId);
+        })
+        .on('mouseenter',function(){
+          d3.select(this)
+            .attr('opacity',0.7)
+            .attr('cursor', 'pointer');
+        })
+        .on('mouseleave',function(){
+          d3.select(this)
+        .attr('opacity', 1)
+        .attr('cursor', 'default'); 
         });
 
       const xAxis = axisBottom(xScale);
