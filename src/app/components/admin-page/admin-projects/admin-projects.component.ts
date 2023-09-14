@@ -79,9 +79,6 @@ export class AdminProjectsComponent {
   openProjectDialog(id: number) {
     this.projectService.getProject({ id }).subscribe((res) => {
       const dialogS = this.dialog.open(ProjectComponent, { data: { project: res.data }, width: '60%' });
-      dialogS.afterClosed().subscribe(() => {
-        window.location.reload();
-      })
     })
   }
 }

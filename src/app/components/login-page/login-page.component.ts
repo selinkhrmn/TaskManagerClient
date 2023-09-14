@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services';
 import { TranslocoService} from '@ngneat/transloco';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +24,8 @@ export class LoginPageComponent{
     private authService: AuthService,
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    public translocoService: TranslocoService) {
+    public translocoService: TranslocoService,
+    public tokenService: TokenService) {
   }
 
   signIn() {

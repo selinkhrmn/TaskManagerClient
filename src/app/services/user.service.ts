@@ -82,8 +82,19 @@ export class UserService {
   }
 
   getUserById(id : any): Observable<any>{
-
     return this.http.post(`${this.baseUrlIdentity}/GetUserById`, {id: id});
+  }
+
+  updateUser(user: Partial<UserDto>){
+    return this.http.post<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/UpdateUser`, user);
+  }
+
+  deleteUser(id: string){
+    return this.http.post<ResponseModel<UserDto>>(`${this.baseUrlIdentity}/DeleteUser`, {UserId: id});
+  }
+
+  deleteUserDialog(projectId: number){
+
   }
 
 }

@@ -52,6 +52,7 @@ export class AdminUsersComponent {
     email: '',
     role: '',
     isConnected: false,
+    status: true
   };
   user3: UserConnection = {
     connectionId: '',
@@ -85,7 +86,6 @@ export class AdminUsersComponent {
   dataSource = new MatTableDataSource<UserDto>(this.users);
 
   ngOnInit() {
-    debugger;
     this.commentHubService.startConnection();
 
     this.fetchTasks();
@@ -112,7 +112,6 @@ export class AdminUsersComponent {
     });
 
     this.commentHubService.userLeaved((ConnectionId) => {
-      debugger;
 
       let id = this.userList4.find((u) => u.connectionId == ConnectionId).id;
 
@@ -136,7 +135,6 @@ export class AdminUsersComponent {
   fetchTasks() {
     this.userService.getAllUsers().subscribe((res) => {
       if (res.isSuccessful) {
-        debugger;
         console.log(res.data);
         this.users = res.data;
 
@@ -180,7 +178,11 @@ export class AdminUsersComponent {
 
   userDeleteWithHandleTasks(id: string, role: string) {
     debugger;
-    if(this.tokenService.hasRole('Admin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' || role == '6a2c4fe5-5b10-45b6-a1f6-7cfecc629d3f')){
+    console.log(id);
+    console.log(role);
+
+
+    if (this.tokenService.hasRole('Admin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' || role == '6a2c4fe5-5b10-45b6-a1f6-7cfecc629d3f')) {
       Swal.fire({
         icon: 'error',
         title: 'You are not allowed to delete this user!',
@@ -188,7 +190,7 @@ export class AdminUsersComponent {
       })
       return;
     }
-    else if(this.tokenService.hasRole('SuperAdmin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' )){
+    else if (this.tokenService.hasRole('SuperAdmin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3')) {
       Swal.fire({
         icon: 'error',
         title: 'This user cannot be deleted!',
@@ -196,18 +198,17 @@ export class AdminUsersComponent {
       })
       return;
     }
-    let projectId = this.projectService.getProjectLocal().id;
-    this.taskService.GetAllProjectTaskForUser(projectId, id).subscribe((res) => {
-      if (res.isSuccessful) {
-        console.log(res);
-        const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
-          data: { userId: id, tasks: res.data, projectId: this.projectService.getProjectLocal().id, getAllUsers: this.users }, width: '40%'
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-          // this.ngOnInit();
-        });
-      }
-    })
+    else {
+      let projectId = this.projectService.getProjectLocal().id;
+
+      const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+        data: { userId: id, projectId: 0, getAllUsers: this.users }, width: '40%'
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        // this.ngOnInit();
+      });
+    }
+
 
   }
 

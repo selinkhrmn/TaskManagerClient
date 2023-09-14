@@ -162,6 +162,8 @@ export class AdminTasksComponent implements OnInit {
   openTaskDialog(id: number) {
     this.taskService.getTaskById(id).subscribe((res) => {
       let task = res.data;
+      console.log(task);
+      
       const dialogS = this.dialog.open(TaskComponent, { data: { task: task }, width: '60%' });
       dialogS.afterClosed().subscribe((res) => {
         this.ngOnInit();

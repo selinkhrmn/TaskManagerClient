@@ -87,6 +87,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { ChattingComponent } from './components/chatting/chatting.component';
 import { UserRolePipe } from 'src/pipes/user-role.pipe';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -186,6 +187,7 @@ import { DeleteUserDialogComponent } from './components/delete-user-dialog/delet
     FormsModule,
     GoogleChartsModule,
     MatTableModule,
+    CommonModule,
     ToastrModule.forRoot(
       {positionClass: 'toast-bottom-right',}
     ),

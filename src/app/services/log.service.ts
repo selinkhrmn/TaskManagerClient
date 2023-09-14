@@ -12,22 +12,27 @@ export class LogService {
 
   baseUrl = `${environment.baseUrl}/business/Log`;
 
-  constructor(  private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public getLogs(tableName: string, tableid: string) : Observable<ResponseModel<LogDto>>{
+  public getLogs(tableName: string, tableid: string): Observable<ResponseModel<LogDto>> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("tablename", tableName);
-    queryParams =  queryParams.append("tableid", tableid);
- 
-    return this.http.get<ResponseModel<LogDto>>(`${this.baseUrl}/GetLogs`,{params:queryParams});
+    queryParams = queryParams.append("tableid", tableid);
+
+    return this.http.get<ResponseModel<LogDto>>(`${this.baseUrl}/GetLogs`, { params: queryParams });
   }
 
   getUserLogs(projectIds: number[], userId: string): Observable<ResponseModel<LogUserDto>> {
-    const params = new HttpParams({ 
-      fromObject: { 'ProjectIds[]': projectIds, 'userId': userId },
+
+    // let params = new HttpParams();
+    // params = params.append('ProjectIds', projectIds.join(','));
+
+    let params = new HttpParams({ 
+      fromObject: { 'ProjectIds[]': projectIds } 
    });
-    
-    return this.http.get<ResponseModel<LogUserDto>>(`${this.baseUrl}/GetUserLogs`, { params: params });
-  }
   
+
+    return this.http.get<ResponseModel<LogUserDto>>(`${this.baseUrl}/GetUserLogs`, {params: { ProjectIds: projectIds, UserId:userId }});
+  }
+
 }

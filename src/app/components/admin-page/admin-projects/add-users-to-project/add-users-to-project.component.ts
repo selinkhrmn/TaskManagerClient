@@ -11,7 +11,7 @@ import { UserActionDto, UserDto } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 
 import { ProjectUserList, ProjectUserDto } from 'src/app/interfaces/projectUserDto';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProjectDto } from 'src/app/interfaces/project';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
@@ -45,6 +45,7 @@ export class AddUsersToProjectComponent implements OnInit {
     private userService: UserService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private dialogRef: MatDialogRef<AddUsersToProjectComponent>,
   ) { }
 
   ngOnInit() {
@@ -53,7 +54,7 @@ export class AddUsersToProjectComponent implements OnInit {
     }
 
     this.userService.getAllUsers().subscribe((res) => {
-      this.users = res.data;
+      this.users = res.data.filter(u => u.status = true);
       this.userService.GetProjectSelectedUsers(this.projectId).subscribe((resr) => {
         this.selectedUsers = resr.data;
         this.userCheckedList = this.users.map((user) => ({
@@ -136,6 +137,6 @@ export class AddUsersToProjectComponent implements OnInit {
   
 
   closeDialog() {
-    const dialogRef = this.dialog.closeAll();
+   this.dialogRef.close();
   }
 }

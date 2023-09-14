@@ -65,16 +65,9 @@ export class NavbarComponent {
       this.router.navigate(['profile-setting']);
     }
 
-    openShareDialog(shareButton: HTMLElement) {
-      const rect = shareButton.getBoundingClientRect();
-  
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.position = {
-        top: `${rect.top - 30}px`, // Örnek olarak butonun 200px üstünde açılması için, bu değeri ihtiyacınıza göre ayarlayabilirsiniz.
-        left: `${rect.left - 130}px`
-      };
-  
-      this.dialog.open(ShareComponent, dialogConfig);
+    openMailDialog() {
+
+      this.dialog.open(ShareComponent, {width: '30%', height: '60%'});
     }
 
     openCreateIssueDialog() {

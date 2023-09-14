@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chat } from 'src/app/interfaces/chat';
 import { UserConnection } from 'src/app/interfaces/user';
+import { ChatService } from 'src/app/services/chat.service';
 import { CommentHubService } from 'src/app/services/comment-hub.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -12,8 +13,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class ChattingComponent {
   inputMessage: string;
   messageWithUser: Chat = {
-    message: '',
-    id: ''
+    Message: '',
+    Id: ''
   }
   messages: string[] = [];
   userList: Chat[] = [];
@@ -27,30 +28,34 @@ export class ChattingComponent {
 
   constructor(
     private commentHubService: CommentHubService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private chatService : ChatService
   ) {}
 
 
    ngOnInit() {
-    this.commentHubService.startConnection();
+    this.chatService.startConnection();
    
     }
 
     sendMessage() {
       let id = this.tokenService.tokenUserId();
       this.messageWithUser = {
-        message: this.inputMessage,
-        id: id
+        Message: this.inputMessage,
+        Id: id
       }
-      this.commentHubService.sendMessage(this.messageWithUser);
+      this.chatService.sendMessage(this.messageWithUser);
 
-      this.commentHubService.addMessageReceivedHandler((user) => {
-        console.log(user);
+      this.chatService.addMessageReceivedHandler((user) => {
+        
         if(this.userList.includes(user)){
           return
         }
         else{
-          this.userList.push(user);
+          debugger
+          this.chatService.SaveChat(user).subscribe((res) => {
+           this.userList.push(...res.data);
+          });
         }
       });
 

@@ -1,31 +1,38 @@
 <div class="paylas-container">
-  <h2>Share in Slack</h2>
-
-  <!-- Seçilen kullanıcıları gösteren bölüm -->
-  <!-- <div class="selected-users">
-    <div class="user-chip" *ngFor="let userName of selectedUserNames">
-      <span>{{ userName }}</span>
-      <span class="remove-user" (click)="removeUser(userName)">x</span>
+  <div class="wrapper">
+    <div class="topside">
+      <h1>Send E-Mail</h1>
     </div>
-  </div> -->
 
-<br>  
+    <br />
 
-  <div class="input-group">
-    <mat-form-field>
-      <mat-label>Users</mat-label>
-      <mat-select [formControl]="userList" multiple (selectionChange)="logit($event)">
-        <mat-option *ngFor="let user of users" [value]="user">{{user.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    
+    <div class="input-group">
+      <mat-form-field class="input-container">
+        <mat-label>Users</mat-label>
+        <mat-select
+          [formControl]="userList"
+          multiple
+          (selectionChange)="logit($event)"
+        >
+          <mat-option *ngFor="let user of users" [value]="user">{{
+            user.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-group">
+      <textarea
+        id="message"
+        [(ngModel)]="message"
+        placeholder="{{ 'messagePlaceholder' | transloco }}"
+      ></textarea>
+      <label for="message"></label>
+    </div>
   </div>
 
+  <br />
+  <br />
 
-  <div class="input-group">
-    <textarea id="message" [(ngModel)]="message" placeholder="{{ 'messagePlaceholder' | transloco }}"></textarea>
-    <label for="message"></label>
-  </div>
-
-  <button (click)="SendEmail()">{{ 'shareButtonLabel' | transloco }}</button>
+  <button (click)="SendEmail()">{{ "shareButtonLabel" | transloco }}</button>
 </div>

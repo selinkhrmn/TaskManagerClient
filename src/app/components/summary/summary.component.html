@@ -3,13 +3,13 @@
         <br>
         <div class="center-align custom-container">
             <div class="d-flex align-items-center justify-content-center userName">
-                <h3 class="text-center me-2 m-0" >Hoş geldiniz </h3>
+                <h3 class="text-center me-2 m-0">Hoş geldiniz </h3>
                 <div class="label_part">
-                  <label>
-                    {{ tokenService.tokenFullName() }}
-                </label>  
+                    <label>
+                        {{ tokenService.tokenFullName() }}
+                    </label>
                 </div>
-                
+
                 <img src="../../assets/hosgeldiniz.png" alt="" style="width: 40px;height: 40px;">
             </div>
         </div>
@@ -19,8 +19,9 @@
 
         <div class="center-align custom-container" *ngIf="tasks.length != 0">
             <div class="d-flex align-items-center justify-content-center projectName">
-                Burada 
-                <label>{{ projectService.getProjectLocal()?.name }}</label> adlı projenin durumunun, önceliklerinin, iş yükünün
+                Burada
+                <label>{{ projectService.getProjectLocal()?.name }}</label> adlı projenin durumunun, önceliklerinin, iş
+                yükünün
                 ve daha fazlasının bir özetini görebilirsiniz.
             </div>
         </div>
@@ -100,45 +101,37 @@
                             <button
                                 style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
                                 öğe oluşturun</button>
-                            
+
                         </h6>
-                      
-                            <app-chart></app-chart>
-                      
+
+                        <app-chart></app-chart>
+
                     </div>
                 </div>
 
                 <div class="col-6">
-                    <div class="p-4 rounded"
-                        style="display: block; height: 375px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
-                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">En Son
-                            Etkinlikleriniz</h5>
+                    <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik
+                            Dökümü</h5>
                         <br>
-                        <div class="scroll">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Priority</th>
-                                        <th>Due Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="click-user">
-                                    <tr *ngFor="let task of lastActivities" (click)="openTaskDialog(task.id)">
-                                        <td><a>{{ task.name }}</a></td>
-                                        <td><img [src]="priorityService.getIcon(task.priority, 'icon')"
-                                                alt="Priority Icon" class="priority-icon" /></td>
-                                        <td>{{ task.dueDate | calculateDate }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- <h6 style="text-align: left; margin-top: 0;">
-                            Birkaç öğe oluşturun ve proje etkinliğinizi görüntüleyebilmeleri için takım arkadaşlarınızı projenize davet edin.
-                            <button (click)="filterLastActivities()" style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
+                        <h6 style="text-align: left; margin-top: 0;">
+                            İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
+                            <button
+                                style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
+                                öğe oluşturun</button>
                         </h6>
-                        <img src="../../assets/sonetkinlik.png" alt="" style="width: 250px;" class="me-2"> -->
+                        <svg id="priority-chart"></svg>
+                        <div class="icon-container-wrapper">
+                            <div class="icon-container">
+                                <img src="../../assets/lowest.png" alt="Priority Icon" class="priority-icon" />
+                                <img src="../../assets/low.png" alt="Priority Icon" class="priority-icon" />
+                                <img src="../../assets/medium.png" alt="Priority Icon" class="priority-icon" />
+                                <img src="../../assets/high.png" alt="Priority Icon" class="priority-icon" />
+                                <img src="../../assets/highest.png" alt="Priority Icon" class="priority-icon" />
+                            </div>
+                        </div>
                     </div>
+                    <br><br>
                 </div>
             </div>
         </div>
@@ -149,14 +142,42 @@
             <div class="row">
                 <div class="col-6">
                     <div class="p-4 rounded"
-                        style="display: block; height: 420px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        style="display: block; height: 400px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
+                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">
+                            {{ tokenService.tokenFullName() }} kullanıcısı olarak En Son
+                            Etkinlikleriniz</h5>
+                        <br>
+                        <div class="scroll">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Field</th>
+                                        <th>OldValue</th>
+                                        <th>NewValue</th>
+                                        <th>UpdatedDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="click-user">
+                                    <tr *ngFor="let log of userLogs">
+                                        <td><a>{{ log.tableName}}</a></td>
+                                        <td>{{ log.fieldName }}</td>
+                                        <td>{{ log.oldValue | user:userList }}</td>
+                                        <td>{{ log.newValue | user:userList }}</td>
+                                        <td>{{ log.actionDate | date:'MMM d, y, h:mm a' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-4 rounded"
+                        style="display: block; height: 400px; max-width: 600px; border: 1px solid black;background-color: rgb(255, 255, 255);">
                         <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Takım
                             İş Yükü</h5>
                         <br>
-                        <!-- <h6 style="text-align: left; margin-top: 0;">
-                            İşleri takımınızdaki doğru kişilere atamak için birkaç öğe oluşturmanız gerekir.
-                            <button style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir öğe oluşturun</button>
-                        </h6> -->
                         <div class="scroll">
                             <table class="table">
                                 <thead>
@@ -202,39 +223,14 @@
                                 <img src="../../assets/takım.ekle.png" alt="" style="width: 25px;">Takımınıza yeni
                                 birini ekleyin.
                             </button>
-
                         </div>
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <div class="p-4 rounded" style="border: 1px solid black;background-color: rgb(255, 255, 255);">
-                        <h5 style="text-align: left; margin-bottom: 0; font-weight: bold; font-size: 1.2em;">Öncelik
-                            Dökümü</h5>
-                        <br>
-                        <h6 style="text-align: left; margin-top: 0;">
-                            İşleri önceliklendirebilmek için birkaç öğe oluşturmalısınız.
-                            <button
-                                style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">Bir
-                                öğe oluşturun</button>
-                        </h6>
-                        <svg id="priority-chart"></svg>
-                        <div class="icon-container-wrapper">
-                        <div class="icon-container">
-                            <img src="../../assets/lowest.png" alt="Priority Icon" class="priority-icon" />
-                            <img src="../../assets/low.png" alt="Priority Icon" class="priority-icon" />
-                            <img src="../../assets/medium.png" alt="Priority Icon" class="priority-icon" />
-                            <img src="../../assets/high.png" alt="Priority Icon" class="priority-icon" />
-                            <img src="../../assets/highest.png" alt="Priority Icon" class="priority-icon" />
-                        </div>
-                    </div>
-                </div>
-                    
-                    
-                    
-                    <br><br>
-                </div>
             </div>
+            <br>
+            <br>
+            <br>
         </div>
     </div>
 </div>

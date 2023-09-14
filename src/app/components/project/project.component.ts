@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FileData } from 'src/app/interfaces/FileData';
 import { Project, ProjectDto } from 'src/app/interfaces/project';
@@ -10,6 +10,7 @@ import { FileService } from 'src/app/services/file.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 
 
 
@@ -48,7 +49,8 @@ export class ProjectComponent implements OnInit {
     private userService: UserService,
     private fileService: FileService,
     public tokenService: TokenService,
-    private dialogRef: MatDialogRef<ProjectComponent>
+    private dialogRef: MatDialogRef<ProjectComponent>,
+    public dialog: MatDialog,
   ) { }
 
 
@@ -132,27 +134,32 @@ export class ProjectComponent implements OnInit {
     }
   }
 
-  deleteUser(id: string) {
-    // Swal.fire({
-    //   title: 'Do you want to delete this user?',
-    //   showDenyButton: true,
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes',
-    //   denyButtonText: `No`,
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.userService.DeleteUserFromProject({ projectId: this.projectId, users: [] }).subscribe((res) => {
-    //       if (res.isSuccessful == true) {
-    //         Swal.fire('Saved!', '', 'success'),
-    //           this.ngOnInit();
-    //       }
-    //     })
-    //     Swal.fire('Saved!', '', 'success')
-    //   } else if (result.isDenied) {
-    //     console.log("not delete");
-    //     Swal.fire('Changes are not saved', '', 'info')
-    //   }
-    // })
+  deleteUser(id: string, role: string) {
+    
+    if (this.tokenService.hasRole('Admin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3' || role == '6a2c4fe5-5b10-45b6-a1f6-7cfecc629d3f')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'You are not allowed to delete this user!',
+        showConfirmButton: false
+      })
+      return;
+    }
+    else if (this.tokenService.hasRole('SuperAdmin') && (role == '4dc5874d-f3be-459a-b05f-2244512d13e3')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'This user cannot be deleted!',
+        showConfirmButton: false
+      })
+      return;
+    }
+    else {
+      const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+        data: { userId: id, projectId: this.data.project.id, getAllUsers: this.userList }, width: '40%'
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        // this.ngOnInit();
+      });
+    }
 
   }
 

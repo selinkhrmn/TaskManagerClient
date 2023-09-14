@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUsersToProjectComponent } from '../admin-page/admin-projects/add-users-to-project/add-users-to-project.component';
 import { PriorityService } from 'src/app/services/priority.service';
 import { TaskComponent } from '../task/task.component';
+import { LogService } from 'src/app/services/log.service';
+import { LogDto, LogUserDto } from 'src/app/interfaces/logDto';
+import * as d3 from 'd3';
 
 type PriorityCounts = {
   Lowest: number;
@@ -57,6 +60,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   lastActivities: ListTask[] = [];
   today: Date = new Date();
   fromDate: Date = new Date();
+  userLogs : LogUserDto[] = [];
   private readonly priorityColors = ['#237DB0', '#0B5F8F', '#FFDF00', '#EB7934', '#E44C23'];
   private readonly priorityLabels = ['Lowest', 'Low', 'Normal', 'High', 'Highest'];
 
@@ -69,9 +73,11 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     public priorityService: PriorityService,
+    public logService: LogService
   ) {}
 
   ngOnInit(): void {
+    this.getUserLogs();
   }
 
   ngAfterViewInit() {
@@ -199,6 +205,16 @@ export class SummaryComponent implements AfterViewInit, OnInit {
         .on('click', function (event, d) {
           const clickedPriorityId = self.priorityIds[d].value;
           self.handleClickPriority(clickedPriorityId);
+        })
+        .on('mouseenter',function(){
+          d3.select(this)
+            .attr('opacity',0.7)
+            .attr('cursor', 'pointer');
+        })
+        .on('mouseleave',function(){
+          d3.select(this)
+        .attr('opacity', 1)
+        .attr('cursor', 'default'); 
         });
 
       const xAxis = axisBottom(xScale);
@@ -241,6 +257,16 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.ngOnInit();
     });
+  }
+
+  getUserLogs(){
+    this.logService.getUserLogs([this.projectService.getProjectLocal()?.id] , this.tokenService.tokenUserId() ).subscribe((res) => {
+      if(res.isSuccessful){
+        this.userLogs = res.data;
+        console.log(this.userLogs);
+        
+      }
+    })
   }
 
   summaryFilter(filter: string, id?: string) {

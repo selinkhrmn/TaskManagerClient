@@ -20,7 +20,7 @@ export class UserPipe implements PipeTransform {
     const user = userlist.find(t => t.id === filter);
     
     if (!user) {
-      return '';
+      return filter;
     }
     const name = user.name.charAt(0).toUpperCase() + user.name.slice(1);
     const surname = user.surname.charAt(0).toUpperCase() + user.surname.slice(1);
