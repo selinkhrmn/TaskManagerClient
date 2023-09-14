@@ -93,7 +93,7 @@ export class CreateProjectComponent implements OnInit {
               
               if (result.isConfirmed) {
                 this.dialog.closeAll()
-                const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '75%',width: '60%', panelClass: 'dialog'}); 
+                const dialogRef = this.dialog.open(AddPeopleToProjectComponent,{autoFocus: false,height: '90%',width: '60%', panelClass: 'dialog'}); 
               }
               else {
                 this.closeDialog();

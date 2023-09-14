@@ -6,6 +6,21 @@
   display: flex;
   justify-content: space-between;
 }
+.scrollable-container {
+  max-height: 300px; /* İçeriğin maksimum yüksekliği */
+  overflow-y: auto; /* Yatay kaydırma çubuğunu etkinleştir */
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 15px; /* Kaydırma çubuğunun genişliği */
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Kaydırma çubuğu başlığının rengi */
+  border-radius: 3px; /* Kaydırma çubuğu başlığının köşe yuvarlaması */
+}
+
+
 .red-button {
   color: white; /* Yazı rengi */
   background-color: rgba(206, 40, 40, 0.763); /* Arka plan rengi */
