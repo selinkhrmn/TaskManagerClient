@@ -39,6 +39,19 @@
           </div>
         
         
+        <div class="projects_container">
+          <ng-container *ngFor="let user of users">
+            <tr>
+              <td>
+                <img width="30px" height="30px" [src]="getProfilePhoto(user) || noImage">
+              </td>
+              <td>
+                <mat-checkbox [(ngModel)]="user.selected" [value]="user.id" (change)="onCheckboxChange(user)">
+                  {{ user.name }} 
+                </mat-checkbox>
+              </td>
+            </tr>
+          </ng-container>
 
         </div>
         <button mat-raised-button class="blue" (click)="saveProjectUsers()">Save</button>

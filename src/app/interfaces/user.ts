@@ -51,3 +51,8 @@ export interface DeleteUserDto{
     assigneeId: string;
     reporterId: string;
 }
+
+export interface UserProfilPhoto {
+    userId : string;
+    path: string;
+}

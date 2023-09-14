@@ -25,6 +25,7 @@ export class NavbarComponent {
   taskData : any;
   url : string;
   id = this.tokenService.getTokenId();
+  noImage= '../../assets/noImage.png';
 
     constructor(
       public tokenService: TokenService,

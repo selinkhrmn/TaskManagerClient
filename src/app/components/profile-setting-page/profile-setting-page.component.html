@@ -9,7 +9,7 @@
 
             <!-- Profile Photo -->
             <div class="card-content d-flex justify-content-center row">
-                <img class ="img" type="image" [src]='url'>
+                <img class ="img" type="image" [src]='url || noImage'>
                 <input  type="file" id="file" class="d-flex justify-content-center" [disabled]="working" (change)="onSelectFile($event)">
                 <!-- <label for="file">{{ uploadFileLabel }}</label> -->
               </div>
