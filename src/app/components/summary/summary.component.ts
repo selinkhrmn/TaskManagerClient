@@ -16,6 +16,9 @@ import { TaskComponent } from '../task/task.component';
 import { LogService } from 'src/app/services/log.service';
 import { LogDto, LogUserDto } from 'src/app/interfaces/logDto';
 import * as d3 from 'd3';
+import { PagedResult } from 'src/app/interfaces/pagedResult';
+import { ResponseModel } from 'src/app/interfaces/responseModel';
+
 
 type PriorityCounts = {
   Lowest: number;
@@ -60,7 +63,10 @@ export class SummaryComponent implements AfterViewInit, OnInit {
   lastActivities: ListTask[] = [];
   today: Date = new Date();
   fromDate: Date = new Date();
-  userLogs : LogUserDto[] = [];
+  userLogs: any;
+  totalCount: number;
+  pageNumber = 1;
+  pageSize = 10;
   private readonly priorityColors = ['#237DB0', '#0B5F8F', '#FFDF00', '#EB7934', '#E44C23'];
   private readonly priorityLabels = ['Lowest', 'Low', 'Normal', 'High', 'Highest'];
 
@@ -74,7 +80,7 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     private dialog: MatDialog,
     public priorityService: PriorityService,
     public logService: LogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getUserLogs();
@@ -259,15 +265,37 @@ export class SummaryComponent implements AfterViewInit, OnInit {
     });
   }
 
-  getUserLogs(){
-    this.logService.getUserLogs([this.projectService.getProjectLocal()?.id] , this.tokenService.tokenUserId() ).subscribe((res) => {
-      if(res.isSuccessful){
-        this.userLogs = res.data;
-        console.log(this.userLogs);
+  getUserLogs() {
+    this.logService.getUserLogs(
+      [this.projectService.getProjectLocal()?.id],
+      this.tokenService.tokenUserId(),
+      this.pageNumber,
+      this.pageSize
+    ).subscribe((res) => {
+      if (res.isSuccessful) {
+        let logResponse : any = res.data;
+        this.userLogs = logResponse.data;
+        this.totalCount = logResponse.totalCount;
         
       }
-    })
+    });
   }
+
+  previousPage() {
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
+      this.getUserLogs(); 
+    }
+  }
+  
+  nextPage() {
+    if (this.pageNumber * this.pageSize < this.totalCount) {
+      this.pageNumber++;
+      this.getUserLogs(); 
+    }
+  }
+  
+  
 
   summaryFilter(filter: string, id?: string) {
     const today = new Date();

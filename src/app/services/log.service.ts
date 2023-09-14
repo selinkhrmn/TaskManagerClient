@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ResponseModel } from '../interfaces/responseModel';
 import { LogDto, LogUserDto } from '../interfaces/logDto';
 import { Observable } from 'rxjs';
+import { PagedResult } from '../interfaces/pagedResult';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +23,16 @@ export class LogService {
     return this.http.get<ResponseModel<LogDto>>(`${this.baseUrl}/GetLogs`, { params: queryParams });
   }
 
-  getUserLogs(projectIds: number[], userId: string): Observable<ResponseModel<LogUserDto>> {
-
-    // let params = new HttpParams();
-    // params = params.append('ProjectIds', projectIds.join(','));
-
-    let params = new HttpParams({ 
-      fromObject: { 'ProjectIds[]': projectIds } 
-   });
   
+  getUserLogs(projectIds: number[], userId: string, pageNumber: number, pageSize: number): Observable<ResponseModel<PagedResult<LogUserDto>>> {
+    let params = new HttpParams()
+      .append('ProjectIds', projectIds.join(','))
+      .append('UserId', userId)
+      .append('pageNumber', pageNumber.toString())
+      .append('pageSize', pageSize.toString());
 
-    return this.http.get<ResponseModel<LogUserDto>>(`${this.baseUrl}/GetUserLogs`, {params: { ProjectIds: projectIds, UserId:userId }});
-  }
+    return this.http.get<ResponseModel<PagedResult<LogUserDto>>>(`${this.baseUrl}/GetUserLogs`, { params: params });
+}
+
 
 }

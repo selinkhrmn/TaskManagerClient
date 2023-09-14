@@ -167,12 +167,12 @@ export class AdminUsersComponent {
   }
 
   getUserLogs(userId: string) {
-    console.log(userId);
+    // console.log(userId);
 
-    let projects: number[] = [2, 3];
-    this.logService.getUserLogs(projects, userId).subscribe((res) => {
-      console.log(res);
-    });
+    // let projects: number[] = [2, 3];
+    // this.logService.getUserLogs(projects, userId).subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 
 
