@@ -44,22 +44,22 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class ColumnsComponent {
   predefinedColors: string[] = [
-    '#FF5733',
-    '#33FF57',
-    '#5733FF',
-    '#FF336A',
-    '#33B4FF',
-    '#FFD633',
-    '#A633FF',
-    '#33FFD6',
-    '#FF33C1',
-    '#33FFA6',
-    '#E433FF',
-    '#33E2FF',
-    '#B333FF',
-    '#33FFB4',
-    '#FFA833',
-    '#E633FF',
+    '#FF9C8C',
+    '#8CFF9C',
+    '#9C8CFF',
+    '#FF8CB1',
+    '#8CCFFF',
+    '#FFEC8C',
+    '#B38CFF',
+    '#8CFFEC',
+    '#FF8CBF',
+    '#8CFFB4',
+    '#D18CFF',
+    '#8CE6FF',
+    '#BB8CFF',
+    '#8CFFBB',
+    '#FFC18C',
+    '#E68CFF'
   ];
   @Output() currentColumnId: number;
   tasks: Task[] = [];
